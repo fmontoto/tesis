@@ -1,42 +1,41 @@
 \documentclass[upright, contnum]{umemoria}
-\depto{DEPARTAMENTO DE CIENCIAS DE LA COMPUTACIÓN}
-\author{ALFREDO JAIME CADIZ RODRÍGUEZ}
-\title{DESDE LA WEB A LOS MÓVILES: LLEVANDO U-CURSOS A NUESTROS BOLSILLOS}
-\auspicio{.}
-\date{ENERO 2014}
-\guia{JAVIER BUSTOS JIMÉNEZ}
-\carrera{INGENIERO CIVIL EN COMPUTACIÓN}
-\memoria{MEMORIA PARA OPTAR AL TÍTULO DE}
-\comision{JOHAN FABRY}{PATRICIO INOSTROZA FAJARDIN}{\ }
+\depto{Departamento de Ciencias de la Computaci\'on}
+\author{Francisco Javier Andr\'es Montoto Monroy}
+\title{Or\'aculos distribuidos en la blockchain}
+\auspicio{}
+\date{mes {a\~no}}
+\guia{Alejandro Hevia}
+\memoria{Tesis para Optar al Grado de Magister en ... \newline Memoria para optar al Grado e Ingeniero Civil ...}
+\comision{Integrante 1}{Integrante2}{Integrante3}
 
 \usepackage{lipsum}
-
-\usepackage[latin1]{inputenc}
+\usepackage[backend=biber, style=trad-plain]{biblatex}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{csquotes}
 
+\addbibresource{bibliografia.bib}
 \begin{document}
 
 \frontmatter
 \maketitle
 
 \begin{abstract}
-\lipsum[1-4]
+\input{abstract.tex}
 \end{abstract}
 
-\begin{dedicatoria}
-Una dedicatoria corta.
+\begin{dedicatoria} % opcional
+Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
 \end{dedicatoria}
 
-\begin{thanks}
+\begin{thanks} % opcional
 \lipsum[1-2]
 \end{thanks}
+\cleardoublepage
 
-\cleardoublepage
 \tableofcontents
-\cleardoublepage
-\listoftables
-\cleardoublepage
-\listoffigures
+\listoftables % opcional
+\listoffigures % opcional
 
 \mainmatter
 
@@ -45,7 +44,6 @@ Una dedicatoria corta.
 \input{cap2.tex}
 \input{conclu.tex}
 
-\nocite{*}
-\bibliographystyle{plain}
-\bibliography{bibliografia}
+\printbibliography
+
 \end{document}

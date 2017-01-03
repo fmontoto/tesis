@@ -4,7 +4,7 @@
 %%%%%%%%	Primer Autor: Nikolas Tapia M.
 %%%%%%%%	Version: 1.5
 %%%%%%%%	Fecha: 21-06-2012
-%%%%%%%%	Actualización: 11-06-2015
+%%%%%%%%	Actualizaci\'on: 11-06-2015
 %%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}[2009/09/24]
@@ -79,8 +79,8 @@ PROF. GUÍA: \MakeUppercase\@guia \\
 \newenvironment{dedicatoria}{\cleardoublepage\null\vspace{\stretch{1}}\begin{flushright}\itshape}{\end{flushright}\vspace{\stretch{2}}\null}
 \let\thanks\undefined
 \newenvironment{thanks}{\cleardoublepage\chapter*{Agradecimientos}}{\vfill\null}
-\newenvironment{intro}{\addcontentsline{toc}{chapter}{\protect\numberline{}Introducción}\chapter*{Introducción}}{\vfill\null}
-\newenvironment{conclusion}{\addcontentsline{toc}{chapter}{\protect\numberline{}Conclusión}\chapter*{Conclusión}}{\vfill\null}
+\newenvironment{intro}{\addcontentsline{toc}{chapter}{\protect\numberline{}Introducci\'on}\chapter*{Introducci\'on}}{\vfill\null}
+\newenvironment{conclusion}{\addcontentsline{toc}{chapter}{\protect\numberline{}Conclusi\'on}\chapter*{Conclusi\'on}}{\vfill\null}
 
 %% Teoremas, proofs, etc
 \renewenvironment{proof}[1][\proofname] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\scshape\footnotesize#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
@@ -91,21 +91,21 @@ PROF. GUÍA: \MakeUppercase\@guia \\
 	\swapnumbers
 \fi
 \theoremstyle{miestilo}
-\newtheorem{defn}{Definición}[chapter]
+\newtheorem{defn}{Definici\'on}[chapter]
 \if@contnum
 \newtheorem{teo}[defn]{Teorema}
 \newtheorem{cor}[defn]{Corolario}
 \newtheorem{lema}[defn]{Lema}
-\newtheorem{prop}[defn]{Proposición}
+\newtheorem{prop}[defn]{Proposici\'on}
 \else
 \newtheorem{teo}{Teorema}[chapter]
 \newtheorem{cor}{Corolario}[chapter]
 \newtheorem{lema}{Lema}[chapter]
-\newtheorem{prop}{Proposición}[chapter]
+\newtheorem{prop}{Proposici\'on}[chapter]
 \fi
 \theoremstyle{miobs}
 \newtheorem*{ej}{Ejemplo}
-\newtheorem*{obs}{Observación}
+\newtheorem*{obs}{Observaci\'on}
 
 %% Comandos para la portada
 \global\let\@carrera\@empty
@@ -166,7 +166,7 @@ PROF. GUÍA: \MakeUppercase\@guia \\
 			PROFESOR GUÍA:\\ \MakeUppercase\@guia
 
 		\vspace{1cm}
-			MIEMBROS DE LA COMISIÓN:\\ \MakeUppercase\@comisa\\\MakeUppercase\@comisb\\\MakeUppercase\@comisc
+			MIEMBROS DE LA COMISI\'ON:\\ \MakeUppercase\@comisa\\\MakeUppercase\@comisb\\\MakeUppercase\@comisc
 		\if\@auspicio\@empty\else
 
 		\vfill
