@@ -42,8 +42,8 @@
 %% Lenguaje
 \addto\captionsspanish{\renewcommand\tablename{Tabla}}
 \addto\captionsspanish{\renewcommand\contentsname{Tabla de Contenidos}}
-\addto\captionsspanish{\renewcommand\listtablename{Índice de Tablas}}
-\addto\captionsspanish{\renewcommand\listfigurename{Índice de Ilustraciones}}
+\addto\captionsspanish{\renewcommand\listtablename{\'Indice de Tablas}}
+\addto\captionsspanish{\renewcommand\listfigurename{\'Indice de Ilustraciones}}
 
 %% Interlineado
 \RequirePackage{parskip}
@@ -65,10 +65,10 @@
 \small
 \begin{tabular}{l}
 RESUMEN DE LA MEMORIA PARA OPTAR \\
-AL TÍTULO DE \MakeUppercase\@carrera \\
+AL T\'ITULO DE \MakeUppercase\@carrera \\
 POR: \MakeUppercase\@author \\
 FECHA: \MakeUppercase\@date\\
-PROF. GUÍA: \MakeUppercase\@guia \\
+PROF. GU\'IA: \MakeUppercase\@guia \\
 \end{tabular}
 \end{flushright}
 \begin{center}
@@ -118,6 +118,11 @@ PROF. GUÍA: \MakeUppercase\@guia \\
 \let\memoria\setmemoria
 \let\setmemoria\relax
 
+\global\let\@tesis\@empty
+\newcommand{\settesis}[1]{\def\@tesis{#1}}
+\let\tesis\settesis
+\let\settesis\relax
+
 \global\let\@guia\@empty
 \newcommand{\setguia}[1]{\def\@guia{#1}}
 \let\guia\setguia
@@ -149,21 +154,24 @@ PROF. GUÍA: \MakeUppercase\@guia \\
 			\includegraphics[scale=.12]{imagenes/escudoU2014.pdf}
 		\end{minipage}
 		\begin{minipage}[t]{12cm}
-			UNIVERSIDAD DE CHILE\\FACULTAD DE CIENCIAS FÍSICAS Y MATEMÁTICAS\\\MakeUppercase\@depto
+            UNIVERSIDAD DE CHILE\\FACULTAD DE CIENCIAS F\'ISICAS Y MATEM\'ATICAS\\\MakeUppercase\@depto
 		\end{minipage}
 
 		\vspace{2cm}
 		\centering
 			\MakeUppercase\@title
 
+
 		\vspace{1cm}
+			\MakeUppercase\@tesis
+
 			\MakeUppercase\@memoria
 
 		\vspace{1cm}
 			\MakeUppercase\@author
 
 		\vspace{3cm}
-			PROFESOR GUÍA:\\ \MakeUppercase\@guia
+			PROFESOR GU\'IA:\\ \MakeUppercase\@guia
 
 		\vspace{1cm}
 			MIEMBROS DE LA COMISI\'ON:\\ \MakeUppercase\@comisa\\\MakeUppercase\@comisb\\\MakeUppercase\@comisc
