@@ -1,7 +1,7 @@
 \documentclass[upright, contnum]{umemoria}
 \depto{Departamento de Ciencias de la Computaci\'on}
 \author{Francisco Javier Andr\'es Montoto Monroy}
-\title{Trustless gambling in bitcoin: A multiparty protocol}
+\title{Or\'aculos distribuidos en la blockchain}
 \auspicio{}
 \date{mes {a\~no}}
 \guia{Alejandro Hevia}
@@ -10,22 +10,20 @@
 \comision{Integrante 1}{Integrante2}{Integrante3}
 
 \usepackage{lipsum}
-\usepackage[backend=biber, style=trad-plain]{biblatex}
+\usepackage[backend=bibtex, style=trad-plain]{biblatex}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
 
 \addbibresource{bibliografia.bib}
 \begin{document}
-\begin{otherlanguage}{spanish}
+\selectlanguage{spanish}
 \frontmatter
 \maketitle
-\end{otherlanguage}
-\begin{otherlanguage}{english}
+
 \begin{abstract}
 \input{abstract.tex}
 \end{abstract}
-
 
 \begin{dedicatoria} % opcional
 Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
@@ -35,7 +33,7 @@ Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
 \lipsum[1-2]
 \end{thanks}
 \cleardoublepage
-
+\selectlanguage{english}
 \tableofcontents
 \listoftables % opcional
 \listoffigures % opcional
@@ -48,5 +46,5 @@ Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
 \input{cap/conclu.tex}
 
 \printbibliography
-\end{otherlanguage}
+
 \end{document}

@@ -40,10 +40,10 @@
 \RequirePackage{listings} % Codigo Fuente
 
 %% Lenguaje
-\addto\captionsspanish{\renewcommand\tablename{Tabla}}
-\addto\captionsspanish{\renewcommand\contentsname{Tabla de Contenidos}}
-\addto\captionsspanish{\renewcommand\listtablename{\'Indice de Tablas}}
-\addto\captionsspanish{\renewcommand\listfigurename{\'Indice de Ilustraciones}}
+%\addto\captionsspanish{\renewcommand\tablename{Tabla}}
+%\addto\captionsspanish{\renewcommand\contentsname{Tabla de Contenidos}}
+%\addto\captionsspanish{\renewcommand\listtablename{\'Indice de Tablas}}
+%\addto\captionsspanish{\renewcommand\listfigurename{\'Indice de Ilustraciones}}
 
 %% Interlineado
 \RequirePackage{parskip}
@@ -224,3 +224,5 @@ PROF. GU\'IA: \MakeUppercase\@guia \\
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\1}{\mathbf{1}}
 \let\epsilon\varepsilon
+% Italic quotes
+\newcommand*{\itquote}[1]{\enquote{{\itshape#1}}}
