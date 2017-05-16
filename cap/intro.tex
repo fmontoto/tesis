@@ -1,5 +1,5 @@
 \begin{intro}
-\section{Gambling}
+\section{Gambling} \label{gambling}
 Gambling is the activity of predicting events and placing a wager on the
   uncertain outcome of those events, with the intent of winning money or
   valuable goods.
@@ -8,34 +8,58 @@ A wager can be put on many different events, in a casino we find randomizing
   events. In other establishments we can bet on sport events, such as a horse
   racing, football games, etc. or the minimum temperature in Santiago during
   this night.
-  
-Its popularity and the big amounts of money at stake,
+Its popularity and the big amounts of money at stake
   inevitably entails a lot of interest on this activities. Most of the time
   gambling is heavily regulated and taxed, also it is usual that lotteries are
   owned by the state.
 
-Gambling not only takes place in casinos, lotteries or betting sites, it can
-  also involve two or more individuals with no intermediaries. In Chile
+Internet has been making cheaper to open and operate a casino, even without
+  complying laws from any country.  This and the massive internet use, has been
+  moving the gambling industry online\cite{shelat2002makes}
+  \cite{griffiths2008internet}. The global Internet gambling market was
+  estimated to be worth US\$28.32 billion in 2012 and forecasted to rise to
+  US\$49.64 billion by 2017\cite{gainsbury2015risky}.
+However, gambling not only takes place in casinos, lotteries or betting sites,
+  it can also involve two or more individuals with no intermediaries. In Chile
   friends usually bet on their favorites football teams.
   
-But all the mentioned ways share a common obstacle, participants are required
-  to trust in the other parties to pay if they lose.
-  Even if the bet takes place in a casino, where the law can enforce the bet,
-  is not certain the casino will be able to pay after the resolution.
-  
+Nonetheless all the different ways for placing a bet, all of the mentioned
+  share a common obstacle, participants are required to trust in the other
+  parties to pay if they lose.
+  Even if the bet takes place in a physical casino, where the law can enforce
+  the bet, is not certain the casino will be able to pay after the resolution.
 We might not be aware of the fact, but every time we place a bet we are
   implicitly trusting in a third party, either the other player or the bet
-  site. For casinos this is usually not a problem, as they are regulated by
-  law, any misconduct can get the casino to the justice and even get its
-  license revoked.
-  Usually this does not represent a problem, 
-  
+  site. For physical casinos this is usually not a problem, as they are
+  regulated by the law, any misconduct can get the casino to the justice and
+  even get its license revoked. As there is a significant cost on starting a
+  physical casino, them are also encouraged to keep a good reputation, in order
+  to get customers.
+
+Friends usually are trusted people, so trusting them when gambling might not
+  be considered an issue. Also, probably the friendship is at risk if the bet
+  is not paid. Other option is to get a third friend to get the money until the
+  bet result.
+Online casinos on the other hand are more problematic, there are many knowns
+  scam schemes, as described by Griffiths\cite{griffiths2010crime}. And
+  half of the players at this sites believes the providers are cheating on
+  them\cite{mcmullan2010online}. Some of them are subject of government
+  regulation and some of them have being in the business for several years,
+  this kind of characteristics could help to indicate an online site is
+  trustworthy. It might be possible to get the same or equivalents levels of
+  trust on an online casino than a physical one.
+
+%What if you would like to gamble in a event that no gambling site offers nor any
+%  friend want to. Probably the internet would be the place to look for somebody
+%  willing to gamble on this event. However, how could you trust the potential
+%  person in order to bet with him? This work proposes a protocol to bet with
+%  any strange, with no need to trust him.
   
 \section{Cryptocurrency}
 Digital currency refers to any currency stored and transferred
   electronically.
   A subset of the digital currencies is called virtual currencies: them are
-  usually defined\citation{bcentraleuro} as a \itquote{ unregulated,
+  usually defined\cite{bcentraleuro} as a \itquote{ unregulated,
   digital money, which is issued and usually controlled by its developers, and
   used and accepted among the members of a specific virtual community}.
   
@@ -46,19 +70,18 @@ Based on the interaction of the currency with currencies outside the
   type is where the currency can be purchased directly using other currency.
   Here, we observe an unidirectional flow. The third type is when the flow is
   bi directional, the users can sell and buy the currency. 
-  
 A cryptocurrency is a bi directional virtual currency, that uses cryptography
   for security and anti-counterfeiting measures. Virtual currencies are been
   historically linked to cryptography, the first known investigations
-  \citation{chaum1983blind} to establish a virtual currency where lead by David
+  \cite{chaum1983blind} to establish a virtual currency where lead by David
   Chaum, an American cryptographer. However, despite his and others effort
   (e-gold\footnote{https://www.wired.com/2009/06/e-gold/},
-   Ecash\citation{chaum1990untraceable},
+   Ecash\cite{chaum1990untraceable},
    DigiCash, LibertyReserve, among others), virtual currencies never where
    massively adopted.
    
 By late 2008, using a pseudonym, was released a short
-  whitepaper\citation{nakamoto2008bitcoin} with yet another virtual currency
+  whitepaper\cite{nakamoto2008bitcoin} with yet another virtual currency
   protocol specification. A few months later, during 2009 its implementation
   was made available as open source code. The main difference with previous
   implementations was its lack of a central organization, this new coin was
@@ -77,27 +100,79 @@ Then the first online exchanges between bitcoin and other currencies started
   market capitalization of Bitcoin (this is, the amount of money times its
   value in USD) is over 25,000,000,000 USD.
   
+\section{Bitcoin?}
+
+%TODO
+Why bitcoin?
+  
 \section{Gambling in bitcoin}
-Once bitcoin got some traction, several web sites started to offer some
-  games of chance an act as online casinos. Where the only different with a
-  traditional online casino was the currency on which the bet takes place.
-However, as any physical casino, any player who decided to play here is at
-  the mercy of the casino. If the casino does not want or does not have the
-  means to pay, there is nothing the participant can do and its money is lose.
- 
-After online casinos came the betting platforms, were you could also do sport
-  or other real world events bets. This introduces a new uncertainty in the
-  process: Who gets to decide the outcome of the event? The answer is the same
-  all the time, the same casino observes the outcome of the bet and decides
-  who wins.
+
+With cryptocurrencies getting more and more popular, it was only a matter of
+  time until the first sites started to offer started to offer some games of
+  chance an act as online casinos. Where the only difference with a traditional
+  online casino was the currency on which the bet takes place.
+However, as any other currency online casino, any player who decided to play
+  here is at the mercy of the casino. If the casino does not want or does not
+  have the means to pay, there is nothing the participant can do and its money
+  is lose. More on online casinos at subsection \ref{gambling}. The problems
+  described for online casinos using traditional currencies apply in the same
+  way to the new ones.
   
+After some time, people started to see some potential on cryptocurrencies to
+  solve some of the trust issues related to gamble. In 2014 Andrychowicz et
+  al.\citation{andrychowicz2014secure} proposed a two party randomized gambling
+  protocol. Players are not required to trust each other in order to gamble, so
+  even if the loser does not behave correctly the honest player, can get its
+  prize.
+The protocol is not a representation of a casino game, but effectively allows
+  player to gamble on a random event. 
+Also in 2014, a group of Bitcoin enthusiasts started
+  Orisi\footnote{http://orisi.org},  a distributed oracles system for
+  cryptocurrency contracts.
+Orisi allows users to access data of the outside world from the blockchain,
+  by using a distributed set of oracles. So instead of trusting in one instance
+  to provide the data, the trust is placed in the majority of several different
+  oracles.
+More recently, on early 2017, Winsome\footnote{https://www.winsome.io} was
+  released. Advertised as a \itquote{Provably Fair | Trustless Casino}, Winsome
+  is an online casino where wager are placed in a public smart contract posted
+  in the Ethereum's blockchain. So the contract, defining the game, is enforced
+  by the Ethereum protocol. As May 2017, they do offer two casino games,
+  blackjack and \texttt{Rouleth}, an online roulette.
   
-  
+Motivated to provide an option to gamble over real world events with untrusted
+ peers. This work proposes a protocol to define the destination of an initial
+ wage between the two player. The decision is taken by a set of oracles, which
+ are being paid also inside the protocol to behave correctly.
 
- 
- 
+\section{Objectives}
+Design and implement a distributed protocol where real world observations can
+  be used as blockchain transaction inputs.
 
+\subsection{Specific Objectives}
+\begin{enumerate}
+	\item Provide a protocol to make possible to gamble with untrusted peers over
+	  real world events.
+	\item Provide the correct economic incentives to the protocol participants to
+	  behave correctly, so everyone incentives are aligned. 
+	\item Implement a proof of concept of the designed protocol.
+	\item Debate of implications and other applications for the designed protocol.
+\end{enumerate}
 
-
-
+\section{Methodology}
+The main phases of this work will be the following:
+\begin{enumerate}
+	\item Extensive review of existing proposal and implementations to solve
+	  the proposed problem or similar ones. As cryptocurrencies are a recent
+	  investigation field, this review must cover literature as well as
+	  community gathering places, such as forums and specialized blogs, magazines,
+	  etc.. 
+  \item Analysis of current solutions to the problem and similar ones.
+  \item Design and implementation of a protocol to solve the problem.
+    Implementation is considered very important as the current rate of change
+    of cryptocurrencies is considerably fast, validating the protocol within a
+    real implementation is critical.
+  \item Analysis of the economic incentives of the protocol participants, to
+    ensure protocol viability.
+\end{enumerate}
 \end{intro}
