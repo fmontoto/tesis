@@ -22,15 +22,15 @@
 \maketitle
 
 \begin{abstract}
-\input{abstract.tex}
+	\input{abstract.tex}
 \end{abstract}
 
 \begin{dedicatoria} % opcional
-Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
+	Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
 \end{dedicatoria}
 
 \begin{thanks} % opcional
-\lipsum[1-2]
+	\lipsum[1-2]
 \end{thanks}
 \cleardoublepage
 \selectlanguage{english}
@@ -40,7 +40,14 @@ Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
 
 \mainmatter
 
-\input{cap/intro.tex}
+\begin{my_section}{Introduction}
+	\input{cap/intro.tex}
+\end{my_section}
+
+\begin{my_section}{Previous Work}
+	\input{cap/previous_work.tex}
+\end{my_section}
+
 \input{cap/cap1.tex}
 \input{cap/cap2.tex}
 \input{cap/conclu.tex}

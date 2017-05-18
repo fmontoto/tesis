@@ -79,7 +79,7 @@ PROF. GU\'IA: \MakeUppercase\@guia \\
 \newenvironment{dedicatoria}{\cleardoublepage\null\vspace{\stretch{1}}\begin{flushright}\itshape}{\end{flushright}\vspace{\stretch{2}}\null}
 \let\thanks\undefined
 \newenvironment{thanks}{\cleardoublepage\chapter*{Agradecimientos}}{\vfill\null}
-\newenvironment{intro}{\addcontentsline{toc}{chapter}{\protect\numberline{}Introduction}\chapter{Introduction}}{\vfill\null}
+\newenvironment{my_section}[1]{\addcontentsline{toc}{chapter}{\protect\numberline{}#1}\chapter{#1}}{\vfill\null}
 \newenvironment{conclusion}{\addcontentsline{toc}{chapter}{\protect\numberline{}Conclusi\'on}\chapter*{Conclusi\'on}}{\vfill\null}
 
 %% Teoremas, proofs, etc
