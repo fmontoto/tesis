@@ -7,8 +7,9 @@ CDW=$(pwd)
 cd ${W_DIR}
 BIN_PATH="/usr/local/texlive/2014/bin/x86_64-darwin/"
 
+pwd
 #pdflatex
-${BIN_PATH}pdflatex -synctex=1 -interaction=nonstopmode ${file}.tex
+${BIN_PATH}pdflatex -shell-escape -synctex=1 -interaction=nonstopmode ${file}.tex
 
 #bibtex
 ${BIN_PATH}bibtex ${file}.aux
@@ -24,7 +25,7 @@ ${BIN_PATH}bibtex ${file}.aux
 #${BIN_PATH}makeindex -s ${file}.ist -t ${file}.alg -o ${file}.acr ${file}.acn
 
 #pdflatex
-${BIN_PATH}pdflatex -synctex=1 -interaction=nonstopmode ${file}.tex
-${BIN_PATH}pdflatex -synctex=1 -interaction=nonstopmode ${file}.tex
+${BIN_PATH}pdflatex -shell-escape -synctex=1 -interaction=nonstopmode ${file}.tex
+${BIN_PATH}pdflatex -shell-escape -synctex=1 -interaction=nonstopmode ${file}.tex
 
-cd${CWD}
+cd ${CDW}
