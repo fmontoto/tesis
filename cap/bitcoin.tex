@@ -1,3 +1,4 @@
+\section{Bitcoin}
 Bitcoin is the first fully distributed cryptocurrency made publicly available,
   it was proposed in 2008 by Satoshi Nakamoto (a pseudonym)
   \cite{nakamoto2008bitcoin}.
@@ -42,12 +43,12 @@ The blockchain is a distributed database formed by an always growing list of
   a central authority.
 
 \subsection{Blockchain}
-  The blockchain works as the bitcoin's ledger, it keeps record of all
-transactions and coin generation that had ever taken place in the protocol.
+It works as the bitcoin's ledger, it keeps record of all
+  transactions and coin generation that had ever taken place in the protocol.
 It is completely distributed and public, anybody can participate in the
-protocol and get a copy of it. This makes simple to prevent double spending
-and be sure the received coins are valid, as anybody can examine where each
-coin came from.
+  protocol and get a copy of it. This makes simple to prevent double spending
+  and be sure the received coins are valid, as anybody can examine where each
+  coin came from.
 
 As any other distributed system, the blockchain must resolve the consesus
   problem \cite{fischer1983consensus}. Get all the participants to agree on
@@ -56,6 +57,52 @@ As any other distributed system, the blockchain must resolve the consesus
   protocol, so solving this problem is quite challenging. Some authors argue
   the blockchain is the first practical solution to the Byzantine Consensus
   problem \cite{miller2014anonymous} \cite{sun2014solving}.
+
+Proof of work is the algorithm used by the bitcoin blockchain to seek
+  consensus. Each entity trying to add data to the database must proof it
+  has done some required work. This algotithms was designed originally to
+  fight the email spam, by requiring the sender of an email to prove a small
+  work was done in order to send the email\cite{dwork1992pricing}. This is
+  achieved by using a hard to calculate, but easy to check function. This
+  way the receiver or the mail server can easily check if the sender did
+  the required work, however this work was much harder. The difficulty of
+  a work is defined by the amount of computational power required to get
+  it done.
+
+The atomical piece in the blockchain is the block. Each valid block carries with
+  itself a proof of work, so every entity trying to get a valid block into the
+  database tries to solve a puzzle to get this proof.
+This process is called mining, therefore the entities trying to get a valid
+  block are called miners.
+By design a block must be produced every 10 minutes, so the work required to
+  mine a block is a ajusted periodically to met this goal.
+
+The proof of work consists in building a block with a hash under a threshold
+  value, so the miners should reorder and change the block until the hash
+  fulfill the requirement. There is not a known algorithm to do this in a
+  better way than brute force, so the only method to get a hash that mets the
+  criteria is to try with different block configurations, there are some bytes
+  of nonce, a timestamp and transactions to be changes to get different hashes.
+
+The structure of a Bitcoin block is show In the figure \ref{fig:block_pow}, the
+  fields with the light purple background represents the block header, the data
+  hashed to get the block's hash. The transactions are indirectly hashed in the
+  Merkle Root\footnote{A \texttt{Merkle Tree} is a tree in which each non leaf
+  node is labeled with the hash of its children's labels. In the block each
+  transaction is mapped into tree's leaf. So the root of this tree hashes all
+  the transactions}.
+
+\begin{figure}
+	\centering
+	\includesvg[width=\columnwidth]{block_pow}
+	\caption{Block structure}
+	\label{fig:block_pow}
+\end{figure}
+
+  characterisitic
+  A block holds the basic operations in the protocol, the transactions. The
+  proof of wo
+A block is a
 
 The blockchain does not introduce a new primitive or idea to solve all of the
   mentioned problems, it does use existing tools in an innovative way to.
@@ -71,7 +118,8 @@ To keep a consistent history the blocks are linked using the hash of the
 
 
 
-As it is public, every transaction can be verified by any protocol par
+As it is public, every transaction can be verified by any protocol participant.
+
 
   The blockchain is  a chain of blocks were each of them keeps a link
 to the previou

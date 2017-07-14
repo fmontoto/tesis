@@ -12,3 +12,5 @@
 *.synctex.gz
 *.toc
 *-blx.bib
+imagenes/*.pdf
+imagenes/*.pdf_tex
