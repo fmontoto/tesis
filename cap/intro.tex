@@ -167,3 +167,86 @@ The main phases of this work will be the following:
   \item Analysis of the economic incentives of the protocol participants, to
     ensure protocol viability.
 \end{enumerate}
+
+\section{The Protocol}
+
+The main idea behind this work is to eliminate the more single points of
+  trust we can when performing bets. Traditional currencies are produced and
+  controlled at Government's will, so the first decision was to use a currency
+  without a single controller, we chose Bitcoin mainly for two reasons.
+It is the first and one of the most stable currencies out there, changes are
+  made much slower than other currencies, the market back this claim by making
+  bitcoin the Cryptocurrency with by far the biggest market capitalization.
+And second, the network supporting bitcoin is much bigger than the ones for
+  other cryptocurrencies. This makes much harder to attack and take control
+  of the currency.
+
+There are two mains phases in the protocol, where the first one is optional and
+  can be replaced at players will:
+\subsection{Oracle's selection}
+Bitcoin (like most of the cryptocurrencies) includes a scripting language able
+ to control money transferences, well defined and with its execution enforced by
+ the complete bitcoin network.
+The challenge is to bring data from outside the bitcoin data and reason about
+  it. Our protocol relies on several paid ``oracles'' to bring this data.
+As the oracles' output will be used to decide who is the bet's winner, it is a
+  crucial step to avoid a player getting itself or compromised oracles to decide
+  the bet winner.
+We say this phase is optional as it might be the case both players trust already
+  in a set of oracles.
+
+\begin{enumerate}
+  \item The first step is to compile a list of available oracles, we use as
+      decentralized database for this list the blockchain. Everyone willing to
+      be an oracle can send a transaction to register into the blockchain.
+  \item The players negotiate some parameters, as the number of oracles to use
+      and the threshold to decide the winner.
+  \item In order to decide which oracles to use, the oracles need to pick a
+      subset of the available oracles, they do this by running a distributed
+      coin tossing protocol.
+    With this, they can be sure the compiled list is a random subset of the
+      full list. If the list is big enough, the chance of one user controlling
+      the oracles gets smaller. As it would be too expensive to control almost
+      all the oracles in the list.
+\end{enumerate}
+
+\subsection{Bet resolution}
+This is phase starts after both players agree the bet with and the oracles to
+  be used on it.
+
+\begin{enumerate}
+  \item The players send a transaction to the blockchain with the bet
+      description, including the IDs of the oracles they want to decide the
+      winner.
+    We call this transaction ``Bet promise'',as the players commit to the bet by
+      placing it. The wage is also on it.
+    The other purpose of this transaction is to invite the oracles to
+      participate in the bet, we make its ID public so they can identify itself
+      and inscribe to participate as oracles.
+  \item The oracles will see the transaction inviting them to participate in the
+      bet, they will evaluate it and, if they are interested.
+    They will reply with a transaction containing a reference to the ``Bet
+      promise'' transacation and a small deposit as commitment that they will
+      participate in the process.
+  \item When the players see the answer from the expected number of oracles,
+  	  they will send the ``Bet'' transaction with funds of the bet and the
+  	  oracles' reward.
+  	If not enough oracles reply to the call, a second invitation can be send to
+  	  a different set of oracles to fill the available spots.
+  \item As soon as the bet event takes place, oracles are able to collect its
+  	  payment from the Bet transaction. This payment gets available by making
+  	  public, -voting- by the winner.
+  	After the threshold number of oracles collect its payment, the winner player
+  	  is able to collect its prize, its private key and the oracle votes are
+  	  required to get it.
+  \item After a second timeout, players can take the deposit from the oracles
+  	  that did not participate in the bet resolution.
+\end{enumerate}
+
+The payment of the oracle's is not the only cost of this protocol.
+There is a not insignificant number of transactions in the protocol, as there
+  is a fee by each transaction in the Blockchain, this makes the protocol more
+  expensive.
+This is a problem for small bets, the presented protocols is prohibitively
+  expensive for bet of just a few dollars. At least with the current fee costs
+  of bitcoin.

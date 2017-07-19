@@ -137,10 +137,10 @@ The transactions are indirectly hashed in the Merkle Root\footnote{A
   the hash of its children's labels. In the block each transaction is mapped
   into a tree leaf. So the root of this tree hashes all the transactions}.
 
-  \begin{figure}[ht]
+\begin{figure}
 	\centering
-	\includesvg[width=0.8\columnwidth]{block_pow}
-	\caption{Block Structure}
+	\includesvg[width=\columnwidth]{block_pow}
+	\caption{Block structure}
 	\label{fig:block_pow}
 \end{figure}
 
@@ -165,16 +165,18 @@ When sending money, there is a little more than we saw at section
   than a signature, and at each output (figure \ref{fig:output}) also more than
   an address.
 
-  \begin{figure}[ht]
+\begin{figure}
 	\centering
-	\includesvg[width=0.8\columnwidth]{input}
+	\def\svgwidth{\columnwidth}
+	\includesvg{input}
 	\caption{Wire format of an Input.}
 	\label{fig:input}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}
 	\centering
-	\includesvg[width=0.8\columnwidth]{output}
+	\def\svgwidth{\columnwidth}
+	\includesvg{output}
 	\caption{Wire format of an Output.}
 	\label{fig:output}
 \end{figure}
@@ -182,22 +184,8 @@ When sending money, there is a little more than we saw at section
 An output does not send money to a given address, but defines how the money can
   be spent. Currently there are two formats in use. The most used is called
   ``Pay To Public Key Hash'' (P2PKH)\footnote{The key hash is the address of an
-  account}. And ``Pay To Script Hash'' (P2SH).
+  account}. And the other, ``Pay To Script Hash'' (P2SH).
 
-As the figure \ref{fig:output} shows, the output have a script on its wire
-  representation, this script is written in a small stack based language.
-It is read from left to right and it is purposefully not Turing-complete.
-The script is evaluated using the scriptSig as input. If the transaction willing
-  to spend this output provides a valid\footnote{A script is considered valid
-  if after its execution the value in the top of the stack is True.} scriptSig,
-  the output is available to be spend. This is how a P2PKH script looks like:
-
-  \begin{lstlisting}[caption={P2PKH script.},label={lst:p2pkh},frame=single]
-  OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
-  \end{lstlisting}
-
-  It receives two values as input:  \lstinline{<pubKeyHash>} and
-    \lstinline{<sig>}. And the execution looks like:
 
 
 % The blockchain does not introduce a new primitive or idea to solve all of the

@@ -16,6 +16,8 @@
 \usepackage{csquotes}
 \usepackage[svgpath=imagenes/]{svg}
 \usepackage{amsmath}
+\usepackage{listings}
+\usepackage{csvsimple}
 
 \addbibresource{bibliografia.bib}
 \begin{document}
@@ -44,12 +46,12 @@
 
 \begin{my_section}{Introduction}
 	\input{cap/intro.tex}
-	\input{cap/bitcoin.tex}
 \end{my_section}
 
 \begin{my_section}{Preliminaries}
+	\input{cap/bitcoin.tex}
 	\input{cap/previous_work.tex}
-	\input{cap/motivation.tex}
+	% \input{cap/motivation.tex}
 \end{my_section}
 
 \input{cap/cap1.tex}
