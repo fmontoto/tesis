@@ -18,6 +18,13 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{csvsimple}
+\usepackage{makecell}
+% makecell
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+\usepackage{tabularx}
 
 \addbibresource{bibliografia.bib}
 \begin{document}
@@ -49,6 +56,9 @@
 \end{my_section}
 
 \begin{my_section}{Preliminaries}
+	\input{cap/hash.tex}
+	\input{cap/digital_signature.tex}
+	\input{cap/ecash.tex}
 	\input{cap/bitcoin.tex}
 	\input{cap/previous_work.tex}
 	% \input{cap/motivation.tex}

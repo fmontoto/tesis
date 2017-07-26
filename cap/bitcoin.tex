@@ -199,6 +199,44 @@ The script is evaluated using the scriptSig as input. If the transaction willing
   It receives two values as input:  \lstinline{<pubKeyHash>} and
     \lstinline{<sig>}. And the execution looks like:
 
+	\begin{table}[]
+		\small
+		\caption{Script evaluation to check a P2PKH transaction.}
+		\label{tab:exec_1_step}
+		\begin{tabularx}{\textwidth}{| c | X |}
+			\hline
+				\thead{Stack} & \thead{Script} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{Constants from scriptSig are copied to the stack.}} \\
+			\hline
+			\makecell{<pubKey>\\<sig>} & OP\_DUP \footnotesize{OP\_HASH160 <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{OP\_DUP copies the top element from the stack.}} \\
+			\hline
+			\makecell{<pubKey> \\ <pubKey> \\ <sig>} & OP\_HASH160 \footnotesize{<pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The hash of the top element is calculated.}} \\
+			\hline
+			\makecell{H(<pubKey>) \\ <pubKey> \\ <sig>} & <pubKeyHash> \footnotesize{OP\_EQUALVERIFY OP\_CHECKSIG} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The destination address is moved to the stack.}} \\
+			\hline
+			\makecell{<pubKeyHash> \\ H(<pubKey>) \\ <pubKey> \\ <sig>} & OP\_EQUALVERIFY \footnotesize{OP\_CHECKSIG} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The destination address is compared with the Hash of the Public Key (PK) provided by the}} \\
+			\multicolumn{2}{|c|}{\textit{sig Script. This check the provided Public Key is the one from the intended receiver.}} \\
+			\hline
+			\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{Using the already verified PK, the script checks the transaction was signed using the}} \\
+			\multicolumn{2}{|c|}{\textit{corresponding Private Key. This step secures the transaction from tampering an proves it was}} \\
+			\multicolumn{2}{|c|}{\textit{sent by the private Key controller.}} \\
+			\hline
+			\makecell{True} & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+
 
 % The blockchain does not introduce a new primitive or idea to solve all of the
   % mentioned problems, it does use existing tools in an innovative way to.
