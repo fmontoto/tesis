@@ -1,13 +1,53 @@
 \section{Hash}
-Hash is an overload word and it is used for a few different things:
-\begin{enumerate}
-	\item \textbf{Hash Function}: Is a function able to map data of arbitrary size
-		to a fixed size.
-	\item \textbf{Image of a Hash Function}: The return after applying a Hash
-		Function to an input.
-	\item \textbf{Cryptographic Hash Function}: A special class of Hash Function
-		with properties which makes it suitable for use in cryptography.
-\end{enumerate}
+Hash is an overload word and it is usually used for a few different things:
+% \begin{enumerate}
+	% \item \textbf{Hash Function}: Is a function able to map data of arbitrary size
+		% to a fixed size.
+	% \item \textbf{Image of a Hash Function}: The return after applying a Hash
+		% Function to an input.
+	% \item \textbf{Cryptographic Hash Function}: A special class of Hash Function
+		% with properties which makes it suitable for use in cryptography.
+% \end{enumerate}
+
 \subsection{Hash Function}
-If not stated otherwise when used in this work, Hash means the output of a
-  Cryptographic Hash Function.
+Is a function able to map data from arbitraty size to data of a fixed size.
+The range has only elements of a fixed size, so it's bounded by all the
+  elements of that size. If we represent the data in a binary base, the range
+  is bounded by $2^n$ where n is the size in bits of the output.
+The domain of the function is unbounded, so by the \textit{Pigeonhole
+  Principle:}
+\begin{equation}
+	\exists \, i, j \mid f(i) = f(j), \, i \neq j
+\end{equation}
+We call this a collision, and for most uses of a Hash function are unwanted.
+
+Hash functions are used for many things: File comparison, instead of comparing
+  files bit to bit, the image of a Hash Function can be compared instead;
+  Hash-Tables, this allows quick lookups for the elements; Find similar
+  records, by using a Hash Function that produces similar images for similar
+  pre-images, etc..
+
+\subsection{Image of a Hash Function}
+
+If not stated otherwise, will use the word ``Hash'' to denote the image of
+  some data using a Hash Function.
+
+\subsection{Cryptographic Hash Function}
+This refers to a special class of Hash Functions the Cryptography has defined
+  to be suitable for its use on cryptographic applications. The main property
+  this functions are designed to is to be ``one way'' functions, this means
+  its infeasible\footnote{We say something is computational infeasible when even
+  it is computable, it will require far too many resources to do it.} to invert.
+
+In an ideal cryptographic function, the most efficient way to find one of the
+  preimages is a brute-force search\footnote{Also known as exhaustive search,
+  it consists of enumerating all the potential solutions and to check which of
+  them satisfies the predicate}. We call this property
+  \textit{preimage-resistance}.
+It is also important for this ideal function to be \textit{collision
+  resistance}, this means it is infeasible to find any two distinct inputs
+  $x, x'$ with the same image, i.e., such that $h(x) = h(x')$.
+
+When using this ideal function producing a (second) preimage requires $2^n$
+  operations, and producing a collision requires at least
+  $2^{n / 2} $ operations\cite{preneel1993analysis}.
