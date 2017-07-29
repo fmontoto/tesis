@@ -1,0 +1,27 @@
+\subsection{Digital Signatures}
+The idea of ``Digital Signature'' was introduced in 1976 by Diffie and
+  Hellman in ``New Directions in Cryptography''\cite{diffie1976new}. In this
+  work is also introduced what they called ``Public Key Cryptosystem'', were
+  enciphering and deciphering operations use different keys, $E$ and $D$, such
+  that computing D from E is computationally infeasible. Today this pair are
+  widely used and are known as Public Key (PK) and Secret Key (SK).
+
+The public key cryptosystem, or asymmetrical cryptography was created to solve
+  one important problem of symmetrical systems\footnote{As opposed to the
+  asymmetrical one, this system uses the same key to cipher and decipher
+  the messages.}: It is imposible to start a secured communication in an
+  insecure channel without previously exhange of a key using a secure channel.
+To stablish a secure communication within an insecure channel participants
+  makes its PK publicly available to the others. Anyone willing to talk to
+  another participant must cipher its message using the public key of the
+  receiver, this way the only one able to decipher the message is the intended
+  receiver.
+
+A digital signature, as its name indicates, is a mechanism to provide protection
+  against third paty forgeries. It must be easy to for anyone to recognize as
+  authentic but impossible for anyone but the signer to produce it. This is
+  specially challenging since any digital signal can be easily copied.
+
+It works within the public key cryptosystem the signer uses its SK to produce
+  a signature over the message to sign, and anyone with the signer PK and the
+  message can determine the validity of the signature.
