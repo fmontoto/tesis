@@ -115,6 +115,15 @@ The atomical piece in the blockchain is the block. Each valid block carries
 This process is called mining, therefore the entities trying to get a valid
   block are called miners. A block is linked to the previous one, as show by the
   figure \ref{fig:block_links}.
+
+\begin{figure}
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{block_links}
+	\caption{Blocks linked to each other in the blockchain.}
+	\label{fig:block_links}
+\end{figure}
+
 Once block is produced, all the others miners need to delete the transactions
   added by the block from the one they are building and update the link to the
   new last block. And they start to mine a new block.
@@ -147,6 +156,15 @@ The transactions are indirectly hashed in the Merkle Root\footnote{A
 As expected in a protocol with many participants, there are times were more
   than one block is generated with the same parent (figure
   \ref{fig:chain_fork}), this is call a fork.
+
+\begin{figure}
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{chain_fork}
+	\caption{A fork in the blockchain.}
+	\label{fig:chain_fork}
+\end{figure}
+
 In order to achieve consensus, the protocol determines that the chain with
   more work\footnote{The amount of work in a chain is the sum of the difficulty
   of every block on it.} on it is the active chain.
@@ -158,10 +176,17 @@ A block mined on one of the branches will decide which is the active one
   the fork can repeat itself and prevent to have one consensus branch, this is
   very unlikely\cite{decker2013information} to happen during a long time.
 
-  \subsection{Script}
+The chain structure gives a chronological order to the transactions in the
+  protocol, so it makes clear to check if a transaction is valid.
+Any participant willing to probe the validity of a given transaction needs
+  to evaluate the script (see section \ref{subsec:script}), and  check the block
+  where the output being spend is stored up to the current block and see if the
+  money was already spent in a different transaction.
+
+  \subsection{Script} \label{subsec:script}
 
 When sending money, there is a little more than we saw at section
-  \ref{subsec:Transaction}. In an input (figure \ref{fig:input} there is more
+  \ref{subsec:Transaction}. In an input (figure \ref{fig:input}) there is more
   than a signature, and at each output (figure \ref{fig:output}) also more than
   an address.
 
@@ -192,17 +217,19 @@ The script is evaluated using the scriptSig as input. If the transaction willing
   if after its execution the value in the top of the stack is True.} scriptSig,
   the output is available to be spend. This is how a P2PKH script looks like:
 
-  \begin{lstlisting}[caption={P2PKH script.},label={lst:p2pkh},frame=single]
-  OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
-  \end{lstlisting}
+\begin{center}
+	  \begin{tabular}{|c|}
+		  \texttt{OP\_DUP OP\_HASH160 <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG}
+     \end{tabular}
+\end{center}
 
   It receives two values as input:  \lstinline{<pubKeyHash>} and
-    \lstinline{<sig>}. And the execution looks like:
+  \lstinline{<sig>}. And the execution is explained in the table \ref{tab:p2pkh_exec}.
 
 	\begin{table}[]
 		\small
 		\caption{Script evaluation to check a P2PKH transaction.}
-		\label{tab:exec_1_step}
+		\label{tab:p2pkh_exec}
 		\begin{tabularx}{\textwidth}{| c | X |}
 			\hline
 				\thead{Stack} & \thead{Script} \\
@@ -237,33 +264,75 @@ The script is evaluated using the scriptSig as input. If the transaction willing
 		\end{tabularx}
 	\end{table}
 
+The scriptPubKey in a pay to script hash transaction is even simpler:
+\begin{center}
+	\begin{tabular}{|c|}
+		\texttt{OP\_HASH160 <scriptHash> OP\_EQUAL}
+	\end{tabular}
+\end{center}
+Whis script is pretty simple, it takes the first element of the stack,
+  calculates its hash and compares it with '<scriptHash>'. The first
+  element in the stack is however a complete script, and after checking
+  it hashes to the expected scriptHash, it will be evaluated with its
+  required input. This implies the scriptSig now holds the script and
+  its signature:
+
+\begin{center}
+	\begin{tabular}{|c|}
+		\texttt{<sig> >script>}
+	\end{tabular}
+	% \caption*{P2SH sigScript.}
+\end{center}
+
+
+  A execution of a sample P2SH is show in the table \ref{tab:p2sh_exec}.
+
+	\begin{table}[]
+		\small
+		\caption{Script evaluation of a P2SH transaction.}
+		\label{tab:p2sh_exec}
+		\begin{tabularx}{\textwidth}{| c | X |}
+			\hline
+				\thead{Stack} & \thead{Script} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The serialized script and its input are copied to the stack.}} \\
+			\hline
+			\makecell{\string{<pubkey> OP\_CHECKSIG\string} \\ <sig> } & OP\_HASH160 \footnotesize{<scriptHash> OP\_EQUAL} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The serialized script hash is calculated.}} \\
+			\hline
+			\makecell{H(\string{<pubkey> OP\_CHECKSIG\string}) \\ <sig>} & <pubkeyHash> \footnotesize{OP\_EQUAL} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The expected hash is pushed to the stack.}} \\
+			\hline
+			% \makecell{asdas} & dqwdeq \\
+			\makecell{<pubKeyHash> \\ H(\string{<pubkey> OP\_CHECKSIG\string}) \\ <sig>} & OP\_EQUAL \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{Then the hashes are compared, and if they match, the script is deserialized and evaluated.}} \\
+			\hline
+			\makecell{<sig>} & <pubkey> \footnotesize{OP\_CHECKSIG} \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The public key is pushed to the stack.}} \\
+			\hline
+			\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
+			\hline
+			\multicolumn{2}{|c|}{\textit{The provided signature is validated using the public key.}} \\
+			\hline
+			\makecell{True} & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+
+A P2SH transaction allows different conditions to redeems its outputs,
+  a complete list of the operations supported by the Bitcoin scripting language
+  can be found at the Bitcoin wiki: \url{https://en.bitcoin.it/wiki/Script}.
 
 % The blockchain does not introduce a new primitive or idea to solve all of the
   % mentioned problems, it does use existing tools in an innovative way to.
 % To keep a consistent history the blocks are linked using the hash of the
   % previous block, this prevents tamper on past data.
-\begin{figure}
-	\centering
-	\def\svgwidth{\columnwidth}
-	\includesvg{block_links}
-	\caption{Blocks linked to each other in the blockchain.}
-	\label{fig:block_links}
-\end{figure}
 
-\begin{figure}
-	\centering
-	\def\svgwidth{\columnwidth}
-	\includesvg{chain_fork}
-	\caption{A fork in the blockchain.}
-	\label{fig:chain_fork}
-\end{figure}
 
-The chain structure gives a chronological order to the transactions in the
-  protocol, so it makes clear to check if a transaction is valid.
-Any participant willing to probe the validity of the tramsaction needs
-  to check the block where the output being spend is stored up to the
-  current block and see if the money was already spent in a different
-  transaction.
 
 
 % As it is public, every transaction can be verified by any protocol participant.
