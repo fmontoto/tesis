@@ -135,7 +135,7 @@ More recently, on early 2017, Winsome\footnote{https://www.winsome.io} was
 Motivated to provide an option to gamble over real world events with untrusted
  peers. This work proposes a protocol to define the destination of an initial
  wage between the two player. The decision is taken by a set of oracles, which
- are being paid also inside the protocol to behave correctly.
+ are being paid also within the protocol to behave correctly.
 
 \section{Objectives}
 Design and implement a distributed protocol where real world observations can
@@ -250,3 +250,10 @@ There is a not insignificant number of transactions in the protocol, as there
 This is a problem for small bets, the presented protocols is prohibitively
   expensive for bet of just a few dollars. At least with the current fee costs
   of bitcoin.
+
+If we step out a little bit, the proposed protocol uses paid oracles to get a
+  binary answer about an event outside the blockchain. This is not useful only
+  for betting on that outcome. The oracles are \footnote{\colorbox{red}{
+  is this the word?}} insensitive to the use given to their answer, they get
+  paid anyway. Further applications of the protocol can be generalized from our
+  proposal. \colorbox{red}{Como por ejemplo.... ?}
