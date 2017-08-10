@@ -78,4 +78,24 @@ Multi party computation, or secure multi party computation aims to provide
   protocols for computing public functions and gets its results while
   participants keeps their input private.
 
+The idea of the Coin Tossing we use is to get a random bit, as neither of the
+  players trust the other to select the bit randomly, both players select a bit
+  and the they XOR it with the other one.
+This way, does not matter how the other bit was chosen, the result is random.
+There is one important restriction when using this protocol, the bit must be
+  chosen before the other, otherwhise if one bit is known the second one can
+  be selected in order to get the desired outcome.
+If we were physically together we would write down the bit in a paper, wait for
+  the other player to write his and then reveal both bits and perform the XOR.
+However we would like to run this algorithm through the phone or in this case
+  the computer.
+The idea is the same, but instead of writting down into a paper, players
+  ``commit'' to the value they just chose randomly by sending to the other
+  player a ``commitment''.
+Once both players receive the other's commitment, they send the bit they chose,
+  the commitment allows the other user to check they are sending the bit they
+  commited to.
+
+If we
+
 

@@ -44,22 +44,35 @@ The blockchain is a distributed database formed by an always growing list of
 
 
 
-  \subsection{Transaction}\label{subsec:Transaction}
-Bitcoin works with accounts where coins can be stored. Accounts are identified
-  with an address, a 25-byte value, usually encoded in the bitcoin's own encode
-  format of base 58, resulting in a string of 25-33 characters.
-This address is public, and required to send bitcoins. It represents a hash of
-  a public key. Bitcoin uses Elliptic Curve Digital Signature Algorithm
-  (ECDSA)\footnote{ECDSA is a digital signature algorithm using Elliptic Curve
-  Cryptography. It is an asymmetric scheme, with a private and public key. In
-  bitcoin transactions are secured with a private key signature and validated
-  using the public one.} to ensure the owner of an address is the only one able
+\subsection{Transaction}\label{subsec:Transaction}
+Bitcoin works with accounts where coins can be stored, this accounts are
+  identified with an address\footnote{
+  In the wire, an address is a 25-byte value, for human consumption we usually
+    see it, in its encoded representation of base 58, resulting in a string of
+    25-33 characters.}, for this reason some times both words are used
+  interchangeably.
+The address is not private, and people share theirs when willing to receive
+  money.
+
+It represents a hash of a public key. Therefore, the owner of the account is
+  however control the private key of the address.
+Bitcoin uses Elliptic Curve Digital Signature Algorithm (ECDSA)\footnote{
+  ECDSA is a digital signature algorithm using Elliptic Curve
+    Cryptography. It is an asymmetric scheme, with a private and public key. In
+    bitcoin transactions are secured with a private key signature and validated
+    using the public one.} to ensure the owner of an address is the only one able
   to spend its content.
+Getting a new address is free, it only requires to generate a random byte string
+  and get a ECDSA private key from it. ECDSA allows the public key derivation
+  from the private key. Then, by hashing the public key the address is obtained.
+Many libraries and most of the bitcoin wallets implement the algorithms to
+  generate new addresses.
 
 A transaction is the only way to move bitcoins from one account to other one,
-  it is basically a list of accounts where to get the money from and a list
-  of accounts where the money is going to, a simplified view in the figure
-  \ref{fig:simplified_transaction}.
+  it is basically a list of accounts where the money is pulled from, the
+  inputs.
+And the outputs, a list of accounts the bitcoins are going to, a simplified
+  view in the figure \ref{fig:simplified_transaction}.
 
 \begin{figure}
 	\centering
@@ -73,21 +86,24 @@ There is only one exception to this rule, the miner that builds each block is
   transaction and its amount is defined in the protocol.
 This is the only way bitcoins are generated.
 
-A transaction input spends a previous transaction output, so it links to the
-  previous transaction (by its hash) and to one of its outputs. Plus, in order
-  to ve valid must have a signature from the address of the output being spent.
+A transaction input points to a previous unspent output and proves it has the
+  right to spend that output.
+An output contains\footnote{This is a simplification, not every output work this
+  way, detailed at subsection \label{subsec:script}.} the address of the account
+  is transferring the money to, so any input signed using the private key of
+  that address has the right to spend the output.
 This implies that the money from an account must be spent in the same amount
   the money was received. If an output of $\$ 10BTC$ is received, when trying
   to spend it, the same amount must be spent. If willing to spend just a
   portion, a second output is created and send to the same account.
 
-  \subsection{Blockchain} \label{subsec:Blockchain}
+\subsection{Blockchain} \label{subsec:Blockchain}
 It works as the bitcoin's ledger, it keeps record of all
   transactions and coin generation that had ever taken place in the protocol.
-It is completely distributed and public, anybody can participate in the
-  protocol and get a copy of it. This makes simple to prevent double spending
-  and be sure the received coins are valid, as anybody can examine where each
-  coin came from.
+It is completely distributed and public, anybody can participate and get a
+  copy of it.
+This makes simple to prevent double spending and be sure the received coins are
+  valid, as anybody can examine where each coin came from.
 
 As any other distributed system, the blockchain must resolve the consesus
   problem \cite{fischer1983consensus}. Get all the participants to agree on
@@ -124,19 +140,27 @@ This process is called mining, therefore the entities trying to get a valid
 	\label{fig:block_links}
 \end{figure}
 
+The mining process is like playing the lottery, tickets are distributed  among
+  every miner until someone gets the winner one. The number of tickets each
+  miner gets is proportional to the work he is doing, so a miner doing more work
+  will get a bigger chance to win the lottery and mine a block. However any miner
+  can win.
+
+Of course, in the real implementation there are no tickets issued to the
+  miners.
+Proof of work consists in building a block with a hash under a threshold value,
+  so the miners should reorder and change the block until the hash fulfill the
+  requirement.
+There is not a known algorithm to do this in a better way than
+  brute force, so the only method to get a hash that mets the criteria is to try
+  with different block configurations, there are also some bytes of nonce, a
+  timestamp and transactions to be changes to get different hashes.
+
 Once block is produced, all the others miners need to delete the transactions
   added by the block from the one they are building and update the link to the
   new last block. And they start to mine a new block.
 By design a block must be produced every 10 minutes, so the work required to
   mine a block is a ajusted periodically to met this goal.
-
-The proof of work consists in building a block with a hash under a threshold
-  value, so the miners should reorder and change the block until the hash
-  fulfill the requirement. There is not a known algorithm to do this in a
-  better way than brute force, so the only method to get a hash that mets the
-  criteria is to try with different block configurations, there are also some
-  bytes of nonce, a timestamp and transactions to be changes to get different
-  hashes.
 
 The structure of a Bitcoin block is show in the figure \ref{fig:block_pow}, the
   fields with the gray background represents the block header, the data hashed
