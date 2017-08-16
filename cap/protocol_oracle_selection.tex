@@ -17,7 +17,7 @@ With a big enough list, selecting randomly from it reduces the
 However, there are a few key properties in our protocol to reduce the chance
   of influencing their selection.
 
-\subsubsection{Compiling the oracle List}
+\subsubsection{Oracle list}
 
 In order to get a trustworthy list, we define a few key properties:
 It must be a decentralized list; anybody willing to be an oracle can inscribe
@@ -32,7 +32,7 @@ In order to let anybody inscribe to be an oracle, the inscription is a simple
 
 \subsubsection{Oracle registration}
 \colorbox{red}{Registration transaction}
-In order to register themself into the list, oracles needs to send a transaction
+In order to register themself into the list, oracles need to send a transaction
   to the blockchain.
 This transaction must include the address to be used, this is the oracle
   identifier, and the protocol indentification.
@@ -48,13 +48,13 @@ If that is the case, increasing the cost by adding a required a unspendable
   output already exist. Adding a deposit spendable by an address will require
   a new output, but the idea remain the same.
 
-\subsubsection{Oracle selection}
+\subsubsection{Compiling oracle list}
 
 There are a few parameters players must agree in order to select oracles from
   the blockchain list.
 First they decide the period of time\footnote{Measured as a range of blocks in
   the blockchain.} they will consider oracles from.
-Some participants could want to avoid recently registered oracles, as they might
+Some participants might want to avoid recently registered oracles, as they might
   have an higher chance to be controlled by the other player.
 Others might argue too old oracles are likely to be inactive, in order to avoid
   oracles registered long time ago.
@@ -68,6 +68,8 @@ Finally they decide the number of oracles to use, also they can decide to
 Once they decide the filter and which blocks to use for retrieve the oracles,
   both players can compile the same list of availables oracles. Then they just
   need to decide which of them to use.
+
+\subsubsection{Oracle selection}
 
 Both players need to have the certainty the election from the list is random.
 In order to achieve this property we use a protocol originally proposed to flip
@@ -83,8 +85,8 @@ The idea of the Coin Tossing we use is to get a random bit, as neither of the
   and the they XOR it with the other one.
 This way, does not matter how the other bit was chosen, the result is random.
 There is one important restriction when using this protocol, the bit must be
-  chosen before the other, otherwhise if one bit is known the second one can
-  be selected in order to get the desired outcome.
+  chosen before knowing the value of  the other, otherwise if one bit is known
+  the second one can be selected in order to get the desired outcome.
 If we were physically together we would write down the bit in a paper, wait for
   the other player to write his and then reveal both bits and perform the XOR.
 However we would like to run this algorithm through the phone or in this case
@@ -92,10 +94,14 @@ However we would like to run this algorithm through the phone or in this case
 The idea is the same, but instead of writting down into a paper, players
   ``commit'' to the value they just chose randomly by sending to the other
   player a ``commitment''.
-Once both players receive the other's commitment, they send the bit they chose,
-  the commitment allows the other user to check they are sending the bit they
-  commited to.
+This commitment binds the player to the value calculated, without revealing it.
+Once both players receive the other's commitment, they send the bit they chose.
+Both check the commit with the commitment received previously, and if they
+  match, the protocol outputs a random bit.
+Otherwise, a player tried to cheat and the protocol aborts as there is no way to
+  calculate a random bit.
 
-If we
+If we have a list both players agree with, and we can also produce random bits,
+  selecting a number of oracles from the list is a trivial exercise.
 
 

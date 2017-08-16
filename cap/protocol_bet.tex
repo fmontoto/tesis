@@ -1,0 +1,55 @@
+\subsection{Second part: The bet}
+
+\subsubsection{Bet Promise}
+Once players decided the oracles to use, whether using the \textit{Oracle
+  Selection} part or by any other mean.
+They need to agree in the terms of the bet, the event and who is the winner on
+  each outcome, the time available for the oracles to answer, money required by
+  each player, fees of the  oracles, deposit required to the oracles, etc..
+Once all the bet parameters are set, they are serialized and its hash is
+  calculated, players puts all the money required to run the protocol,
+  including fees and the prize into a transaction.
+The selected oracles, bet hash and a method\footnote{For instance an URL to a
+  website with the bet description. Oracles are responsible to check the
+  description fetched with the hash provided in the transaction.} to get the
+  transaction full description are appended to this transaction in plain text
+  and the transaction is sent to the blockchain.
+We call this transaction ``\textit{Bet Promise}'', as it is a commitment from both
+  players to the bet.
+
+\colorbox{red}{Figura de la tx}
+
+The commitment consists in paying the transaction fees\footnote{This money is
+  gone forever.}, and to move all the money required by the BET into the control
+  of both players.
+Any other transaction with this money needs the approval from both, however in
+  the case one of the player dissapear and does not participate anymore in the
+  protocol, most of it is return \colorbox{red}{Hablar de la plata que va a los
+  oraculos y es irrecuperable, y el costo de hacerla recuperable}.
+
+\subsubsection{Oracle Inscription}
+Oracles invited to participate needs to retrieve the Bet description as
+  instructed in the \textit{Bet Promise} transaction and decide whether to
+  participate or not.
+When an oracle does not participate, players decide how to select a new one,
+  a waiting list is recommended to be selected in the first part of the
+  protocol.
+When it decides to participate, it builds and send to the players
+  \colorbox{red}{Explicar como se comunica} the ``Oracle Inscription''
+  transaction.
+
+This transaction also binds the hash...
+
+This transaction is the oracle's commitment with the bet, and the acceptance
+  from the users. The inputs comes from the Oracle's deposit and the players
+  joint account, some of it goes to an account controlled by the oracle and
+  the players. The left portion goes to a
+  A deposit from the oracle, and money from the players is
+  moved into an account controlled by the players and the oracle, and
+
+
+
+
+
+
+\colorbox{red}{HAblar de la comunicacion}
