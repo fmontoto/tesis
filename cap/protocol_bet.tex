@@ -38,18 +38,62 @@ When it decides to participate, it builds and send to the players
   \colorbox{red}{Explicar como se comunica} the ``Oracle Inscription''
   transaction.
 
-This transaction also binds the hash...
 
-This transaction is the oracle's commitment with the bet, and the acceptance
-  from the users. The inputs comes from the Oracle's deposit and the players
+This transaction is the oracle's commitment with the bet, and its acceptance
+  from the players. The inputs come from the Oracle's deposit and the players
   joint account, some of it goes to an account controlled by the oracle and
-  the players. The left portion goes to a
-  A deposit from the oracle, and money from the players is
-  moved into an account controlled by the players and the oracle, and
+  the players.
+The portion left goes to any of the players if the oracle does not give the
+  correct answer or goes back to the oracle after the bet is done, we call
+  this output ``two answers penalty'', as it is a penalty for the oracle
+  when it misbehaves.
 
+This transaction also binds the oracle anwers, at this step the oracle generates
+  two random strings to be used as answers, one for each possible outcome.
+This strings are to remaing secret until the oracle answers the event's
+  outcome.
+However the hashs of this strings are included in the \textit{two answers
+  penalty} output, if a player gets to know both answers can spend this output.
 
+\subsubsection{Bet}
 
+Once the required oracles are inscribed to participate the ``Bet'' transaction
+  is built by the players.
+ The input contains what is remaining from the original players contributions to
+   the prize, controlled by the players' joint account plus most\footnote{The
+  other portion of this deposit was used in the \textit{two answers penalty}
+  output in the \textit{Oracle Inscription} transaction.} of the oracles
+  deposit, controlled by the corresponding oracle and both players.
+Because of this, the transaction must be signed by both players and all the
+  oracles.
 
+The first two outputs are the prize, divided in two, so in case there is no
+  answer from the oracles half of the prize returns to each player.
+Each of them getting back almost all the money initially spend, some is lose
+  on fees and oracle payments. \colorbox{red}{Esto depende de los valores de
+  las variables}. On the other hand, if the oracles get to an agreement and the
+  bet is resolved on time. Using the oracles' answer the winner player can spend
+  both outputs.
 
+The next $n$ outputs are the oracle payments, they are spendable by the
+  corresponding oracle plus any of its answers.
+Spending this output requires to make public the oracle's answer. This way the
+  oracle is guaranteed to get its payment when responding on time, and players
+  know the oracle only gets pay when it answers.
+  If the transaction is not spent in a defined time (T$_{\text{reply}}$) we say
+  the oracle didn't answer and the money can be spend by the players joint
+  account.
+This prevents the oracle of taking the money after not responding in the
+  required time.
+
+The last $n$ outputs are a withholding for the same amount of the oracle
+  payment, if the oracle gives a wrong answer for the oucome this money
+  goes to the real winner, this way we take the payment out from the oracle.
+If it behaves as expected, the oracle can spend this money some time after
+  (T$_{\text{undue}}$) the bet is resolved.
+
+After this transaction is placed, every player only wait for the events to take
+  place and spend, if they can the outputs availables. The only transaction
+  remaining are the participants taking the money they are entitled to.
 
 \colorbox{red}{HAblar de la comunicacion}
