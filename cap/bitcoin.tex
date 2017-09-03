@@ -160,7 +160,7 @@ Once block is produced, all the others miners need to delete the transactions
   added by the block from the one they are building and update the link to the
   new last block. And they start to mine a new block.
 By design a block must be produced every 10 minutes, so the work required to
-  mine a block is a ajusted periodically to met this goal.
+  mine a block is a adjusted periodically to meet this goal.
 
 The structure of a Bitcoin block is show in the figure \ref{fig:block_pow}, the
   fields with the gray background represents the block header, the data hashed
@@ -168,7 +168,7 @@ The structure of a Bitcoin block is show in the figure \ref{fig:block_pow}, the
 The transactions are indirectly hashed in the Merkle Root\footnote{A
   \texttt{Merkle Tree} is a tree in which each non leaf node is labeled with
   the hash of its children's labels. In the block each transaction is mapped
-  into a tree leaf. So the root of this tree hashes all the transactions}.
+  into a tree leaf. So the root of this tree hashes all the transactions.}.
 
   \begin{figure}[ht]
 	\centering
@@ -179,7 +179,7 @@ The transactions are indirectly hashed in the Merkle Root\footnote{A
 
 As expected in a protocol with many participants, there are times were more
   than one block is generated with the same parent (figure
-  \ref{fig:chain_fork}), this is call a fork.
+  \ref{fig:chain_fork}). This is call a fork.
 
 \begin{figure}
 	\centering
@@ -258,30 +258,30 @@ The script is evaluated using the scriptSig as input. If the transaction willing
 			\hline
 				\thead{Stack} & \thead{Script} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{Constants from scriptSig are copied to the stack.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 1: }\textit{Constants from scriptSig are copied to the stack.}} \\
 			\hline
 			\makecell{<pubKey>\\<sig>} & OP\_DUP \footnotesize{OP\_HASH160 <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{OP\_DUP copies the top element from the stack.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 2: }\textit{OP\_DUP copies the top element from the stack.}} \\
 			\hline
 			\makecell{<pubKey> \\ <pubKey> \\ <sig>} & OP\_HASH160 \footnotesize{<pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The hash of the top element is calculated.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 3: }\textit{The hash of the top element is calculated.}} \\
 			\hline
 			\makecell{H(<pubKey>) \\ <pubKey> \\ <sig>} & <pubKeyHash> \footnotesize{OP\_EQUALVERIFY OP\_CHECKSIG} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The destination address is moved to the stack.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 4: }\textit{The destination address is moved to the stack.}} \\
 			\hline
 			\makecell{<pubKeyHash> \\ H(<pubKey>) \\ <pubKey> \\ <sig>} & OP\_EQUALVERIFY \footnotesize{OP\_CHECKSIG} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The destination address is compared with the Hash of the Public Key (PK) provided by the}} \\
-			\multicolumn{2}{|c|}{\textit{sig Script. This check the provided Public Key is the one from the intended receiver.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 5: }\textit{The destination address is compared with the Hash of the Public Key (PK) provided by}} \\
+			\multicolumn{2}{|l|}{\textit{the sig Script. This check the provided Public Key is the one from the intended receiver.}} \\
 			\hline
 			\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{Using the already verified PK, the script checks the transaction was signed using the}} \\
-			\multicolumn{2}{|c|}{\textit{corresponding Private Key. This step secures the transaction from tampering an proves it was}} \\
-			\multicolumn{2}{|c|}{\textit{sent by the private Key controller.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 6: }\textit{Using the already verified PK, the script checks the transaction was signed using the}} \\
+			\multicolumn{2}{|l|}{\textit{corresponding Private Key. This step secures the transaction from tampering an proves it was}} \\
+			\multicolumn{2}{|l|}{\textit{sent by the private Key controller.}} \\
 			\hline
 			\makecell{True} & \\
 			\hline
@@ -319,28 +319,28 @@ Whis script is pretty simple, it takes the first element of the stack,
 			\hline
 				\thead{Stack} & \thead{Script} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The serialized script and its input are copied to the stack.}} \\
+			\multicolumn{2}{|c|}{\textbf{Step 1: }\textit{The serialized script and its input are copied to the stack.}} \\
 			\hline
 			\makecell{\string{<pubkey> OP\_CHECKSIG\string} \\ <sig> } & OP\_HASH160 \footnotesize{<scriptHash> OP\_EQUAL} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The serialized script hash is calculated.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 2: }\textit{The serialized script hash is calculated.}} \\
 			\hline
 			\makecell{H(\string{<pubkey> OP\_CHECKSIG\string}) \\ <sig>} & <pubkeyHash> \footnotesize{OP\_EQUAL} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The expected hash is pushed to the stack.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 3: }\textit{The expected hash is pushed to the stack.}} \\
 			\hline
 			% \makecell{asdas} & dqwdeq \\
 			\makecell{<pubKeyHash> \\ H(\string{<pubkey> OP\_CHECKSIG\string}) \\ <sig>} & OP\_EQUAL \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{Then the hashes are compared, and if they match, the script is deserialized and evaluated.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 4: }\textit{Hashes are compared, and if they match, the script is deserialized and evaluated.}} \\
 			\hline
 			\makecell{<sig>} & <pubkey> \footnotesize{OP\_CHECKSIG} \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The public key is pushed to the stack.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 5: }\textit{The public key is pushed to the stack.}} \\
 			\hline
 			\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
 			\hline
-			\multicolumn{2}{|c|}{\textit{The provided signature is validated using the public key.}} \\
+			\multicolumn{2}{|l|}{\textbf{Step 6: }\textit{The provided signature is validated using the public key.}} \\
 			\hline
 			\makecell{True} & \\
 			\hline

@@ -37,7 +37,8 @@ This refers to a special class of Hash Functions the Cryptography has defined
   to be suitable for its use on cryptographic applications. The main property
   this functions are designed to is to be ``one way'' functions, this means
   its infeasible\footnote{We say something is computational infeasible when even
-  it is computable, it will require far too many resources to do it.} to invert.
+  it is computable, it will require far too many resources to do it.} to invert
+  if the input to the function is chose uniformly at random.
 
 In an ideal cryptographic function, the most efficient way to find one of the
   preimages is a brute-force search\footnote{Also known as exhaustive search,
@@ -48,6 +49,6 @@ It is also important for this ideal function to be \textit{collision
   resistance}, this means it is infeasible to find any two distinct inputs
   $x, x'$ with the same image, i.e., such that $h(x) = h(x')$.
 
-When using this ideal function producing a (second) preimage requires $2^n$
-  operations, and producing a collision requires at least
+When using this ideal function, on average, producing a (second) preimage
+  requires $2^n$ operations, and producing a collision requires at least
   $2^{n / 2} $ operations\cite{preneel1993analysis}.

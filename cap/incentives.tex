@@ -1,0 +1,59 @@
+\section{Incentives}
+
+The ulterior motive for participating in the protocol is to win money, so we
+  assume each player is driven by this.
+All of their action aims to this goal, win money. The protocol is designed with
+  this assumption in mind and in the following paragraphs we discuss how the
+  monetary incentives align participants to have a proper behaviour.
+
+\subsection{Players}
+The first thing to considerate is that players are paying fees for every
+  transaction they send to the blockchain, in equal proportions.
+So, it is impossible the protocol can be aborted and both players get its
+  money back.
+Once the first transaction is placed, at least one player will not recover its
+  money: If the protocol does not finishes with a resolution, both will lose
+  some money; If there is a winner the other will lose everything.
+
+One option to maximize the money won is to control the oracles.
+The first phase of the protocol and the second's player enforcement
+  minimize the chances of selecting them.
+However there is another way to control the oracles, payments can be made to
+  influence into the oracle's answer.
+Bribing the oracles is discused into the subsection \ref{subsec:inc_oracles}.
+
+
+
+
+\subsection{Oracles} \label{subsec:inc_oracles}
+
+As the players, oracles also try to maximize their earnings, within the protocol
+  that means to give the correct answer and collect its payment.
+But, there is an option to increase the earnings outside the protocol. Receiving
+  money from a player to change their vote can give the oracle more money than
+  answering correctly, as the incentive to change its vote can be bigger than
+  the payment.
+A modified version of the bet transaction can used to do these payment, the
+  player willing to pay the bribe can set the output to be spent with the answer
+  he expects.
+So, in order to get the bribe, the oracle must reveal the answer the player pay
+  to get.
+This make the problem even bigger, as no trust is required between a player and
+  the oracle in order to cheat and change the answer.
+
+This problem comes from the fact there is not source of truth accessible in the
+  blockchain, in fact this is the problem the protocol tries to solve.
+The payment for answering correctly goes for the oracles that answer as the
+  majority of them, not the ones that answer the truth, simply because that is
+  the protocol truth.
+Bribing a majority of the oracles gives the oracles the bribe and also the
+  payment.
+And this is the only useful bribe for the player, to change a minority of the
+  answers does not gives him any benefit.
+
+A way to mitigate this problem is to give the oracles certain reputation based
+  on past behavior.
+This gives the oracles the incentive of behave properly in order to get long
+  term earnings, as accepting bribes will erode their chances to be selected as
+  oracles again.
+\colorbox{red}{How to track bad behavior?}
