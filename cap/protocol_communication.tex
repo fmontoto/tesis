@@ -1,7 +1,7 @@
 \section{Communication}
 
 When the protocol is explained many things are get by granted, we just say
-  oracles and players exchange communication between them with not further
+  oracles and players exchange data between them with not further
   discussion.
 When implementing this protocol the communication between participants can
   not be ignored, in this section we discuss a proposed model of communication
@@ -13,16 +13,17 @@ In Bitcoin communication in the protocol is not encrypted neither
 The protocol relies heavily on the Blockchain, so we take advantage of all these
   features and no communication requieres encryption nor authentication.
 
-There are two required things both players needs to know in order to start the
-  protocol, the other player's Bitcoin address and a communication method.
+In order to start the protocol, players are required to know two things about
+the other. The other player's Bitcoin address and a communication method.
 A communication method besides the blockchain is required in order to discuss
-  and get to an agreement in the bet parameters. This communication is required
-  to be bidirectional.
+  and get to an agreement in the bet parameters.
+This communication is required to be bidirectional.
 
 The first step is to chat and decide the bet, if this communication is not
   secured, the \textit{Bet Promise} transaction works as authentication method.
 Because at signing it, each player proves it control the private key
   corresponding to its address.
+And commits to the data the transaction holds.
 
 When an oracle sees its id in the blockchain it needs to get the full bet
   description to decide whether to participate or not, as the full description
@@ -38,10 +39,9 @@ After all the oracles sent their transactions, players have all they need
   to create, sign and send the Bet transaction to the blockchain.
 No further communication off the blockchain is required from now on if every
   oracle behaves correctly.
-However, if a penalty is to be charged to an oracle,\foonote{Not responding
-  on time for example.} communication off the blockchain is required to
+However, if a penalty is to be charged to an oracle \foonote{Because it did not
+  answer on time for example.} communication off the blockchain is required to
   build and sign the transaction charging the penalty to the oracle.
-
 
 \subsection{Secured communication} \label{subsec:secured_comm}
 

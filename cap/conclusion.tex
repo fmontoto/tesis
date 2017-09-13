@@ -1,12 +1,34 @@
 \section{Conclusion}
 
-Since the Bitcoin creation in 2008 there have been created more than one
-  thousand different cryptocurrencies, most of them following its main design
+Since the Bitcoin creation in 2008 more than a thousands of different
+  cryptocurrencies have been created, most of them following its main design
   properties.
 Bitcoin is known and often criticized because its slow evolution and resistance
   to changes.
 This is accentuated for the overwhelming number of different and fast evolving
   currencies created.
 
+A currency where rules does not change too much over time makes it a good store
+  for value, and likely this property of bitcoin contributes to make it the
+  most valuable cryptocurrency, as measured by market capitalization.
+This is a desired feature for our algorithm, we don't want the value of the
+  money put when the bet is placed to be too different of the one when the bet
+  is resolved.
 
-Choosing Bitcoin as the currency to implement the solution was a made to
+However this did not come for free, this slow change rate keeps bitcoin script
+  language very limited.
+When people talk about smart contract or scripting, Bitcoin is never the first
+  currency to come to peoples' mind.
+This limitation, the slow change rate and the biggest network made it our
+  choice: the limitation poses the real challenge in the protocol presented.
+The problem is trivial for currencies with more expressive scripting languages;
+  the slow change rate helps to keep the currency value and the same rules from
+  the start to the end of a bet; and finally to have the biggest network
+  enforcing the protocol rules makes more difficult some known attacks, as
+  Majority and Eclipse \cite{heilman2015attack}.
+Other cost of using a limited scripting language is the amount of instructions
+  and transactions required to express the protocol, this is traduced to a
+  higher fee cost.
+
+
+

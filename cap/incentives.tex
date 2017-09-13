@@ -8,12 +8,13 @@ All of their action aims to this goal, win money. The protocol is designed with
 
 \subsection{Players}
 The first thing to considerate is that players are paying fees for every
-  transaction they send to the blockchain, in equal proportions.
+  transaction they send to the blockchain, in equal proportion.
 So, it is impossible the protocol can be aborted and both players get its
   money back.
 Once the first transaction is placed, at least one player will not recover its
   money: If the protocol does not finishes with a resolution, both will lose
-  some money; If there is a winner the other will lose everything.
+  some money; If there is a winner he will get earnings and the other will lose
+  everything.
 
 One option to maximize the money won is to control the oracles.
 The first phase of the protocol and the second's player enforcement
@@ -22,8 +23,21 @@ However there is another way to control the oracles, payments can be made to
   influence into the oracle's answer.
 Bribing the oracles is discused into the subsection \ref{subsec:inc_oracles}.
 
-
-
+Making the other player to lose money could be a motivation to some players,
+  even if does not mean an earning for themself.
+As payments on timeouts and fees are equally distributed in the transactions,
+  aborting the protocol at some point will mean an equal lose of funds for both
+  players. If a player is willing to make the other one lose an amount of money,
+  it will cost him the same amount.
+Other possible motivation could be to deprive the other player of its funds.
+But again for the same reason mentioned above, this will mean the player
+  performing the attack should lock the same amount of money for the same period
+  of time.
+A player can impair monetarily the other one, but is not for free, it will cost
+  the same amount of money to do it. It can make the other player lose money,
+  but only small amounts to be used as fees.
+When it comes to funds depravation, the amount can be all the money involved,
+  but it will not be lost, just locked for the time the bet defines as timeout.
 
 \subsection{Oracles} \label{subsec:inc_oracles}
 
@@ -56,4 +70,5 @@ A way to mitigate this problem is to give the oracles certain reputation based
 This gives the oracles the incentive of behave properly in order to get long
   term earnings, as accepting bribes will erode their chances to be selected as
   oracles again.
-\colorbox{red}{How to track bad behavior?}
+Players must consider this incentive when choosing oracles, the use of oracles
+  with some kind of reputation decreases the chance of them taking a bribe.
