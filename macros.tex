@@ -1,0 +1,73 @@
+% transaction {label}{transaction name}{list of inputs}
+\makeatletter
+\newcommand{\transaction}[0]{%
+    \@transactionbegin
+}
+\newcommand\@transactionbegin[3]{%
+    \begin{center}
+        \label{#1}
+        \begin{tabular}{| l | c |}
+            \hline
+            \multicolumn{2}{|c|}{\textbf{$T_{#2}$}  (\textbf{in:} \@transactionize{#3})} \\
+            \hline
+            \@transactioninputsit
+}
+\newcommand{\@transactioninputsit}[1]{%
+    \ifx\stopinputs#1%
+        \expandafter\@firstoftwo
+    \else
+        \expandafter\@secondoftwo
+    \fi
+    {\@transactioninputsend}
+    {\@transactioninputsscript{#1}}%
+}
+\newcommand{\@transactioninputsscript}[2]{%
+    $T_{#1}$ \textbf{in-script:} & #2 \\
+    \hline
+    \@transactioninputsit%
+}
+\newcommand{\@transactioninputsend}[0]{%
+    \@transactionoutputsit
+}
+\newcommand{\@transactionoutputsit}[1]{%
+    \ifx\stopoutputs#1%
+        \expandafter\@firstoftwo
+    \else
+        \expandafter\@secondoftwo
+    \fi
+    {\@transactionoutputsend}
+    {\@transactionoutputsscript{#1}}%
+}
+\newcommand{\@transactionoutputsscript}[2]{%
+    \textbf{out-script} (#1): & #2 \\
+    \hline
+    \@transactionoutputsit %
+}
+\newcommand{\@transactionoutputsend}[0]{
+        \end{tabular}
+    \end{center}
+}
+% Take a comma separated list "a,b,c" and transform it into "T_{a},T_{b},T_{c}"
+\newcommand{\@transactionize}[1]{%
+    \@tempswafalse
+    \@for\next:=#1\do
+    {\if@tempswa\else\@tempswatrue\fi{$T_{\next}$}}
+}
+\def\stopinputs{}
+\def\stopoutputs{}
+\makeatother
+
+% \begin{center}
+    % \label{tx:presentation}
+    % \begin{tabular}{| l | c |}
+        % \hline
+            % \multicolumn{2}{|c|}{\textbf{T_x}  (\textbf{in:} T_{y1} T_{y2})} \\
+        % \hline
+            % T_{y1} \textbf{in-script:} & \sigma_1 \\
+        % \hline
+            % T_{y2} \textbf{in-script:} & \sigma_2 \\
+        % \hline
+        % asdksd & asd \\
+        % \hline
+    % \end{tabular}
+% \end{center}

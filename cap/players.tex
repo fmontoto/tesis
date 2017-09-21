@@ -1,7 +1,15 @@
 \section{Players}
 
-Players are the ones wagering the money, we define its number to 2, however
-  when gambling there could be more than two players. Usually we will refer to
-  them as ``Player A'' and ``Player B''. Players are the ones paying the bet,
-  the oracles and the transactions fees. The one who predicts correctly the
-  outcome of the event they are betting on takes the prize.
+Players are the ones wagering the money, within this work we define its number
+  to 2, the idea behind this work can be extended to more than two players,
+  however the code in the transactions gets more complicated, so transactions
+  increase on size, this makes the protocol more expensive.
+
+Players participate in the protocol with the expectation to predict the
+  outcome of the event and win some money, they might not trust each other but
+  they collaborate to build the transaction of this protocol, expecting to win.
+The protocol lock the players' money before the event they are wagering on takes
+  and let the oracles decide where the money goes, this prevent the losing
+  player from not paying the bet.
+As players are requesting the oracles' services they pay for it and the cost
+  of transactions required in the protocol.

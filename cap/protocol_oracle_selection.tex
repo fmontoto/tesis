@@ -1,8 +1,20 @@
+
+
 \section{The Protocol}
 
-Our protocol is divided into two parts, where the second one is the actual bet
-  and the first one is an optional step to select the oracles.
+In order to introduce the protocol we introduce the following notation to
+  describe the transactions, based in the work of Andrychowicz et
+  al.\cite{andrychowicz2014secure}:
 
+  \transaction{tx:example}{x}{y1,y2}
+                {y1}{$\sigma_1$}
+                {y2}{$\sigma_2$}
+                \stopinputs
+                {$\nu_2$}{$\gamma_1$}
+                {$\nu_2$}{$\gamma_2$}
+                {$\nu_3$}{$\gamma_3$}
+                \stopoutputs
+%
 \subsection{First part: Oracle Selection}
 
 The oracles are a key piece in the protocol, as they get to decide who get
