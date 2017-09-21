@@ -89,7 +89,7 @@ This is the only way bitcoins are generated.
 A transaction input points to a previous unspent output and proves it has the
   right to spend that output.
 An output contains\footnote{This is a simplification, not every output work this
-  way, detailed at subsection \label{subsec:script}.} the address of the account
+  way, detailed at subsection \ref{subsec:script}.} the address of the account
   is transferring the money to, so any input signed using the private key of
   that address has the right to spend the output.
 This implies that the money from an account must be spent in the same amount
@@ -214,18 +214,18 @@ When sending money, there is a little more than we saw at section
   than a signature, and at each output (figure \ref{fig:output}) also more than
   an address.
 
-  \begin{figure}[ht]
-	\centering
-	\includesvg[width=0.8\columnwidth]{input}
-	\caption{Wire format of an Input.}
-	\label{fig:input}
+\begin{figure}[ht]
+  \centering
+  \includesvg[width=0.8\columnwidth]{input}
+  \caption{Wire format of an Input.}
+  \label{fig:input}
 \end{figure}
 
 \begin{figure}[ht]
-	\centering
-	\includesvg[width=0.8\columnwidth]{output}
-	\caption{Wire format of an Output.}
-	\label{fig:output}
+  \centering
+  \includesvg[width=0.8\columnwidth]{output}
+  \caption{Wire format of an Output.}
+  \label{fig:output}
 \end{figure}
 
 An output does not send money to a given address, but defines how the money can
@@ -242,51 +242,67 @@ The script is evaluated using the scriptSig as input. If the transaction willing
   the output is available to be spend. This is how a P2PKH script looks like:
 
 \begin{center}
-	  \begin{tabular}{|c|}
-		  \texttt{OP\_DUP OP\_HASH160 <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG}
-     \end{tabular}
+  \begin{tabular}{|c|}
+    \texttt{OP\_DUP OP\_HASH160 <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG}
+  \end{tabular}
 \end{center}
 
   It receives two values as input:  \lstinline{<pubKeyHash>} and
-  \lstinline{<sig>}. And the execution is explained in the table \ref{tab:p2pkh_exec}.
+  \lstinline{<sig>}. And the execution is explained in the table%
+    \ref{tab:p2pkh_exec}.
 
-	\begin{table}[]
-		\small
-		\caption{Script evaluation to check a P2PKH transaction.}
-		\label{tab:p2pkh_exec}
-		\begin{tabularx}{\textwidth}{| c | X |}
-			\hline
-				\thead{Stack} & \thead{Script} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 1: }\textit{Constants from scriptSig are copied to the stack.}} \\
-			\hline
-			\makecell{<pubKey>\\<sig>} & OP\_DUP \footnotesize{OP\_HASH160 <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 2: }\textit{OP\_DUP copies the top element from the stack.}} \\
-			\hline
-			\makecell{<pubKey> \\ <pubKey> \\ <sig>} & OP\_HASH160 \footnotesize{<pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 3: }\textit{The hash of the top element is calculated.}} \\
-			\hline
-			\makecell{H(<pubKey>) \\ <pubKey> \\ <sig>} & <pubKeyHash> \footnotesize{OP\_EQUALVERIFY OP\_CHECKSIG} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 4: }\textit{The destination address is moved to the stack.}} \\
-			\hline
-			\makecell{<pubKeyHash> \\ H(<pubKey>) \\ <pubKey> \\ <sig>} & OP\_EQUALVERIFY \footnotesize{OP\_CHECKSIG} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 5: }\textit{The destination address is compared with the Hash of the Public Key (PK) provided by}} \\
-			\multicolumn{2}{|l|}{\textit{the sig Script. This check the provided Public Key is the one from the intended receiver.}} \\
-			\hline
-			\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 6: }\textit{Using the already verified PK, the script checks the transaction was signed using the}} \\
-			\multicolumn{2}{|l|}{\textit{corresponding Private Key. This step secures the transaction from tampering an proves it was}} \\
-			\multicolumn{2}{|l|}{\textit{sent by the private Key controller.}} \\
-			\hline
-			\makecell{True} & \\
-			\hline
-		\end{tabularx}
-	\end{table}
+\begin{table}[tbp]
+  \small
+    \caption{Script evaluation to check a P2PKH transaction.}
+    \label{tab:p2pkh_exec}
+    \begin{tabularx}{\textwidth}{| c | X |}
+    \hline
+	    \thead{Stack} & \thead{Script} \\
+	\hline
+      \multicolumn{2}{|l|}{\textbf{Step 1: }\textit{%
+          Constants from scriptSig are copied to the stack.}} \\
+    \hline
+	  \makecell{<pubKey>\\<sig>} & OP\_DUP \footnotesize{%
+          OP\_HASH160 <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
+    \hline
+	  \multicolumn{2}{|l|}{\textbf{Step 2: }\textit{%
+	      OP\_DUP copies the top element from the stack.}} \\
+    \hline
+      \makecell{<pubKey> \\ <pubKey> \\ <sig>} & OP\_HASH160 \footnotesize{%
+          <pubKeyHash> OP\_EQUALVERIFY OP\_CHECKSIG} \\
+	\hline
+      \multicolumn{2}{|l|}{\textbf{Step 3: }\textit{%
+          The hash of the top element is calculated.}} \\
+    \hline
+	  \makecell{H(<pubKey>) \\ <pubKey> \\ <sig>} & <pubKeyHash> \footnotesize{%
+          OP\_EQUALVERIFY OP\_CHECKSIG} \\
+    \hline
+	  \multicolumn{2}{|l|}{\textbf{Step 4: }\textit{%
+	      The destination address is moved to the stack.}} \\
+	\hline
+	  \makecell{<pubKeyHash> \\ H(<pubKey>) \\ <pubKey> \\ <sig>} &%
+	      OP\_EQUALVERIFY \footnotesize{OP\_CHECKSIG} \\
+	\hline
+	  \multicolumn{2}{|l|}{\textbf{Step 5: }\textit{%
+	      The destination address is compared with the Hash of the %
+          Public Key (PK) provided by}} \\
+	  \multicolumn{2}{|l|}{\textit{the sig Script. This check the provided %
+	      Public Key is the one from the intended receiver.}} \\
+	\hline
+	  \makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
+	\hline
+	  \multicolumn{2}{|l|}{\textbf{Step 6: }\textit{%
+	      Using the already verified PK, the script checks the transaction was %
+          signed using the}} \\
+	  \multicolumn{2}{|l|}{\textit{corresponding Private Key. This step %
+	      secures the transaction from tampering an proves it was}} \\
+	  \multicolumn{2}{|l|}{\textit{sent by the private Key controller.}} \\
+	\hline
+	  \makecell{True} & \\
+	\hline
+    \end{tabularx}
+  % small
+\end{table}
 
 The scriptPubKey in a pay to script hash transaction is even simpler:
 \begin{center}
@@ -311,59 +327,51 @@ Whis script is pretty simple, it takes the first element of the stack,
 
   A execution of a sample P2SH is show in the table \ref{tab:p2sh_exec}.
 
-	\begin{table}[]
-		\small
-		\caption{Script evaluation of a P2SH transaction.}
-		\label{tab:p2sh_exec}
-		\begin{tabularx}{\textwidth}{| c | X |}
-			\hline
-				\thead{Stack} & \thead{Script} \\
-			\hline
-			\multicolumn{2}{|c|}{\textbf{Step 1: }\textit{The serialized script and its input are copied to the stack.}} \\
-			\hline
-			\makecell{\string{<pubkey> OP\_CHECKSIG\string} \\ <sig> } & OP\_HASH160 \footnotesize{<scriptHash> OP\_EQUAL} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 2: }\textit{The serialized script hash is calculated.}} \\
-			\hline
-			\makecell{H(\string{<pubkey> OP\_CHECKSIG\string}) \\ <sig>} & <pubkeyHash> \footnotesize{OP\_EQUAL} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 3: }\textit{The expected hash is pushed to the stack.}} \\
-			\hline
-			% \makecell{asdas} & dqwdeq \\
-			\makecell{<pubKeyHash> \\ H(\string{<pubkey> OP\_CHECKSIG\string}) \\ <sig>} & OP\_EQUAL \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 4: }\textit{Hashes are compared, and if they match, the script is deserialized and evaluated.}} \\
-			\hline
-			\makecell{<sig>} & <pubkey> \footnotesize{OP\_CHECKSIG} \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 5: }\textit{The public key is pushed to the stack.}} \\
-			\hline
-			\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
-			\hline
-			\multicolumn{2}{|l|}{\textbf{Step 6: }\textit{The provided signature is validated using the public key.}} \\
-			\hline
-			\makecell{True} & \\
-			\hline
-		\end{tabularx}
-	\end{table}
+\begin{table}[tbp]
+  \small
+    \caption{Script evaluation of a P2SH transaction.}
+	\label{tab:p2sh_exec}
+	\begin{tabularx}{\textwidth}{| c | X |}
+	  \hline
+	    \thead{Stack} & \thead{Script} \\
+	  \hline
+	  \multicolumn{2}{|c|}{\textbf{Step 1: }\textit{%
+	      The serialized script and its input are copied to the stack.}} \\
+	  \hline
+		\makecell{\{<pubkey> OP\_CHECKSIG\} \\ <sig> } & %
+	      OP\_HASH160 \footnotesize{<scriptHash> OP\_EQUAL} \\
+	  \hline
+		\multicolumn{2}{|l|}{\textbf{Step 2: }\textit{%
+		  The serialized script hash is calculated.}} \\
+      \hline
+		\makecell{H(\{<pubkey> OP\_CHECKSIG\}) \\ <sig>} & %
+	      <pubkeyHash> \footnotesize{OP\_EQUAL} \\
+	  \hline
+		\multicolumn{2}{|l|}{\textbf{Step 3: }\textit{%
+		  The expected hash is pushed to the stack.}} \\
+	  \hline
+		\makecell{<pubKeyHash> \\ %
+		    H(\{<pubkey> OP\_CHECKSIG\}) \\ <sig>} & OP\_EQUAL \\
+	  \hline
+		\multicolumn{2}{|l|}{\textbf{Step 4: }\textit{%
+		    Hashes are compared, and if they match, the script is deserialized and evaluated.}} \\
+      \hline
+	    \makecell{<sig>} & <pubkey> \footnotesize{OP\_CHECKSIG} \\
+	  \hline
+	    \multicolumn{2}{|l|}{\textbf{Step 5: }\textit{%
+	      The public key is pushed to the stack.}} \\
+	  \hline
+		\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
+	  \hline
+		\multicolumn{2}{|l|}{\textbf{Step 6: }\textit{%
+		    The provided signature is validated using the public key.}} \\
+	  \hline
+	    \makecell{True} & \\
+	  \hline
+	\end{tabularx}
+  % \end small
+\end{table}
 
 A P2SH transaction allows different conditions to redeems its outputs,
   a complete list of the operations supported by the Bitcoin scripting language
   can be found at the Bitcoin wiki: \url{https://en.bitcoin.it/wiki/Script}.
-
-% The blockchain does not introduce a new primitive or idea to solve all of the
-  % mentioned problems, it does use existing tools in an innovative way to.
-% To keep a consistent history the blocks are linked using the hash of the
-  % previous block, this prevents tamper on past data.
-
-
-
-
-% As it is public, every transaction can be verified by any protocol participant.
-
-
-  % The blockchain is  a chain of blocks were each of them keeps a link
-% to the previou
-  % also fully distributed. In bitcoin
-
-
