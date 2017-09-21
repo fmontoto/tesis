@@ -8,7 +8,7 @@
         \label{#1}
         \begin{tabular}{| l | c |}
             \hline
-            \multicolumn{2}{|c|}{\textbf{$T_{#2}$}  (\textbf{in:} \@transactionize{#3})} \\
+            \multicolumn{2}{|c|}{\textbf{$T_{#2}$}  (\textbf{in:} \transactionize{#3})} \\
             \hline
             \@transactioninputsit
 }
@@ -21,8 +21,8 @@
     {\@transactioninputsend}
     {\@transactioninputsscript{#1}}%
 }
-\newcommand{\@transactioninputsscript}[2]{%
-    $T_{#1}$ \textbf{in-script:} & #2 \\
+\newcommand{\@transactioninputsscript}[3]{%
+    $T_{#1}$-#2 \textbf{in-script:} & #3 \\
     \hline
     \@transactioninputsit%
 }
@@ -39,12 +39,13 @@
     {\@transactionoutputsscript{#1}}%
 }
 \newcommand{\@transactionoutputsscript}[2]{%
-    \textbf{out-script} (#1): & #2 \\
+    (#1) \textbf{out-script}: & #2 \\
     \hline
     \@transactionoutputsit %
 }
-\newcommand{\@transactionoutputsend}[0]{
+\newcommand{\@transactionoutputsend}[1]{
         \end{tabular}
+        \captionof{table}{#1}
     \end{center}
 }
 % Take a comma separated list "a,b,c" and transform it into "T_{a},T_{b},T_{c}"
@@ -53,21 +54,15 @@
     \@for\next:=#1\do
     {\if@tempswa\else\@tempswatrue\fi{$T_{\next}$}}
 }
+\newcommand{\transactionize}[1]{%
+    \foreach \next [count=\ni] in {#1} {%
+        \ifnum\ni=1%
+            $T_{\next}$%
+        \else%
+            ,$T_{\next}$%
+        \fi%
+    }%
+}
 \def\stopinputs{}
 \def\stopoutputs{}
 \makeatother
-
-% \begin{center}
-    % \label{tx:presentation}
-    % \begin{tabular}{| l | c |}
-        % \hline
-            % \multicolumn{2}{|c|}{\textbf{T_x}  (\textbf{in:} T_{y1} T_{y2})} \\
-        % \hline
-            % T_{y1} \textbf{in-script:} & \sigma_1 \\
-        % \hline
-            % T_{y2} \textbf{in-script:} & \sigma_2 \\
-        % \hline
-        % asdksd & asd \\
-        % \hline
-    % \end{tabular}
-% \end{center}

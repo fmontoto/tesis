@@ -1,19 +1,37 @@
-
-
 \section{The Protocol}
-
-In order to introduce the protocol we introduce the following notation to
+\subsection{Notation}
+Before explaining the the protocol we introduce the following notation to
   describe the transactions, based in the work of Andrychowicz et
-  al.\cite{andrychowicz2014secure}:
+  al.\cite{andrychowicz2014secure}.
+Table \ref{tx:example} represents a transaction that spends two outputs from
+  two different previous transaction and creates three outputs:
 
-  \transaction{tx:example}{x}{y1,y2}
-                {y1}{$\sigma_1$}
-                {y2}{$\sigma_2$}
-                \stopinputs
-                {$\nu_2$}{$\gamma_1$}
-                {$\nu_2$}{$\gamma_2$}
-                {$\nu_3$}{$\gamma_3$}
-                \stopoutputs
+  \transaction
+    {tx:example}{x}{y1,y2}
+    % Inputs
+      {y1}{$\alpha$}{$\sigma_1$}
+      {y2}{$\beta$}{$\sigma_2$}
+      \stopinputs
+    % Outputs
+      {$\nu_1$}{$\gamma_1$}
+      {$\nu_2$}{$\gamma_2$}
+      {$\nu_3$}{$\gamma_3$}
+      \stopoutputs
+    % Caption
+      {Transaction notation example.}
+
+\begin{itemize}
+    \item \transactionize{x}: Transaction's name/id.
+    \item \transactionize{y1,y2}: Transactions being spent.
+    \item $\alpha,\beta$: Indexes of the output being spent.
+    \item $\nu_1,\nu_2,\nu_3$: Value of the output.
+    \item $\gamma_1, \gamma_2, \gamma_3$: Outputs' script, need to be satisfy
+                                          in order to spend its corresponding
+                                          output.
+\end{itemize}
+
+For describing the scripts we use
+
 %
 \subsection{First part: Oracle Selection}
 

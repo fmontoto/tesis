@@ -12,5 +12,6 @@
 *.synctex.gz
 *.toc
 *-blx.bib
+svg-inkscape/*
 imagenes/*.pdf
 imagenes/*.pdf_tex
