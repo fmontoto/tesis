@@ -3,12 +3,11 @@
 \newcommand{\transaction}[0]{%
     \@transactionbegin
 }
-\newcommand\@transactionbegin[3]{%
+\newcommand\@transactionbegin[2]{%
     \begin{center}
-        \label{#1}
         \begin{tabular}{| l | c |}
             \hline
-            \multicolumn{2}{|c|}{\textbf{$T_{#2}$}  (\textbf{in:} \transactionize{#3})} \\
+            \multicolumn{2}{|c|}{\textbf{$T_{#1}$}  (\textbf{in:} \transactionize{#2})} \\
             \hline
             \@transactioninputsit
 }
@@ -43,9 +42,10 @@
     \hline
     \@transactionoutputsit %
 }
-\newcommand{\@transactionoutputsend}[1]{
+\newcommand{\@transactionoutputsend}[2]{
         \end{tabular}
-        \captionof{table}{#1}
+        \captionof{table}{#2}
+        \label{#1}
     \end{center}
 }
 % Take a comma separated list "a,b,c" and transform it into "T_{a},T_{b},T_{c}"
