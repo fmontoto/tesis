@@ -9,6 +9,8 @@
             \hline
             \multicolumn{2}{|c|}{\textbf{$T_{#1}$}  (\textbf{in:} \transactionize{#2})} \\
             \hline
+            \multicolumn{2}{|c|}{\textit{Inputs:}} \\
+            \hline
             \@transactioninputsit
 }
 \newcommand{\@transactioninputsit}[1]{%
@@ -26,6 +28,7 @@
     \@transactioninputsit%
 }
 \newcommand{\@transactioninputsend}[0]{%
+    \multicolumn{2}{|c|}{\textit{Outputs:}} \\ \hline
     \@transactionoutputsit
 }
 \newcommand{\@transactionoutputsit}[1]{%
@@ -38,7 +41,7 @@
     {\@transactionoutputsscript{#1}}%
 }
 \newcommand{\@transactionoutputsscript}[2]{%
-    (#1) \textbf{out-script}: & #2 \\
+    \makecell{(#1) \textbf{out-script}:} & \makecell{#2} \\
     \hline
     \@transactionoutputsit %
 }
@@ -62,6 +65,15 @@
             ,$T_{\next}$%
         \fi%
     }%
+}
+\newcommand{\fee}[1]{%
+    \ensuremath{\mathcal{F}_{#1}}%
+}
+\newcommand{\signature}[1]{%
+    \ensuremath{\mathcal{S}_{#1}}%
+}
+\newcommand{\timeout}[1]{%
+    \ensuremath{\uptau_{#1}}%
 }
 \def\stopinputs{}
 \def\stopoutputs{}

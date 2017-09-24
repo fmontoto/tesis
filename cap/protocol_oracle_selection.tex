@@ -36,10 +36,10 @@ For the scripts we use the logical conjunction ($\wedge$) when both propositions
 Logical disjunction ($\vee$) when we need to satisfy only one of the
   propositions.
 Signatures always sign its own transaction, when a signature from the
-  participant $A$ is required, we say: $\mathcal{S}_A$.
+  participant $A$ is required, we say: \signature{A}.
 Sometime a literal is required, usually a preimage of a known hash ($H(l)$), we
   use just $l$. Some paths of the transaction are unreachable before a defined
-  time, we use $\uptau_k$ to disable the path this expressions is in before the
+  time, we use \timeout{k} to disable the path this expressions is in before the
   time $k$.
 
 For instance, the script at \ref{eq:notation_sample} requires to be evaluated
@@ -48,9 +48,6 @@ For instance, the script at \ref{eq:notation_sample} requires to be evaluated
     \mathcal{S}_U \wedge (l \vee \uptau_k)
 \end{equation}
 \mathmode
-
-
-
 
 \subsection{First part: Oracle Selection}
 
@@ -95,7 +92,7 @@ We defined our own string as protocol indentification, but different protocols
 
 In this registration transaction the oracle takes money from an unspent output
   and returns all the money where it wants. The registration happens with the
-  second output. OP_RETURNS makes this output invalid, so nobody can spend it.
+  second output. OP\_RETURNS makes this output invalid, so nobody can spend it.
 Which don't matter that much, as the value is zero. But the operation allows
   us to insert arbitrary data, and it's here where we enter a defined string
   saying the oracle's address and its will to participate as oracle.

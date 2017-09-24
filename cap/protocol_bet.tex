@@ -15,26 +15,89 @@ The selected oracles, bet hash and a method\footnote{For instance an URL to a
   transaction full description are appended to this transaction in plain text
   and the transaction is sent to the blockchain.
 We call this transaction ``\textit{Bet Promise}'', as it is a commitment from both
-  players to the bet.
+  players to the bet:
 
-\colorbox{red}{Figura de la tx}
+\transaction
+    {Bet Promise}{A previous tx, B previous tx}
+    {A previous tx}{$\alpha_A$}{$\sigma_A$}
+    {B previous tx}{$\alpha_B$}{$\sigma_B$}
+    \stopinputs
+    {0}{\footnotesize{OP\_RETURN \{Bet Channel, Oracle List, Bet hash\}}}
+    {$\mathcal{P} - \fee{Bet Promise} / 2$}{(\signature{A} $\wedge$ \signature{B}) \\
+                                                   \vee \\
+                                                  (\timeout{bet} $\wedge$ \signature{A}) }
+    {$\mathcal{P} - \fee{Bet Promise} / 2$}{(\signature{A} $\wedge$ \signature{B}) \\
+                                                   \vee \\
+                                                  (\timeout{bet} $\wedge$ \signature{B}) }
+    {$c/n$}{(\signature{A} $\wedge$ \signature{B})}
+    {...}{... \guilsinglleft n - 2\guilsinglright ...}
+    {$c/n$}{(\signature{A} $\wedge$ \signature{B})}
+    \stopoutputs
+    {tx:bet_promise}
+    {Bet Promise}
 
-The commitment consists in paying the transaction fees\footnote{This money is
-  gone forever.}, and to move all the money required by the BET into the control
-  of both players.
-Any other transaction with this money needs the approval from both, however in
-  the case one of the player dissapear and does not participate anymore in the
-  protocol, most of it is return \colorbox{red}{Hablar de la plata que va a los
-  oraculos y es irrecuperable, y el costo de hacerla recuperable}.
+The inputs for this transaction are not relevant to the protocol, they spend
+  money from both player to pay for this bet.
+There can be more than one input by player, and change outputs if required.
+As it's unlikely the players have an unspent transaction for the exact amount
+  required for the bet.
+To simplificate the transaction, more inputs nor change outputs are included.
+
+The first output does not transfer any money, but includes: the list of oracles
+  asked to participate; the channel to use for retrieving the full bet and the
+  hash to compare the retrieved bet against.
+When an oracle sees itself in the list of oracles, it goes to the channel and
+  retrieves the bet, compares it against the expected hash.
+Read the description and decides to participate or not.
+
+The second and third outputs of this transaction moves most of the money into
+  a joined account, so from now on it can only be moved by both players
+  together.
+This represents the commitment to start the bet, as each one lock its own money
+  under the other's will.
+In the case one of the players disappear, after \timeout{bet} the money can
+  recovered by its owner.
+
+The outputs 3 to 3 + (n - 1) are a small portion of the money, used for the
+  oracle inscriptions.
+This money does not includes a timeout because it is an small amount, if players
+  are willing to pay the extra fee required to add this timeout, it can be
+  added.
+
+This transaction spends $\mathcal{P} + \frac{c}{2}}$ from each player:
+  $ n \cdot \frac{c}{n}$ goes to pay for oracle inscriptions; \fee{Bet Promise}
+  goes to pay this transaction's fees; and
+  $2 \cdot \matchcal{P} - \fee{Bet Promise} $ for paying the bet and its
+  associated costs.
 
 \subsubsection{Oracle Inscription}
 Oracles invited to participate needs to retrieve the Bet description as
   instructed in the \textit{Bet Promise} transaction and decide whether to
   participate or not.
-When an oracle does not participate, players decide how to select a new one,
-  a waiting list is recommended to be selected in the first part of the
+When one or more oracles do not participate, players decide how to select a new
+  one, a waiting list is recommended to be selected in the first part of the
   protocol.
-When it decides to participate, it builds and send to the players
+When a oracle decides to participate, it builds and send to the players its
+  incription transaction, spending money from the \textit{Bet Promise}
+  transaction:
+
+\transaction
+    {Oracle Inscription}{Oracle previous tx, Bet Promise}
+    {Oracle previous tx}{$\alpha$}{$\sigma$}
+    \stopinputs
+    {[Registration] + c/n + [Oracle Payment] \\ - \fee{Oracle Inscription}}
+        {(\signature{Oracle} $\wedge$ \signature{A} $\wedge$ \signature{B}) \\
+            $\vee$ \\
+         (\signature{Oracle} $\wedge$ \timeout{Bet}}
+    \stopoutputs
+    {tx:oracle_inscription}
+    {Oracle Inscription}
+
+
+
+
+
+
   \colorbox{red}{Explicar como se comunica} the ``Oracle Inscription''
   transaction.
 
