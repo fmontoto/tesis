@@ -77,46 +77,41 @@ Oracles invited to participate needs to retrieve the Bet description as
 When one or more oracles do not participate, players decide how to select a new
   one, a waiting list is recommended to be selected in the first part of the
   protocol.
-When a oracle decides to participate, it builds and send to the players its
+When a oracle decides to participate, it builds and sends to the players its
   incription transaction, spending money from the \textit{Bet Promise}
   transaction:
 
 \transaction
     {Oracle Inscription}{Oracle previous tx, Bet Promise}
     {Oracle previous tx}{$\alpha$}{$\sigma$}
+    {Bet Promise}{3 + Oracle Index}{\signature{A} $\wedge$ \signature{B}}
     \stopinputs
     {[Registration] + c/n + [Oracle Payment] \\ - \fee{Oracle Inscription}}
         {(\signature{Oracle} $\wedge$ \signature{A} $\wedge$ \signature{B}) \\
             $\vee$ \\
          (\signature{Oracle} $\wedge$ \timeout{Bet}}
+    {[Two Answers Penalty]}{((\signature{A} $\vee$ \signature{B}) $\wedge$ %
+                             ($AWins_o \wedge BWins_o$)) \\
+                           $\vee$ \\
+                       (\signature{Oracle} $\wedge$ \timeout{two})}
     \stopoutputs
     {tx:oracle_inscription}
     {Oracle Inscription}
 
+This transaction is the oracle's commitment with the bet and the players
+  acceptance of it as oracle.
+The oracle sends [Registration] + [Oracle Payment] as initial payment
+  (input [0]), and players c/n from the \textit{Bet Promise} (input 1).
 
-
-
-
-
-  \colorbox{red}{Explicar como se comunica} the ``Oracle Inscription''
-  transaction.
-
-
-This transaction is the oracle's commitment with the bet, and its acceptance
-  from the players. The inputs come from the Oracle's deposit and the players
-  joint account, some of it goes to an account controlled by the oracle and
-  the players.
-The portion left goes to any of the players if the oracle does not give the
-  correct answer or goes back to the oracle after the bet is done, we call
-  this output ``two answers penalty'', as it is a penalty for the oracle
-  when it misbehaves.
-
-This transaction also binds the oracle anwers, at this step the oracle generates
-  two random strings to be used as answers, one for each possible outcome.
-This strings are to remaing secret until the oracle answers the event's
-  outcome.
-However the hashs of this strings are included in the \textit{two answers
-  penalty} output, if a player gets to know both answers can spend this output.
+The first output takes the money under the oracle and both players control, to
+  be used in the \textit{Bet} transaction.
+And the second one is a penalty to be charge if the oracle misbehaves.
+If the oracle reveals that player A and player B wins, this money can be taken
+  by any player. Otherwise the money can be claimed back by the oracle after
+  \timeout{two}.
+At this output the hash of the answers is revealed ($H(AWins_o), H(BWins_o)$),
+  the oracle must keeps$AWins_o$ and $BWins_o$ secret, revealing this value is
+  equivalent to choose a winner.
 
 \subsubsection{Bet}
 
@@ -128,7 +123,64 @@ Once the required oracles are inscribed to participate the ``Bet'' transaction
   output in the \textit{Oracle Inscription} transaction.} of the oracles
   deposit, controlled by the corresponding oracle and both players.
 Because of this, the transaction must be signed by both players and all the
-  oracles.
+  oracles:
+
+\transaction
+    {Bet}{Bet Promise, Oracles Inscription}
+    {Bet Promise}{0}{\signature{A} $\wedge$ \signature{B}}
+    {Bet Promise}{1}{\signature{A} $\wedge$ \signature{B}}
+    {Oracle Inscription}{0}
+    {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{O}\tikzmark{ini:a}}
+            {...}{..}{...}
+    \stopinputs
+    {$\mathcal{P} + n/2 \cdot $($[Registration] \\
+    - [Oracle Payment] \\
+    - \fee{Oracle Inscription}$)$ \\
+    - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
+    {(\signature{A} $\wedge$ \signature{B}) \\
+                                                   \vee \\
+                                                  (\timeout{bet} $\wedge$ \signature{B}) }
+    {[Oracle Payment]}{(\signature{o} $\wedge$ ($AWins_o \vee BWins_o$) %
+                       $\wedge$ \timeout{Bet}) \\
+                       $\vee$ \tikzmark{ini:b} \\
+                       \signature{A} $\wedge$ \signature{B} $\wedge$ %
+                       \timeout{Reply}}
+    {...}{...}
+    {[Oracle Payment]}{($AWins_o$ $\wedge$ ($BWins_{\hat{o}} \wedge %
+                        \tikzmark{ini:c}...$) $\wedge$ \signature{B}) \\
+                       $\vee$ \\
+                       ($BWins_o$ $\wedge$ $($AWins_{\hat{o}}$ %
+                        \wedge \tikzmark{ini:d} ...$) $\wedge$ \signature{A}) \\
+                       $\vee$ \\
+                        \signature{o} $\wedge$ \timeout{undue}\tikzmark{ini:e}}
+    {...}{...}
+    \stopoutputs
+    {tx:bet}
+    {Bet}
+
+\raisebox{17em}[0pt][0pt]{
+        \hbox{\hspace{34em} \framebox[1.1\width]{\tikzmark{end:a}$\forall o \in $ Oracles}}
+}
+\raisebox{12em}[0pt][0pt]{
+    \hbox{\hspace{35em}{\framebox[1\width]{
+            \parbox{80\unitlength}{\tikzmark{end:c}For at least $m\\\hat{o} \in $ Oracles}}}}
+}
+\raisebox{8em}[0pt][0pt]{
+        \hbox{\hspace{35em} \framebox[1.1\width]{\tikzmark{end:d}$\forall o \in $ Oracles}}
+}
+\begin{tikzpicture}[overlay, remember picture, yshift=.25\baselineskip,%
+                    shorten >=.5pt, shorten <=.5pt]
+    \draw [->] ([bend left,xshift=17mm]{pic cs:ini:a}) [bend left, yshift=3mm, xshift=1mm] %
+                to ({pic cs:end:a});
+    \draw [->] ([bend right,xshift=22mm]{pic cs:ini:b}) [bend right, yshift=-3mm, xshift=1mm] %
+                to ({pic cs:end:a});
+    \draw [->] ([bend right,xshift=1mm, yshift=-2mm]{pic cs:ini:c}) [bend right, yshift=0mm, xshift=-2mm] %
+                to ({pic cs:end:c});
+    \draw [->] ([xshift=1mm, yshift=3mm]{pic cs:ini:d}) [yshift=-4mm, xshift=-2mm] %
+                to ({pic cs:end:c});
+    \draw [->] ([bend left,xshift=6mm, yshift=2mm]{pic cs:ini:e}) [bend left, yshift=0mm, xshift=-2mm] %
+                to ({pic cs:end:d});
+\end{tikzpicture}
 
 The first two outputs are the prize, divided in two, so in case there is no
   answer from the oracles half of the prize returns to each player.

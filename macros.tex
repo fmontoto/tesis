@@ -23,7 +23,8 @@
     {\@transactioninputsscript{#1}}%
 }
 \newcommand{\@transactioninputsscript}[3]{%
-    $T_{#1}$-#2 \textbf{in-script:} & #3 \\
+    \ensuremath{T_{#1}}[#2] & #3 \\
+    % $T_{#1}$[#2] \textbf{in-script:} & #3 \\
     \hline
     \@transactioninputsit%
 }
@@ -41,7 +42,8 @@
     {\@transactionoutputsscript{#1}}%
 }
 \newcommand{\@transactionoutputsscript}[2]{%
-    \makecell{(#1) \textbf{out-script}:} & \makecell{#2} \\
+    \makecell{(#1)} & \makecell{#2} \\
+    % \makecell{(#1) \textbf{out-script}:} & \makecell{#2} \\
     \hline
     \@transactionoutputsit %
 }

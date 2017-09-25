@@ -11,7 +11,7 @@ BIN_PATH="/usr/local/texlive/2014/bin/x86_64-darwin/"
 ${BIN_PATH}pdflatex -shell-escape -synctex=1 -interaction=nonstopmode ${file}.tex > /dev/null 2>&1
 
 #bibtex
-${BIN_PATH}bibtex `realpath --relative-to=${W_DIR} ${file}.aux`
+# ${BIN_PATH}bibtex `realpath --relative-to=${W_DIR} ${file}.aux`
 
 #index/glossarie
 #${BIN_PATH}makeindex ${file}.idx
