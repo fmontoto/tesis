@@ -30,8 +30,7 @@ We call this transaction ``\textit{Bet Promise}'', as it is a commitment from bo
                                                    \vee \\
                                                   (\timeout{bet} $\wedge$ \signature{B}) }
     {$c/n$}{(\signature{A} $\wedge$ \signature{B})}
-    {...}{... \guilsinglleft n - 2\guilsinglright ...}
-    {$c/n$}{(\signature{A} $\wedge$ \signature{B})}
+    {...}{\extra{n - 1}}
     \stopoutputs
     {tx:bet_promise}
     {Bet Promise}
@@ -130,22 +129,33 @@ Because of this, the transaction must be signed by both players and all the
     {Bet Promise}{0}{\signature{A} $\wedge$ \signature{B}}
     {Bet Promise}{1}{\signature{A} $\wedge$ \signature{B}}
     {Oracle Inscription}{0}
-    {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{O}\tikzmark{ini:a}}
-            {...}{..}{...}
+        {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{O}\tikzmark{ini:a}}
+        {...}{..}{\extra{n-1}}
     \stopinputs
     {$\mathcal{P} + n/2 \cdot $($[Registration] \\
-    - [Oracle Payment] \\
-    - \fee{Oracle Inscription}$)$ \\
-    - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
-    {(\signature{A} $\wedge$ \signature{B}) \\
-                                                   \vee \\
-                                                  (\timeout{bet} $\wedge$ \signature{B}) }
+            - [Oracle Payment] \\
+            - \fee{Oracle Inscription}$)$ \\
+            - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:f})) \\
+                          \vee \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:g})) \\
+                                    \vee \\
+         (\signature{A} $\webge$ \timeout{two})}
+    {$\mathcal{P} + n/2 \cdot $($[Registration] \\
+            - [Oracle Payment] \\
+            - \fee{Oracle Inscription}$)$ \\
+            - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:ff})) \\
+                          \vee \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:gg})) \\
+                                    \vee \\
+         (\signature{B} $\webge$ \timeout{two})}
     {[Oracle Payment]}{(\signature{o} $\wedge$ ($AWins_o \vee BWins_o$) %
                        $\wedge$ \timeout{Bet}) \\
                        $\vee$ \tikzmark{ini:b} \\
                        \signature{A} $\wedge$ \signature{B} $\wedge$ %
                        \timeout{Reply}}
-    {...}{...}
+    {...}{\extra{n-1}}
     {[Oracle Payment]}{($AWins_o$ $\wedge$ ($BWins_{\hat{o}} \wedge %
                         \tikzmark{ini:c}...$) $\wedge$ \signature{B}) \\
                        $\vee$ \\
@@ -153,19 +163,26 @@ Because of this, the transaction must be signed by both players and all the
                         \wedge \tikzmark{ini:d} ...$) $\wedge$ \signature{A}) \\
                        $\vee$ \\
                         \signature{o} $\wedge$ \timeout{undue}\tikzmark{ini:e}}
-    {...}{...}
+    {...}{\extra{n-1}}
     \stopoutputs
     {tx:bet}
     {Bet}
 
-\raisebox{17em}[0pt][0pt]{
+\raisebox{31em}[0pt][0pt]{
         \hbox{\hspace{34em} \framebox[1.1\width]{\tikzmark{end:a}$\forall o \in $ Oracles}}
 }
-\raisebox{12em}[0pt][0pt]{
+\raisebox{27em}[0pt][0pt]{
+    \hbox{\hspace{35em}{\framebox[1\width]{
+            \parbox{80\unitlength}{\tikzmark{end:e}For at least $m\\\tilde{o} \in $ Oracles}}}}
+}
+\raisebox{19em}[0pt][0pt]{
+        \hbox{\hspace{36em} \framebox[1.1\width]{\tikzmark{end:b}$\forall o \in $ Oracles}}
+}
+\raisebox{14em}[0pt][0pt]{
     \hbox{\hspace{35em}{\framebox[1\width]{
             \parbox{80\unitlength}{\tikzmark{end:c}For at least $m\\\hat{o} \in $ Oracles}}}}
 }
-\raisebox{8em}[0pt][0pt]{
+\raisebox{10em}[0pt][0pt]{
         \hbox{\hspace{35em} \framebox[1.1\width]{\tikzmark{end:d}$\forall o \in $ Oracles}}
 }
 \begin{tikzpicture}[overlay, remember picture, yshift=.25\baselineskip,%
@@ -173,43 +190,51 @@ Because of this, the transaction must be signed by both players and all the
     \draw [->] ([bend left,xshift=17mm]{pic cs:ini:a}) [bend left, yshift=3mm, xshift=1mm] %
                 to ({pic cs:end:a});
     \draw [->] ([bend right,xshift=22mm]{pic cs:ini:b}) [bend right, yshift=-3mm, xshift=1mm] %
-                to ({pic cs:end:a});
+                to ({pic cs:end:b});
     \draw [->] ([bend right,xshift=1mm, yshift=-2mm]{pic cs:ini:c}) [bend right, yshift=0mm, xshift=-2mm] %
                 to ({pic cs:end:c});
     \draw [->] ([xshift=1mm, yshift=3mm]{pic cs:ini:d}) [yshift=-4mm, xshift=-2mm] %
                 to ({pic cs:end:c});
     \draw [->] ([bend left,xshift=6mm, yshift=2mm]{pic cs:ini:e}) [bend left, yshift=0mm, xshift=-2mm] %
                 to ({pic cs:end:d});
+    \draw [->] ([bend left,xshift=-1mm, yshift=-3mm]{pic cs:ini:f}) [bend left, yshift=4mm, xshift=2mm] %
+                to ({pic cs:end:e});
+    \draw [->] ([bend right,xshift=-1mm, yshift=-2mm]{pic cs:ini:g}) [bend right, yshift=1mm, xshift=-2mm] %
+                to ({pic cs:end:e});
+    \draw [->] ([bend right,xshift=-1mm, yshift=-3mm]{pic cs:ini:ff}) [bend right, yshift=-2mm, xshift=-2mm] %
+                to ({pic cs:end:e});
+    \draw [->] ([bend right,xshift=-1mm, yshift=-2mm]{pic cs:ini:gg}) [bend right, yshift=-8mm, xshift=2mm] %
+                to ({pic cs:end:e});
 \end{tikzpicture}
 
-The first two outputs are the prize, divided in two, so in case there is no
-  answer from the oracles half of the prize returns to each player.
-Each of them getting back almost all the money initially spend, some is lose
-  on fees and oracle payments. \colorbox{red}{Esto depende de los valores de
-  las variables}. On the other hand, if the oracles get to an agreement and the
-  bet is resolved on time. Using the oracles' answer the winner player can spend
-  both outputs.
+There are n + 2 inputs to this transaction, the first two brings the money
+  corresponding to the winner's prize, its come for the commitment of
+  bot players at the \textit{Bet Promise} transaction.
+The next n come from each oracle inscription and require the signature of both
+  players and the corresponding oracle.
 
-The next $n$ outputs are the oracle payments, they are spendable by the
-  corresponding oracle plus any of its answers.
-Spending this output requires to make public the oracle's answer. This way the
-  oracle is guaranteed to get its payment when responding on time, and players
-  know the oracle only gets pay when it answers.
-  If the transaction is not spent in a defined time (T$_{\text{reply}}$) we say
-  the oracle didn't answer and the money can be spend by the players joint
-  account.
-This prevents the oracle of taking the money after not responding in the
-  required time.
+The first two outputs are the prize, it can be spend by any of the two players'
+  signature plus at least $m$ votes of the oracles for that player.
+When any of the players sees $m$ votes from the oracles it can get its prize.
+If the threshold is not met, half of this money goes to each player and we
+  say the bet is not resolved, as there is no winner.
+
+The next n outputs are the oracles's payment for answering.
+They can not be spend before \timeout{Bet}, the moment when the event happen.
+It requires the vote of the oracle ($AWins_o$ or $BWins_o$) plus the oracle's
+   signature.
+This output binds the vote with the oracle's payment, as they are required to
+  make its vote public in order to get the payment.
+If the oracle does not answer after \timeout{Reply} players are allowed to
+  take this money back and the oracle can not further claim its payment.
 
 The last $n$ outputs are a withholding for the same amount of the oracle
-  payment, if the oracle gives a wrong answer for the oucome this money
-  goes to the real winner, this way we take the payment out from the oracle.
+  payment, if the oracle gives a wrong answer for the outcome this money
+  goes to the real winner.
+This way we take the payment out from the oracle, as it didn't give the right
+  answer.
 If it behaves as expected, the oracle can spend this money some time after
   (T$_{\text{undue}}$) the bet is resolved.
-
-After this transaction is placed, every player only wait for the events to take
-  place and spend, if they can the outputs availables. The only transaction
-  remaining are the participants taking the money they are entitled to.
 
 
 
