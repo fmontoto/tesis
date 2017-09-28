@@ -62,6 +62,8 @@ The outputs 3 to 3 + (n - 1) are a small portion of the money, used for the
 This money does not includes a timeout because it is an small amount, if players
   are willing to pay the extra fee required to add this timeout, it can be
   added.
+This money is spend at the oracle inscription as commitment from the players to
+  the oracles.
 
 This transaction spends $\mathcal{P} + \frac{c}{2}}$ from each player:
   $ n \cdot \frac{c}{n}$ goes to pay for oracle inscriptions; \fee{Bet Promise}
@@ -73,8 +75,8 @@ This transaction spends $\mathcal{P} + \frac{c}{2}}$ from each player:
 Oracles invited to participate needs to retrieve the Bet description as
   instructed in the \textit{Bet Promise} transaction and decide whether to
   participate or not.
-When one or more oracles do not participate, players decide how to select a new
-  one, a waiting list is recommended to be selected in the first part of the
+When one or more oracles do not participate, players decide how to select new
+  one(s), a waiting list is recommended to be selected in the first part of the
   protocol.
 When a oracle decides to participate, it builds and sends to the players its
   incription transaction, spending money from the \textit{Bet Promise}
@@ -100,29 +102,36 @@ When a oracle decides to participate, it builds and sends to the players its
 This transaction is the oracle's commitment with the bet and the players
   acceptance of it as oracle.
 The oracle sends [Registration] + [Oracle Payment] as initial payment
-  (input [0]), and players c/n from the \textit{Bet Promise} (input 1).
+  (input 0), and players c/n from the \textit{Bet Promise} (input 1).
+Oracle Index goes from 0 to n - 1.
 
 The first output takes the money under the oracle and both players control, to
   be used in the \textit{Bet} transaction.
-And the second one is a penalty to be charge if the oracle misbehaves.
+If the Bet transaction does not go into the blockchain, the oracle can claim
+  this money after \timeout{Bet}.
+
+The second one is a penalty to be charge if the oracle misbehaves.
 If the oracle reveals that player A and player B wins, this money can be taken
   by any player. Otherwise the money can be claimed back by the oracle after
   \timeout{two}.
+Two Answers Penalty is the charge for voting twice, this must not be a small
+  amount, as voting twice is the oracle's full responsibility.
 At this output the hash of the answers is revealed ($H(AWins_o), H(BWins_o)$),
   the oracle must keeps$AWins_o$ and $BWins_o$ secret, revealing this value is
   equivalent to choose a winner.
 
 \subsubsection{Bet}
 
-Once the required oracles are inscribed to participate the ``Bet'' transaction
+Once the required oracles are inscribed to participate, the ``Bet'' transaction
   is built by the players.
- The input contains what is remaining from the original players contributions to
-   the prize, controlled by the players' joint account plus most\footnote{The
-  other portion of this deposit was used in the \textit{two answers penalty}
-  output in the \textit{Oracle Inscription} transaction.} of the oracles
-  deposit, controlled by the corresponding oracle and both players.
-Because of this, the transaction must be signed by both players and all the
-  oracles:
+ The first two inputs contains what is remaining from the original players
+   contributions to the prize, controlled by the players' joint account.
+Then, next n inputs are the outputs in the \textit{Oracle Inscription},
+  containing the oracles registration.
+This outputs are controlled by each oracle and both players.
+
+Because inputs come from outputs controlled by all the participants, the
+  transaction must be signed by both players and all the oracles:
 
 \transaction
     {Bet}{Bet Promise, Oracles Inscription}
@@ -207,12 +216,6 @@ Because of this, the transaction must be signed by both players and all the
                 to ({pic cs:end:e});
 \end{tikzpicture}
 
-There are n + 2 inputs to this transaction, the first two brings the money
-  corresponding to the winner's prize, its come for the commitment of
-  bot players at the \textit{Bet Promise} transaction.
-The next n come from each oracle inscription and require the signature of both
-  players and the corresponding oracle.
-
 The first two outputs are the prize, it can be spend by any of the two players'
   signature plus at least $m$ votes of the oracles for that player.
 When any of the players sees $m$ votes from the oracles it can get its prize.
@@ -229,22 +232,12 @@ If the oracle does not answer after \timeout{Reply} players are allowed to
   take this money back and the oracle can not further claim its payment.
 
 The last $n$ outputs are a withholding for the same amount of the oracle
-  payment, if the oracle gives a wrong answer for the outcome this money
+  payment, if the oracle gives a wrong answer for the outcome, this money
   goes to the real winner.
 This way we take the payment out from the oracle, as it didn't give the right
   answer.
 If it behaves as expected, the oracle can spend this money some time after
   (T$_{\text{undue}}$) the bet is resolved.
-
-
-
-The payment of the oracle's is not the only cost of this protocol.
-There is a not insignificant number of transactions in the protocol, as there
-  is a fee by each transaction in the Blockchain, this makes the protocol more
-  expensive.
-This is a problem for small bets, the presented protocols is prohibitively
-  expensive for bet of just a few dollars. At least with the current fee costs
-  of bitcoin.
 
 If we step out a little bit, the proposed protocol uses paid oracles to get a
   binary answer about an event outside the blockchain. This is not useful only

@@ -56,7 +56,7 @@ For instance, the script at \ref{eq:notation_sample} requires to be evaluated
 
 \subsection{First part: Oracle Selection}
 
-The oracles are a key piece in the protocol, as they get to decide who get
+The oracles are a key piece in the protocol, as they get to decide who gets
   the prize money.
 The first part of the protocol defines a way to select them in a trustless
   way.
@@ -128,7 +128,7 @@ Some participants might want to avoid recently registered oracles, as they might
 Others might argue too old oracles are likely to be inactive, in order to avoid
   oracles registered long time ago.
 
-Second they decide the list to get the oracles from, and if they want to filter
+Second, they decide the list to get the oracles from, and if they want to filter
   out oracles, for example they might decide to exclude oracles that paid less
   than $b$ bitcoins on fees at registration time.
 Finally they decide the number of oracles to use, also they can decide to
@@ -176,8 +176,8 @@ The idea is the same, but instead of writting down into a paper, players
   player a ``commitment''.
 This commitment binds the player to the value calculated, without revealing it.
 Once both players receive the other's commitment, they send the bit they chose.
-Both check the commit with the commitment received previously, and if they
-  match, the protocol outputs a random bit.
+They check the received value against the previously received commitment, and if
+  they match, the protocol outputs a random bit.
 Otherwise, a player tried to cheat and the protocol aborts as there is no way to
   calculate a random bit.
 
