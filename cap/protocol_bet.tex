@@ -239,12 +239,55 @@ This way we take the payment out from the oracle, as it didn't give the right
 If it behaves as expected, the oracle can spend this money some time after
   (T$_{\text{undue}}$) the bet is resolved.
 
+There are four timeouts expressed in the transaction, table
+  \ref{table:timeouts} describe each of them in chronological order, from
+  sooner to later in the protocol execution.
+
+\begin{center}
+    \begin{tabular}{|c|l|}
+        \hline
+          \textbf{Symbol} & \textbf{Description} \\
+        \hline
+        \timeout{Bet} & \makecell[l]{
+              First timeout, this is the moment the event being used to decide
+              the bet \\ takes place. From this moment on oracles can vote for a
+              winner and take its \\ place.} \\
+        \hline
+        \timeout{Reply} & \makecell[l]{
+              This timeout signals the time for the oracles to answer. After
+              this timeout \\ pass, players can take the oracle's payment if the
+              oracle has not replied.} \\
+        \hline
+        \timeout{Undue} & \makecell[l]{
+              If an oracle gave the wrong answer, players have until this
+              timeout to take \\ its payment back. After this timeout the oracle
+              that behaved correctly can \\ take the payment deposit back.} \\
+        \hline
+        \timeout{Two} & \makecell[l]{
+              The last timeout, this could be the same than \timeout{Undue}.
+              Until this moment, \\  players can take the two answers penalty
+              for any oracle that made public \\ the votes for both players.
+              After this timeout, the oracle can take its deposit \\ back.} \\
+        \hline
+    \end{tabular}
+    \captionof{table}{Timeouts}
+    \label{table:timeouts}
+\end{center}
+
+Timeouts are enforced using Relative Lock Time (RLT) as defined by the Bitcoin
+  Improvement Proposal 68 (BIP 68). Their granularity is 512 seconds, roughly
+  the same time it takes to produce a new block.
+As it is a 16 bits number, it's limited to be a year in the future, relative to
+  the time its transaction was submitted to the blockchain.
+
+
+\colorbox{red}{Goes this next paragraph here?}
 If we step out a little bit, the proposed protocol uses paid oracles to get a
   binary answer about an event outside the blockchain. This is not useful only
   for betting on that outcome. The oracles are \footnote{\colorbox{red}{
-  is this the word?}} insensitive to the use given to their answer, they get
-  paid anyway. Further applications of the protocol can be generalized from our
-  proposal.
+  is insensitive the word?}} insensitive to the use given to their answer, they
+  get paid anyway. Further applications of the protocol can be generalized from
+  our proposal.
 Resolution of contractual disputes is an interesting topic, where parties agree
   to use arbitrator(s) to decide a missunderstanding.
 In this case oracles takes part in the protocol more like judge than a oracle.

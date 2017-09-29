@@ -82,4 +82,15 @@
 }
 \def\stopinputs{}
 \def\stopoutputs{}
+\newcommand\calculatecosts[4]{%
+    \newcounter{constCost} \setcounter{constCost}{#1}%
+    \newcounter{perOracleCost} \setcounter{perOracleCost}{#2}%
+    \newcounter{numOracles} \setcounter{numOracles}{#3}%
+    \newcounter{feeVal} \setcounter{feeVal}{#4}%
+    \newcounter{totalbytes} \setcounter{totalbytes}{%
+            \numexpr\theconstCost+(\thenumOracles*\theperOracleCost)\relax}%
+    \newcounter{totalCost} \setcounter{totalCost}{%
+            \numexpr\thetotalbytes*\thefeeVal\relax}%
+    \theconstCost & \theperOracleCost & \thetotalbytes & \num{\thetotalCost}
+}
 \makeatother
