@@ -24,7 +24,6 @@
 }
 \newcommand{\@transactioninputsscript}[3]{%
     \ensuremath{T_{#1}}[#2] & #3 \\
-    % $T_{#1}$[#2] \textbf{in-script:} & #3 \\
     \hline
     \@transactioninputsit%
 }
@@ -43,7 +42,6 @@
 }
 \newcommand{\@transactionoutputsscript}[2]{%
     \makecell{(#1)} & \makecell{#2} \\
-    % \makecell{(#1) \textbf{out-script}:} & \makecell{#2} \\
     \hline
     \@transactionoutputsit %
 }
@@ -82,15 +80,35 @@
 }
 \def\stopinputs{}
 \def\stopoutputs{}
-\newcommand\calculatecosts[4]{%
+\newcommand{\@calctotalbytes}[3]{%
     \newcounter{constCost} \setcounter{constCost}{#1}%
     \newcounter{perOracleCost} \setcounter{perOracleCost}{#2}%
     \newcounter{numOracles} \setcounter{numOracles}{#3}%
-    \newcounter{feeVal} \setcounter{feeVal}{#4}%
-    \newcounter{totalbytes} \setcounter{totalbytes}{%
+    \setcounter{totalbytes}{%
             \numexpr\theconstCost+(\thenumOracles*\theperOracleCost)\relax}%
-    \newcounter{totalCost} \setcounter{totalCost}{%
+}
+\newcommand{\@calctotalcost}[2]{%
+    \newcounter{bytesize} \setcounter{bytesize}{#1}%
+    \newcounter{feeVal} \setcounter{feeVal}{#2}%
+    \setcounter{totalCost}{%
             \numexpr\thetotalbytes*\thefeeVal\relax}%
-    \theconstCost & \theperOracleCost & \thetotalbytes & \num{\thetotalCost}
+
+}
+\newcommand\calculatecosts[4]{%
+    \newcounter{totalbytes} \@calctotalbytes{#1}{#2}{#3}%
+    \newcounter{totalCost} \@calctotalcost{\thetotalbytes}{#4}%
+    \theconstCost & \theperOracleCost & \thetotalbytes & \num{\thetotalCost}%
+}
+\newcommand\totalcostimpl[4]{%
+    \newcounter{totalbytes} \@calctotalbytes{#1}{#2}{#3}%
+    \newcounter{totalCost} \@calctotalcost{\thetotalbytes}{#4}%
+    \num{\thetotalCost}%
+}
+\newcommand\satoshitousd[2]{%
+    \newcounter{numsatoshis} \setcounter{numsatoshis}{#1}
+    \newcounter{bitcoinusd} \setcounter{bicoinusd}{#2}
+    \newcounter{result} \setcounter{result}{%
+      \numexpr(\thenumsatoshis * \thebitcoinusd) / 100000000\relax}%
+    \theresult %
 }
 \makeatother

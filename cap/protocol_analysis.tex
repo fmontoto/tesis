@@ -1,7 +1,9 @@
 \section {Cost analysis}
-\newcommand\numoracles[0]{7}
-\newcommand\feeval[0]{15}
-\newcommand\txcost[2]{\calculatecosts{#1}{#2}{\numoracles{}}{\feeval{}}}
+\newcommand\numoracles[0]{7}%
+\newcommand\feeval[0]{15}%
+\newcommand\bitcoinusd[0]{3800}%
+\newcommand\txcost[2]{\calculatecosts{#1}{#2}{\numoracles{}}{\feeval{}}}%
+\newcommand\usdcost[1]{\satoshitousd{#1}{\bitcoinusd{}}}%
 
 Most of the bibliography read simplifies the fee transactions to be 0,
   as this was the the cost of it for a long time.
@@ -75,15 +77,132 @@ Table \ref{tab:tx_fees} has the size for the transactions used in the protocol,
 The first four transactions are the ones detailed in the previous section,
   however this transactions are not enough to make the complete cost analysis
   of a protocol execution.
-So we append the redeem transactions, as they are required to get the money
-  into complete user control form the protocol.
+Redeem transactions are required to get the money into personal accounts, so we
+  append them.
 
+For a successful run of the protocol, where there is a winner and every oracle
+  behaves properly. Table \ref{tab:costs}  summarize the costs incurred by the
+  players.
 
+\newcommand\totalcost[2]{\totalcostimpl{#1}{#2}{\numoracles{}}{\feeval{}}}%
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+            \textbf{Item} & \textbf{Cost [satoshi]} \\
+        \hline
+          Bet Promise fees & -\totalcost{1267}{65} \\
+        \hline
+          Oracle Inscriptions fee & -\totalcost{0}{776} \\
+        \hline
+          Bet transaction fee & -\totalcost{617}{445} \\
+        \hline
+          Oracles payment & -\numoracles{}\ $\cdot$ [Oracle Payment] \\
+        \hline
+          Oracle first transfer & -c \\
+        \hline
+          Player redeem prize & -\totalcost{511}{150} \\
+        \hline
+          \textbf{Total} & -\numoracles{}\ $\cdot$ [Oracle Payment] - c - \num{186705} \\
+        \hline
+    \end{tabular}
+  \captionof{table}{Successful run, costs for the players}
+  \label{tab:costs}
+\end{center}
 
-The payment of the oracle's is not the only cost of this protocol.
-There is a significant number of transactions in the protocol, as there is a fee
-  by each transaction in the Blockchain, this makes the protocol more expensive.
-This is a problem for small bets, the presented protocols is prohibitively
-  expensive for bet of just a few dollars. At least with the current fee costs
-  of bitcoin.
+The \numoracles{} is the number of oracles, as set above.
+C and [Oracle Payment] are parameters decided by the players, below we propose
+  values for this constanst and discuss about the tradeoff on setting this
+  values.
 
+Table \ref{tab:oracle_costs} summarize the cost and earning for an oracle that
+  behaves correctly in a protocol execution.
+
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+            \textbf{Item} & \textbf{Cost [satoshi]} \\
+        \hline
+          Initial deposit & -[Registration] - [Oracle Payment] - [Two Answers Penalty] \\
+        \hline
+          Payment & [Oracle Payment] \\
+        \hline
+          Redeem payment fee & -\totalcost{355}{0} \\
+        \hline
+          Undue deposit & [Oracle Payment] \\
+        \hline
+          Undue redeem fee & -\totalcost{283}{62} \\
+        \hline
+          Two answers deposit & [Two Answers Penalty] \\
+        \hline
+          Two answers redeem fee & -\totalcost{373}{0} \\
+        \hline
+        \textbf{Total} & [Oracle Payment] - [Registration] - \num{21675} \\
+        \hline
+    \end{tabular}
+    \captionof{table}{Successful run, oracle cost and earning}
+    \label{tab:oracle_costs}
+\end{center}
+
+The c constant is a transfer made from the players to the
+  \textit{Oracle Inscription} bet, its objective is to regulate the oracle
+  risk when accepting to participate in the bet.
+If an oracle send the \textit{Oracle Inscription} and the bet does not take
+  place. The oracle will get back all its deposit + $c/n$ -
+  \fee{OracleInscription}.
+
+Players might decide, in order to incentive oracles to participate, that there
+  is no risk of losing money in this situation for oracles. So they set c such
+  that $c/n > \fee{OracleInscription}$.
+Nonetheless, players might decide to make $c = 0$ because this simplifies the
+  transaction and saves money in fees.
+
+The [Registration] constant is an option to require the oracle to lock more
+  money while participating in the bet.
+Making this constant big could help to have more committed oracles, as they
+  have more money in the execution.
+Players have the option to set it ot zero, this will not save any fees.
+Probably the most important constant in this analysis is the [Oracle Payment],
+  it's the most expensive cost for the players and the way oracles earn money
+  by participating.
+
+As the tables show there is no dependency between the protocol costs and the
+  amount of the bet.
+The cost for paying oracles is directly proportional to the number of them, and
+  how much is each one getting paid.
+And the transaction cost depend on the number of oracles, the size of the
+  transactions and the fee per byte.
+
+So how much cost a run of the protocol, at the moment this work was written
+  bitcoin was being exhange by USD \bitcoinusd{}. If we replace this number
+  in the first table we get the cost of the protocol for the players:
+\begin{center}
+    \begin{tabular}{|c|}
+        \texttt{7 * [Oracle Payment] + c + USD 7.095}
+    \end{tabular}
+\end{center}
+
+As the \textit{Oracle Registration} transaction fees correspond to
+  % The macro has a bug somewhere, mbox to prevent the new line.
+  \mbox{\totalcost{239}{0}} satoshis, we set the c/n parameter to be 5000, a
+  little bit more than the cost of the fees.
+This gives a value of $c = 35,000$, so the cost of C is USD 1.33.
+
+Argue about the value for the oracle payment is less technical, and probably
+  every person reading this work will think in a different optimal value.
+We have simplified this payment to be equal for every oracle, but players
+  might decide some oracles are more expensives than other ones.
+Oracles with more history or reputation might be worthy of a bigger payment.
+The amount being wagered is also an important factor to determine this number,
+  if there is a really big amount of money at stake we might be willing to
+  spend more money on this item, as this can decrease the chance of the oracles
+  taking a bribe.
+
+For this calculation we have defined a [Oracle Payment] of \num{200000}
+  satoshis, or USD 7.60. Simplifying the [Registration] to 0, running the
+  protocol cost the users USD 61.62.
+In order to participate in the bet, each oracle needs to put a deposit of
+  USD 30.40, and if behaves properly at the end of the bet will earn USD 6.40
+
+To summarize, if player are willing to bet USD 1000, they will require to start
+  with USD 1030.81, the winner would have win USD 969.19 at the end, and the
+  loser would have spent 1030.81.
