@@ -19,16 +19,62 @@ However this did not come for free, this slow change rate keeps bitcoin script
   language very limited.
 When people talk about smart contract or scripting, Bitcoin is never the first
   currency to come to peoples' mind.
-This limitation, the slow change rate and the biggest network made it our
-  choice: the limitation poses the real challenge in the protocol presented.
-The problem is trivial for currencies with more expressive scripting languages;
-  the slow change rate helps to keep the currency value and the same rules from
-  the start to the end of a bet; and finally to have the biggest network
-  enforcing the protocol rules makes more difficult some known attacks, as
-  Majority and Eclipse \cite{heilman2015eclipse}.
+The limited scripting, slow change rate and the biggest network made Bitcoin our
+  choice:
+The script limitation poses a real challenge in the protocol presented, making this
+  an open problem.
+As we discussed at section \ref{sec:discussion_previous_work}, the problem has
+  many implemented solutions for currencies with more expressive scripting
+  languages;
+The slow change rate helps to keep the currency value and the same rules from
+  the start to the end of a bet, this makes the platform suitable for long term
+  bets;
+Finally, having the largest network enforcing the protocol rules makes more
+  difficult some known attacks, as Majority and Eclipse
+  \cite{heilman2015eclipse}.
+Where attackers can overtake the control of the network or part of it.
 Other cost of using a limited scripting language is the amount of instructions
   and transactions required to express the protocol, this is traduced to a
   higher fee cost.
 
+The cost of running our proposed algorithm is prohibitively expensive for many
+  cases.
+But we think there is people willing to pay the cost when doing bet on large
+  sums of money, as the cost of the protocol would represent a small fraction of
+  the bet.
+As there is no increase in the cost with the amount of money involved.
 
+Most of the transaction required by the protcol are called ``Non standard''
+  in Bitcoin.
+Meaning even they are valid transactions and everyione recognizes them as that.
+Most of the miners will not mine them, so likely submitting the transactions
+  will take more time than a standard one.
+We hope new proposals that makes use of this available features, like this one,
+  can move the Bitcoin community to embrace this ``non estandard'' transactions.
+
+Gambling is a really big and heavily regulated industry, Winsomeio, oraclizeit
+  and this protocol are tools  to make this industry more flexible.
+Allowing people to fully control its money while gambling, a difference from
+  the regular casinos or bet sites.
+As cryptocurrencies allows people to stay away from a centralized government
+  issuer, this kind of tools allows people to steo out from centralized gambling
+  sites.
+There is yet another big difference, people running protocols on top of
+  blockchains can see every line of code executed and how decissions are taken,
+  making gambling a transparent process, opossed as it is today.
+Where people uses only the public interface of a web site or physical casino.
+Never seeing what is really going on ``behind the scenes''.
+
+
+\colorbox{red}{Future work}
+We also see value in transforming the oracles in ``judges'', and instead of
+  betting on an uncertain outcome, let the judges decide between players
+  controversy, acting as arbiter.
+Small adjustements would be required to the protocol, as removing the random
+  selection, probably judges will be agreed beforehand by the players.
+Other required change is to remove the penalization by answering different
+  from the majority.
+It is perfectly fine and possible to have different opinions among the
+  judges, and the ones with the minority should not be punished.
+An implementation of this
 

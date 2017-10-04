@@ -1,4 +1,4 @@
-\section{Previous Work}
+\section{Previous Work} \label{sec:discussion_previous_work}
 
 This protocol is not the first attempt to perform trustless gambling using
   crypto currencies.
@@ -6,5 +6,79 @@ Is not even the first attempt to do it using Bitcoin in particular.
 In this section we try to differentiate this proposal with the existent
   solutions by highlighting their differences.
 
+At section \ref{sec:previous_work} we gave a short introduction to the existent
+  solutions.
+Oraclize and Town Crier provide a secure interface to web sites.
+Making information of these websites available in the blockchain.
+A web site is a centralized data source, however combining multiple sites as
+  data source give us a descentralized source.
+This could be a really good approach to do bets on massive events, as
+  many websites already publish results of this events.
+If the bet is massive the cost of the oracles could be amortized among
+  all the players.
 
-The proposed protocol have important differences with the existent
+However is difficult for this approach to work with non massive events, as
+  web sites does not provide results for them.
+A second big difference with the proposed protocol is the platform they work
+  on, Ethereum.
+
+Winsome is another implementation on top of Ethereum that allows people to
+  gamble against each other, but on random events.
+It emulates casino games as blackjack and roulette.
+As its target are random games, it's not suitable for real world event bets.
+
+Ethereum unlike Bitcoin was not designed with the goal of being a currency,
+  but a platform to write and enforce code execution in a distributed
+  way.
+It's primary objective is to become a ``Blockchain app platform'' as they
+  state in their website \footnote{https://ethereum.org/}.
+Because of this, their scripting language is turing complete and provides much
+  more flexibility.
+This makes Ethereum the home for most of the blockchain applications.
+Recently, one of the Ethereum biggest app, the Decentralized Autonomous
+  Organization (DAO), was subjected to an attack were attackers gained control
+  of one third of the money it had.
+About 50 USD Million at the time of the attack.
+Most of the Ethereum community decided to ``rollback'' the history and give the
+  DAO its money back.
+Immutability of the coin was therefore, broken.
+
+Regardless bitcoin does not aim to be an app platform, people try to overcome
+  its scripting limitations and write applications for it.
+Orisi is one of this applications that aims to solve the same problem we do.
+It works on top of bitcoin, one key difference is it's centralized oracle
+  database.
+Other important difference is its secrecy, it uses BitMessage to keep the
+  location and indentity of the participants secret.
+Although we could use BitMessage, our implementation uses direct TCP
+  communication among the participants.
+
+Probably the most deeper difference between our proposal and Orisi are the
+  transactions used by each one.
+Orisi uses multisignature address to move the bet money into the control of
+  the oracles and the players.
+This means, in order to redeem the priza,e the winner need to make a transaction
+  and get it signed by a majority of the oracles.
+So oracles need to agree in the destination of the prize, otherwise they will
+  not sign the transaction.
+Our proposal gets the oracles out from this decission and requires only the
+  winner signature to spend the money.
+In order to claim its payment, oracles are required to reveal one of the two
+  secrets they kept.
+When a majority of the oracles have revealed the secrets corresponding to the
+  winner, this collect them all and claim its prize.
+
+This has two main advantages: the first one, already mentioned, keeps the
+  oracles out from deciding where does the prize goes.
+Oracles are not envolved in the transactions spending the prize;
+The second one is how it bounds the action of emiting the vote for the winner
+  with getting paid.
+There is not pressure for the oracle in responding before the other do it,
+  there is a fixed timeout defined from the beginning to vote.
+Oracles can be sure if they behave properly and vote on time they will be
+  remunerated, even if they vote after a majority already did.
+In the multisignature address, the player could decide to wait only to the
+  minimum required number of oracles and send the transaction to redeem the
+  prize.
+Then the prize gets splitted in exactly the required majority.
+Oracles that answer on time after this are not guaranteed to get paid.
