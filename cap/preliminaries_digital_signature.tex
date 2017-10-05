@@ -1,31 +1,33 @@
 \section{Digital Signatures}
 The idea of ``Digital Signature'' was introduced in 1976 by Diffie and
-  Hellman in ``New Directions in Cryptography''\cite{diffie1976new}. In this
-  work is also introduced what they called ``Public Key Cryptosystem'', were
-  enciphering and deciphering operations use different keys, $E$ and $D$, such
-  that computing D from E is computationally infeasible. Today this pair are
-  widely used and are known as Public Key (PK) and Secret Key (SK).
+  Hellman in ``New Directions in Cryptography''\cite{diffie1976new}. This work
+  introduced what they called ``Public Key Cryptosystem'', where enciphering and
+  deciphering operations use different keys, $E$ and $D$, such that computing D
+  from E is computationally infeasible.
+Today this pair is widely used and known as Public Key (PK) and Secret Key (SK).
 
 The public key cryptosystem, or asymmetrical cryptography was created to solve
   one important problem of symmetrical systems\footnote{As opposed to the
   asymmetrical one, this system uses the same key to cipher and decipher
   the messages.}: It is imposible to start a secured communication in an
   insecure channel without previously exhange of a key using a secure channel.
-To stablish a secure communication within an insecure channel participants
-  makes its PK publicly available to the others. Anyone willing to talk to
-  another participant must cipher its message using the public key of the
-  receiver, this way the only one able to decipher the message is the intended
-  receiver.
+To stablish secure communication within an insecure channel participants makes
+  its PK publicly available to the others.
+Anyone willing to talk to another participant must cipher its message using the
+  public key of the receiver, this way the only one able to decipher the message
+  is the intended receiver.
 
 A digital signature, as its name indicates, is a mechanism to provide protection
-  against third paty forgeries. It must be easy to for anyone to recognize as
-  authentic but impossible for anyone but the signer to produce it. This is
-  specially challenging since any digital signal can be easily copied.
+  against third party forgeries. It must be easy for anyone to recognize as
+  authentic, but impossible for anyone but the signer to produce it. This is
+  especially challenging since any digital signal can be easily copied.
 
-It works within the public key cryptosystem the signer uses its SK to produce
-  a signature over the message to sign, and anyone with the signer PK and the
-  message can determine the validity of the signature.
+It works within the public key cryptosystem.
+The signer uses its SK to produce a signature over the message to sign, and
+  anyone with the signer PK and the message can determine the validity of the
+  signature.
 
-The most important property of a digital signature is that does not matter how
-  many pairs \mbox{\textless message, signature\textgreater} has a third party
-  seen, it does not make it easier to generate a signature for a new message.
+The most important property of a digital signature is that it does not matter how
+  many pairs \mbox{\textless message, signature\textgreater} a third party has
+  seen, but it does not make it easier to generate a signature for a new
+  message.

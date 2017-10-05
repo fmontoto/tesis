@@ -1,77 +1,71 @@
 \section{Bitcoin}
 Bitcoin is the first fully distributed cryptocurrency made publicly available,
-  it was proposed in 2008 by Satoshi Nakamoto (a pseudonym)
-  \cite{nakamoto2008bitcoin}.
+  proposed in 2008 by Satoshi Nakamoto (a pseudonym) \cite{nakamoto2008bitcoin}.
 The same author shared as open source code a implementation of the protocol in
-  January 2009. And the protocol has being running since then.
+  January 2009. And the protocol has been running ever since.
 
 Nevertheless, Bitcoin is not the first idea of electronic cash.
 The idea of electronic cash has been present within the cryptographic community
   since at least 1983, when Chaum \cite{chaum1983blind} proposed a system for
   anonymous payments.
-And the attempts kept going for other three decades, hundreds of paper have
-  been published with improvements of e-cash schemes\cite{barber2012bitter}.
-So, why is Bitcoin so popular and achieved the notority that three decades of
-  academic research on the field could not achieve?
+And the attempts kept going for another three decades, amd  hundreds of papers
+  have been published with improvements of e-cash schemes
+  \cite{barber2012bitter}.
+Why is Bitcoin so popular and why has it achieved the notority that three
+  decades of academic research on the field could not achieve?
 
 Barber et al.\cite{barber2012bitter} suggest a few key points to explain why
-  was Bitcoin the first electronic currency to take off.
+  Bitcoin was the first electronic currency to take off.
 \begin{enumerate}
 \item No central point of trust.
 	Bitcoin is a fully distributed system, there are no trusted entities in the
 	  system. The only asumption is that the majority of the network participants
-	  are honests. Every previous proposal had a central trusted entity for
+	  are honest. Every previous proposal had a central trusted entity for
 	  critical tasks, as preventing double spending and coin issuance.
 \item Predictable money supply.
-	The money supply is minted at a defined and transparent rate, defined from the
-	begining of the protocol.
+	The money supply is minted at a defined and transparent rate, defined from
+	  the begining of the protocol.
 \item Transaction irreversibility.
-	Bitcoin transactions quickly become irreversible. This is a big difference with
-	  credit cards, where chargebacks has been using largely to commit frauds.
+	Bitcoin transactions quickly become irreversible. This is a big difference
+	  with credit cards, where chargebacks have been used largely to commit
+	  fraud.
 \end{enumerate}
-Bitcoin has not stopped to gain massive popularity and attention from the press.
-Mainly because its market capitalization (over USD $36\,000\,000\,000$), and some
-  illegal activities it has been using to as ransom to retrieve victim's data
-  encrypted for malicious software, or as exchange medium in one of the most
-  famous online black market, closed in 2013 by the FBI.
 
   The main technical advance in Bitcoin is its database, the
-  \texttt{blockchain}\cite{inventionblockchain}\cite{blockchainmostimportant}.
+  \texttt{blockchain} \cite{inventionblockchain}\cite{blockchainmostimportant}.
 The blockchain is a distributed database formed by an always growing list of
   blocks, where each block contains the data to be stored, a timestamp and a
   link to a previous block. Its fully distributed nature allows bitcoin to lack
   a central authority.
 
-
-
 \subsection{Transaction}\label{subsec:Transaction}
-Bitcoin works with accounts where coins can be stored, this accounts are
-  identified with an address\footnote{
-  In the wire, an address is a 25-byte value, for human consumption we usually
-    see it in its encoded representation of base 58, resulting in a string of
-    25-33 characters.}, for this reason some times both words are used
-  interchangeably.
+Bitcoin works with accounts where coins are stored, these accounts are
+  identified with an address\footnote{In the wire, an address is a 25-byte
+    value, for human consumption we usually see it in its encoded representation
+    of base 58, resulting in a string of 25-33 characters.}, for this reason
+  sometimes both words are used interchangeably.
 The address is not private, and people share theirs when willing to receive
   money.
 
-It represents a hash of a public key. Therefore, the owner of the account is
-  however control the private key of the address.
+The address represents a hash of a public key. Therefore, the owner of the
+  account is however control the private key of the address.
 Bitcoin uses Elliptic Curve Digital Signature Algorithm (ECDSA)\footnote{
   ECDSA is a digital signature algorithm using Elliptic Curve
-    Cryptography. It is an asymmetric scheme, with a private and public key. In
-    bitcoin transactions are secured with a private key signature and validated
+    Cryptography. It is an asymmetric scheme, with a private and public key.
+    Bitcoin transactions are secured with a private key signature and validated
     using the public one.} to ensure the owner of an address is the only one able
   to spend its content.
-Getting a new address is free, it only requires to generate a random byte string
-  and get a ECDSA private key from it. ECDSA allows the public key derivation
-  from the private key. Then, by hashing the public key the address is obtained.
+Getting a new address is free, it only requires one to generate a random byte
+  string and get a ECDSA private key from it. ECDSA allows the public key
+  derivation from the private key.
+By hashing the public key the address is then obtained.
 Many libraries and most of the bitcoin wallets implement the algorithms to
   generate new addresses.
 
 A transaction is the only way to move bitcoins from one account to other one,
-  it is basically a list of accounts where the money is pulled from, the
-  inputs.
-And the outputs, a list of accounts the bitcoins are going to, a simplified
+  it is basically two lists:
+  a list of accounts where the money is pulled from, called inputs; and a list
+  of accounts where the the bitcoins are going to, a simplified
   view in the figure \ref{fig:simplified_transaction}.
 
 \begin{figure}
@@ -81,55 +75,57 @@ And the outputs, a list of accounts the bitcoins are going to, a simplified
 	\label{fig:simplified_transaction}
 \end{figure}
 
-There is only one exception to this rule, the miner that builds each block is
-  allow to send money to his account from nowhere, this is called the generation
-  transaction and its amount is defined in the protocol.
+There is only one exception to this rule; the miner that builds each block is
+  allowed to create a transaction without intputs and send money to his account.
+This especial transaction called generation transaction and its amount is
+  defined in the protocol.
 This is the only way bitcoins are generated.
 
 A transaction input points to a previous unspent output and proves it has the
   right to spend that output.
-An output contains\footnote{This is a simplification, not every output work this
-  way, detailed at subsection \ref{subsec:script}.} the address of the account
-  is transferring the money to, so any input signed using the private key of
-  that address has the right to spend the output.
+An output contains\footnote{This is a simplification, not every output works
+  this way. Details are in subsection \ref{subsec:script}.} the address of the
+  account it is transferring the money to, so any input signed using the private
+  key of that address has the right to spend the output.
 This implies that the money from an account must be spent in the same amount
-  the money was received. If an output of $\$ 10BTC$ is received, when trying
-  to spend it, the same amount must be spent. If willing to spend just a
-  portion, a second output is created and send to the same account.
+  the money was received. There is no way to spend just a fraction of the money
+  received in a previous output. If an output of $\$ 10BTC$ is received, when
+  trying to spend it, the same amount must be spent. If willing to spend just a
+  portion, a second output is created and sent to the same account.
 
 \subsection{Blockchain} \label{subsec:Blockchain}
-It works as the bitcoin's ledger, it keeps record of all
-  transactions and coin generation that had ever taken place in the protocol.
-It is completely distributed and public, anybody can participate and get a
+It works as the bitcoin's ledger keeping record of all transactions and coin
+  generation that had ever taken place in the protocol.
+It is completely distributed, public, and anybody can participate and get a
   copy of it.
-This makes simple to prevent double spending and be sure the received coins are
-  valid, as anybody can examine where each coin came from.
+This makes it simple to prevent double spending while being sure the received
+  coins are valid, as anybody can examine where each coin came from.
 
 As any other distributed system, the blockchain must resolve the consesus
   problem \cite{fischer1983consensus}. Get all the participants to agree on
   the data. This is a fundamental problem to any distributed system. In the
   the blockchain anybody with an internet connection can be part of the
   protocol, so solving this problem is quite challenging. Some authors argue
-  the blockchain is the first practical solution to the Byzantine Consensus
+  that the blockchain is the first practical solution to the Byzantine Consensus
   problem \cite{miller2014anonymous} \cite{sun2014solving}.
 
 Proof of work is the algorithm used by the bitcoin blockchain to seek
   consensus. Each entity trying to add data to the database must prove it
-  has done some required work. This algotithms was designed originally to
-  fight the email spam, by requiring the sender of an email to prove a small
-  work was done in order to send the email\cite{dwork1992pricing}.
+  has done some required work. This algotithm was designed originally to fight
+  email spam by requiring the sender of an email to prove that a small job was
+  done in order to send the email \cite{dwork1992pricing}.
 It works by using a hard to calculate, but easy to check function. This
   way the receiver or the mail server can easily check if the sender did
-  the required work, however this work was much harder. The difficulty of
-  a work is defined by the amount of computational power required to get
-  it done.
+  the required work. However this work was much harder. The difficulty of
+  particular work is defined by the amount of computational power required to
+  get it done.
 
 The atomical piece in the blockchain is the block. Each valid block carries
-  transactions of the protocol and a proof of work. So every entity trying to
-  get a valid block into the database need to collect transactions and solve
-  the puzzle to get a valid proof of work for its block.
+  transactions of the protocol and a proof of work. Therefore every entity
+  trying to get a valid block into the database needs to collect transactions
+  and solve the puzzle to get a valid proof of work for its block.
 This process is called mining, therefore the entities trying to get a valid
-  block are called miners. A block is linked to the previous one, as show by the
+  block are called miners. A block is linked to the previous one, as show in the
   figure \ref{fig:block_links}.
 
 \begin{figure}
@@ -140,29 +136,29 @@ This process is called mining, therefore the entities trying to get a valid
 	\label{fig:block_links}
 \end{figure}
 
-The mining process is like playing the lottery, tickets are distributed  among
-  every miner until someone gets the winner one. The number of tickets each
-  miner gets is proportional to the work he is doing, so a miner doing more work
-  will get a bigger chance to win the lottery and mine a block. However any miner
-  can win.
+The mining process is like playing the lottery: tickets are distributed  among
+  every miner until someone gets the winning one. The number of tickets each
+  miner gets is proportional to the work he/she is doing, so a miner doing more
+  work will have a bigger chance at winning the lottery and mine a block.
+However, any miner can win.
 
 Of course, in the real implementation there are no tickets issued to the
   miners.
 Proof of work consists in building a block with a hash under a threshold value,
-  so the miners should reorder and change the block until the hash fulfill the
+  so the miners should reorder and change the block until the hash fulfills the
   requirement.
-There is not a known algorithm to do this in a better way than
-  brute force, so the only method to get a hash that mets the criteria is to try
-  with different block configurations, there are also some bytes of nonce, a
-  timestamp and transactions to be changes to get different hashes.
+There is no known algorithm to do this in a better way than brute force, so the
+  only method to get a hash that mets the criteria is to try with different
+  block configurations. In the block there are also some bytes of nonce, a
+  timestamp and transactions to be changed to get different hashes.
 
-Once block is produced, all the others miners need to delete the transactions
+Once block is produced, all the other miners need to delete the transactions
   added by the block from the one they are building and update the link to the
   new last block. And they start to mine a new block.
 By design a block must be produced every 10 minutes, so the work required to
-  mine a block is a adjusted periodically to meet this goal.
+  mine a block is adjusted periodically to meet this goal.
 
-The structure of a Bitcoin block is show in the figure \ref{fig:block_pow}, the
+The structure of a Bitcoin block is shown in figure \ref{fig:block_pow}, the
   fields with the gray background represents the block header, the data hashed
   to get the block's hash.
 The transactions are indirectly hashed in the Merkle Root\footnote{A
@@ -177,7 +173,7 @@ The transactions are indirectly hashed in the Merkle Root\footnote{A
 	\label{fig:block_pow}
 \end{figure}
 
-As expected in a protocol with many participants, there are times were more
+As expected in a protocol with many participants, there are times where more
   than one block is generated with the same parent (figure
   \ref{fig:chain_fork}). This is call a fork.
 
@@ -192,19 +188,19 @@ As expected in a protocol with many participants, there are times were more
 In order to achieve consensus, the protocol determines that the chain with
   more work\footnote{The amount of work in a chain is the sum of the difficulty
   of every block on it.} on it is the active chain.
-So when a fork happen there are two active chains, while having a non unique
+So when a fork happens there are two active chains, while having a non unique
   active chain miners will try to mine in any of the candidates with the same
   work.
 A block mined on one of the branches will decide which is the active one
   because it adds more work to the chain. However the situation that originated
-  the fork can repeat itself and prevent to have one consensus branch, this is
+  the fork can repeat itself and prevent having one consensus branch, which is
   very unlikely\cite{decker2013information} to happen during a long time.
 
 The chain structure gives a chronological order to the transactions in the
-  protocol, so it makes clear to check if a transaction is valid.
+  protocol, so it makes easy to check if a transaction is valid.
 Any participant willing to probe the validity of a given transaction needs
   to evaluate the script (see section \ref{subsec:script}), and  check the block
-  where the output being spend is stored up to the current block and see if the
+  where the output being spent is stored up to the current block and see if the
   money was already spent in a different transaction.
 
   \subsection{Script} \label{subsec:script}
@@ -231,10 +227,11 @@ When sending money, there is a little more than we saw at section
 An output does not send money to a given address, but defines how the money can
   be spent. Currently there are two formats in use. The most used is called
   ``Pay To Public Key Hash'' (P2PKH)\footnote{The key hash is the address of an
-  account}. And ``Pay To Script Hash'' (P2SH).
+  account}. The other is called ``Pay To Script Hash'' (P2SH).
 
-As the figure \ref{fig:output} shows, the output have a script on its wire
-  representation, this script is written in a small stack based language.
+As figure \ref{fig:output} shows, the output has a script on its wire
+  representation.
+This script is written in a small stack based language.
 It is read from left to right and it is purposefully not Turing-complete.
 The script is evaluated using the scriptSig as input. If the transaction willing
   to spend this output provides a valid\footnote{A script is considered valid
@@ -248,7 +245,7 @@ The script is evaluated using the scriptSig as input. If the transaction willing
 \end{center}
 
   It receives two values as input:  \lstinline{<pubKeyHash>} and
-  \lstinline{<sig>}. And the execution is explained in the table%
+  \lstinline{<sig>}. And the execution is explained in table%
     \ref{tab:p2pkh_exec}.
 
 \begin{table}[tbp]
@@ -286,13 +283,13 @@ The script is evaluated using the scriptSig as input. If the transaction willing
 	  \multicolumn{2}{|l|}{\textbf{Step 5: }\textit{%
 	      The destination address is compared with the Hash of the %
           Public Key (PK) provided by}} \\
-	  \multicolumn{2}{|l|}{\textit{the sig Script. This check the provided %
+	  \multicolumn{2}{|l|}{\textit{the sig Script. This checks that the provided %
 	      Public Key is the one from the intended receiver.}} \\
 	\hline
 	  \makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
 	\hline
 	  \multicolumn{2}{|l|}{\textbf{Step 6: }\textit{%
-	      Using the already verified PK, the script checks the transaction was %
+	      Using the already verified PK, the script checks that the transaction was %
           signed using the}} \\
 	  \multicolumn{2}{|l|}{\textit{corresponding Private Key. This step %
 	      secures the transaction from tampering an proves it was}} \\
@@ -310,10 +307,10 @@ The scriptPubKey in a pay to script hash transaction is even simpler:
 		\texttt{OP\_HASH160 <scriptHash> OP\_EQUAL}
 	\end{tabular}
 \end{center}
-Whis script is pretty simple, it takes the first element of the stack,
+This script is pretty simple, it takes the first element of the stack,
   calculates its hash and compares it with '<scriptHash>'. The first
   element in the stack is however a complete script, and after checking
-  it hashes to the expected scriptHash, it will be evaluated with its
+  it hashes to the expected scriptHash. It will be evaluated with its
   required input. This implies the scriptSig now holds the script and
   its signature:
 
@@ -325,7 +322,7 @@ Whis script is pretty simple, it takes the first element of the stack,
 \end{center}
 
 
-  A execution of a sample P2SH is show in the table \ref{tab:p2sh_exec}.
+  A execution of a sample P2SH is shown in table \ref{tab:p2sh_exec}.
 
 \begin{table}[tbp]
   \small
@@ -372,6 +369,6 @@ Whis script is pretty simple, it takes the first element of the stack,
   % \end small
 \end{table}
 
-A P2SH transaction allows different conditions to redeems its outputs,
-  a complete list of the operations supported by the Bitcoin scripting language
+A P2SH transaction allows different conditions to redeem its outputs.
+A complete list of the operations supported by the Bitcoin scripting language
   can be found at the Bitcoin wiki: \url{https://en.bitcoin.it/wiki/Script}.
