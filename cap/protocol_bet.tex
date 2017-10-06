@@ -68,7 +68,7 @@ This money is spend at the oracle inscription as commitment from the players to
 This transaction spends $\mathcal{P} + \frac{c}{2}$ from each player:
   $ n \cdot \frac{c}{n}$ goes to pay for oracle inscriptions; \fee{Bet Promise}
   goes to pay this transaction's fees; and
-  $2 \cdot \matchcal{P} - \fee{Bet Promise} $ for paying the bet and its
+  $2 \cdot \mathcal{P} - \fee{Bet Promise} $ for paying the bet and its
   associated costs.
 
 \subsubsection{Oracle Inscription}
@@ -141,19 +141,19 @@ Because inputs come from outputs controlled by all the participants, the
         {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{O}\tikzmark{ini:a}}
         {\ldots}{\ldots}{\extra{n-1}}
     \stopinputs
-    {$\mathcal{P} + n/2 \cdot $($[Registration] \\
+    {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
             - \fee{Oracle Inscription}$)$ \\
-            - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
+            - 1/2 (\fee{Bet Promise} + \fee{Bet})}
         {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:f})) \\
                           $\vee$ \\
          (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:g})) \\
                                     $\vee$ \\
          (\signature{A} $\wedge$ \timeout{two})}
-    {$\mathcal{P} + n/2 \cdot $($[Registration] \\
+    {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
-            - \fee{Oracle Inscription}$)$ \\
-            - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
+            - \fee{Oracle Inscription}) \\
+            - 1/2 (\fee{Bet Promise} + \fee{Bet})}
         {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:ff})) \\
                           $\vee$ \\
          (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:gg})) \\
@@ -165,11 +165,11 @@ Because inputs come from outputs controlled by all the participants, the
                        \signature{A} $\wedge$ \signature{B} $\wedge$ %
                        \timeout{Reply}}
     {\ldots}{\extra{n-1}}
-    {[Oracle Payment]}{($AWins_o$ $\wedge$ ($BWins_{\hat{o}} \wedge %
-                        \tikzmark{ini:c}\dots$) $\wedge$ \signature{B}) \\
+    {[Oracle Payment]}{($AWins_o$ $\wedge$ ($BWins_{\hat{o}} \wedge$ %
+                        \tikzmark{ini:c} \dots) $\wedge$ \signature{B}) \\
                        $\vee$ \\
-                       ($BWins_o$ $\wedge$ $($AWins_{\hat{o}}$ %
-                        $\wedge$ \tikzmark{ini:d} \dots$) $\wedge$ \signature{A}) \\
+                       ($BWins_o$ $\wedge$ ($AWins_{\hat{o}}$ %
+                        $\wedge$ \tikzmark{ini:d} \dots) $\wedge$ \signature{A}) \\
                        $\vee$ \\
                         \signature{o} $\wedge$ \timeout{undue}\tikzmark{ini:e}}
     {\ldots}{\extra{n-1}}
