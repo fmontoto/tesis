@@ -10,13 +10,13 @@
 \memoria{Memoria para optar al Grado De Ingeniero Civil En Computaci\'on}
 \comision{Integrante 1}{Integrante2}{Integrante3}
 
+\usepackage{amsmath}
 \usepackage{lipsum}
-\usepackage[backend=bibtex, style=trad-plain]{biblatex}
+\usepackage[backend=bibtex,bibencoding=ascii,style=trad-plain]{biblatex}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
 \usepackage[svgpath=imagenes/]{svg}
-\usepackage{amsmath}
 \usepackage{csvsimple}
 \usepackage{listings}
 \usepackage{makecell}
@@ -33,7 +33,11 @@
 \renewcommand\cellgape{\Gape[4pt]}
 \usepackage{tabularx}
 
-\input{macros.tex}
+\usepackage{macros}
+% https://tex.stackexchange.com/questions/76273/multiple-pdfs-with-page-group-included-in-a-single-page-warning
+\pdfsuppresswarningpagegroup
+
+
 
 \addbibresource{bibliografia.bib}
 \begin{document}

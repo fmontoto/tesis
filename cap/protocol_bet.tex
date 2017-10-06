@@ -24,13 +24,13 @@ We call this transaction ``\textit{Bet Promise}'', as it is a commitment from bo
     \stopinputs
     {0}{\footnotesize{OP\_RETURN \{Bet Channel, Oracle List, Bet hash\}}}
     {$\mathcal{P} - \fee{Bet Promise} / 2$}{(\signature{A} $\wedge$ \signature{B}) \\
-                                                   \vee \\
-                                                  (\timeout{bet} $\wedge$ \signature{A}) }
+                                                   $\vee$ \\
+                                            (\timeout{bet} $\wedge$ \signature{A}) }
     {$\mathcal{P} - \fee{Bet Promise} / 2$}{(\signature{A} $\wedge$ \signature{B}) \\
-                                                   \vee \\
-                                                  (\timeout{bet} $\wedge$ \signature{B}) }
+                                                   $\vee$ \\
+                                            (\timeout{bet} $\wedge$ \signature{B}) }
     {$c/n$}{(\signature{A} $\wedge$ \signature{B})}
-    {...}{\extra{n - 1}}
+    {\ldots }{\extra{n - 1}}
     \stopoutputs
     {tx:bet_promise}
     {Bet Promise}
@@ -65,7 +65,7 @@ This money does not includes a timeout because it is an small amount, if players
 This money is spend at the oracle inscription as commitment from the players to
   the oracles.
 
-This transaction spends $\mathcal{P} + \frac{c}{2}}$ from each player:
+This transaction spends $\mathcal{P} + \frac{c}{2}$ from each player:
   $ n \cdot \frac{c}{n}$ goes to pay for oracle inscriptions; \fee{Bet Promise}
   goes to pay this transaction's fees; and
   $2 \cdot \matchcal{P} - \fee{Bet Promise} $ for paying the bet and its
@@ -139,59 +139,59 @@ Because inputs come from outputs controlled by all the participants, the
     {Bet Promise}{1}{\signature{A} $\wedge$ \signature{B}}
     {Oracle Inscription}{0}
         {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{O}\tikzmark{ini:a}}
-        {...}{..}{\extra{n-1}}
+        {\ldots}{\ldots}{\extra{n-1}}
     \stopinputs
     {$\mathcal{P} + n/2 \cdot $($[Registration] \\
             - [Oracle Payment] \\
             - \fee{Oracle Inscription}$)$ \\
             - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
-        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:f})) \\
-                          \vee \\
-         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:g})) \\
-                                    \vee \\
-         (\signature{A} $\webge$ \timeout{two})}
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:f})) \\
+                          $\vee$ \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:g})) \\
+                                    $\vee$ \\
+         (\signature{A} $\wedge$ \timeout{two})}
     {$\mathcal{P} + n/2 \cdot $($[Registration] \\
             - [Oracle Payment] \\
             - \fee{Oracle Inscription}$)$ \\
             - 1/2 $($\fee{Bet Promise} + \fee{Bet}$)}
-        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:ff})) \\
-                          \vee \\
-         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ ...\tikzmark{ini:gg})) \\
-                                    \vee \\
-         (\signature{B} $\webge$ \timeout{two})}
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:ff})) \\
+                          $\vee$ \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:gg})) \\
+                                    $\vee$ \\
+         (\signature{B} $\wedge$ \timeout{two})}
     {[Oracle Payment]}{(\signature{o} $\wedge$ ($AWins_o \vee BWins_o$) %
                        $\wedge$ \timeout{Bet}) \\
                        $\vee$ \tikzmark{ini:b} \\
                        \signature{A} $\wedge$ \signature{B} $\wedge$ %
                        \timeout{Reply}}
-    {...}{\extra{n-1}}
+    {\ldots}{\extra{n-1}}
     {[Oracle Payment]}{($AWins_o$ $\wedge$ ($BWins_{\hat{o}} \wedge %
-                        \tikzmark{ini:c}...$) $\wedge$ \signature{B}) \\
+                        \tikzmark{ini:c}\dots$) $\wedge$ \signature{B}) \\
                        $\vee$ \\
                        ($BWins_o$ $\wedge$ $($AWins_{\hat{o}}$ %
-                        \wedge \tikzmark{ini:d} ...$) $\wedge$ \signature{A}) \\
+                        $\wedge$ \tikzmark{ini:d} \dots$) $\wedge$ \signature{A}) \\
                        $\vee$ \\
                         \signature{o} $\wedge$ \timeout{undue}\tikzmark{ini:e}}
-    {...}{\extra{n-1}}
+    {\ldots}{\extra{n-1}}
     \stopoutputs
     {tx:bet}
     {Bet}
 
-\raisebox{31em}[0pt][0pt]{
+\raisebox{31em}[0pt][0pt]{%
         \hbox{\hspace{34em} \framebox[1.1\width]{\tikzmark{end:a}$\forall o \in $ Oracles}}
 }
-\raisebox{27em}[0pt][0pt]{
-    \hbox{\hspace{35em}{\framebox[1\width]{
+\raisebox{27em}[0pt][0pt]{%
+    \hbox{\hspace{35em}{\framebox[1\width]{%
             \parbox{80\unitlength}{\tikzmark{end:e}For at least $m\\\tilde{o} \in $ Oracles}}}}
 }
-\raisebox{19em}[0pt][0pt]{
+\raisebox{19em}[0pt][0pt]{%
         \hbox{\hspace{36em} \framebox[1.1\width]{\tikzmark{end:b}$\forall o \in $ Oracles}}
 }
-\raisebox{14em}[0pt][0pt]{
-    \hbox{\hspace{35em}{\framebox[1\width]{
+\raisebox{14em}[0pt][0pt]{%
+    \hbox{\hspace{35em}{\framebox[1\width]{%
             \parbox{80\unitlength}{\tikzmark{end:c}For at least $m\\\hat{o} \in $ Oracles}}}}
 }
-\raisebox{10em}[0pt][0pt]{
+\raisebox{10em}[0pt][0pt]{%
         \hbox{\hspace{35em} \framebox[1.1\width]{\tikzmark{end:d}$\forall o \in $ Oracles}}
 }
 \begin{tikzpicture}[overlay, remember picture, yshift=.25\baselineskip,%
@@ -239,8 +239,8 @@ This way we take the payment out from the oracle, as it didn't give the right
 If it behaves as expected, the oracle can spend this money some time after
   (T$_{\text{undue}}$) the bet is resolved.
 
-There are four timeouts expressed in the transaction, table
-  \ref{table:timeouts} describe each of them in chronological order, from
+There are four timeouts expressed in the transaction,
+  table~\ref{table:timeouts} describe each of them in chronological order, from
   sooner to later in the protocol execution.
 
 \begin{center}
@@ -248,22 +248,22 @@ There are four timeouts expressed in the transaction, table
         \hline
           \textbf{Symbol} & \textbf{Description} \\
         \hline
-        \timeout{Bet} & \makecell[l]{
+        \timeout{Bet} & \makecell[l]{%
               First timeout, this is the moment the event being used to decide
               the bet \\ takes place. From this moment on oracles can vote for a
               winner and take its \\ place.} \\
         \hline
-        \timeout{Reply} & \makecell[l]{
+        \timeout{Reply} & \makecell[l]{%
               This timeout signals the time for the oracles to answer. After
               this timeout \\ pass, players can take the oracle's payment if the
               oracle has not replied.} \\
         \hline
-        \timeout{Undue} & \makecell[l]{
+        \timeout{Undue} & \makecell[l]{%
               If an oracle gave the wrong answer, players have until this
               timeout to take \\ its payment back. After this timeout the oracle
               that behaved correctly can \\ take the payment deposit back.} \\
         \hline
-        \timeout{Two} & \makecell[l]{
+        \timeout{Two} & \makecell[l]{%
               The last timeout, this could be the same than \timeout{Undue}.
               Until this moment, \\  players can take the two answers penalty
               for any oracle that made public \\ the votes for both players.
@@ -284,7 +284,7 @@ As it is a 16 bits number, it's limited to be a year in the future, relative to
 \colorbox{red}{Goes this next paragraph here?}
 If we step out a little bit, the proposed protocol uses paid oracles to get a
   binary answer about an event outside the blockchain. This is not useful only
-  for betting on that outcome. The oracles are \footnote{\colorbox{red}{
+  for betting on that outcome. The oracles are\footnote{\colorbox{red}{%
   is insensitive the word?}} insensitive to the use given to their answer, they
   get paid anyway. Further applications of the protocol can be generalized from
   our proposal.

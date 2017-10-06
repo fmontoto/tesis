@@ -7,9 +7,9 @@
 
 Most of the bibliography read simplifies the fee transactions to be 0,
   as this was the the cost of it for a long time.
-However as bitcoin use has increased, transactions are not free anymore
-  \footnote{We can still send transactions with no fees to the blochain, but it
-    might take forever for them to get into it. As miner will prioritize
+However as bitcoin use has increased, transactions are not free
+  anymore\footnote{We can still send transactions with no fees to the blochain,
+    but it might take forever for them to get into it. As miner will prioritize
     transactions with fee to collect.}, that's why we kept the fees in the
   explanation.
 So we can do the analysis with all the costs, not only the oracle payment.
@@ -34,7 +34,7 @@ Players in a tight schedule can expend more money in fees and submit
 It's impossible to give an exact value for the size of each transaction, as
   addresses and signatures do not have a fixed size, for the analysis we use
   average the size values, the fluctuation is under 5\%.
-Table \ref{tab:tx_fees} has the size for the transactions used in the protocol,
+Table~\ref{tab:tx_fees} has the size for the transactions used in the protocol,
   sizes are in bytes and we calculate the total using \numoracles{} as the number
   of oracles:
 
@@ -81,7 +81,7 @@ Redeem transactions are required to get the money into personal accounts, so we
   append them.
 
 For a successful run of the protocol, where there is a winner and every oracle
-  behaves properly. Table \ref{tab:costs}  summarize the costs incurred by the
+  behaves properly. Table~\ref{tab:costs}  summarize the costs incurred by the
   players.
 
 \newcommand\totalcost[2]{\totalcostimpl{#1}{#2}{\numoracles{}}{\feeval{}}}%
@@ -114,7 +114,7 @@ The value of c and [Oracle Payment] are parameters decided by the players,
   below we propose values for this constanst and discuss about the tradeoff on
   setting this values.
 
-Table \ref{tab:oracle_costs} summarize the cost and earning for an oracle that
+Table~\ref{tab:oracle_costs} summarize the cost and earning for an oracle that
   behaves correctly in a protocol execution.
 
 \begin{center}

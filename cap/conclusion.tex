@@ -1,5 +1,3 @@
-\section{Conclusion}
-
 Since the Bitcoin creation in 2008 more than a thousands of different
   cryptocurrencies have been created, most of them following its main design
   properties.
@@ -23,7 +21,7 @@ The limited scripting, slow change rate and the biggest network made Bitcoin our
   choice:
 The script limitation poses a real challenge in the protocol presented, making this
   an open problem.
-As we discussed at section \ref{sec:discussion_previous_work}, the problem has
+As we discussed at section~\ref{sec:discussion_previous_work}, the problem has
   many implemented solutions for currencies with more expressive scripting
   languages;
 The slow change rate helps to keep the currency value and the same rules from
@@ -65,6 +63,22 @@ There is yet another big difference, people running protocols on top of
 Where people uses only the public interface of a web site or physical casino.
 Never seeing what is really going on ``behind the scenes''.
 
+One of the most challenging problems to resolve for this protocol was to
+  translate the protocol restrictions to Bitcoin transactions.
+Studied existing solutions are composed just by one or two different
+  transactions.
+In Ethereum one smart contract is enough for the applications we discussed at
+  section~\ref{sec:previous_work}.
+For orisi, only one transaction is post in the blockchain with the bet, all
+  the other communication and set up required happens outside the blockchain.
+Our protocol uses the blochain widely, not only for money transfers, but also
+  for oracle discovery and initial communication.
+This seeks to avoid extra dependecies and keep most of the protocol expressed
+  in the same framework.
+This come to a cost, more and larger transactions.
+Which are not free anymore, for each byte we post in the blockchain within
+  a transaction we are charged by the miner.
+This cost is discussed at section~\ref{sec:"cost_analysis}
 
 \colorbox{red}{Future work}
 We also see value in transforming the oracles in ``judges'', and instead of

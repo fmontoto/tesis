@@ -3,9 +3,9 @@ Gambling is the activity of predicting events and placing a wager on the
   uncertain outcome of those events, with the intent of winning money or
   valuable goods.
 A wager can be placed on many different events, in a casino we find randomizing
-  devices as dice, roulette wheels, etc. which are used to get randomized
+  devices as dice, roulette wheels, etc.\ which are used to get randomized
   events. In other establishments we can bet on sporting events, such as a horse
-  racing, football games, etc. or the minimum temperature in Santiago during a
+  racing, football games, etc.\ or the minimum temperature in Santiago during a
   particular night.
 Gambling popularity and the large amounts of money at stake inevitably entails a
   lot of interest in such activities.
@@ -59,7 +59,7 @@ But, what if you would like to gamble in a event that no gambling site offers
 Digital currency refers to any currency stored and transferred
   electronically.
 A subset of the digital currencies is called virtual currencies: they are
-  usually defined \cite{bcentraleuro} as a \itquote{ unregulated,
+  usually defined \cite{bcentraleuro} as a \itquote{unregulated,
   digital money, which is issued and usually controlled by its developers, and
   used and accepted among the members of a specific virtual community}.
 
@@ -76,7 +76,7 @@ A cryptocurrency is a bi-directional virtual currency that uses cryptography
   \cite{chaum1983blind} to establish a virtual currency were lead by David
   Chaum, an American cryptographer. However, despite his and others' effort
   (e-gold\footnote{https://www.wired.com/2009/06/e-gold/},
-  Ecash\cite{chaum1990untraceable},
+  Ecash \cite{chaum1990untraceable},
   DigiCash, LibertyReserve, among others), virtual currencies never were
   massively adopted.
 
@@ -114,7 +114,7 @@ If the casino does not want or does not have the means to pay, there is nothing
   the participant can do, and his money is lost.
 The problems described for online casinos using traditional currencies apply in
 the same way to the new ones.
-(More on online casinos at subsection \ref{gambling}.)
+(More on online casinos at subsection~\ref{gambling}.)
 
 After some time, people started to see potential of cryptocurrencies at solving
   some of the trust issues related to gambling.
@@ -204,8 +204,8 @@ There are two mains phases in the protocol, the first one is optional and
 Bitcoin (like most of the cryptocurrencies) includes a scripting language able
  to control money transferences, well defined and with its execution enforced by
  the complete bitcoin network.
-The challenge is to bring data from outside the bitcoin data and reason about
-  it.
+The challenge is to bring data from outside the bitcoin blockchain into it so
+  scripts on it can run on that data.
 Our protocol relies on several paid ``oracles'' to bring this data.
 As the oracles' output will be used to decide who is the bet's winner, it is a
   crucial step.
@@ -241,4 +241,3 @@ Oracles get their payment by answering who the winner is, and as soon as
   enough\footnote{Threshold defined in the bet parameters, at least$\lfloor
   \frac{n}{2} \rfloor + 1$ with $n$ the number of oracles.} oracles vote for
   one player as the winner, this player can take its winnings.
-

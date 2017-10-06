@@ -1,4 +1,3 @@
-% transaction {label}{transaction name}{list of inputs}
 \makeatletter
 \newcommand{\transaction}[0]{%
     \@transactionbegin
@@ -45,7 +44,7 @@
     \hline
     \@transactionoutputsit %
 }
-\newcommand{\@transactionoutputsend}[2]{
+\newcommand{\@transactionoutputsend}[2]{%
         \end{tabular}
         \captionof{table}{#2}
         \label{#1}
@@ -76,32 +75,39 @@
     \ensuremath{\uptau_{#1}}%
 }
 \newcommand{\extra}[1]{%
-    ... \guilsinglleft #1\guilsinglright\ ...
+    \dots \guilsinglleft #1\guilsinglright\ \dots
 }
 \def\stopinputs{}
 \def\stopoutputs{}
+\newcounter{totalbytes}
+\newcounter{constCost}
+\newcounter{numOracles}
+\newcounter{perOracleCost}
+\newcounter{bytesize}
+\newcounter{totalCost}
+\newcounter{feeVal}
 \newcommand{\@calctotalbytes}[3]{%
-    \newcounter{constCost} \setcounter{constCost}{#1}%
-    \newcounter{perOracleCost} \setcounter{perOracleCost}{#2}%
-    \newcounter{numOracles} \setcounter{numOracles}{#3}%
+    \setcounter{constCost}{#1}%
+    \setcounter{perOracleCost}{#2}%
+    \setcounter{numOracles}{#3}%
     \setcounter{totalbytes}{%
             \numexpr\theconstCost+(\thenumOracles*\theperOracleCost)\relax}%
 }
 \newcommand{\@calctotalcost}[2]{%
-    \newcounter{bytesize} \setcounter{bytesize}{#1}%
-    \newcounter{feeVal} \setcounter{feeVal}{#2}%
+    \setcounter{bytesize}{#1}%
+    \setcounter{feeVal}{#2}%
     \setcounter{totalCost}{%
             \numexpr\thetotalbytes*\thefeeVal\relax}%
 
 }
 \newcommand\calculatecosts[4]{%
-    \newcounter{totalbytes} \@calctotalbytes{#1}{#2}{#3}%
-    \newcounter{totalCost} \@calctotalcost{\thetotalbytes}{#4}%
+    \@calctotalbytes{#1}{#2}{#3}%
+    \@calctotalcost{\thetotalbytes}{#4}%
     \theconstCost & \theperOracleCost & \thetotalbytes & \num{\thetotalCost}%
 }
 \newcommand\totalcostimpl[4]{%
-    \newcounter{totalbytes} \@calctotalbytes{#1}{#2}{#3}%
-    \newcounter{totalCost} \@calctotalcost{\thetotalbytes}{#4}%
+    \@calctotalbytes{#1}{#2}{#3}%
+    \@calctotalcost{\thetotalbytes}{#4}%
     \num{\thetotalCost}%
 }
 \newcommand\satoshitousd[2]{%

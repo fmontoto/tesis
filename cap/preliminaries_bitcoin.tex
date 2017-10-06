@@ -49,7 +49,7 @@ The address is not private, and people share theirs when willing to receive
 
 The address represents a hash of a public key. Therefore, the owner of the
   account is however control the private key of the address.
-Bitcoin uses Elliptic Curve Digital Signature Algorithm (ECDSA)\footnote{
+Bitcoin uses Elliptic Curve Digital Signature Algorithm (ECDSA)\footnote{%
   ECDSA is a digital signature algorithm using Elliptic Curve
     Cryptography. It is an asymmetric scheme, with a private and public key.
     Bitcoin transactions are secured with a private key signature and validated
@@ -66,7 +66,7 @@ A transaction is the only way to move bitcoins from one account to other one,
   it is basically two lists:
   a list of accounts where the money is pulled from, called inputs; and a list
   of accounts where the the bitcoins are going to, a simplified
-  view in the figure \ref{fig:simplified_transaction}.
+  view in the figure~\ref{fig:simplified_transaction}.
 
 \begin{figure}
 	\centering
@@ -84,7 +84,7 @@ This is the only way bitcoins are generated.
 A transaction input points to a previous unspent output and proves it has the
   right to spend that output.
 An output contains\footnote{This is a simplification, not every output works
-  this way. Details are in subsection \ref{subsec:script}.} the address of the
+  this way. Details are in subsection~\ref{subsec:script}.} the address of the
   account it is transferring the money to, so any input signed using the private
   key of that address has the right to spend the output.
 This implies that the money from an account must be spent in the same amount
@@ -126,7 +126,7 @@ The atomical piece in the blockchain is the block. Each valid block carries
   and solve the puzzle to get a valid proof of work for its block.
 This process is called mining, therefore the entities trying to get a valid
   block are called miners. A block is linked to the previous one, as show in the
-  figure \ref{fig:block_links}.
+  figure~\ref{fig:block_links}.
 
 \begin{figure}
 	\centering
@@ -158,7 +158,7 @@ Once block is produced, all the other miners need to delete the transactions
 By design a block must be produced every 10 minutes, so the work required to
   mine a block is adjusted periodically to meet this goal.
 
-The structure of a Bitcoin block is shown in figure \ref{fig:block_pow}, the
+The structure of a Bitcoin block is shown in figure~\ref{fig:block_pow}, the
   fields with the gray background represents the block header, the data hashed
   to get the block's hash.
 The transactions are indirectly hashed in the Merkle Root\footnote{A
@@ -174,8 +174,8 @@ The transactions are indirectly hashed in the Merkle Root\footnote{A
 \end{figure}
 
 As expected in a protocol with many participants, there are times where more
-  than one block is generated with the same parent (figure
-  \ref{fig:chain_fork}). This is call a fork.
+  than one block is generated with the same parent
+  (figure~\ref{fig:chain_fork}). This is called ``fork''.
 
 \begin{figure}
 	\centering
@@ -194,21 +194,21 @@ So when a fork happens there are two active chains, while having a non unique
 A block mined on one of the branches will decide which is the active one
   because it adds more work to the chain. However the situation that originated
   the fork can repeat itself and prevent having one consensus branch, which is
-  very unlikely\cite{decker2013information} to happen during a long time.
+  very unlikely \cite{decker2013information} to happen during a long time.
 
 The chain structure gives a chronological order to the transactions in the
   protocol, so it makes easy to check if a transaction is valid.
 Any participant willing to probe the validity of a given transaction needs
-  to evaluate the script (see section \ref{subsec:script}), and  check the block
+  to evaluate the script (see section~\ref{subsec:script}), and  check the block
   where the output being spent is stored up to the current block and see if the
   money was already spent in a different transaction.
 
   \subsection{Script} \label{subsec:script}
 
-When sending money, there is a little more than we saw at section
-  \ref{subsec:Transaction}. In an input (figure \ref{fig:input}) there is more
-  than a signature, and at each output (figure \ref{fig:output}) also more than
-  an address.
+When sending money, there is a little more than we saw at
+  section~\ref{subsec:Transaction}. In an input (figure~\ref{fig:input}) there
+  is more than a signature, and at each output (figure~\ref{fig:output}) also
+  more than an address.
 
 \begin{figure}[ht]
   \centering
@@ -229,7 +229,7 @@ An output does not send money to a given address, but defines how the money can
   ``Pay To Public Key Hash'' (P2PKH)\footnote{The key hash is the address of an
   account}. The other is called ``Pay To Script Hash'' (P2SH).
 
-As figure \ref{fig:output} shows, the output has a script on its wire
+As figure~\ref{fig:output} shows, the output has a script on its wire
   representation.
 This script is written in a small stack based language.
 It is read from left to right and it is purposefully not Turing-complete.
@@ -245,8 +245,8 @@ The script is evaluated using the scriptSig as input. If the transaction willing
 \end{center}
 
   It receives two values as input:  \lstinline{<pubKeyHash>} and
-  \lstinline{<sig>}. And the execution is explained in table%
-    \ref{tab:p2pkh_exec}.
+  \lstinline{<sig>}. And the execution is explained in
+  table~\ref{tab:p2pkh_exec}.
 
 \begin{table}[tbp]
   \small
@@ -322,7 +322,7 @@ This script is pretty simple, it takes the first element of the stack,
 \end{center}
 
 
-  A execution of a sample P2SH is shown in table \ref{tab:p2sh_exec}.
+  A execution of a sample P2SH is shown in table~\ref{tab:p2sh_exec}.
 
 \begin{table}[tbp]
   \small

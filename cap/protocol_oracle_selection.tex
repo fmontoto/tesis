@@ -4,7 +4,7 @@ Before explaining the protocol we introduce the following notation, based
   in the work of Andrychowicz et al. \cite{andrychowicz2014secure}, to describe
   the transactions.
 
-Table \ref{tx:example} represents a transaction that spends two outputs from
+Table~\ref{tx:example} represents a transaction that spends two outputs from
   two different previous transaction and creates three outputs:
 
   \transaction
@@ -47,7 +47,7 @@ Sometime a literal is required, usually a preimage of a known hash ($H(l)$), we
   time, we use \timeout{k} to disable the path this expressions is in before the
   time $k$.
 
-For instance, the script at \ref{eq:notation_sample} requires to be evaluated
+For instance, the script at~\ref{eq:notation_sample} requires to be evaluated
   after the time $k$ and a signature of $U$. Or $l$ and a signature of $U$.
 \begin{equation} \label{eq:notation_sample}
     \mathcal{S}_U \wedge (l \vee \uptau_k)
@@ -71,7 +71,7 @@ In order to get a trustworthy list, we define a few key properties:
 It must be a decentralized list; anybody willing to be an oracle can inscribe
   itself; and must be visible for both of the players.
 
-As we saw in sub section \ref{subsec:Blockchain}, we already have a
+As we saw in sub section~\ref{subsec:Blockchain}, we already have a
   public distributed database to store information.
 We use the blockchain to keep the list of oracles, this provides tampering
   protection, a public database and a distributed source for the list.
@@ -109,7 +109,7 @@ There is no required deposit for registration, however the transaction fee must
 Some may argue than a higher price to register an oracle will decrease the
   chances of an individual controlling the majority of the list.
 If that is the case, increasing the cost by adding a required a unspendable
-output does not require any change in the transaction \ref{tx:registration},
+output does not require any change in the transaction~\ref{tx:registration},
   as the unspendable output already exist.
 Adding a deposit spendable by an address will require a new output, but the
   idea remain the same.
@@ -153,7 +153,7 @@ And decreases even more to control the majority of them, required to decide
 As trust in the other player is not required for this protocol, both players
 need to have the certainty the election from the list is random.
 In order to achieve this property we use a protocol originally proposed to flip
-  coins over the phone\cite{blum1983coin}.
+  coins over the phone \cite{blum1983coin}.
 Today this algorithm is mostly known as ``Coin Tossing'', and lives in a
   subfield of cryptography called Multi Party Computation.
 Multi party computation, or secure multi party computation aims to provide
@@ -168,7 +168,7 @@ There is one important restriction when using this protocol, the bit must be
   chosen before knowing the value of  the other, otherwise if one bit is known
   the second one can be selected in order to get the desired outcome.
 If we were physically together we would write down the bit in a paper, wait for
-  the other player to write his and then reveal both bits and perform the XOR.
+  the other player to write his and then reveal both bits and perform the XOR\@.
 However we would like to run this algorithm through the phone or in this case
   the computer.
 The idea is the same, but instead of writting down into a paper, players

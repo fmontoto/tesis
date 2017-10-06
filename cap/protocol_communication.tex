@@ -71,7 +71,7 @@ At this point both players know the secure channel and have the credentials
 
 For test purposes we used a plain TCP connection between peers, and also
   a secure channel was implemented using
-  CurveZMQ \footnote{http://curvezmq.org/}.
+  CurveZMQ\footnote{http://curvezmq.org/}.
 An authentication and encryption protocol on top of TCP that uses elliptic
   curves cryptography to protect the packages sent in the wire.
 
@@ -80,11 +80,10 @@ Establishing a peer to peer connection as channel might reveal more information
 A third party communication channel can be used to obscure our id from the other
   players, but it might be known by the third party controlling the channel.
 Several options can be used to obscure real id when communicating, using private
-  navigation as the one provided by the Thor Network
-  \footnote{https://www.torproject.org/} can help when using a third party
-  channel.
+  navigation as the one provided by the Thor Network\footnote{%
+    https://www.torproject.org/} can help when using a third party channel.
 Other approach is to use inherently anonymous communication protocols, as the
-  one Orisi uses, BitMessage\cite{warren2012bitmessage}.
+  one Orisi uses, BitMessage \cite{warren2012bitmessage}.
 Which solution to use will vary from case to case and how difficult to track
   the participant wants to be.
 
