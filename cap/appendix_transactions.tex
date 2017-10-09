@@ -1,0 +1,1295 @@
+\section{Transactions}
+Example of each one of the most important transactions in the protocol,
+  parsed and explained.
+The transactions are generated for the testnet of Bitcoin, this blockchain
+  works as test for changes to be introduced in Bitcoin.
+It uses the same bitcoin client and rules, the main difference is their value,
+  ``bitcoins'' in the testnet do not have a monetary value, so they are easier
+  to access to.
+
+\lstset{%
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  tabsize=2,
+  linewidth=10cm,
+  escapechar=*,
+}
+\newcommand{\postbreak}[0]{\mbox{\textcolor{red}{$\hookrightarrow$}\space}}
+\subsection{Oracle Registration}
+\begin{lstlisting}
+{
+  version: 1
+  inputs counter: 1
+  inputs: {
+    {
+      prev_tx_hash: 25FCA8C2AA9EC0FBFE418EF18EFF7E683B13EA344F77B5
+                      *\postbreak*3AF48C9D50F980BD45
+      prev_idx: 0
+      script_length: 107
+      script: 483045022100C2CDC0F9C2297D0359F41E6D878AF962966B7DA2
+                *\postbreak*1126BA530C4117B47786165902201F1A667A2433F3336CD8
+                *\postbreak*DB220D954585EE3DEECB333DBAABA1E438BD344857D10121
+                *\postbreak*0293CE4CCDC6B49EE87DF835EC2AD77D92822A52444C425D
+                *\postbreak*03C7EDFAD09FCC2E52
+      sequence_no: 4294967295
+    }
+  }
+  outputs_counter: 2
+  outputs: {
+    {
+      value: 0
+      script_length: 38
+      script: [OP_RETURN, OP_PUSH_36_bytes,
+                49276D20616E206F7261636C652120526561647920746F2070
+                  *\postbreak*726F766964652064617461]
+    }
+    {
+      value: 20968080
+      script_length: 25
+      script: [OP_DUP, OP_HASH160, OP_PUSH_20_bytes,
+                360973EAE34A60DD1EAB3D18705B9EF1C531B57F,
+                OP_EQUALVERIFY, OP_CHECKSIG]
+    }
+  }
+  lock_time: 0
+}
+\end{lstlisting}
+
+The input spends money in the oracle's control, this is outside the scope
+  of the protocol, so we do not parse it.
+
+The first output is a protocol dependent constant, it uses the OP\_RETURN opcode
+  to push the data mark the output as invalid.
+In this example the constant is the string
+  "I'm an oracle! Ready to provide data".
+This constant is used to identify an oracle inscription in the blockchain, so
+  players can find and use the oracles.
+
+The second output is the change.
+In this case the protocol does not require to spend any money in this
+  transaction, so the oracle takes all the money back to an address it controls.
+
+\subsection{Bet Promise}
+
+\begin{lstlisting}
+{
+  version: 1
+  inputs counter: 7
+  inputs: {
+    {
+      prev_tx_hash: 294B8B68DEC454C90A25C8CCA68EEBCF2280205AC17781
+                      *\postbreak*39527DD64317E6CE14
+      prev_idx: 0
+      script_length: 106
+      script: 47304402204C295245BD9389FC6DD7405F12DC04F6E8FB0E999A
+                *\postbreak*08ABE8C14CCEFF7D6414E002207B6F5C77210B0CF2DC67DD
+                *\postbreak*7E90A8526CC130DA28A87323B612FB030C417447C9012102
+                *\postbreak*A52B895664A1D2738B3C1FDEDC112F9B2F1FEF0800150E46
+                *\postbreak*83CF3344AEEE149E
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: A5C7E5CB12835D4B4CC8CBBEF7F6C1D6761F1C779DE396
+                      *\postbreak*179CFAF85A8B966434
+      prev_idx: 0
+      script_length: 106
+      script: 4730440220441665482EFADF4FE4BA306888233D2D9825722A1A
+                *\postbreak*3FBF192D8BA84A5771C86B02201EB740CEF6ABB362DB9AA5
+                *\postbreak*ADB6E57E5248B220B0558165D1B371411B651F4666012102
+                *\postbreak*23522078AF81C1A6D028F37B3446ABD29412EFBDF08EAFB1
+                *\postbreak*122B223340E32D1E
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: F66078FCFED4721EB83D7E329E443CA647F78C9FFF6A77
+                      *\postbreak*C0DD9362932A4BB1D8
+      prev_idx: 0
+      script_length: 107
+      script: 483045022100997F4732B6AFFC2BD95342DCE884ACA906A4A48B
+                *\postbreak*1A841A2CDE07C8C2CD87ADCB0220356B28388D35826AA010
+                *\postbreak*18C154DBA2F1E916F786C3F3E6BD68DB339AEDCDAFAA0121
+                *\postbreak*036E623812F3F4042FA0B981483CB1562E2FE3654E90CB52
+                *\postbreak*DF5938932E3B616DEC
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: 322881B20E1C25A7BC7A4FF0947128F05353BDC1186016
+                      *\postbreak*907F70316A117B9F34
+      prev_idx: 1
+      script_length: 106
+      script: 47304402205AFE3147A8CCE8A7950BE4B3CE0D65C0EBFA1D39FF1
+                *\postbreak*354CD28C7243F7B0CFE5B022072F165E7DE88CD8A7D8C3B4E
+                *\postbreak*B8899900CCB9AEE7CC4E4D3FC0D206EC0094252E012102E99
+                *\postbreak*3E533772F9851A962C59D1819D5641D48B45DC7F6B2D2E2CF
+                *\postbreak*3C34369F7DB5
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: FBC0BA746FECF73D12DEC825BC92630C1C014551F3818D
+                      *\postbreak*0CEAE06B71999A644E
+      prev_idx: 0
+      script_length: 106
+      script: 473044022036DE6627456A7DE119093F1E949705D090F00F521E
+                *\postbreak*169C023E8BA9325B44175D022002A2A66272116DDAA378FE
+                *\postbreak*89A0C0E0D6F202CCA9B7CF3CC75E2C01EC19ADE4D9012102
+                *\postbreak*E993E533772F9851A962C59D1819D5641D48B45DC7F6B2D2
+                *\postbreak*E2CF3C34369F7DB5
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: 741ADE91531D0537B94BBAB93E438D487E2EB4AF070DA2
+                      *\postbreak*10888527D4710FA780
+      prev_idx: 1
+      script_length: 106
+      script: 473044022070E8DAFBC001E12A6D2477391D493B0E22A7C1F044
+                *\postbreak*23E47CC517E9FDA83CE0E802207F6A16960C13FAEA4386BB
+                *\postbreak*2405478B4D82B39911CB64DEDD5C36F363A10434A5012103
+                *\postbreak*4D00A2B430B6999974A29A168B56A12C0065A6CF95181DB3
+                *\postbreak*E209CD5B14332568
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: 4004CC1568D1041710924139C1206A89CCCA5C8D2D072C
+                      *\postbreak*426E9E75C94B31F7EF
+      prev_idx: 0
+      script_length: 107
+      script: 483045022100FCED70DE0C66BC3E3B10F6F1A3AC6849BE625AA6
+                *\postbreak*0D28E1F5A7E36E0FFCB372C6022054CC3D92DD4914FEFA9F
+                *\postbreak*2BC8DA77182C4691E754794741C5DD7A1C44080ED29F0121
+                *\postbreak*02E993E533772F9851A962C59D1819D5641D48B45DC7F6B2
+                *\postbreak*D2E2CF3C34369F7DB5
+      sequence_no: 4294967295
+    }
+  }
+  outputs_counter: 10
+  outputs: {
+    {
+      value: 0
+      script_length: 257
+      script: [OP_RETURN, OP_PUSH_254_bytes,
+                17426574206C6F6F6B696E6720666F72206F7261636C657305
+                  *\postbreak*226D6B536737437248366E7A584145753753454E6F6B7
+                  *\postbreak*371636E425262566347783868226D6E41764644697434
+                  *\postbreak*50745A5338507334474D73456F7167436E3543624E473
+                  *\postbreak*36B4B226D69687976764D756A47317A57416946515239
+                  *\postbreak*3850336A67614C4A4C557A504E6172226D6D334551536
+                  *\postbreak*E74344A506659505063586A64616F61666A5062445235
+                  *\postbreak*6231444C57226D7265675042747333756D6B4B386F7A4
+                  *\postbreak*55764486E35324E516D34384D51566D597394AC3992DD
+                  *\postbreak*3B975DCA40927169D471EBE00F19E601206C6F63616C6
+                  *\postbreak*86F73743A343332342C203137322E31392E322E35343A
+                  *\postbreak*38383736]
+    }
+    {
+      value: 99892970
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                029EF2FC0D7C46BDCC4F07E517F6CC99F3711A66, OP_EQUAL]
+    }
+    {
+      value: 99892970
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                003F90F5C12455CABD2F31685048ED4EDB3457AA, OP_EQUAL]
+    }
+    {
+      value: 60000
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                B0A5676BE17E30499FFF05011D1D404770C48A40, OP_EQUAL]
+    }
+    {
+      value: 60000
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                B0A5676BE17E30499FFF05011D1D404770C48A40, OP_EQUAL]
+    }
+    {
+      value: 60000
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                B0A5676BE17E30499FFF05011D1D404770C48A40, OP_EQUAL]
+    }
+    {
+      value: 60000
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                B0A5676BE17E30499FFF05011D1D404770C48A40, OP_EQUAL]
+    }
+    {
+      value: 60000
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                B0A5676BE17E30499FFF05011D1D404770C48A40, OP_EQUAL]
+    }
+    {
+      value: 220550000
+      script_length: 25
+      script: [OP_DUP, OP_HASH160, OP_PUSH_20_bytes,
+                66E2E39AB1C5E98A8180DE876CC4743D3292E14A, OP_EQUALVERIFY,
+                OP_CHECKSIG]
+    }
+    {
+      value: 531650000
+      script_length: 25
+      script: [OP_DUP, OP_HASH160, OP_PUSH_20_bytes,
+                73F245C95CAF31F4449B8259D6CEB248A57262F8, OP_EQUALVERIFY,
+                OP_CHECKSIG]
+    }
+  }
+  lock_time: 0
+}
+\end{lstlisting}
+
+The inputs is all the money required to run this bet, it comes from both
+  oracles previously owned addresses.
+
+The first output pushes: A constant to identify the data, in this case the
+  string "Bet looking for oracles"; The bet description's hash; The channel
+  to type and address to stablish communication with the players. In this
+  case an IP address and a port.
+
+The second and third outputs move most of the money to a joint account, to
+  be used in the Bet transaction.
+
+The fourth to the eighth outputs set apart the money to be used in the oracle
+  enrollment.
+
+Ninth and tenth are the change for both players, de difference from what they
+  got from its input and the required to run the bet.
+
+Second to eighth outputs use Pay To Script Hash.
+This means we do not get o see the real script required to spend them, just the
+  hash of it.
+The script (and the data required to evaluate it) must be provided when spending
+  this outputs.
+
+\subsection{Oracle Enrollment}
+
+\begin{lstlisting}
+{
+  version: 1
+  inputs counter: 4
+  inputs: {
+    {
+      prev_tx_hash: 25FCA8C2AA9EC0FBFE418EF18EFF7E683B13EA344F77B5
+                      *\postbreak*3AF48C9D50F980BD45
+      prev_idx: 0
+      script_length: 107
+      script: [OP_PUSH_72_bytes
+                3045022100D0F089625E7E1198D48D6DF2AACF0A5AAB42853C
+                  *\postbreak*A48EE0B458DCC91D7438FB0502200DFA820300B8389C6
+                  *\postbreak*ED256387F78A3C2B30453B504520DB96F47DA57349883
+                  *\postbreak*[ALL]
+                OP_PUSH_33_bytes
+                0293CE4CCDC6B49EE87DF835EC2AD77D92822A52444C425D03
+                  *\postbreak*C7EDFAD09FCC2E52]
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: F3378F87464223D458156E561D147B1E8C50DD55860A69
+                      *\postbreak*065F7B3BD1D96F8EAB
+      prev_idx: 0
+      script_length: 106
+      script: [OP_PUSH_71_bytes
+               304402206F48E436F5DDC97A74D7CF96BBD3BEF6252964F90B1
+                 *\postbreak*6F0F22E67CB93FD7D18610220441F11AB77AC454258808
+                 *\postbreak*BD641183ADD71D6B8EB7DD455A9F400D2315958DF[ALL]
+               OP_PUSH_33_bytes
+               0293CE4CCDC6B49EE87DF835EC2AD77D92822A52444C425D03C
+                 *\postbreak*7EDFAD09FCC2E52]
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: F65ED60FAF8C89F16E89939B1EBD5AC91FCCDA1EE4EBE1
+                      *\postbreak*1BD4DA203469C714CA
+      prev_idx: 0
+      script_length: 107
+      script: [OP_PUSH_72_bytes
+                3045022100D32C220D13956398B7C1EBB7858FD4272F40ACD5
+                 *\postbreak*BDB76E1D2FAF3A2E709047C8022065CC1C9AD993483B78
+                 *\postbreak*C8394DBAB2CDEC1C67B49576BF0CCEB8B1DEFAB52254
+                 *\postbreak*[ALL]
+                OP_PUSH_33_bytes
+                0293CE4CCDC6B49EE87DF835EC2AD77D92822A52444C425D03
+                 *\postbreak*C7EDFAD09FCC2E52]
+      sequence_no: 4294967295
+    }
+    {
+      prev_tx_hash: B7C9A9B3870295EF98367502E599210E1046410C9FA154
+                      *\postbreak*7321E8E026CAEB5590
+      prev_idx: 3
+      script_length: 218
+      script: [OP_0 OP_PUSH_72_bytes
+                3045022100E3D14D93F42FB897D3DAB079122843CAC1DBE72A
+                 *\postbreak*22132689001FB452BCA144330220573015E3783DD47A42
+                 *\postbreak*F49CB5A77E85CCA87049AEF4775B942DD740AF09962F
+                 *\postbreak*[ALL]
+                OP_PUSH_71_bytes
+                304402203DE0D1CD2DE543795F79933DACCADFAAFF8D5D631E
+                 *\postbreak*FF039EAC25CC8D759E696902207F48C2244049A8BF8764
+                 *\postbreak*B74C7659C704E48E89E095968DBE4F76D17F23E1EA
+                 *\postbreak*[ALL]
+                OP_PUSH_71_bytes
+                {
+                  [OP_2 OP_PUSH_33_bytes
+                    02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2C
+                     *\postbreak*D156B997F865034C257D1
+                    OP_PUSH_33_bytes
+                    034D00A2B430B6999974A29A168B56A12C0065A6CF9518
+                     *\postbreak*1DB3E209CD5B14332568
+                    OP_2 OP_CHECKMULTISIG]
+                }
+              ]
+      sequence_no: 4294967295
+    }
+  }
+  outputs_counter: 3
+  outputs: {
+    {
+      value: 3001780
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                1DBB37095E8EC83A0C37D4AF62778AA3035C8B7E, OP_EQUAL]
+    }
+    {
+      value: 10000000
+      script_length: 23
+      script: [OP_HASH160, OP_PUSH_20_bytes,
+                A17855C80692945036967371A75ACD35003DEDDC, OP_EQUAL]
+    }
+    {
+      value: 232075000
+      script_length: 25
+      script: [OP_DUP, OP_HASH160, OP_PUSH_20_bytes,
+                360973EAE34A60DD1EAB3D18705B9EF1C531B57F,
+                OP_EQUALVERIFY, OP_CHECKSIG]
+    }
+  }
+  lock_time: 0
+}
+\end{lstlisting}
+
+First three inputs belong to the oracle, this money come from transactions
+  outside the protocol.
+And we can see the input of this transactions is the required data for a
+  Pay to Public Key Hash, the public key and its corresponding signature.
+
+The fourth input is spending the fourth (index 3) output from the Bet Promise
+  transaction.
+It contains the output script requesting both players signatures using the
+  OP\_CHECKMULTISIG opcode.
+It also contains the two required signatures.
+
+The first output moves the money to a joint account controlled by both players
+  and the oracle.
+
+The second output is the two answers penalty deposit.
+
+The third output is the oracle's change, it gives the non used money back to
+  the oracle.
+
+\subsection{Bet}
+
+\begin{lstlisting}
+{
+  version: 2
+  inputs counter: 7
+  inputs: {
+    {
+      prev_tx_hash: 2138072E6593FFBFECAB73D9F2B819E84274DAA78811DD
+                      *\postbreak*54D994DF0972EBB657
+      prev_idx: 1
+      script_length: 227
+      script: [OP_PUSH_71_bytes
+                3044022069A810EBE1EEF38E7D4EC7606A5B98A2FAC417B3A1
+                 *\postbreak*7C012EA3249316AF5A6FD4022067F532EAE45500B6B0FA
+                 *\postbreak*C8C42FE53E312406706FA2CEF47F11DD4567D0A517
+                 *\postbreak*[ALL]
+                OP_1 OP_PUSH_71_bytes
+                30440220160EC827ECE0FD655F17D3C157C9BFAFF36ADF1CEB
+                 *\postbreak*23640E47B67D02E0B26A7802205ADE0BE3833FBD6E2B8A
+                 *\postbreak*C37A4991A7F6954F1962E2CEDA86A824B9C65025BB
+                 *\postbreak*[ALL]
+                OP_PUSH_80_bytes
+                {
+                  [OP_PUSH_33_bytes
+                   02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2CD1
+                    *\postbreak*56B997F865034C257D1
+                   OP_CHECKSIGVERIFY
+                   OP_IF
+                     OP_PUSH_33_bytes
+                     034D00A2B430B6999974A29A168B56A12C0065A6CF95
+                      *\postbreak*181DB3E209CD5B14332568
+                     OP_CHECKSIGVERIFY
+                   OP_ELSE
+                     OP_PUSH_3_bytes FA0140
+                     OP_CHECKSEQUENCEVERIFY OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                }
+              ]
+      sequence_no: 18446744073709551615
+    }
+    {
+      prev_tx_hash: 2138072E6593FFBFECAB73D9F2B819E84274DAA78811DD
+                      *\postbreak*54D994DF0972EBB657
+      prev_idx: 2
+      script_length: 227
+      script: [OP_PUSH_71_bytes
+                304402202C6CFD8F24F24C093F37A7C00C983E0530F44F038B
+                 *\postbreak*CC0D88DCF8F1906681A2B8022065C689F5AF3C0B81F719
+                 *\postbreak*816A19228217E592588EFC0EA9B900BF57C8FA6FCF
+                 *\postbreak*[ALL]
+                OP_1 OP_PUSH_71_bytes
+                304402202B23B5CF5B175225BCD571CB5384C1E0AE8D991771
+                 *\postbreak*DFF56B3C65825C840D19DF02204677B925F2F0DC8AD860
+                 *\postbreak*22867A005FF2F61F4DB642D7A12FA3815FF5EAE701
+                 *\postbreak*[ALL]
+                OP_PUSH_80_bytes
+                {
+                  [OP_PUSH_33_bytes
+                   034D00A2B430B6999974A29A168B56A12C0065A6CF95181
+                    *\postbreak*DB3E209CD5B14332568
+                   OP_CHECKSIGVERIFY
+                   OP_IF
+                     OP_PUSH_33_bytes
+                     02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2C
+                      *\postbreak*D156B997F865034C257D1
+                     OP_CHECKSIGVERIFY
+                   OP_ELSE
+                     OP_PUSH_3_bytes FA0140
+                     OP_CHECKSEQUENCEVERIFY
+                     OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                 }
+              ]
+      sequence_no: 18446744073709551615
+    }
+    {
+      prev_tx_hash: 9EF6EFAD5B2C9EF387D19D878DA83E9743FAAE0A235BF4
+                      *\postbreak*8B049D9C86CB84F84A
+      prev_idx: 0
+      script_length: 337
+      script: [OP_0 OP_PUSH_71_bytes
+                3044022025E3CB3C98561F4E96E63A992895015531CE029B64
+                 *\postbreak*2D4E64F3D0A6D606E4302502200A9A9CDC8C7B9D19C81D
+                 *\postbreak*8AEB51DEDE329FE710C5877E3B923BF8B58C2ED678
+                 *\postbreak*[ALL]
+                OP_PUSH_71_bytes
+                304402203B778E24A9E64161925AC8C6D47937250E47AE251C
+                 *\postbreak*B3D47FFB4EE01F0D6DC96202205DB43C82081391471D28
+                 *\postbreak*20B530D51CB27B90B187B22FC8F775F5E5CEAD7307
+                 *\postbreak*[ALL]
+                OP_1 OP_PUSH_72_bytes
+                3045022100C8CD147FC265CF5A1A7AE63EE89070C308D1A54A
+                 *\postbreak*0885F6048556B76F1CFA0D95022039141CBDA7D289A467
+                 *\postbreak*8F296C4687AA46CAA9B1887CC9BF31FCB6705052F37E
+                 *\postbreak*[ALL]
+                OP_PUSH_116_bytes
+                {
+                  [OP_PUSH_33_bytes
+                   03E4BAB917EA0BD852820237A59595CB3B06F9492EF6EC5
+                    *\postbreak*BEC16F5A89B5717E1F2
+                   OP_CHECKSIGVERIFY
+                   OP_IF
+                     OP_2
+                     OP_PUSH_33_bytes
+                     02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2C
+                      *\postbreak*D156B997F865034C257D1
+                     OP_PUSH_33_bytes
+                     034D00A2B430B6999974A29A168B56A12C0065A6CF951
+                      *\postbreak*81DB3E209CD5B14332568
+                     OP_2
+                     OP_CHECKMULTISIGVERIFY
+                   OP_ELSE
+                     OP_PUSH_3_bytes FA0140
+                     OP_CHECKSEQUENCEVERIFY
+                     OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                }
+              ]
+      sequence_no: 18446744073709551615
+    }
+    {
+      prev_tx_hash: FBBEC4193E0B7BB96208BB7CC5EA3834D324E422CDA367
+                      *\postbreak*E57C65511E9696D810
+      prev_idx: 0
+      script_length: 336
+      script: [OP_0 OP_PUSH_71_bytes
+                30440220266A8174C9A75DA1C8FC7A43276B8FF2FEA79F87A9
+                 *\postbreak*B9D10141729E0FA685A4CD0220316F6FBE91934C236BD4
+                 *\postbreak*608BB80C67AEFADCFD67F5C177039A70BF5A292380
+                 *\postbreak*[ALL]
+                OP_PUSH_71_bytes
+                304402204C6A3C1E25615C2BF7B33F5637C78C24A1E1E33880
+                 *\postbreak*6675DC2B1905AFBCC2A0630220092950399A27279FA952
+                 *\postbreak*71ABE31C3F4D370853649665C69093016EDE6E9054
+                 *\postbreak*[ALL]
+                OP_1 OP_PUSH_71_bytes
+                304402201501B998021EF8B77884EF66931B9B3B024021CAB0
+                 *\postbreak*EE7FA98A0085D79EEF0180022016BBA25B58C5D66AECC0
+                 *\postbreak*431144B722528A587C1005EA4EBD83EA866DA95576
+                 *\postbreak*[ALL]
+                OP_PUSH_116_bytes
+                {
+                  [OP_PUSH_33_bytes
+                   03C26AADD6B66332134182E8FCA8C238A7C24448D43C368
+                    *\postbreak*860BF1C7488F3CDC171
+                   OP_CHECKSIGVERIFY
+                   OP_IF
+                     OP_2
+                     OP_PUSH_33_bytes
+                     02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2C
+                      *\postbreak*D156B997F865034C257D1
+                     OP_PUSH_33_bytes
+                     034D00A2B430B6999974A29A168B56A12C0065A6CF951
+                      *\postbreak*81DB3E209CD5B14332568
+                     OP_2
+                     OP_CHECKMULTISIGVERIFY
+                   OP_ELSE
+                     OP_PUSH_3_bytes FA0140
+                     OP_CHECKSEQUENCEVERIFY
+                     OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                }
+              ]
+      sequence_no: 18446744073709551615
+    }
+    {
+      prev_tx_hash: 3F32A95A1F811F2DF13192B1EB09C48C2C53491ADF7E9C
+                      *\postbreak*9D5152FB64ECCE4758
+      prev_idx: 0
+      script_length: 336
+      script: [OP_0 OP_PUSH_71_bytes
+                3044022069269B2D9053B13EDEA05F8A2726ADDE9DB8EE36DC
+                 *\postbreak*E20BE9F80A3C4FF02C3EC702202018BA6BACF254AF9183
+                 *\postbreak*426C668C2EE5FCBAF17A062EAF3EAFE7D529697FA8
+                 *\postbreak*[ALL]
+                OP_PUSH_71_bytes
+                304402202B43221C29EF9A32048BC883BC91E8BEEBF03EB300
+                 *\postbreak*BEDA73B2790364C496A06E02204321EAED90C7A06518C6
+                 *\postbreak*E6FE497786A6ED4B07EA7D9EB22E5745B137E98C2C
+                [ALL]
+                OP_1 OP_PUSH_71_bytes
+                30440220554BF72107A0F64007E0C36D38FBDE9C82FE6E4B70
+                 *\postbreak*56482FE7B23009A14AFC76022001BC85C822F49EBAC44E
+                 *\postbreak*37DF62414AD0A36D1DDAAE22B5911302BFD735FD49
+                [ALL]
+                OP_PUSH_116_bytes
+                {
+                  [OP_PUSH_33_bytes
+                   034D3259B9F364B8642A7E5937BD1C678E73C8353B0D525
+                    *\postbreak*FF4C3181ADDE1CCA95B
+                   OP_CHECKSIGVERIFY
+                   OP_IF
+                     OP_2
+                     OP_PUSH_33_bytes
+                     02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2C
+                      *\postbreak*D156B997F865034C257D1
+                     OP_PUSH_33_bytes
+                     034D00A2B430B6999974A29A168B56A12C0065A6CF951
+                      *\postbreak*81DB3E209CD5B14332568
+                     OP_2
+                     OP_CHECKMULTISIGVERIFY
+                   OP_ELSE
+                     OP_PUSH_3_bytes FA0140
+                     OP_CHECKSEQUENCEVERIFY
+                     OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                }
+              ]
+      sequence_no: 18446744073709551615
+    }
+    {
+      prev_tx_hash: 9DBCE4D777148100FA1D7E11B0F6FA568413601B24948F
+                      *\postbreak*598D67036BF9BADB3B
+      prev_idx: 0
+      script_length: 337
+      script: [OP_0 OP_PUSH_71_bytes
+                3044022000DBD27D25C4BF0E1E1E2493DB3309AEC5F181288D
+                 *\postbreak*1B6925463C93B7A06E1F730220293A8F9652A374E59E9D
+                 *\postbreak*09CC129DD5753D83F811FE42E6B4096F4E6FCA1DDC
+                 *\postbreak*[ALL]
+                OP_PUSH_71_bytes
+                3044022016BA7E45A2D6A8174DE2A0476FA7A0E40C853CE793
+                 *\postbreak*F71BDB5839FA824C253E1902206AEF00B3DD3EA8DCEBB1
+                 *\postbreak*BF4B6741D28254A9384F11F72560BB63EC4E80570E
+                 *\postbreak*[ALL]
+                OP_1 OP_PUSH_72_bytes
+                30450221009BD014D23E09693DE13CBE20CABCE8D341D22792
+                 *\postbreak*0D2884AC43584CC4770CBE3A022008A4D78E48620B56B5
+                 *\postbreak*148AC4CC214D962127DE10DD4977F447698D0FEE8C1C
+                 *\postbreak*[ALL]
+                OP_PUSH_116_bytes
+                {
+                  [OP_PUSH_33_bytesi
+                   03840940CAB26409E8239C463655A4668108FA7C3B5F2A4
+                    *\postbreak*F7FAFFD2C4D00047247
+                   OP_CHECKSIGVERIFY
+                   OP_IF
+                     OP_2
+                     OP_PUSH_33_bytes
+                     02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2C
+                      *\postbreak*D156B997F865034C257D1
+                     OP_PUSH_33_bytes
+                     034D00A2B430B6999974A29A168B56A12C0065A6CF951
+                      *\postbreak*81DB3E209CD5B14332568
+                     OP_2 OP_CHECKMULTISIGVERIFY
+                   OP_ELSE
+                     OP_PUSH_3_bytes FA0140
+                     OP_CHECKSEQUENCEVERIFY
+                     OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                }
+              ]
+      sequence_no: 18446744073709551615
+    }
+    {
+      prev_tx_hash: 66AFA218E07ABE0D8242666FF170522F1CCED81006A1A3
+                      *\postbreak*F9CF0E10808749F89E
+      prev_idx: 0
+      script_length: 338
+      script: [OP_0 OP_PUSH_71_bytes
+                304402204CE28022808810B4DF1FEC09F5D14CB7369BCAB67D
+                 *\postbreak*320C23F5CEE468484B1CF102202C2D4CBCB7E917D49160
+                 *\postbreak*57DAA5B19F807C28FDBA7BD487FC9E87C2894F4EB2
+                 *\postbreak*[ALL]
+                OP_PUSH_72_bytes
+                3045022100D624642E9EE4FD9E30ACA11579BD86B4646E846E
+                 *\postbreak*2E7619E82C24D2E602A2F82F0220054972431AB9F49FA7
+                 *\postbreak*1D345DD2C638ED49CCBE540A4F42F5E354293DDF5E4F
+                 *\postbreak*[ALL]
+                OP_1 OP_PUSH_72_bytes
+                3045022100CE64EBBCC4D1125A59A5A989C69777051E840685
+                 *\postbreak*A4094D03411867192E072B1C02200D1E53F93EA142968C
+                 *\postbreak*ABDE879C599F465EBA818094FF4D867A7BEC6C13B048
+                 *\postbreak*[ALL]
+                OP_PUSH_116_bytes
+                {
+                  [OP_PUSH_33_bytes
+                   0320E9F9ED3209E2A2552354FDD632245B13A0019B067EE
+                    *\postbreak*4537ECFD9C6CCC17582
+                   OP_CHECKSIGVERIFY
+                   OP_IF
+                     OP_2
+                     OP_PUSH_33_bytes
+                     02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2C
+                      *\postbreak*D156B997F865034C257D1
+                     OP_PUSH_33_bytes
+                     034D00A2B430B6999974A29A168B56A12C0065A6CF95181DB3E209CD5B14332568
+                     OP_2
+                     OP_CHECKMULTISIGVERIFY
+                   OP_ELSE
+                     OP_PUSH_3_bytes FA0140
+                     OP_CHECKSEQUENCEVERIFY
+                     OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                }
+              ]
+      sequence_no: 18446744073709551615
+    }
+  }
+  outputs_counter: 12
+  outputs: {
+    {
+      value: 92281150
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes DB462EBE7EA4EA37B33C55A1B2F0C248D0A09EDE
+                OP_EQUAL]
+    }
+    {
+      value: 92281150
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes 2F94430868831770263A816A38DB1CAB1CACC6C1
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+               OP_PUSH_20_bytes C51CC859AAF8964EC4542B6A2325A1313CA5E528
+               OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes 4633E6CCC1C019D443EF2D8B07B626A1476C086B
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes 978CD4A4FC0E1E3D6837466F5ABD0729AF487A07
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes 5D1CF6559FCB6ADB8752AA2F25AE6BB71FC7E798
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes 753C630FA29D3DB021B3447E27B181378F5B4B1D
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes 6259C5769F46E4450B5F1BF37A96CF7AD1F67446
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes E28F8576E8785436E0E181A72E2B5A82E3A44D10
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes FED90167EA434BDFCFF57200EBFF36F8378B9149
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes 650261902037C28A9B79A2ADAC4F7C347F01F920
+                OP_EQUAL]
+    }
+    {
+      value: 3000000
+      script_length: 23
+      script: [OP_HASH160
+                OP_PUSH_20_bytes F40AA165879099585B01896A7EB07D24CCD65F97
+                OP_EQUAL]
+    }
+  }
+  lock_time: 0
+}
+\end{lstlisting}
+
+First two inputs spend the the second and third output at the Bet Promise
+  transaction.
+They include each player's signature and the output script.
+If we look closely, the output script is symmetric, as seen in
+  table~\ref{tx:bet_promise}.
+We can see the main difference is the position of each player's public
+  key.
+Other interesting data to notice is the "FA0140" constant that appears,
+  it is the \timeout{Bet}\footnote{The interpretation of this bytes can
+    be found at Bitcoin Improvement Proposal 0112. %
+    https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki}.
+
+Next five inputs are the money coming from each oracle's enrollment.
+At this inputs we can see three signatures are used, both players and the
+  corresponding oracle.
+We can see two of the public keys are repeated in the previous inputs, however
+  the signature provided for them are not equal.
+This is because the way Bitcoin specify transactions are signed: When signing a
+  Pay To Script Hash all others input's scripts are set emptied.
+And the one being sign is set to the output's script the input spends.
+This is how Bitcoin ensures signatures are tied to its input.
+
+\subsection{Oracle Answer}
+
+\begin{lstlisting}
+{
+  version: 2
+  inputs counter: 1
+  inputs: {
+    {
+      prev_tx_hash: 9CAA0B7F15D18DAC9034DB114452ACD405C53B4BB1C20C
+                      *\postbreak*CCE0A7C6ADC0CF226A
+      prev_idx: 2
+      script_length: 269
+      script: [OP_PUSH_22_bytes
+                1AE3DB90D7B53CB9C1173900C356AE2D27CFB11B68EB
+                OP_1 OP_PUSH_71_bytes
+                30440220737C8D9FBEC9E236CC29A4A39D8C9AE157B4EC591E
+                 *\postbreak*09B92A1093CD0C5D495E4E02201FF11CB6D5EFDFE9CA9D
+                 *\postbreak*16BA4FD35623C634F0E7942D97B5D9EDB411B3B0E4
+                 *\postbreak*[ALL]
+                OP_1
+                OP_PUSH_170_bytes
+                {
+                  [OP_IF
+                     OP_PUSH_33_bytes
+                      03E4BAB917EA0BD852820237A59595CB3B06F9492EF
+                      *\postbreak*6EC5BEC16F5A89B5717E1F2
+                      OP_CHECKSIGVERIFY
+                      OP_PUSH_3_bytes FA0140
+                      OP_CHECKSEQUENCEVERIFY
+                      OP_DROP
+                      OP_IF
+                        OP_HASH160
+                        OP_PUSH_20_bytes
+                        50918176ACCC76AFA983FBC196F72A13169E3706
+                        OP_EQUALVERIFY
+                      OP_ELSE
+                        OP_HASH160
+                        OP_PUSH_20_bytes
+                        CB2349648A50A14AF307D60946B36299D323C58B
+                        OP_EQUALVERIFY
+                      OP_ENDIF
+                   OP_ELSE
+                     OP_PUSH_33_bytes
+                      02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2
+                       *\postbreak*CD156B997F865034C257D1
+                      OP_CHECKSIGVERIFY
+                      OP_PUSH_33_bytes
+                      034D00A2B430B6999974A29A168B56A12C0065A6CF95
+                       *\postbreak*181DB3E209CD5B14332568
+                      OP_CHECKSIGVERIFY
+                      OP_PUSH_3_bytes 320240
+                      OP_CHECKSEQUENCEVERIFY
+                      OP_DROP
+                   OP_ENDIF
+                   OP_1]
+                }
+              ]
+      sequence_no: 4194810
+    }
+  }
+  outputs_counter: 1
+  outputs: {
+    {
+      value: 2950160
+      script_length: 25
+      script: [OP_DUP, OP_HASH160
+                OP_PUSH_20_bytes
+                360973EAE34A60DD1EAB3D18705B9EF1C531B57F
+                OP_EQUALVERIFY
+                OP_CHECKSIG]
+    }
+  }
+  lock_time: 0
+}
+\end{lstlisting}
+
+The first input of this transaction is giving a vote for winner to the first
+  player.
+The value pushed is the 22-byte secret which hash is expected by the
+  output script at the nested if-else block.
+We can see there are two options in this block, they only differ in the hash
+  expected.
+They represent the vote for each player, and both have the same validity for
+  this script.
+The second branch for the output script (not used by this transaction) requires
+  both players' signatures and to be submitted after the timeout "320240",
+  corresponding to \timeout{Reply}.
+At posting this transaction the oracle makes public its vote, after the
+  required number of oracles does this, the winner can take these hash and
+  redeem its prize.
+
+The output of this transaction is a simple Pay To Public Key Hash, where the
+  oracles has decided to move its payment.
+
+\subsection{Winner Prize Collect}
+\begin{lstlisting}
+{
+  version: 2
+  inputs counter: 2
+  inputs: {
+    {
+      prev_tx_hash: 17640D0C824C575BE3F393491B32D1B585E5CA28F36BDB
+                      *\postbreak*2D2F98EFB3006B4535
+      prev_idx: 0
+      script_length: 567
+      script: [OP_PUSH_71_bytes
+                304402207DC931CE42CCBD552FFCD75D57AF6A5E49B204ACAA
+                 *\postbreak*55AAB145C9181E44BA6B4D02207A031F9AF4EF605163A6
+                 *\postbreak*C364660E6F7F06E49968823FF76679AF46CB1CFA5D
+                 *\postbreak*[ALL]
+                OP_PUSH_33_bytes
+                02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2CD156B
+                 *\postbreak*997F865034C257D1
+                OP_PUSH_1_bytes 51
+                OP_PUSH_19_bytes
+                3AFFA9D769B5807CE4F9764771A0F966CE02A6
+                OP_PUSH_23_bytes
+                5FDDD56DB498CFB29C514B3A27A6F685FF40449E9974CA
+                OP_PUSH_21_bytes
+                5A0A3C2DB3CB1DE19C0896FED80B4335FB6C503194
+                OP_1
+                OP_1
+                OP_PUSH_388_bytes
+                {
+                  [OP_IF
+                     OP_IF
+                       OP_0
+                       OP_TOALTSTACK
+                       OP_HASH160
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       010E7DAFABDD0E8EED77B2C1F715F3071F710D3E
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       4D2021B46ED7B29EFC20AFB4C771AAE341AEBE5D
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       774594000150D5935E3B1F63187EFCEB1E36CB83
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       590F74932E25BE9A958FD19D39BE52E2A4CB9D3F
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       276C972344745AADA362D4CECA7A25301EE47D86
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DROP
+                       OP_FROMALTSTACK
+                       OP_2
+                       OP_LESSTHANOREQUAL
+                       OP_VERIFY
+                     OP_ELSE
+                       OP_PUSH_3_bytes
+                       FA0140
+                       OP_CHECKSEQUENCEVERIFY
+                       OP_DROP
+                     OP_ENDIF
+                     OP_DUP
+                     OP_HASH160
+                     OP_PUSH_20_bytes
+                     66E2E39AB1C5E98A8180DE876CC4743D3292E14A
+                     OP_EQUALVERIFY
+                     OP_CHECKSIG
+                   OP_ELSE
+                     OP_0
+                     OP_TOALTSTACK
+                     OP_HASH160
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     99B6793C6944C55AB1195957545746055FEA0593
+                     OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     2A3FB2A0E3DF3219579F5AF968A7AE118C7287FE
+                     OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     2C1771354527252791F83A78AC5CEBD7427ACB59
+                     OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     A843DBB79C247128B7BD223A80CA3551201515A3
+                     OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     32FB95E3F35819519703A58B016F02C9C4943BFC
+                     OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                     OP_DROP
+                     OP_FROMALTSTACK
+                     OP_2
+                     OP_LESSTHANOREQUAL
+                     OP_VERIFY
+                     OP_DUP
+                     OP_HASH160
+                     OP_PUSH_20_bytes
+                     4C48CA1BE269DF0539BFD40D27AC797101B7FFC9
+                     OP_EQUALVERIFY
+                     OP_CHECKSIG
+                   OP_ENDIF]
+                }
+               ]
+      sequence_no: 4194810
+    }
+    {
+      prev_tx_hash: 17640D0C824C575BE3F393491B32D1B585E5CA28F36BDB
+                      *\postbreak*2D2F98EFB3006B4535
+      prev_idx: 1
+      script_length: 567
+      script: [OP_PUSH_72_bytes
+                3045022100DDC7EE0D84A2B67A8EE5CF6328DE45776F518705
+                 *\postbreak*617C3E817FD368A74C6FC00E0220013496B5C3E7925887
+                 *\postbreak*E32FB1253E2E1ECFC4A8D17AA6586BF84AF3F8A7EE97
+                 *\postbreak*[ALL]
+                OP_PUSH_33_bytes
+                02EF5471E4BB8B2B6709C700057DBA30F2F9D418ACD2CD156B
+                 *\postbreak*997F865034C257D1
+                OP_PUSH_1_bytes 51
+                OP_PUSH_19_bytes
+                3AFFA9D769B5807CE4F9764771A0F966CE02A6
+                OP_PUSH_23_bytes
+                5FDDD56DB498CFB29C514B3A27A6F685FF40449E9974CA
+                OP_PUSH_21_bytes
+                5A0A3C2DB3CB1DE19C0896FED80B4335FB6C503194
+                OP_0
+                OP_PUSH_388_bytes
+                {
+                  [OP_IF
+                     OP_IF
+                       OP_0
+                       OP_TOALTSTACK
+                       OP_HASH160
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       99B6793C6944C55AB1195957545746055FEA0593
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       2A3FB2A0E3DF3219579F5AF968A7AE118C7287FE
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       2C1771354527252791F83A78AC5CEBD7427ACB59
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       A843DBB79C247128B7BD223A80CA3551201515A3
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       32FB95E3F35819519703A58B016F02C9C4943BFC
+                       OP_EQUAL
+                       OP_IF
+                         OP_DROP
+                         OP_HASH160
+                       OP_ELSE
+                         OP_FROMALTSTACK
+                         OP_1ADD
+                         OP_TOALTSTACK
+                       OP_ENDIF
+                       OP_DROP
+                       OP_FROMALTSTACK
+                       OP_2
+                       OP_LESSTHANOREQUAL
+                       OP_VERIFY
+                     OP_ELSE
+                       OP_PUSH_3_bytes
+                       FA0140
+                       OP_CHECKSEQUENCEVERIFY
+                       OP_DROP
+                     OP_ENDIF
+                     OP_DUP
+                     OP_HASH160
+                     OP_PUSH_20_bytes
+                     4C48CA1BE269DF0539BFD40D27AC797101B7FFC9
+                     OP_EQUALVERIFY
+                     OP_CHECKSIG
+                   OP_ELSE
+                     OP_0
+                     OP_TOALTSTACK
+                     OP_HASH160
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     010E7DAFABDD0E8EED77B2C1F715F3071F710D3E
+                     OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       4D2021B46ED7B29EFC20AFB4C771AAE341AEBE5D
+                       OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       774594000150D5935E3B1F63187EFCEB1E36CB83
+                       OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       590F74932E25BE9A958FD19D39BE52E2A4CB9D3F
+                       OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                       OP_DUP
+                       OP_PUSH_20_bytes
+                       276C972344745AADA362D4CECA7A25301EE47D86
+                       OP_EQUAL
+                     OP_IF
+                       OP_DROP
+                       OP_HASH160
+                     OP_ELSE
+                       OP_FROMALTSTACK
+                       OP_1ADD
+                       OP_TOALTSTACK
+                     OP_ENDIF
+                       OP_DROP
+                       OP_FROMALTSTACK
+                       OP_2
+                       OP_LESSTHANOREQUAL
+                       OP_VERIFY
+                       OP_DUP
+                       OP_HASH160
+                       OP_PUSH_20_bytes
+                       66E2E39AB1C5E98A8180DE876CC4743D3292E14A
+                       OP_EQUALVERIFY
+                       OP_CHECKSIG
+                   OP_ENDIF]
+                }
+6363006BA9761499B6793C6944C55AB1195957545746055FEA0593876375A9676C8B6B6876142A3FB2A0E3DF3219579F5AF968A7AE118C7287FE876375A9676C8B6B6876142C1771354527252791F83A78AC5CEBD7427ACB59876375A9676C8B6B687614A843DBB79C247128B7BD223A80CA3551201515A3876375A9676C8B6B68761432FB95E3F35819519703A58B016F02C9C4943BFC876375A9676C8B6B68756C52A1696703FA0140B2756876A9144C48CA1BE269DF0539BFD40D27AC797101B7FFC988AC67006BA97614010E7DAFABDD0E8EED77B2C1F715F3071F710D3E876375A9676C8B6B6876144D2021B46ED7B29EFC20AFB4C771AAE341AEBE5D876375A9676C8B6B687614774594000150D5935E3B1F63187EFCEB1E36CB83876375A9676C8B6B687614590F74932E25BE9A958FD19D39BE52E2A4CB9D3F876375A9676C8B6B687614276C972344745AADA362D4CECA7A25301EE47D86876375A9676C8B6B68756C52A16976A91466E2E39AB1C5E98A8180DE876CC4743D3292E14A88AC68
+]
+      sequence_no: 4194810
+    }
+  }
+  outputs_counter: 1
+  outputs: {
+    {
+      value: 184385480
+      script_length: 25
+      script: [OP_DUP, OP_HASH160, OP_PUSH_20_bytes, 66E2E39AB1C5E98A8180DE876CC4743D3292E14A, OP_EQUALVERIFY, OP_CHECKSIG]
+    }
+  }
+  lock_time: 0
+}
+\end{lstlisting}

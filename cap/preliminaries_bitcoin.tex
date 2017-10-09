@@ -179,7 +179,7 @@ As expected in a protocol with many participants, there are times where more
 
 \begin{figure}
 	\centering
-	\def\svgwidth{\columnwidth}
+	\def\svgwidth{0.7\columnwidth}
 	\includesvg{chain_fork}
 	\caption{A fork in the blockchain.}
 	\label{fig:chain_fork}
@@ -250,8 +250,6 @@ The script is evaluated using the scriptSig as input. If the transaction willing
 
 \begin{table}[tbp]
   \small
-    \caption{Script evaluation to check a P2PKH transaction.}
-    \label{tab:p2pkh_exec}
     \begin{tabularx}{\textwidth}{| c | X |}
     \hline
 	    \thead{Stack} & \thead{Script} \\
@@ -298,6 +296,8 @@ The script is evaluated using the scriptSig as input. If the transaction willing
 	  \makecell{True} & \\
 	\hline
     \end{tabularx}
+    \caption{Script evaluation to check a P2PKH transaction.}
+    \label{tab:p2pkh_exec}
   % small
 \end{table}
 
@@ -326,8 +326,6 @@ This script is pretty simple, it takes the first element of the stack,
 
 \begin{table}[tbp]
   \small
-    \caption{Script evaluation of a P2SH transaction.}
-	\label{tab:p2sh_exec}
 	\begin{tabularx}{\textwidth}{| c | X |}
 	  \hline
 	    \thead{Stack} & \thead{Script} \\
@@ -366,6 +364,8 @@ This script is pretty simple, it takes the first element of the stack,
 	    \makecell{True} & \\
 	  \hline
 	\end{tabularx}
+    \caption{Script evaluation of a P2SH transaction.}
+	\label{tab:p2sh_exec}
   % \end small
 \end{table}
 
