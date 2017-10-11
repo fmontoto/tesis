@@ -702,84 +702,84 @@ The third output is the oracle's change, it gives the non used money back to
       value: 92281150
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes DB462EBE7EA4EA37B33C55A1B2F0C248D0A09EDE
+                OP_PUSH_20_bytes E5A86D80F148897C3813C3981E9940CF328AAC49
                 OP_EQUAL]
     }
     {
       value: 92281150
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes 2F94430868831770263A816A38DB1CAB1CACC6C1
+                OP_PUSH_20_bytes 2DCCF04275EB961DD4ED9E87EBC9B948C88E70E1
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-               OP_PUSH_20_bytes C51CC859AAF8964EC4542B6A2325A1313CA5E528
+               OP_PUSH_20_bytes B8ED98E1F64E5A6278093054F201B1704B5D4519
                OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes 4633E6CCC1C019D443EF2D8B07B626A1476C086B
+                OP_PUSH_20_bytes D48B76D17895B4B8D6364F60FE3E0D734F3D8958
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes 978CD4A4FC0E1E3D6837466F5ABD0729AF487A07
+                OP_PUSH_20_bytes E84ABC5DAEBF11FFEC60E479ED8C17651837008D
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes 5D1CF6559FCB6ADB8752AA2F25AE6BB71FC7E798
+                OP_PUSH_20_bytes 56D2E9575A80B96BFA3B9B1435A91DEFCBE77781
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes 753C630FA29D3DB021B3447E27B181378F5B4B1D
+                OP_PUSH_20_bytes 7C4DCB244DA6DF5D472A7F88BA2C4D21867E99F7
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes 6259C5769F46E4450B5F1BF37A96CF7AD1F67446
+                OP_PUSH_20_bytes CD5FA2DEF69CA02FB959FA79663C7D9366B1BAE1
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes E28F8576E8785436E0E181A72E2B5A82E3A44D10
+                OP_PUSH_20_bytes 632C59C13A5D3CE501CD772242D1E1278B0CE456
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes FED90167EA434BDFCFF57200EBFF36F8378B9149
+                OP_PUSH_20_bytes 9D2E8D88757AA4227B72EA2111201909305B9DFA
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes 650261902037C28A9B79A2ADAC4F7C347F01F920
+                OP_PUSH_20_bytes 639C1223300F80B287AF33819512EF861D7027E5
                 OP_EQUAL]
     }
     {
       value: 3000000
       script_length: 23
       script: [OP_HASH160
-                OP_PUSH_20_bytes F40AA165879099585B01896A7EB07D24CCD65F97
+                OP_PUSH_20_bytes 8EA5E31EF1F503BAFB9CEF5B3C02F03C0DD945A9
                 OP_EQUAL]
     }
   }
@@ -903,7 +903,7 @@ At posting this transaction the oracle makes public its vote, after the
 The output of this transaction is a simple Pay To Public Key Hash, where the
   oracles has decided to move its payment.
 
-\subsection{Winner Prize Collect}
+\subsection{Winner Prize Collect}\label{app:winner_collect}
 \begin{lstlisting}
 {
   version: 2
@@ -1005,7 +1005,7 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
                        OP_VERIFY
                      OP_ELSE
                        OP_PUSH_3_bytes
-                       FA0140
+                       6A0240
                        OP_CHECKSEQUENCEVERIFY
                        OP_DROP
                      OP_ENDIF
@@ -1190,7 +1190,7 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
                        OP_VERIFY
                      OP_ELSE
                        OP_PUSH_3_bytes
-                       FA0140
+                       6A0240
                        OP_CHECKSEQUENCEVERIFY
                        OP_DROP
                      OP_ENDIF
@@ -1216,10 +1216,10 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
                        OP_1ADD
                        OP_TOALTSTACK
                      OP_ENDIF
-                       OP_DUP
-                       OP_PUSH_20_bytes
-                       4D2021B46ED7B29EFC20AFB4C771AAE341AEBE5D
-                       OP_EQUAL
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     4D2021B46ED7B29EFC20AFB4C771AAE341AEBE5D
+                     OP_EQUAL
                      OP_IF
                        OP_DROP
                        OP_HASH160
@@ -1228,10 +1228,10 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
                        OP_1ADD
                        OP_TOALTSTACK
                      OP_ENDIF
-                       OP_DUP
-                       OP_PUSH_20_bytes
-                       774594000150D5935E3B1F63187EFCEB1E36CB83
-                       OP_EQUAL
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     774594000150D5935E3B1F63187EFCEB1E36CB83
+                     OP_EQUAL
                      OP_IF
                        OP_DROP
                        OP_HASH160
@@ -1240,10 +1240,10 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
                        OP_1ADD
                        OP_TOALTSTACK
                      OP_ENDIF
-                       OP_DUP
-                       OP_PUSH_20_bytes
-                       590F74932E25BE9A958FD19D39BE52E2A4CB9D3F
-                       OP_EQUAL
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     590F74932E25BE9A958FD19D39BE52E2A4CB9D3F
+                     OP_EQUAL
                      OP_IF
                        OP_DROP
                        OP_HASH160
@@ -1252,10 +1252,10 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
                        OP_1ADD
                        OP_TOALTSTACK
                      OP_ENDIF
-                       OP_DUP
-                       OP_PUSH_20_bytes
-                       276C972344745AADA362D4CECA7A25301EE47D86
-                       OP_EQUAL
+                     OP_DUP
+                     OP_PUSH_20_bytes
+                     276C972344745AADA362D4CECA7A25301EE47D86
+                     OP_EQUAL
                      OP_IF
                        OP_DROP
                        OP_HASH160
@@ -1264,20 +1264,19 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
                        OP_1ADD
                        OP_TOALTSTACK
                      OP_ENDIF
-                       OP_DROP
-                       OP_FROMALTSTACK
-                       OP_2
-                       OP_LESSTHANOREQUAL
-                       OP_VERIFY
-                       OP_DUP
-                       OP_HASH160
-                       OP_PUSH_20_bytes
-                       66E2E39AB1C5E98A8180DE876CC4743D3292E14A
-                       OP_EQUALVERIFY
-                       OP_CHECKSIG
+                     OP_DROP
+                     OP_FROMALTSTACK
+                     OP_2
+                     OP_LESSTHANOREQUAL
+                     OP_VERIFY
+                     OP_DUP
+                     OP_HASH160
+                     OP_PUSH_20_bytes
+                     66E2E39AB1C5E98A8180DE876CC4743D3292E14A
+                     OP_EQUALVERIFY
+                     OP_CHECKSIG
                    OP_ENDIF]
                 }
-6363006BA9761499B6793C6944C55AB1195957545746055FEA0593876375A9676C8B6B6876142A3FB2A0E3DF3219579F5AF968A7AE118C7287FE876375A9676C8B6B6876142C1771354527252791F83A78AC5CEBD7427ACB59876375A9676C8B6B687614A843DBB79C247128B7BD223A80CA3551201515A3876375A9676C8B6B68761432FB95E3F35819519703A58B016F02C9C4943BFC876375A9676C8B6B68756C52A1696703FA0140B2756876A9144C48CA1BE269DF0539BFD40D27AC797101B7FFC988AC67006BA97614010E7DAFABDD0E8EED77B2C1F715F3071F710D3E876375A9676C8B6B6876144D2021B46ED7B29EFC20AFB4C771AAE341AEBE5D876375A9676C8B6B687614774594000150D5935E3B1F63187EFCEB1E36CB83876375A9676C8B6B687614590F74932E25BE9A958FD19D39BE52E2A4CB9D3F876375A9676C8B6B687614276C972344745AADA362D4CECA7A25301EE47D86876375A9676C8B6B68756C52A16976A91466E2E39AB1C5E98A8180DE876CC4743D3292E14A88AC68
 ]
       sequence_no: 4194810
     }
@@ -1287,9 +1286,44 @@ The output of this transaction is a simple Pay To Public Key Hash, where the
     {
       value: 184385480
       script_length: 25
-      script: [OP_DUP, OP_HASH160, OP_PUSH_20_bytes, 66E2E39AB1C5E98A8180DE876CC4743D3292E14A, OP_EQUALVERIFY, OP_CHECKSIG]
+      script: [OP_DUP OP_HASH160 OP_PUSH_20_bytes
+               66E2E39AB1C5E98A8180DE876CC4743D3292E14A
+               OP_EQUALVERIFY OP_CHECKSIG]
     }
   }
   lock_time: 0
 }
 \end{lstlisting}
+
+Inputs spend the first two outputs of the bet transaction.
+They contain the public key and the signature of the winner, and a majority
+  of the votes for this player.
+In this case we have 5 oracles, and the threshold is set to 3, so inputs include
+  three votes on its script, we can see these votes at the beginning of the
+  script.
+The large and repetitive script is one of the costs of using a non turing
+  complete language.
+Because there are no loops availables, we need to write everything explicitly,
+  like an unrolled loop.
+This script contains three main branches, one for the timeout case, where a new
+  constant is visible: "6A0240", which is the \timeout{Two Answers Penalty}.
+And one for each winner, we can see at both of them the 20-byte hash of the
+  expected votes.
+Most of the size in this output are these hash, in this case 10 of them, 2 per
+  each oracle participating.
+An interesting property of this transaction is all the signatures required are
+  generated by the winner, third parties are not required directly to redeem
+  the bet prize.
+
+The script implements an operation similar to a multi-sig check, but instead
+  of signatures it checks multiple hash.
+It works by testing the provided pre image candidates against the expected
+  hash, by hashing and then testing equality.
+Each time a pre image does not match a hash, we increase a counter stored in the
+  alt stack, at the end of the script we check this counter to be less than 2.
+The difference between the total number of oracles and the threshold.
+It requires ordering in the provided candidates, respecting the order hash are
+  written.
+
+The output is a Pay To Public Key Hash which moves the money to an account
+  controlled by the player.

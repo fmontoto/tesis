@@ -80,6 +80,17 @@ Which are not free anymore, for each byte we post in the blockchain within
   a transaction we are charged by the miner.
 This cost is discussed at section~\ref{sec:cost_analysis}
 
+A good example of this complexity is the transaction dumped at
+  section~\ref{app:winner_collect}.
+Bitcoin provides a multi-sig check function, which checks at least
+  threshold signatures of the provided public keys are provided.
+At the Bet transaction we need to implement our own version of this
+  language primitive, to get a multi-hash check function, which checks
+  at least threshold preimages are provided for the written hash.
+This transaction is hard to read as it can not be written using loops (because
+  the language does not support them), and even not used branches needs to be
+  included to match the original hash in the Bet transaction output.
+
 \colorbox{red}{Future work}
 We also see value in transforming the oracles in ``judges'', and instead of
   betting on an uncertain outcome, let the judges decide between players
