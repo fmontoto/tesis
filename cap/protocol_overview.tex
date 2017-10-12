@@ -8,16 +8,17 @@ In this subsection we present an overview before the full explanation of the
 \subsection{First part: Oracle selection}
 
 \begin{enumerate}
-  \item The first step is to compile a list of available oracles, as
-      decentralized database for this list we use the blockchain. Everyone
-      willing to be an oracle can send a transaction to register into the
-      blockchain. Players might agree in some filter to apply into this
-      compilation, as time of registration or if the oracle already
-      participated in a previous bet
-  \item Players negotiate bet parameters required for this step, as the number
-      of oracles to use.
+  \item The first step is to compile a list of available oracles, we use the
+      blockchain as decentralized database.
+      Everyone willing to be an oracle can send a transaction to register into
+      the blockchain.
+      Players can compile the list from all registered oracles or might apply
+      some filter; eg time of registration or if the oracle already participate
+      in a previous bet.
+  \item Players negotiate the bet parameters required for this step, as the
+      number of oracles to use.
   \item In order to decide which oracles to use, the oracles need to pick a
-      subset of the available oracles, they do this by running a distributed
+      subset of the list compiled, they do this by running a distributed
       coin tossing protocol.
     With this, they can be sure the list generated is a random subset of the
       full list. If the list is big enough, the chance of one user controlling
@@ -34,8 +35,8 @@ In this subsection we present an overview before the full explanation of the
   \item Players build, sign and send a transaction to the blockchain with the
       bet description, including the IDs of the oracles they want to decide the
       winner.
-    We call this transaction ``Bet promise'', as the players commit to the bet by
-      placing it. The wage is also on it.
+    We call this transaction ``Bet promise'', as the players commit to the bet
+      by placing it. The wage is also on it.
     The other purpose of this transaction is to invite the oracles to
       participate in the bet, we make its ID public so they can identify itself
       and inscribe to participate as oracles.

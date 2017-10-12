@@ -36,7 +36,7 @@
     \else
         \expandafter\@secondoftwo
     \fi
-    \@transactionoutputsend
+    {\@transactionoutputsend}%
     {\@transactionoutputsscript{#1}}%
 }
 \newcommand{\@transactionoutputsscript}[2]{%

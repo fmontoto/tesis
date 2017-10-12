@@ -25,10 +25,10 @@ We call this transaction ``\textit{Bet Promise}'', as it is a commitment from bo
     {0}{\footnotesize{OP\_RETURN \{Bet Channel, Oracle List, Bet hash\}}}
     {$\mathcal{P} - \fee{Bet Promise} / 2$}{(\signature{A} $\wedge$ \signature{B}) \\
                                                    $\vee$ \\
-                                            (\timeout{bet} $\wedge$ \signature{A}) }
+                                            (\timeout{Bet} $\wedge$ \signature{A}) }
     {$\mathcal{P} - \fee{Bet Promise} / 2$}{(\signature{A} $\wedge$ \signature{B}) \\
                                                    $\vee$ \\
-                                            (\timeout{bet} $\wedge$ \signature{B}) }
+                                            (\timeout{Bet} $\wedge$ \signature{B}) }
     {$c/n$}{(\signature{A} $\wedge$ \signature{B})}
     {\ldots }{\extra{n - 1}}
     \stopoutputs
@@ -54,7 +54,7 @@ The second and third outputs of this transaction moves most of the money into
   together.
 This represents the commitment to start the bet, as each one lock its own money
   under the other's will.
-In the case one of the players disappear, after \timeout{bet} the money can
+In the case one of the players disappear, after \timeout{Bet} the money can
   recovered by its owner.
 
 The outputs 3 to 3 + (n - 1) are a small portion of the money, used for the
@@ -82,7 +82,7 @@ When a oracle decides to participate, it builds and sends to the players its
   incription transaction, spending money from the \textit{Bet Promise}
   transaction:
 
-\transaction
+\transaction%
     {Oracle Inscription}{Oracle previous tx, Bet Promise}
     {Oracle previous tx}{$\alpha$}{$\sigma$}
     {Bet Promise}{3 + Oracle Index}{\signature{A} $\wedge$ \signature{B}}
@@ -94,7 +94,7 @@ When a oracle decides to participate, it builds and sends to the players its
     {[Two Answers Penalty]}{((\signature{A} $\vee$ \signature{B}) $\wedge$ %
                              ($AWins_o \wedge BWins_o$)) \\
                            $\vee$ \\
-                       (\signature{Oracle} $\wedge$ \timeout{two})}
+                       (\signature{Oracle} $\wedge$ \timeout{Two})}
     \stopoutputs
     {tx:oracle_inscription}
     {Oracle Inscription}
@@ -113,7 +113,7 @@ If the Bet transaction does not go into the blockchain, the oracle can claim
 The second one is a penalty to be charge if the oracle misbehaves.
 If the oracle reveals that player A and player B wins, this money can be taken
   by any player. Otherwise the money can be claimed back by the oracle after
-  \timeout{two}.
+  \timeout{Two}.
 Two Answers Penalty is the charge for voting twice, this must not be a small
   amount, as voting twice is the oracle's full responsibility.
 At this output the hash of the answers is revealed ($H(AWins_o), H(BWins_o)$),
@@ -149,16 +149,16 @@ Because inputs come from outputs controlled by all the participants, the
                           $\vee$ \\
          (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:g})) \\
                                     $\vee$ \\
-         (\signature{A} $\wedge$ \timeout{two})}
+         (\signature{A} $\wedge$ \timeout{Two})}
     {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
             - \fee{Oracle Inscription}) \\
             - 1/2 (\fee{Bet Promise} + \fee{Bet})}
-        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:ff})) \\
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:h})) \\
                           $\vee$ \\
-         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:gg})) \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:i})) \\
                                     $\vee$ \\
-         (\signature{B} $\wedge$ \timeout{two})}
+         (\signature{B} $\wedge$ \timeout{Two})}
     {[Oracle Payment]}{(\signature{o} $\wedge$ ($AWins_o \vee BWins_o$) %
                        $\wedge$ \timeout{Bet}) \\
                        $\vee$ \tikzmark{ini:b} \\
@@ -171,49 +171,56 @@ Because inputs come from outputs controlled by all the participants, the
                        ($BWins_o$ $\wedge$ ($AWins_{\hat{o}}$ %
                         $\wedge$ \tikzmark{ini:d} \dots) $\wedge$ \signature{A}) \\
                        $\vee$ \\
-                        \signature{o} $\wedge$ \timeout{undue}\tikzmark{ini:e}}
+                        \signature{o} $\wedge$ \timeout{Undue}\tikzmark{ini:e}}
     {\ldots}{\extra{n-1}}
     \stopoutputs
     {tx:bet}
     {Bet}
 
-\raisebox{31em}[0pt][0pt]{%
-        \hbox{\hspace{34em} \framebox[1.1\width]{\tikzmark{end:a}$\forall o \in $ Oracles}}
+\raisebox{33em}[0pt][0pt]{%
+    \hbox{\hspace{34em} \framebox[1.2\width]{%
+        \tikzmark{end:a}$\forall o \in $ Oracles}}
 }
 \raisebox{27em}[0pt][0pt]{%
-    \hbox{\hspace{35em}{\framebox[1\width]{%
-            \parbox{80\unitlength}{\tikzmark{end:e}For at least $m\\\tilde{o} \in $ Oracles}}}}
+    \hbox{\hspace{36em}{\framebox[1.1\width]{\parbox{80\unitlength}{%
+        \tikzmark{end_e}For at least $m\\\tilde{o} \in $ Oracles}}}}
 }
 \raisebox{19em}[0pt][0pt]{%
-        \hbox{\hspace{36em} \framebox[1.1\width]{\tikzmark{end:b}$\forall o \in $ Oracles}}
+    \hbox{\hspace{36em} \framebox[1.1\width]{%
+        \tikzmark{end:b}$\forall o \in $ Oracles}}
 }
-\raisebox{14em}[0pt][0pt]{%
-    \hbox{\hspace{35em}{\framebox[1\width]{%
-            \parbox{80\unitlength}{\tikzmark{end:c}For at least $m\\\hat{o} \in $ Oracles}}}}
+\raisebox{15em}[0pt][0pt]{%
+    \hbox{\hspace{36em}{\framebox[1\width]{\parbox{80\unitlength}{%
+        \tikzmark{end:c}For at least $m\\\hat{o} \in $ Oracles}}}}
 }
-\raisebox{10em}[0pt][0pt]{%
-        \hbox{\hspace{35em} \framebox[1.1\width]{\tikzmark{end:d}$\forall o \in $ Oracles}}
+\raisebox{12em}[0pt][0pt]{%
+        \hbox{\hspace{35em} \framebox[1.1\width]{%
+            \tikzmark{end_d}$\forall o \in $ Oracles}}
 }
 \begin{tikzpicture}[overlay, remember picture, yshift=.25\baselineskip,%
                     shorten >=.5pt, shorten <=.5pt]
-    \draw [->] ([bend left,xshift=17mm]{pic cs:ini:a}) [bend left, yshift=3mm, xshift=1mm] %
-                to ({pic cs:end:a});
-    \draw [->] ([bend right,xshift=22mm]{pic cs:ini:b}) [bend right, yshift=-3mm, xshift=1mm] %
-                to ({pic cs:end:b});
-    \draw [->] ([bend right,xshift=1mm, yshift=-2mm]{pic cs:ini:c}) [bend right, yshift=0mm, xshift=-2mm] %
-                to ({pic cs:end:c});
-    \draw [->] ([xshift=1mm, yshift=3mm]{pic cs:ini:d}) [yshift=-4mm, xshift=-2mm] %
-                to ({pic cs:end:c});
-    \draw [->] ([bend left,xshift=6mm, yshift=2mm]{pic cs:ini:e}) [bend left, yshift=0mm, xshift=-2mm] %
-                to ({pic cs:end:d});
-    \draw [->] ([bend left,xshift=-1mm, yshift=-3mm]{pic cs:ini:f}) [bend left, yshift=4mm, xshift=2mm] %
-                to ({pic cs:end:e});
-    \draw [->] ([bend right,xshift=-1mm, yshift=-2mm]{pic cs:ini:g}) [bend right, yshift=1mm, xshift=-2mm] %
-                to ({pic cs:end:e});
-    \draw [->] ([bend right,xshift=-1mm, yshift=-3mm]{pic cs:ini:ff}) [bend right, yshift=-2mm, xshift=-2mm] %
-                to ({pic cs:end:e});
-    \draw [->] ([bend right,xshift=-1mm, yshift=-2mm]{pic cs:ini:gg}) [bend right, yshift=-8mm, xshift=2mm] %
-                to ({pic cs:end:e});
+    \draw [->] [bend left] ([xshift=2mm]{pic cs:ini:a}) %
+        to ([xshift=-1mm,yshift=4mm]{pic cs:end:a});
+
+    \draw [->] [bend left]  ([xshift=-1mm, yshift=-3mm]{pic cs:ini:f}) %
+        to ([xshift=2mm, yshift=4mm]{pic cs:end_e});
+    \draw [->] [bend right] ([xshift=-1mm, yshift=-2mm]{pic cs:ini:g}) %
+        to ([xshift=-2mm, yshift=1mm]{pic cs:end_e});
+    \draw [->] [bend right] ([xshift=-1mm, yshift=-3mm]{pic cs:ini:h}) %
+        to ([xshift=-2mm, yshift=-2mm]{pic cs:end_e});
+    \draw [->] [bend right] ([xshift=-1mm, yshift=-2mm]{pic cs:ini:i}) %
+        to ([xshift=2mm, yshift=-8mm]{pic cs:end_e});
+
+    \draw [->] [bend right]([xshift=22mm]{pic cs:ini:b}) %
+        to ([xshift=-2mm, yshift=-1mm]{pic cs:end:b});
+
+    \draw [->] [bend right]([xshift=1mm, yshift=-2mm]{pic cs:ini:c}) %
+        to ([xshift=-2mm, yshift=0mm]{pic cs:end:c});
+    \draw [->] ([xshift=1mm, yshift=3mm]{pic cs:ini:d}) %
+        to([xshift=-2mm, yshift=-5mm]{pic cs:end:c});
+
+    \draw [->] [bend left]([xshift=6mm, yshift=2mm]{pic cs:ini:e}) %
+        to ([xshift=-2mm, yshift=0mm]{pic cs:end_d});
 \end{tikzpicture}
 
 The first two outputs are the prize, it can be spend by any of the two players'
