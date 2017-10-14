@@ -58,20 +58,20 @@ In the case one of the players disappear, after \timeout{Bet} the money can
   recovered by its owner.
 
 The outputs 3 to 3 + (n - 1) are a small portion of the money, used for the
-  oracle inscriptions.
+  oracle enrollments.
 This money does not includes a timeout because it is an small amount, if players
   are willing to pay the extra fee required to add this timeout, it can be
   added.
-This money is spend at the oracle inscription as commitment from the players to
+This money is spend at the oracle enrollment as commitment from the players to
   the oracles.
 
 This transaction spends $\mathcal{P} + \frac{c}{2}$ from each player:
-  $ n \cdot \frac{c}{n}$ goes to pay for oracle inscriptions; \fee{Bet Promise}
+  $ n \cdot \frac{c}{n}$ goes to pay for oracle enrollments; \fee{Bet Promise}
   goes to pay this transaction's fees; and
   $2 \cdot \mathcal{P} - \fee{Bet Promise} $ for paying the bet and its
   associated costs.
 
-\subsubsection{Oracle Inscription}
+\subsubsection{Oracle Enrollment}
 Oracles invited to participate needs to retrieve the Bet description as
   instructed in the \textit{Bet Promise} transaction and decide whether to
   participate or not.
@@ -83,11 +83,11 @@ When a oracle decides to participate, it builds and sends to the players its
   transaction:
 
 \transaction%
-    {Oracle Inscription}{Oracle previous tx, Bet Promise}
+    {Oracle Enrollment}{Oracle previous tx, Bet Promise}
     {Oracle previous tx}{$\alpha$}{$\sigma$}
     {Bet Promise}{3 + Oracle Index}{\signature{A} $\wedge$ \signature{B}}
     \stopinputs
-    {[Registration] + c/n + [Oracle Payment] \\ - \fee{Oracle Inscription}}
+    {[Registration] + c/n + [Oracle Payment] \\ - \fee{Oracle Enrollment}}
         {(\signature{Oracle} $\wedge$ \signature{A} $\wedge$ \signature{B}) \\
             $\vee$ \\
          (\signature{Oracle} $\wedge$ \timeout{Bet})}
@@ -96,8 +96,8 @@ When a oracle decides to participate, it builds and sends to the players its
                            $\vee$ \\
                        (\signature{Oracle} $\wedge$ \timeout{Two})}
     \stopoutputs
-    {tx:oracle_inscription}
-    {Oracle Inscription}
+    {tx:oracle_enrollment}
+    {Oracle Enrollment}
 
 This transaction is the oracle's commitment with the bet and the players
   acceptance of it as oracle.
@@ -122,11 +122,11 @@ At this output the hash of the answers is revealed ($H(AWins_o), H(BWins_o)$),
 
 \subsubsection{Bet}
 
-Once the required oracles are inscribed to participate, the ``Bet'' transaction
+Once the required oracles are enrolled to participate, the ``Bet'' transaction
   is built by the players.
  The first two inputs contains what is remaining from the original players
    contributions to the prize, controlled by the players' joint account.
-Then, next n inputs are the outputs in the \textit{Oracle Inscription},
+Then, next n inputs are the outputs in the \textit{Oracle Enrollment},
   containing the oracles registration.
 This outputs are controlled by each oracle and both players.
 
@@ -134,16 +134,16 @@ Because inputs come from outputs controlled by all the participants, the
   transaction must be signed by both players and all the oracles:
 
 \transaction
-    {Bet}{Bet Promise, Oracles Inscription}
+    {Bet}{Bet Promise, Oracles Enrollment}
     {Bet Promise}{0}{\signature{A} $\wedge$ \signature{B}}
     {Bet Promise}{1}{\signature{A} $\wedge$ \signature{B}}
-    {Oracle Inscription}{0}
+    {Oracle Enrollment}{0}
         {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{O}\tikzmark{ini:a}}
         {\ldots}{\ldots}{\extra{n-1}}
     \stopinputs
     {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
-            - \fee{Oracle Inscription}$)$ \\
+            - \fee{Oracle Enrollment}$)$ \\
             - 1/2 (\fee{Bet Promise} + \fee{Bet})}
         {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:f})) \\
                           $\vee$ \\
@@ -152,7 +152,7 @@ Because inputs come from outputs controlled by all the participants, the
          (\signature{A} $\wedge$ \timeout{Two})}
     {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
-            - \fee{Oracle Inscription}) \\
+            - \fee{Oracle Enrollment}) \\
             - 1/2 (\fee{Bet Promise} + \fee{Bet})}
         {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:h})) \\
                           $\vee$ \\

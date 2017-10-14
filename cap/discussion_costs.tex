@@ -14,7 +14,7 @@ Players might be willing to pay to run the protocol, but unlikely for small
 Within the protocol, oracles maximize they earnings by participating and
   voting for winner.
 However, if oracles stop participating after they send the
-  \textit{Oracle Inscription} and $c/n > \fee{Oracle Inscription}$ they can
+  \textit{Oracle Enrollment} and $c/n > \fee{Oracle Enrollment}$ they can
   also win money:
 
 \begin{center}
@@ -24,7 +24,7 @@ However, if oracles stop participating after they send the
         \hline
           Initial deposit & -[Oracle Payment] - [Two Answers Penalty] \\
         \hline
-          Redeem initial deposit & [Oracle Payment] + c/n - \fee{Oracle Inscription} \\
+          Redeem initial deposit & [Oracle Payment] + c/n - \fee{Oracle Enrollment} \\
         \hline
           Redeem initial deposit fee & - \fee{Redeem Initial Deposit} \\
         \hline
@@ -32,15 +32,15 @@ However, if oracles stop participating after they send the
         \hline
           Redeem two answers penalty fee & - \fee{Redeem Two Answers Penalty} \\
         \hline
-          \textbf{Total} & c/n - \fee{OracleInscription} - \fee{Redeem Two Answers Penalty} \\
+          \textbf{Total} & c/n - \fee{OracleEnrollment} - \fee{Redeem Two Answers Penalty} \\
         \hline
     \end{tabular}
-    \captionof{table}{Oracle exits after Oracle Inscription}
+    \captionof{table}{Oracle exits after Oracle Enrollment}
     \label{tab:oracle_abort}
 \end{center}
 
 If c/n is bigger than the fees required to redeem the
-  \textit{Oracle Inscription} transaction, oracle wins money by aborting after
+  \textit{Oracle Enrollment} transaction, oracle wins money by aborting after
   submitting this transaction.
 
 For the players this bring other cost beside the c/n amount.
@@ -49,7 +49,7 @@ They need to get a replacement for this oracle, a new smaller
 Which has an added cost, as it have to pay fees.
 
 A malicious oracle can try to attack the players by aborting after the
-  \textit{Oracle Inscription} transaction, resulting in an extra cost to the
+  \textit{Oracle Enrollment} transaction, resulting in an extra cost to the
   players.
 Decreasing the value of c makes this attack unlikely, as oracles will require
   to spend money in order to perform it.

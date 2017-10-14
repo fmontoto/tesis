@@ -50,7 +50,7 @@ Table~\ref{tab:tx_fees} has the size for the transactions used in the protocol,
       \hline
         Bet Promise & \txcost{1267}{65} \\
       \hline
-        Oracle Inscription & \txcost{776}{0} \\
+        Oracle Enrollment & \txcost{776}{0} \\
       \hline
         Bet & \txcost{617}{445} \\
       \hline
@@ -92,7 +92,7 @@ For a successful run of the protocol, where there is a winner and every oracle
         \hline
           Bet Promise fees & -\totalcost{1267}{65} \\
         \hline
-          Oracle Inscriptions fee & -\totalcost{0}{776} \\
+          Oracle Enrollments fee & -\totalcost{0}{776} \\
         \hline
           Bet transaction fee & -\totalcost{617}{445} \\
         \hline
@@ -144,15 +144,15 @@ Table~\ref{tab:oracle_costs} summarize the cost and earning for an oracle that
 \end{center}
 
 The c constant is a transfer made from the players to the
-  \textit{Oracle Inscription} bet, its objective is to regulate the oracle
+  \textit{Oracle Enrollment} bet, its objective is to regulate the oracle
   risk when accepting to participate in the bet.
-If an oracle send the \textit{Oracle Inscription} and the bet does not take
+If an oracle send the \textit{Oracle Enrollment} and the bet does not take
   place. The oracle will get back all its deposit + $c/n$ -
-  \fee{OracleInscription}.
+  \fee{OracleEnrollment}.
 
 Players might decide, in order to incentive oracles to participate, that there
   is no risk of losing money in this situation for oracles. So they set c such
-  that $c/n > \fee{OracleInscription}$.
+  that $c/n > \fee{OracleEnrollment}$.
 Nonetheless, players might decide to make $c = 0$ because this simplifies the
   transaction and saves money in fees.
 
