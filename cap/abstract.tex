@@ -1,0 +1,39 @@
+When placing bets we trust the other(s) participant(s) or the institution
+  holding the bet to pay us if we win.
+In this work we propose a protocol on top of Bitcoin to place bets depending on
+  real world events in a decentralized and trustless fashion.
+Implementations of decentralized gambling on top of Bitcoin or other
+  cryptocurrencies have been publicized for random events, trying to emulate
+  some casino's game of chance, as the roulette or blackjack.
+However a distributed solution for non random events is still an open problem.\\
+\noindent
+Our protocol uses a set ``oracles'' to bring the outcome of the bet's event into
+  the blockchain.
+When a certain threshold of the oracles have reported the same outcome for
+  the event we unlock the winner's prize.
+Protocol was designed to move the money to one of the players in the bet,
+  oracles do not take control of the prize, they only decide between two
+  possible outcomes.\\
+\noindent
+Economic incentives are placed to encourage good behavior of the participants,
+  oracles get paid if and only if they provide the right answer, defined as the
+  answer provided by the majority of them.
+They are required to place a deposit to participate.
+This allows the protocol to establish economic penalties if the oracle does not
+  answer or does it wrong.\\
+\noindent
+Once the bet is placed, the prize is locked waiting for the oracles' answer,
+  players lose the control of the money until the oracles decide the winner
+  or a previously defined timeout is exceeded.
+In which case each player gets half of the prize.\\
+\noindent
+Using Bitcoin scripting language the protocol guarantees fairness and correct
+  execution with a dishonest minority of oracles and a dishonest peer, once the
+  bet is placed.
+Before the bet is placed a dishonest peer can cause limited economic damage to
+  an honest player.
+With an attack cost equal to the damage inflicted.
+Dishonest oracles, before the bet is placed, can cause small economic damage to
+  both players equally, the cost for this attack is a parameter set by the
+  players.\\
+\noindent

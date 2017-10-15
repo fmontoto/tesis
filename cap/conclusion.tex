@@ -9,14 +9,14 @@ This is accentuated for the overwhelming number of different and fast evolving
 A currency where rules does not change too much over time makes it a good store
   for value, and likely this Bitcoin's property contributes to make it the
   most valuable cryptocurrency, as measured by market capitalization.
-This is a desired feature for our algorithm, we don't want the value of the
+This is a desired feature for our algorithm, we do not want the value of the
   money put when the bet is placed to be too different of the one when the bet
   is resolved.
 
 However, using Bitcoin did not come for free, this slow change rate keeps
   bitcoin script language very limited.
 When people talk about smart contract or scripting, Bitcoin is never the first
-  currency to come to peoples' mind.
+  currency coming to people's mind.
 The limited scripting, slow change rate and the biggest network made Bitcoin our
   choice:
 The script limitation poses a real challenge in the protocol presented, making this
@@ -44,24 +44,11 @@ As there is no increase in the cost with the amount of money involved.
 
 Most of the transaction required by the protcol are called ``Non standard''
   in Bitcoin.
-Meaning even they are valid transactions and everyione recognizes them as that.
+Meaning even they are valid transactions and everyone recognizes them as that.
 Most of the miners will not mine them, so likely submitting the transactions
   will take more time than a standard one.
 We hope new proposals that makes use of this available features, like this one,
   can move the Bitcoin community to embrace this ``non estandard'' transactions.
-
-Gambling is a really big and heavily regulated industry, Winsomeio, oraclizeit
-  and this protocol are tools  to make this industry more flexible.
-Allowing people to fully control its money while gambling, a difference from
-  the regular casinos or bet sites.
-As cryptocurrencies allows people to stay away from a centralized government
-  issuer, this kind of tools allows people to steo out from centralized gambling
-  sites.
-There is yet another big difference, people running protocols on top of
-  blockchains can see every line of code executed and how decissions are taken,
-  making gambling a transparent process, opossed as it is today.
-Where people uses only the public interface of a web site or physical casino.
-Never seeing what is really going on ``behind the scenes''.
 
 One of the most challenging problems to resolve for this protocol was to
   translate the protocol restrictions to Bitcoin transactions.
@@ -69,7 +56,7 @@ Studied existing solutions are composed just by one or two different
   transactions.
 In Ethereum one smart contract is enough for the applications we discussed at
   section~\ref{sec:previous_work}.
-For orisi, only one transaction is post in the blockchain with the bet, all
+For Orisi, only one transaction is post in the blockchain with the bet, all
   the other communication and set up required happens outside the blockchain.
 Our protocol uses the blochain widely, not only for money transfers, but also
   for oracle discovery and initial communication.
@@ -91,15 +78,76 @@ This transaction is hard to read as it can not be written using loops (because
   the language does not support them), and even not used branches needs to be
   included to match the original hash in the Bet transaction output.
 
-\colorbox{red}{Future work}
-We also see value in transforming the oracles in ``judges'', and instead of
-  betting on an uncertain outcome, let the judges decide between players
-  controversy, acting as arbiter.
+The initial decision of implementing the protocol prove to be very helpful when
+  investi\-ga\-ting limitations of the protocol.
+It allowed us to calculate the size of the required transactions, which were
+  used to get a very accurate cost of the fees per transaction.
+Other limitation found thanks the implementation was the maximum size of an
+  element on the Bitcoin stack: 520 bytes.
+Due this limitation our original implementation was able to use up to 6 oracles,
+  after some script optimizations our implementatio support up to 7 oracles.
+With other optimizations we might be able to support one or two more oracles.
+However, without a change in the way Pay To Script Hash transactions work, or
+  the hard limit of 520 bytes per element in the stack.
+It is impossible for our protocol to support a bigger number of oracles.
+
+Many of the work on the implementation were basic tools to manipulate and
+  generate custom transactions.
+This code is a contribution not only for our protocol, but also for people
+  willing to use the bitcoin with custom transactions, as we do.
+
+Gambling is a really big and heavily regulated industry, Winsomeio, oraclizeit
+  and this protocol are tools to make this industry more flexible.
+Allowing people to fully control its money while gambling, a difference from
+  the regular casinos or bet sites.
+As cryptocurrencies allows people to stay away from a centralized government
+  issuer, this kind of tools allows people to steo out from centralized gambling
+  sites.
+There is yet another big difference, people running protocols on top of
+  blockchains can see every line of code executed and how decissions are taken,
+  making gambling a transparent process, opossed as it is today.
+Where people uses only the public interface of a web site or physical casino.
+Never seeing what is really going on ``behind the scenes''.
+
+We believe this work is a contribution for both worlds, it introduces new
+  options on the gambling industry.
+And also adds a new application on top of Bitcoin, using it as more than a
+  value store currency.
+Bitcoin introduces a method to store and transfer value without relying in a
+  central authority as previous currencies did before.
+The presented protocol uses this property and introduces an option to do
+  these transfers subject to real world events, while keeping the lack
+  of central control to achieve it.
+Therefore the objective for this work is accomplished.
+
+While working on this we realized bets are only one example of external
+  people or events deciding destination of somebody else's money.
+We could think in our oracles as ``judges'' in a dispute.
+And instead of providing an event outcome into the blockchain, they can
+  decide on any subject, acting as arbiter on a controversy.
+
 Small adjustements would be required to the protocol, as removing the random
   selection, probably judges will be agreed beforehand by the players.
 Other required change is to remove the penalization by answering different
   from the majority.
-It is perfectly fine and possible to have different opinions among the
+It is perfectly fine and even desirable to have different opinions among the
   judges, and the ones with the minority should not be punished.
-An implementation of this
 
+It might be also desirable to have a larger number of oracles participating in
+  a bet.
+However, this requires a change in the Bitcoin implementaion, which is not
+  under our control.
+
+Future work might also include sharing oracles among different Bets.
+This could help on making the protocol cheaper but adds new issues, as paying
+  the oracle.
+Our proposal pays the oracles in the same Bet transaction, get all the users to
+  finance the oracles would require a new way to do it.
+
+Other interesting change would be to decrease the transactions number or
+  transactions' size to make the fees more affordables.
+One of the last additions to Bitcoin was ``Segregated Witness'', it solves
+  transaction malleability, which opens the door to the use of off the blockchain
+  transactions.
+This is an option to decrease the number of required transactions posted in the
+  blockchain, and therefore decrease the amount of fees paid.
