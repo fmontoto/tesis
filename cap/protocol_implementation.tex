@@ -1,0 +1,64 @@
+\section{Implementation}
+
+Bitcoin is widely used as value storage, most of the applications and library
+  supporting it provide just a wallet and blockchain inspection functionality.
+Creating custom transactions is not a common functionality in bitcoin clients,
+  and by the time this work started there was no library available to generate
+  custom transactions.
+
+In order to prove the viability of the proposed protocol and generate the
+  transactions in the appendix~\ref{sec:appendix_transactions} an implementation
+  was written.
+
+We used Java to implement all the protocol functionality.
+We divide our implementation in three logical modules to explain the work done:
+\begin{enumerate}
+\item \textbf{Bitcoin communication:}
+The official Bitcoin client exposes a RPC server to interact with the
+  blockchain.
+This module provides an interface to the Bitcoin client, it allows our
+  implementation to get information from the Blockchain and verify the
+  validity of the transactions we generate.
+
+\item \textbf{Bitcoin core:}
+This module expose Bitcoin objects with our required functionality.
+It is capable to generate custom transaction and sign them, it also
+  provides transaction parsers and human readable views of them.
+Likely all this functionality would be in a ``Bitcoin Library'' if bitcoin
+  were usually used to do smart contracts.
+
+\item \textbf{Protocol implementation:}
+In this module we included the protocol specific functionality, it is able
+  to generate and understand the Bets and the protocol transactions.
+It also exposes a distributed coin tossing implementation to select oracles
+  randomly from a list.
+\end{enumerate}
+
+Our implementation has a little bit more than 10 thousand lines of code.
+It includes:
+\begin{itemize}
+\item An encrypted and authenticated communication channel, which can start from
+  an insecure channel only knowing the Bitcoin address of the other
+  participant.
+
+\item A blockchain scan to compile a list of oracles from its Registration
+  transactions.
+
+\item A distributed coin tossing implementation to select the oracles to use
+  from the compiled list.
+
+\item A direct method to generate each of the required transactions in the
+  protocol, including all the redeem transactions required to spend them.
+
+\item A check to verify the transactions received from the other player are
+  valid and include the expected inputs and outputs.
+\end{itemize}
+
+We used this implementation and the official bitcoin client to prove the
+  validity of the transactions generated.
+We want to be sure the transactions generated are valid Bitcoin transactions,
+  so testing them using the official client is a crucial step.
+
+Due to lack of libraries doing custom transactions, this implementation is
+  a contribution not only for this protocol, but potentially for other
+  applications using custom transactions.
