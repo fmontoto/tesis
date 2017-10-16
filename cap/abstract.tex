@@ -1,11 +1,19 @@
-When placing bets we trust the other(s) participant(s) or the institution
-  holding the bet to pay us if we win.
+Every time we place a bet, we implicitly trust the other participant or the
+  institution which holds the bet to pay in the case we win.
+For this reason we do not bet directly with people we do not know or trust,
+  and we use a casino or other gambling sites.
+Expecting the law or casino reputation to enforce good behavior.\\
+\noindent
+Cryptocurrencies made possible to store and transfer value easily without
+  using centralized currencies.
+And since its populariation, many decentralized applications on top of them
+  have been proposed and implemented.
+Among them, gambling.
+It is currently possible to safely bet with an stranger on a random events
+  using cryptocurrencies.
+Neither trust nor centralized entities are required.
 In this work we propose a protocol on top of Bitcoin to place bets depending on
   real world events in a decentralized and trustless fashion.
-Implementations of decentralized gambling on top of Bitcoin or other
-  cryptocurrencies have been publicized for random events, trying to emulate
-  some casino's game of chance, as the roulette or blackjack.
-However a distributed solution for non random events is still an open problem.\\
 \noindent
 Our protocol uses a set ``oracles'' to bring the outcome of the bet's event into
   the blockchain.
@@ -37,3 +45,11 @@ Dishonest oracles, before the bet is placed, can cause small economic damage to
   both players equally, the cost for this attack is a parameter set by the
   players.\\
 \noindent
+The protocol was implemented and run in the Bitcoin testnet using the official
+  client to verify the transactions.
+Discussion on the trade off between the protocol cost and economic incentives
+  for the participants
+  The trade off between the protocol cost and economic incentives are discussed
+  in the
+Sample transaction and costs for running the protocol are presented and
+  discussed
