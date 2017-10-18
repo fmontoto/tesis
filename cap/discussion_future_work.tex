@@ -1,0 +1,40 @@
+\section{Future work}
+\subsection{Protocol extension}
+
+In our proposed protocol there is nothing that binds the oracle answer with an
+  event's outcome.
+We could ask the oracles an opinion, to take a position in a dispute, or
+  anything we want without changing the protocol.
+In a more general view, our protocol allows a pair of peers to move money
+  between two options outsorcing the decision.
+A bet is a particular case.
+
+Even though our protocol is inspired by gambling, we strongly believe there is
+  room to solve many other scenarios.
+Lawsuits  seeking compensations is another example of deciding between two
+  destinations.
+Accused must pay or keep its money, and the decision is made by third parties.
+Disputes on agreements and products warranties are other similar schemas.
+
+In general we think, oracles can be repurposed as ``judges'' and let them
+  decide on other scenarios.
+An arbiter or court might have problems to enforce its orders, using our
+  protocol the money's recipient can get it as soon as the judges agree.
+
+\subsection{Oracle reutilization}
+Utilizing oracles for more than one Bet could be another interesting addition to
+  the proposed protocol.
+First, because it would help to bring the cost of the protocol down.
+If the oracles payments can be shared among many bets, each bet pays
+  an smaller amount.
+And second, if an oracle participates in many bets, it would receive a bigger
+  payment than when participating on a single one.
+This makes more expensive to bribe an oracle by a single player.
+However it also adds a new attack possibility, multiple players betting on the
+  same output could share the bribe cost.
+Which is more complicated than the single player case, because requires
+  coordination and new transactions among the players.
+
+Utilizing the same answers for many bets requires changes on how the oracle get
+  paid and communication between players at different bets.
+It would require important changes in the current transactions.
