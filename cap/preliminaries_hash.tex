@@ -1,19 +1,16 @@
-\section{Hash}
-Hash is an overload word and it is usually used to define various things:
-
-\subsection{Hash Function}
-It is a function able to map data from arbitraty size to data of a fixed size.
-The range has only elements of a fixed size, so it is bounded by all the
-  elements of that size.
-If we represent the data in a binary base, the range is bounded by $2^n$ where n
+\section{Hash Functions}
+A hash function is a mapping from a set of arbitrary size to a set of a fixed
+  size.
+The range has only elements of the same size
+If we represent the data in binary, the range is bounded by $2^n$ where n
   is the size in bits of the output.
 The domain of the function is unbounded, by the \textit{Pigeonhole
   Principle:}
 \begin{equation}
 	\exists \, i, j \mid f(i) = f(j), \, i \neq j
 \end{equation}
-When this happen, we call it collision, and for most uses of a Hash function are
-  unwanted.
+When this happen, we say there is a collision, and for most uses of a Hash
+  function are unwanted.
 
 Hash functions are used for many things: File comparison, instead of comparing
   files bit to bit, the image of a Hash Function can be compared instead;
@@ -21,12 +18,12 @@ Hash functions are used for many things: File comparison, instead of comparing
   records, by using a Hash Function that produces similar images for similar
   pre-images, etc..
 
-\subsection{Image of a Hash Function}
+\section{Image of a Hash Function}
 
 If not stated otherwise we will use the word ``Hash'' to denote the image of
   some data using a Hash Function.
 
-\subsection{Cryptographic Hash Function}
+\section{Cryptographic Hash Function}
 This refers to a special class of Hash Functions the cryptography has defined
   to be suitable for its use on cryptographic applications. These functions are
   designed to be ``one way'' functions, meaning it is unfeasible\footnote{We %
@@ -40,8 +37,8 @@ In an ideal cryptographic function, the most efficient way to find one of the
   them satisfies the predicate}. We call this property
   \textit{preimage-resistance}.
 It is also important for this ideal function to be \textit{collision
-  resistat}, this means it is unfeasible to find any two distinct inputs
-  $x, x'$ with the same image, i.e., such that $h(x) = h(x')$.
+  resistant}, this means it is unfeasible to find a collision, that is: any two
+  distinct inputs $x, x'$ with the same image, i.e., such that $h(x) = h(x')$.
 
 When using this ideal function, on average, producing a (second) preimage
   requires $2^n$ operations, and producing a collision requires at least

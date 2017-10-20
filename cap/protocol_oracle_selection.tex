@@ -5,7 +5,7 @@ Before explaining the protocol we introduce the following notation, based
   the transactions.
 
 Table~\ref{tx:example} represents a transaction that spends two outputs from
-  two different previous transaction and creates three outputs:
+  two different previous transactions and creates three outputs:
 
   \transaction
     {x}{y1,y2}
@@ -31,7 +31,7 @@ Table~\ref{tx:example} represents a transaction that spends two outputs from
     \item $\sigma_1,\sigma_2$: Input script, values required to satisfy the
                                 output script being spent.
     \item $\nu_1,\nu_2,\nu_3$: Value of the output.
-    \item $\gamma_1, \gamma_2, \gamma_3$: Outputs' script, need to be satisfied
+    \item $\gamma_1, \gamma_2, \gamma_3$: Output scripts, need to be satisfied
                                           in order to spend its corresponding
                                           output.
 \end{itemize}
@@ -40,12 +40,13 @@ For the scripts we use the logical conjunction ($\wedge$) when both propositions
   must be satisfied.
 Logical disjunction ($\vee$) when we need to satisfy only one of the
   propositions.
-Signatures always sign its own transaction, when a signature from the
-  participant $A$ is required, we say: \signature{A}.
-Sometime a literal is required, usually a preimage of a known hash ($H(l)$), we
-  use just $l$. Some paths of the transaction are unreachable before a defined
-  time, we use \timeout{k} to disable the path this expressions is in before the
-  time $k$.
+Signatures always sign the transaction they are included on, this makes the
+  signature valid only for the transaction it was created.
+When a signature from the participant $A$ is provided, we denote: \signature{A}.
+Sometimes a literal is required, usually a preimage of a known hash ($H(l)$).
+In that case, we just use $l$.
+Some branches of the transaction's script are locked before a defined time, we use
+  \timeout{k} to disable the the branch this expressions is in before the time $k$.
 
 For instance, the script at~\ref{eq:notation_sample} requires to be evaluated
   after the time $k$ and a signature of $U$. Or $l$ and a signature of $U$.

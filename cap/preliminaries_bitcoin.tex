@@ -4,14 +4,13 @@ Bitcoin is the first fully distributed cryptocurrency made publicly available,
 The same author shared as open source code a implementation of the protocol in
   January 2009. And the protocol has been running ever since.
 
-Nevertheless, Bitcoin is not the first idea of electronic cash.
+Nevertheless as it was mentioned in the previous section, Bitcoin is not the
+  first idea of electronic cash.
 The idea of electronic cash has been present within the cryptographic community
-  since at least 1983, when Chaum \cite{chaum1983blind} proposed a system for
-  anonymous payments.
-And the attempts kept going for another three decades, amd  hundreds of papers
-  have been published with improvements of e-cash schemes
-  \cite{barber2012bitter}.
-Why is Bitcoin so popular and why has it achieved the notority that three
+  since at least 1983\cite{chaum1983blind}.
+And there were attempts for another three decades, and hundreds of papers
+  published with improvements of e-cash schemes\cite{barber2012bitter}.
+So, why is Bitcoin so popular and why has it achieved the notority that three
   decades of academic research on the field could not achieve?
 
 Barber et al.\cite{barber2012bitter} suggest a few key points to explain why
@@ -32,23 +31,24 @@ Barber et al.\cite{barber2012bitter} suggest a few key points to explain why
 \end{enumerate}
 
   The main technical advance in Bitcoin is its database, the
-  \texttt{blockchain} \cite{inventionblockchain}\cite{blockchainmostimportant}.
+  \texttt{blockchain} \cite{inventionblockchain,blockchainmostimportant}.
 The blockchain is a distributed database formed by an always growing list of
   blocks, where each block contains the data to be stored, a timestamp and a
   link to a previous block. Its fully distributed nature allows bitcoin to lack
   a central authority.
 
-\subsection{Transaction}\label{subsec:Transaction}
+\subsection{Transactions}\label{subsec:Transaction}
 Bitcoin works with accounts where coins are stored, these accounts are
-  identified with an address\footnote{In the wire, an address is a 25-byte
-    value, for human consumption we usually see it in its encoded representation
-    of base 58, resulting in a string of 25-33 characters.}, for this reason
-  sometimes both words are used interchangeably.
+  identified with an address\footnote{In the implementation format, an address
+    is a 25-byte value, yet for human consumption we usually see it in its
+    encoded representation of base 58, resulting in a string of 25-33
+    characters.}, for this reason sometimes account and address are used
+    interchangeably.
 The address is not private, and people share theirs when willing to receive
   money.
 
-The address represents a hash of a public key. Therefore, the owner of the
-  account is however control the private key of the address.
+The address represents a hash of a public key. The owner of the account is
+  whoever controls the private key associated to the address.
 Bitcoin uses Elliptic Curve Digital Signature Algorithm (ECDSA)\footnote{%
   ECDSA is a digital signature algorithm using Elliptic Curve
     Cryptography. It is an asymmetric scheme, with a private and public key.
@@ -77,16 +77,16 @@ A transaction is the only way to move bitcoins from one account to other one,
 
 There is only one exception to this rule; the miner that builds each block is
   allowed to create a transaction without intputs and send money to his account.
-This especial transaction called generation transaction and its amount is
-  defined in the protocol.
+This especial transaction, called generation transaction, is defined in the
+  protocol.
 This is the only way bitcoins are generated.
 
 A transaction input points to a previous unspent output and proves it has the
   right to spend that output.
-An output contains\footnote{This is a simplification, not every output works
-  this way. Details are in subsection~\ref{subsec:script}.} the address of the
-  account it is transferring the money to, so any input signed using the private
-  key of that address has the right to spend the output.
+An output contains the address of the account it is transferring the money to,
+  so any input signed using the private key of that address has the right to
+  spend the output\footnote{This is a simplification, not every output works
+  this way. Details are in subsection~\ref{subsec:script}.}.
 This implies that the money from an account must be spent in the same amount
   the money was received. There is no way to spend just a fraction of the money
   received in a previous output. If an output of $\$ 10BTC$ is received, when
@@ -107,7 +107,7 @@ As any other distributed system, the blockchain must resolve the consesus
   the blockchain anybody with an internet connection can be part of the
   protocol, so solving this problem is quite challenging. Some authors argue
   that the blockchain is the first practical solution to the Byzantine Consensus
-  problem \cite{miller2014anonymous} \cite{sun2014solving}.
+  problem \cite{miller2014anonymous,sun2014solving}.
 
 Proof of work is the algorithm used by the bitcoin blockchain to seek
   consensus. Each entity trying to add data to the database must prove it
@@ -116,9 +116,10 @@ Proof of work is the algorithm used by the bitcoin blockchain to seek
   done in order to send the email \cite{dwork1992pricing}.
 It works by using a hard to calculate, but easy to check function. This
   way the receiver or the mail server can easily check if the sender did
-  the required work. However this work was much harder. The difficulty of
-  particular work is defined by the amount of computational power required to
-  get it done.
+  the required work.
+However the work of the sender was much harder.
+The difficulty of particular work is defined by the amount of computational
+  power required to get it done.
 
 The atomical piece in the blockchain is the block. Each valid block carries
   transactions of the protocol and a proof of work. Therefore every entity
@@ -140,7 +141,7 @@ The mining process is like playing the lottery: tickets are distributed  among
   every miner until someone gets the winning one. The number of tickets each
   miner gets is proportional to the work he/she is doing, so a miner doing more
   work will have a bigger chance at winning the lottery and mine a block.
-However, any miner can win.
+However, in principle any miner can win.
 
 Of course, in the real implementation there are no tickets issued to the
   miners.
@@ -205,22 +206,41 @@ Any participant willing to probe the validity of a given transaction needs
 
   \subsection{Script} \label{subsec:script}
 
-When sending money, there is a little more than we saw at
+When sending money, there are some more details than we have discussed at
   section~\ref{subsec:Transaction}. In an input (figure~\ref{fig:input}) there
-  is more than a signature, and at each output (figure~\ref{fig:output}) also
-  more than an address.
+  is more than a signature, and at each output (figure~\ref{fig:output}) there
+  are also more than one address.
 
 \begin{figure}[ht]
   \centering
   \includesvg[width=0.8\columnwidth]{input}
-  \caption{Wire format of an Input.}
+  \caption{Wire format of an Input.
+             The first two fields specify the output to be spent.
+             The first one is the hash of the transaction containing it, and the
+               second its index on it.
+             The next two fields define the input script, commonly known as
+               scriptSig.
+             To be a valid input the script in the output being spent must
+               evaluate to true using this script as parameter.
+             The last field, sequence\_no, is used to lock executions based on
+             the age of the output being spent.
+         }
   \label{fig:input}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
   \includesvg[width=0.8\columnwidth]{output}
-  \caption{Wire format of an Output.}
+  \caption{Wire format of an Output.
+           The first field is the amount of coins this output holds.
+           The second field specify the length of the script.
+           And the third field is the script required to spend this output,
+             it contains a sequence of operations in the bitcoin scriptin
+             language.
+           This output can be spent for anybody able to provide an input to this
+             script such that after evaluating it, the stack finishes with a
+             true value in the top.
+             }
   \label{fig:output}
 \end{figure}
 
@@ -234,9 +254,10 @@ As figure~\ref{fig:output} shows, the output has a script on its wire
 This script is written in a small stack based language.
 It is read from left to right and it is purposefully not Turing-complete.
 The script is evaluated using the scriptSig as input. If the transaction willing
-  to spend this output provides a valid\footnote{A script is considered valid
-  if after its execution the value in the top of the stack is True.} scriptSig,
-  the output is available to be spend. This is how a P2PKH script looks like:
+  to spend this output provides a valid scriptSig\footnote{A script is
+  considered valid if after its execution the value in the top of the stack is
+  True.}, the output is available to be spend. This is how a P2PKH script looks
+  like:
 
 \begin{center}
   \begin{tabular}{|c|}
@@ -301,14 +322,14 @@ The script is evaluated using the scriptSig as input. If the transaction willing
   % small
 \end{table}
 
-The scriptPubKey in a pay to script hash transaction is even simpler:
+The script in a pay to script hash (P2SH) transaction is even simpler:
 \begin{center}
 	\begin{tabular}{|c|}
 		\texttt{OP\_HASH160 <scriptHash> OP\_EQUAL}
 	\end{tabular}
 \end{center}
 This script is pretty simple, it takes the first element of the stack,
-  calculates its hash and compares it with '<scriptHash>'. The first
+  calculates its hash and compares it with `<scriptHash>'. The first
   element in the stack is however a complete script, and after checking
   it hashes to the expected scriptHash. It will be evaluated with its
   required input. This implies the scriptSig now holds the script and
@@ -316,7 +337,7 @@ This script is pretty simple, it takes the first element of the stack,
 
 \begin{center}
 	\begin{tabular}{|c|}
-		\texttt{<sig> >script>}
+		\texttt{<sig> <script>}
 	\end{tabular}
 	% \caption*{P2SH sigScript.}
 \end{center}
@@ -356,10 +377,10 @@ This script is pretty simple, it takes the first element of the stack,
 	    \multicolumn{2}{|l|}{\textbf{Step 5: }\textit{%
 	      The public key is pushed to the stack.}} \\
 	  \hline
-		\makecell{<pubKey> \\ <sig>} & OP\_CHECKSIG \\
+		\makecell{<pubkey> \\ <sig>} & OP\_CHECKSIG \\
 	  \hline
 		\multicolumn{2}{|l|}{\textbf{Step 6: }\textit{%
-		    The provided signature is validated using the public key.}} \\
+		    The provided signature is validated using the public key <pubkey>.}} \\
 	  \hline
 	    \makecell{True} & \\
 	  \hline

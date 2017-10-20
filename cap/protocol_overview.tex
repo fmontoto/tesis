@@ -1,7 +1,6 @@
 \section{Overview}
 
-We split the protocol to make clear which part of it is optional and can be
-  skipped if players can agree in a set of oracles.
+We split the protocol to make clear the optional parts
 In this subsection we present an overview before the full explanation of the
   protocol.
 
@@ -13,16 +12,16 @@ In this subsection we present an overview before the full explanation of the
       Everyone willing to be an oracle can send a transaction to register into
       the blockchain.
       Players can compile the list from all registered oracles or might apply
-      some filter; eg time of registration or if the oracle already participate
+      some filter; e.g. time of registration or if the oracle already participate
       in a previous bet.
   \item Players negotiate the bet parameters required for this step, as the
       number of oracles to use.
   \item In order to decide which oracles to use, the oracles need to pick a
-      subset of the list compiled, they do this by running a distributed
+      subset of the list compiled, they can do this by running a distributed
       coin tossing protocol.
     With this, they can be sure the list generated is a random subset of the
       full list. If the list is big enough, the chance of one user controlling
-      the oracles gets smaller. As it would be too expensive to control almost
+      the oracles gets smaller, as it would be too expensive to control almost
       all the oracles in the list.
 \end{enumerate}
 
@@ -37,22 +36,24 @@ In this subsection we present an overview before the full explanation of the
       winner.
     We call this transaction ``Bet promise'', as the players commit to the bet
       by placing it. The wage is also on it.
-    The other purpose of this transaction is to invite the oracles to
-      participate in the bet, we make its ID public so they can identify itself
+    Another purpose of this transaction is to invite the oracles to
+      participate in the bet.
+      We make its ID public so they can identify itself
       and enroll to participate as oracles.
   \item The oracles will see the transaction asking them to participate in the
-      bet, they will evaluate it and, if they are interested.
-    They will reply with a transaction containing a reference to the ``Bet
-      promise'' transacation and a deposit as commitment that they will
-      participate in the process.
-  \item When the players see the answer from the expected number of oracles,
-  	  they will send the ``Bet'' transaction with funds of the bet and the
-  	  oracles' reward.
+      bet, they will evaluate it and, if they are interested they will join the
+      bet.
+    To enroll in the bet they will reply with a transaction containing a
+      reference to the ``Bet promise'' transacation and a deposit as commitment
+      that they will participate in the process.
+  \item When the players see a positive answer from the number of oracles
+      specified in the bet, they submit the ``Bet'' transaction with funds of
+      the bet and the oracles' reward.
   	If not enough oracles reply to the call, a second invitation can be send to
   	  a different set of oracles to fill the available spots.
-  \item As soon as the bet event takes place, oracles are able to collect its
-  	  payment from the Bet transaction. This payment gets available by making
-  	  public, -voting- by the winner.
+  \item As soon as the event that defines the bet  takes place, oracles are able
+      to collect its payment from the Bet transaction.
+      To collect, each oracle must make public its vote.
   	After the threshold number of oracles collect its payment, the winner player
   	  is able to collect its prize, its private key and the oracle votes are
   	  required to get it.

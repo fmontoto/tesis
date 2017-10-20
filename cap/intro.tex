@@ -2,20 +2,20 @@
 Gambling is the activity of predicting events and placing a wager on the
   uncertain outcome of those events, with the intent of winning money or
   valuable goods.
-A wager can be placed on many different events, in a casino we find randomizing
+A wager can be placed on many different events. In a casino we find randomizing
   devices as dice, roulette wheels, etc.\ which are used to get randomized
   events. In other establishments we can bet on sporting events, such as a horse
-  racing, football games, etc.\ or the minimum temperature in Santiago during a
+  racing, football games,  or even the minimum temperature in Santiago during a
   particular night.
-Gambling popularity and the large amounts of money at stake inevitably entails a
-  lot of interest in such activities.
+Given the gambling popularity and the large amounts of money at stake inevitably
+  entails a lot of interest in such activities.
 Most of the time gambling is heavily regulated and taxed, and lotteries are
   usually owned by the state.
 
-Internet has made it cheaper to open and operate a casino, even without
+Internet has made it cheaper to open and operate a casino, without the need of
   complying with laws of a particular country.
-This and the massive internet use has moved the gambling industry online%
-  \cite{shelat2002makes}\cite{griffiths2008internet}.
+This and the massive internet grow has moved a big percentage of the gambling
+  industry online \cite{shelat2002makes}\cite{griffiths2008internet}.
 The global Internet gambling market was estimated to be worth US\$28 billion in
   2012 and forecasted to rise to US\$49 billion by 2017%
   \cite{gainsbury2015risky}.
@@ -27,8 +27,8 @@ Of all the different ways for placing a bet, the aforementioned share a common
   obstacle: participants are required to trust in the other parties to pay if
   they lose.
 Even if the bet takes place in a physical casino, where the law can enforce
-  the bet, it is not certain if the casino will be able to pay after the
-resolution.
+  the bet, it is not certain the casino will be able to pay after the
+  resolution.
 We might not be aware of the fact, but every time we place a bet we are
   implicitly trusting in a third party, either the other player or the bet
   site. For physical casinos this is usually not a problem, as they are
@@ -47,8 +47,7 @@ Online casinos on the other hand are more problematic as there are many knowns
   half of the players at this sites believe the providers are cheating on
   them \cite{mcmullan2010online}. However, some of them are subject to
   government regulation and many have been in the business for several years.
-This kind of characteristics could help to indicate thar online site is
-  trustworthy.
+This kind of characteristics can help to identify a trustworthy online site.
 
 But, what if you would like to gamble in a event that no gambling site offers
   nor any friend is willing to do gamble init? Likely the internet would be the
@@ -152,12 +151,12 @@ Design and implement a distributed protocol where real world observations can
 
 \subsection{Specific Objectives}
 \begin{enumerate}
-	\item Provide a protocol to make it possible to gamble with untrusted peers over
-	  real world events.
+	\item Provide a protocol to make it possible to gamble with untrusted peers
+	  about real world events.
 	\item Provide the correct economic incentives to the protocol participants to
-	  behave correctly, so everyone's incentives are aligned.
+	  behave correctly.
 	\item Implement a proof of concept of the designed protocol.
-	\item Debate implications and other applications for the designed protocol.
+	\item Discuss implications and other applications of the protocol.
 \end{enumerate}
 
 \section{Methodology}
@@ -201,6 +200,10 @@ There are two mains phases in the protocol, the first one is optional and
   can be replaced at players' will:
 
 \subsection{Oracles selection}
+In this first step the players compile a list of oracles from a distributed
+  and public source, and select randomly from there a subset of oracles to
+  be used in their bet.
+
 Bitcoin (like most of the cryptocurrencies) includes a scripting language able
  to control money transferences, well defined and with its execution enforced by
  the complete bitcoin network.
@@ -214,10 +217,6 @@ The chances of a player tampering the list with oracles controlled by him must
 We say this phase is optional as it might be the case both players trust already
   in a set of oracles.
 
-In this first step the players compile a list of oracles from a distributed
-  and public source, and select randomly from there a subset of oracles to
-  be used in their bet.
-
 \subsection{Bet resolution}
 This phase starts after the players agree on the bet and the oracles to be used
   on it.
@@ -228,9 +227,9 @@ This transaction is sent to the blockchain to make it publicly visible. So
   oracles known they are asked to participate.
 Oracles express their desire to participate by submitting an enrollment
   transaction into the blockchain.
-If enough oracles do it, the bet can take place.
+If enough oracles enroll, the bet can take place.
 
-Once the required number of oracles are enrolled to participate, the ``Bet''
+Once the required number of oracles are enrolled to participate, the Bet
   transaction is placed in the blockchain, and signed by the oracles
   participating and both players.
 All the payments are also set in this transaction: the payments for the winner
@@ -238,6 +237,6 @@ All the payments are also set in this transaction: the payments for the winner
   to the players from the oracles that do not behave properly.
 
 Oracles get their payment by answering who the winner is, and as soon as
-  enough\footnote{Threshold defined in the bet parameters, at least$\lfloor
-  \frac{n}{2} \rfloor + 1$ with $n$ the number of oracles.} oracles vote for
-  one player as the winner, this player can take its winnings.
+  enough oracles vote for one player as the winner\footnote{Threshold defined
+  in the bet parameters, at least$\lfloor \frac{n}{2} \rfloor + 1$ with $n$ the
+  number of oracles.}, this player can take its reward.
