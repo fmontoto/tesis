@@ -1,13 +1,13 @@
-\section{Hash Functions}
+\section{Hash functions}
 A hash function is a mapping from a set of arbitrary size to a set of a fixed
   size.
 The range has only elements of the same size
 If we represent the data in binary, the range is bounded by $2^n$ where n
   is the size in bits of the output.
-The domain of the function is unbounded, by the \textit{Pigeonhole
-  Principle:}
+The domain of the function in principle can be unbounded, and by the
+  \textit{Pigeonhole Principle:}
 \begin{equation}
-	\exists \, i, j \mid f(i) = f(j), \, i \neq j
+    \exists \, i, j \mid f(i) = f(j), \, i \neq j
 \end{equation}
 When this happen, we say there is a collision, and for most uses of a Hash
   function are unwanted.
@@ -18,12 +18,12 @@ Hash functions are used for many things: File comparison, instead of comparing
   records, by using a Hash Function that produces similar images for similar
   pre-images, etc..
 
-\section{Image of a Hash Function}
+\section{Image of a hash function}
 
 If not stated otherwise we will use the word ``Hash'' to denote the image of
   some data using a Hash Function.
 
-\section{Cryptographic Hash Function}
+\section{Cryptographic hash function}
 This refers to a special class of Hash Functions the cryptography has defined
   to be suitable for its use on cryptographic applications. These functions are
   designed to be ``one way'' functions, meaning it is unfeasible\footnote{We %

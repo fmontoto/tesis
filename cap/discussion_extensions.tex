@@ -1,0 +1,26 @@
+\section{Extensions}
+
+If we step out a little bit, the proposed protocol uses paid oracles to get a
+  binary answer about an event outside the blockchain.
+This is useful not only for betting on some outcome.
+The oracles are oblivious to the protocol in which their answer is used; they
+  get paid anyway.
+Further applications of the protocol can be generalized from our proposal.
+Resolution of contractual disputes is an interesting topic, where parties agree
+  to use arbitrator(s) to decide two conflicting interpretations of a contract,
+  for example.
+In this example oracles takes part in the protocol more like judge than oracle.
+So, it would make sense to paid the oracle for providing an answer instead of
+  providing the same that the majority provides.
+To extend the proposed protocol we can remove the output with the penalty on
+  wrong answer.
+
+Other possible extension would be to have not just untrusted and randomly
+  selected oracles to decide the bet.
+It could be interesting to add semi-trusted oracles, services of oracles could
+  be created and used.
+This might require to pay differently to the oracles, semi-trusted oracles could
+  charge more for participate than the ones from the list.
+Our protocol was proposed with the assumption each oracles is the equivalent,
+  therefore they get paid the same, but it also may be extended to support
+  different rewards and penalties per oracle.

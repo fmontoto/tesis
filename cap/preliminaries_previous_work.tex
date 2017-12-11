@@ -1,11 +1,12 @@
-\section{Previous Work} \label{sec:previous_work}
+\section{Previous work} \label{sec:previous_work}
 
 There are several attempts to provide information to the blockchain from the
   outside.
 One possibility is using  ``Distributed Oracles'', where the data is channeled
   through a group of third party participants.
 Another option is using the so called ``Data Feeds'', where the data is provided
-  by a centralized party, using some techniques to authenticate the data.
+  by a centralized party, using some cryptographic techniques to authenticate
+  the data.
 
 We also add ``Trustless Distributed Casino'' as they provide a solution to a
   similar problem.
@@ -40,8 +41,8 @@ Therefore we want a $1$ + ($n$ of $m$), where the extra signature is
   from the receiver.
 As this kind of transaction is not considered
   standard\footnote{Non standard transactions are recognized as valid
-  transactions by everybody at the bitcoin betwork, but only a small fraction of
-  miners will mine these.}.
+  by everybody at the bitcoin betwork, but only a small fraction of
+  miners will mine them.}.
  With this configuration the oracles are
   not able to move the money by themselves, and at least one signature
   from the receiver is required.
@@ -74,6 +75,8 @@ A secured data feed is a centralized stream of data, where a trusted entity
 It is usually protected from tampering by cryptographic algorithms.
 Although this is a centralized data source, using many techniques or providers
   might be combined to get a decentralized source.
+Several services provide this feeds as a service to use on smart contracts in
+  the blockchain.
 
 \subsubsection{Oraclize}
 Oraclize \cite{oraclizeit} provides an interface for using data fetched from a

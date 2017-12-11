@@ -9,8 +9,8 @@ A wager can be placed on many different events. In a casino we find randomizing
   particular night.
 Given the gambling popularity and the large amounts of money at stake inevitably
   entails a lot of interest in such activities.
-Most of the time gambling is heavily regulated and taxed, and lotteries are
-  usually owned by the state.
+Sometimes gambling is heavily regulated and taxed, and lotteries are usually
+  owned by the state.
 
 Internet has made it cheaper to open and operate a casino, without the need of
   complying with laws of a particular country.
@@ -100,7 +100,7 @@ As the money became popular, the idea was taken and a whole generation of
 Today the market capitalization of Bitcoin (this is, the amount of money times
   its value in USD) is over 25,000,000,000 USD.
 
-\section{Gambling using Cryptocurrencies}
+\section{Gambling using cryptocurrencies}
 
 With cryptocurrencies getting more popular, it was only a matter of time until
   the first sites started to offer some games of chance, acting as online
@@ -113,7 +113,7 @@ If the casino does not want or does not have the means to pay, there is nothing
   the participant can do, and his money is lost.
 The problems described for online casinos using traditional currencies apply in
 the same way to the new ones.
-(More on online casinos at subsection~\ref{gambling}.)
+(More on online casinos at Section~\ref{gambling}.)
 
 After some time, people started to see potential of cryptocurrencies at solving
   some of the trust issues related to gambling.
@@ -149,7 +149,7 @@ The decision is made by a set of oracles, which are being paid also within the
 Design and implement a distributed protocol where real world observations can
   be used as blockchain transaction inputs.
 
-\subsection{Specific Objectives}
+\subsection{Specific objectives}
 \begin{enumerate}
 	\item Provide a protocol to make it possible to gamble with untrusted peers
 	  about real world events.
@@ -176,7 +176,7 @@ The main phases of this work will be the following:
     ensure protocol viability.
 \end{enumerate}
 
-\section{The Protocol}
+\section{The protocol}
 
 The main idea behind this work is to eliminate most of the single points of
   trust we can when performing bets.
@@ -237,6 +237,7 @@ All the payments are also set in this transaction: the payments for the winner
   to the players from the oracles that do not behave properly.
 
 Oracles get their payment by answering who the winner is, and as soon as
-  enough oracles vote for one player as the winner\footnote{Threshold defined
-  in the bet parameters, at least$\lfloor \frac{n}{2} \rfloor + 1$ with $n$ the
-  number of oracles.}, this player can take its reward.
+  enough oracles vote for one player as the winner\footnote{Enough is a
+  threshold defined in the bet parameters, at least$\lfloor \frac{n}{2}
+  \rfloor + 1$ with $n$ the number of oracles.}, the winning  player can take
+  its reward.

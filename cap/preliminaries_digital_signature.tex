@@ -30,3 +30,12 @@ The most important property of a digital signature is that it does not matter ho
   many pairs \mbox{\textless message, signature\textgreater} a third party has
   seen, but it does not make it easier to generate a signature for a new
   message.
+
+Sometimes we require more than one signer to produce a signature, when this is
+  the case we call it multisignature.
+In the general case a multisignature has two associated parameters: The number
+  of signers ables to sign; and the required numbers of signers to be a valid
+  signature.
+A multisignature with 7 signers were at least 4 of them are required to produce
+  a valid signature is called a 4 of 7 multisignature.
+So, a signature is valid with at least 4 out of the 7 valid signers.

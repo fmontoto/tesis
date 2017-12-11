@@ -6,10 +6,12 @@ Usually we get information about events from a variety of sources.
 From television, an internet portal, or our eyes among many others. Any protocol
   willing to make decisions over events needs a source for those events.
 
-In order to keep the protocol decentralized we define its data source as a set
-  of entities, called oracles. The decision is made by the oracles voting on
-  the outcome of the event. In this scheme the decision does not rely on a
-  centralized entity, but in a group of them.
+In order to keep the protocol decentralized we define the source of truth to be
+  a majority from a set of entities, called oracles.
+The answer for questions asked within the protocol is decided by the oracles
+  voting.
+Using this scheme the decision does not rely on a centralized entity, but in a
+  group of them.
 
 Oracles are rewarded when provide the correct answer to resolve the bet.
 We define the correct answer as the one given by at least $m$ of the $n$ oracles
@@ -19,4 +21,4 @@ When providing the incorrect anwswer oracles do not get paid, and when giving
   economic incentives to the oracles to answer as they expect the other ones
   are going to answer.
 A discussion on how this incentives influence oracles behavior is available
-  in subsection~\ref{subsec:inc_oracles}.
+  in Section~\ref{subsec:inc_oracles}.

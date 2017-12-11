@@ -2,17 +2,17 @@
 
 \subsubsection{Bet Promise}
 Once players decided the oracles to use, whether using the \textit{Oracle
-  Selection} part or by any other mean.
-They need to agree in the terms of the bet, the event and who is the winner on
-  each outcome, the time available for the oracles to answer, money required by
-  each player, fees of the  oracles, deposit required to the oracles, etc..
-Once all the bet parameters are set, they are serialized and its hash is
-  calculated, players puts all the money required to run the protocol,
+  Selection} protocol or by any other mean, they need to agree in the terms of
+  the bet, the event and who is the winner on each outcome, the time available
+  for the oracles to answer, the amount of money to bet, the fees of the
+  oracles, and deposit required to the oracles.
+Once all the bet parameters are set and serialized its hash is calculated.
+Players puts the bet hash and all the money required to run the protocol,
   including fees and the prize into a transaction.
 The selected oracles, bet hash and a method\footnote{For instance an URL to a
   website with the bet description. Oracles are responsible to check the
   description fetched with the hash provided in the transaction.} to get the
-  transaction full description are appended to this transaction in plain text
+  transaction full description are appended to this transaction in plain text,
   and the transaction is sent to the blockchain.
 We call this transaction ``\textit{Bet Promise}'', as it is a commitment from both
   players to the bet:
@@ -42,45 +42,50 @@ As it's unlikely the players have an unspent transaction for the exact amount
   required for the bet.
 To simplificate the transaction, more inputs nor change outputs are included.
 
-The first output does not transfer any money, but includes: the list of oracles
-  asked to participate; the channel to use for retrieving the full bet and the
-  hash to compare the retrieved bet against.
+The first output does not transfer any money but includes the following
+  information: the oracles list invited to participate; the channel to use for
+  retrieving the full bet and the hash to compare the retrieved bet against.
 When an oracle sees itself in the list of oracles, it goes to the channel and
-  retrieves the bet, compares it against the expected hash.
-Read the description and decides to participate or not.
+  retrieves the bet, compares it against the expected hash, and reads the
+  description; with that information the oracle decides or not to participate
+  in the bet
 
 The second and third outputs of this transaction moves most of the money into
-  a joined account, so from now on it can only be moved by both players
+  a joined account. From now on it can only be moved by both players
   together.
 This represents the commitment to start the bet, as each one lock its own money
   under the other's will.
-In the case one of the players disappear, after \timeout{Bet} the money can
-  recovered by its owner.
+In case one of the players disappear, there is a provision so, after a certain
+  time (\timeout{Bet}) money can be recovered by its owner.
 
-The outputs 3 to 3 + (n - 1) are a small portion of the money, used for the
-  oracle enrollments.
-This money does not includes a timeout because it is an small amount, if players
-  are willing to pay the extra fee required to add this timeout, it can be
-  added.
+The outputs with indexes 3 to 3 + (n - 1) are a small portion of the money, used
+  for the oracle enrollments.
+This money does not includes a timeout because it is an small amount\footnote{If
+  players are willing to pay the extra fee required to add this timeout, it can
+  be added.}.
 This money is spend at the oracle enrollment as commitment from the players to
   the oracles.
 
 This transaction spends $\mathcal{P} + \frac{c}{2}$ from each player:
   $ n \cdot \frac{c}{n}$ goes to pay for oracle enrollments; \fee{Bet Promise}
   goes to pay this transaction's fees; and
-  $2 \cdot \mathcal{P} - \fee{Bet Promise} $ for paying the bet and its
-  associated costs.
+  $2 \cdot \mathcal{P} - \fee{Bet Promise}$ to pay the bet and its associated
+  costs, as transaction fees and oracle rewards\footnote{\mathcal{P} is a
+  constant to make easier to keep track of the money spent by the each player
+  during the protocol}.
 
 \subsubsection{Oracle Enrollment}
 Oracles invited to participate needs to retrieve the Bet description as
-  instructed in the \textit{Bet Promise} transaction and decide whether to
-  participate or not.
-When one or more oracles do not participate, players decide how to select new
-  one(s), a waiting list is recommended to be selected in the first part of the
-  protocol.
-When a oracle decides to participate, it builds and sends to the players its
-  incription transaction, spending money from the \textit{Bet Promise}
-  transaction:
+  instructed in the \textit{Bet Promise} transaction, and decide whether ot not
+  to participate.
+When one or more oracles do not participate, players must decide how to select
+  new one(s).
+For example, using a "waiting list" computed in the first part of the protocol
+  is an option.
+When a oracle decides to participate, it builds an \textit{Oracle enrollment}
+  transaction, and sends it to the players while spending money from the
+  \textit{Bet Promise} transaction. Table~\ref{tx:oracle_enrollment} includes
+  the details.
 
 \transaction%
     {Oracle Enrollment}{Oracle previous tx, Bet Promise}
@@ -99,16 +104,16 @@ When a oracle decides to participate, it builds and sends to the players its
     {tx:oracle_enrollment}
     {Oracle Enrollment}
 
-This transaction is the oracle's commitment with the bet and the players
-  acceptance of it as oracle.
+This transaction is the oracle's commitment with the bet and it conveys the
+  players acceptance the oracle.
 The oracle sends [Registration] + [Oracle Payment] as initial payment
-  (input 0), and players c/n from the \textit{Bet Promise} (input 1).
-Oracle Index goes from 0 to n - 1.
+  (input 0), and players send c/n from the \textit{Bet Promise} (input 1).
+The oracle index goes from 0 to n - 1.
 
 The first output takes the money under the oracle and both players control, to
   be used in the \textit{Bet} transaction.
-If the Bet transaction does not go into the blockchain, the oracle can claim
-  this money after \timeout{Bet}.
+If the Bet Transaction (see Section~\ref{subsec:bet_transaction} does not go
+  into the blockchain, the oracle can claim this money after \timeout{Bet}.
 
 The second one is a penalty to be charge if the oracle misbehaves.
 If the oracle reveals that player A and player B wins, this money can be taken
@@ -120,108 +125,85 @@ At this output the hash of the answers is revealed ($H(AWins_o), H(BWins_o)$),
   the oracle must keeps$AWins_o$ and $BWins_o$ secret, revealing this value is
   equivalent to choose a winner.
 
-\subsubsection{Bet}
+\subsubsection{Bet Transaction} \label{subsec:bet_transaction}
 
 Once the required oracles are enrolled to participate, the ``Bet'' transaction
   is built by the players.
  The first two inputs contains what is remaining from the original players
    contributions to the prize, controlled by the players' joint account.
-Then, next n inputs are the outputs in the \textit{Oracle Enrollment},
+Then, the next $n$ inputs are the outputs in the \textit{Oracle Enrollment},
   containing the oracles registration.
-This outputs are controlled by each oracle and both players.
+Each one of these outputs are controlled by one oracle and both players.
 
 Because inputs come from outputs controlled by all the participants, the
   transaction must be signed by both players and all the oracles:
-
+\small{
 \transaction
     {Bet}{Bet Promise, Oracles Enrollment}
     {Bet Promise}{0}{\signature{A} $\wedge$ \signature{B}}
     {Bet Promise}{1}{\signature{A} $\wedge$ \signature{B}}
-    {Oracle Enrollment}{0}
-        {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{O}\tikzmark{ini:a}}
-        {\ldots}{\ldots}{\extra{n-1}}
+    {Oracle_1 Enrollment}{0}
+        {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{o_1}}
+    {\ldots}{\ldots}{\ldots}
+    {Oracle_n Enrollment}{0}
+        {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{o_n}}
     \stopinputs
     {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
             - \fee{Oracle Enrollment}$)$ \\
             - 1/2 (\fee{Bet Promise} + \fee{Bet})}
-        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:f})) \\
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $AWins_{\tilde{o}_m}$)) \\
                           $\vee$ \\
-         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:g})) \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $BWins_{\tilde{o}_m})) \\
                                     $\vee$ \\
          (\signature{A} $\wedge$ \timeout{Two})}
     {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
             - \fee{Oracle Enrollment}) \\
             - 1/2 (\fee{Bet Promise} + \fee{Bet})}
-        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:h})) \\
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $AWins_{\tilde{o}_m})) \\
                           $\vee$ \\
-         (\signature{B} $\wedge$ ($BWins_{\tilde{o}}$ $\wedge$ \ldots \tikzmark{ini:i})) \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $BWins_{\tilde{o}_m})) \\
                                     $\vee$ \\
          (\signature{B} $\wedge$ \timeout{Two})}
-    {[Oracle Payment]}{(\signature{o} $\wedge$ ($AWins_o \vee BWins_o$) %
+    {[Oracle_1 Payment]}{(\signature{o_1} $\wedge$ ($AWins_{o_1} \vee BWins_{o_1}$) %
                        $\wedge$ \timeout{Bet}) \\
-                       $\vee$ \tikzmark{ini:b} \\
+                       $\vee$ \\
                        \signature{A} $\wedge$ \signature{B} $\wedge$ %
                        \timeout{Reply}}
-    {\ldots}{\extra{n-1}}
-    {[Oracle Payment]}{($AWins_o$ $\wedge$ ($BWins_{\hat{o}} \wedge$ %
-                        \tikzmark{ini:c} \dots) $\wedge$ \signature{B}) \\
+    {\ldots}{\ldots}
+    {[Oracle_{n} Payment]}{(\signature{o_{n}} $\wedge$ ($AWins_{o_{n}} \vee BWins_{o_{n}}$) %
+                       $\wedge$ \timeout{Bet}) \\
                        $\vee$ \\
-                       ($BWins_o$ $\wedge$ ($AWins_{\hat{o}}$ %
-                        $\wedge$ \tikzmark{ini:d} \dots) $\wedge$ \signature{A}) \\
+                       \signature{A} $\wedge$ \signature{B} $\wedge$ %
+                       \timeout{Reply}}
+    {[Oracle_{1} Payment]}{\big( $AWins_{o_{1}}$ $\wedge$ \\
+                             ($BWins_{\hat{o}_{1}} \wedge$ \dots $\wedge$ %
+                             $BWins_{\hat{o}_{m}}) $\wedge$ \signature{B} \big) \\
                        $\vee$ \\
-                        \signature{o} $\wedge$ \timeout{Undue}\tikzmark{ini:e}}
-    {\ldots}{\extra{n-1}}
+                       \big($BWins_{o_{1}}$ $\wedge$ \\
+                            ($AWins_{\hat{o}_{1}}$ %
+                            $\wedge$ \dots $\wedge$ $AWins_{\hat{o}_{m}}) $\wedge$ \signature{A}\big) \\
+                       $\vee$ \\
+                        \signature{o_{1}} $\wedge$ \mbox{\timeout{Undue}}}
+    {\ldots}{\ldots}
+    {[Oracle_{n} Payment]}{\big( $AWins_{o_{n}}$ $\wedge$ \\
+                             ($BWins_{\hat{o}_{1}} \wedge$ \dots $\wedge$ %
+                             $BWins_{\hat{o}_{m}}) $\wedge$ \signature{B} \big) \\
+                       $\vee$ \\
+                       \big($BWins_{o_{n}}$ $\wedge$ \\
+                            ($AWins_{\hat{o}_{1}}$ %
+                            $\wedge$ \dots $\wedge$ $AWins_{\hat{o}_{m}}) $\wedge$ \signature{A}\big) \\
+                       $\vee$ \\
+                        \signature{o_{n}} $\wedge$ \timeout{Undue}}
     \stopoutputs
     {tx:bet}
     {Bet}
-
-\raisebox{33em}[0pt][0pt]{%
-    \hbox{\hspace{34em} \framebox[1.2\width]{%
-        \tikzmark{end:a}$\forall o \in $ Oracles}}
 }
-\raisebox{27em}[0pt][0pt]{%
-    \hbox{\hspace{36em}{\framebox[1.1\width]{\parbox{80\unitlength}{%
-        \tikzmark{end_e}For at least $m\\\tilde{o} \in $ Oracles}}}}
+\raisebox{28em}[0pt][0pt]{%
+    \hbox{\hspace{37em}{\framebox[1.1\width]{\parbox{50\unitlength}{%
+        $o_{i}, \tilde{o}_j, \hat{o}_{k}$ \\ $\in$ Oracles}}}}
 }
-\raisebox{19em}[0pt][0pt]{%
-    \hbox{\hspace{36em} \framebox[1.1\width]{%
-        \tikzmark{end:b}$\forall o \in $ Oracles}}
-}
-\raisebox{15em}[0pt][0pt]{%
-    \hbox{\hspace{36em}{\framebox[1\width]{\parbox{80\unitlength}{%
-        \tikzmark{end:c}For at least $m\\\hat{o} \in $ Oracles}}}}
-}
-\raisebox{12em}[0pt][0pt]{%
-        \hbox{\hspace{35em} \framebox[1.1\width]{%
-            \tikzmark{end_d}$\forall o \in $ Oracles}}
-}
-\begin{tikzpicture}[overlay, remember picture, yshift=.25\baselineskip,%
-                    shorten >=.5pt, shorten <=.5pt]
-    \draw [->] [bend left] ([xshift=2mm]{pic cs:ini:a}) %
-        to ([xshift=-1mm,yshift=4mm]{pic cs:end:a});
-
-    \draw [->] [bend left]  ([xshift=-1mm, yshift=-3mm]{pic cs:ini:f}) %
-        to ([xshift=2mm, yshift=4mm]{pic cs:end_e});
-    \draw [->] [bend right] ([xshift=-1mm, yshift=-2mm]{pic cs:ini:g}) %
-        to ([xshift=-2mm, yshift=1mm]{pic cs:end_e});
-    \draw [->] [bend right] ([xshift=-1mm, yshift=-3mm]{pic cs:ini:h}) %
-        to ([xshift=-2mm, yshift=-2mm]{pic cs:end_e});
-    \draw [->] [bend right] ([xshift=-1mm, yshift=-2mm]{pic cs:ini:i}) %
-        to ([xshift=2mm, yshift=-8mm]{pic cs:end_e});
-
-    \draw [->] [bend right]([xshift=22mm]{pic cs:ini:b}) %
-        to ([xshift=-2mm, yshift=-1mm]{pic cs:end:b});
-
-    \draw [->] [bend right]([xshift=1mm, yshift=-2mm]{pic cs:ini:c}) %
-        to ([xshift=-2mm, yshift=0mm]{pic cs:end:c});
-    \draw [->] ([xshift=1mm, yshift=3mm]{pic cs:ini:d}) %
-        to([xshift=-2mm, yshift=-5mm]{pic cs:end:c});
-
-    \draw [->] [bend left]([xshift=6mm, yshift=2mm]{pic cs:ini:e}) %
-        to ([xshift=-2mm, yshift=0mm]{pic cs:end_d});
-\end{tikzpicture}
 
 The first two outputs are the prize, it can be spend by any of the two players'
   signature plus at least $m$ votes of the oracles for that player.
@@ -229,26 +211,26 @@ When any of the players sees $m$ votes from the oracles it can get its prize.
 If the threshold is not met, half of this money goes to each player and we
   say the bet is not resolved, as there is no winner.
 
-The next n outputs are the oracles's payment for answering.
-They can not be spend before \timeout{Bet}, the moment when the event happen.
+The next $n$ outputs are the oracles's payment for answering.
+They can not be spend before time \timeout{Bet}, the moment when the event
+  happen.
 It requires the vote of the oracle ($AWins_o$ or $BWins_o$) plus the oracle's
    signature.
 This output binds the vote with the oracle's payment, as they are required to
   make its vote public in order to get the payment.
-If the oracle does not answer after \timeout{Reply} players are allowed to
+If the oracle does not answer after time \timeout{Reply}, players are allowed to
   take this money back and the oracle can not further claim its payment.
 
 The last $n$ outputs are a withholding for the same amount of the oracle
   payment, if the oracle gives a wrong answer for the outcome, this money
   goes to the real winner.
-This way we take the payment out from the oracle, as it didn't give the right
+This way we take the payment out from the oracle for failing to give the right
   answer.
 If it behaves as expected, the oracle can spend this money some time after
-  (T$_{\text{undue}}$) the bet is resolved.
+  (T$_{\text{Undue}}$) the bet is resolved.
 
-There are four timeouts expressed in the transaction,
-  table~\ref{table:timeouts} describe each of them in chronological order, from
-  sooner to later in the protocol execution.
+There are four timeouts expressed in the transaction which are described in
+  table~\ref{table:timeouts}.
 
 \begin{center}
     \begin{tabular}{|c|l|}
@@ -284,17 +266,5 @@ There are four timeouts expressed in the transaction,
 Timeouts are enforced using Relative Lock Time (RLT) as defined by the Bitcoin
   Improvement Proposal 68 (BIP 68). Their granularity is 512 seconds, roughly
   the same time it takes to produce a new block.
-As it is a 16 bits number, it's limited to be a year in the future, relative to
+As it is a 16 bits number, it can be at most a year in the future, relative to
   the time its transaction was submitted to the blockchain.
-
-
-\colorbox{red}{Goes this next paragraph here?}
-If we step out a little bit, the proposed protocol uses paid oracles to get a
-  binary answer about an event outside the blockchain. This is not useful only
-  for betting on that outcome. The oracles are\footnote{\colorbox{red}{%
-  is insensitive the word?}} insensitive to the use given to their answer, they
-  get paid anyway. Further applications of the protocol can be generalized from
-  our proposal.
-Resolution of contractual disputes is an interesting topic, where parties agree
-  to use arbitrator(s) to decide a missunderstanding.
-In this case oracles takes part in the protocol more like judge than a oracle.

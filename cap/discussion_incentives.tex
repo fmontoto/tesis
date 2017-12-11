@@ -1,30 +1,30 @@
 \section{Incentives}
 
-The ulterior motive for participating in the protocol is to win money, so we
-  assume each player is driven by this.
-All of their action aims to this goal, win money. The protocol is designed with
-  this assumption in mind and in the following paragraphs we discuss how the
-  monetary incentives align participants to have a proper behaviour.
+The ulterior motive for participating in a betting protocol is to make money, so
+  we assume each player is driven by this logic.
+All of their actions are consistent with this goal, earn money.
+The protocol is designed with this assumption in mind and, in the following
+  paragraphs, we discuss how the monetary incentives encourage participants to
+  behave properly.
 
 \subsection{Players}
-The first thing to considerate is that players are paying fees for every
-  transaction they send to the blockchain, in equal proportion.
-So, it is impossible the protocol can be aborted and both players get its
-  money back.
-Once the first transaction is placed, at least one player will not recover its
-  money: If the protocol does not finishes with a resolution, both will lose
-  some money; If there is a winner he will get earnings and the other will lose
-  everything.
 
-One option to maximize the money won is to control the oracles.
+The first thing to considerate is that the protocol runs on top of bitcoin
+  transactions, which have a cost (fee).
+Once the first transaction is placed, at least one player will not recover its
+  money: if the protocol does not finishes with a resolution, both will lose
+  some money; if there is a winner, such entity will get earnings and the other
+  will lose the money involved.
+
+One strategy to maximize the option to win is to control the oracles.
 The first phase of the protocol and the second's player enforcement
-  minimize the chances of selecting them.
+  prevent this.
 However there is another way to control the oracles, payments can be made to
   influence into the oracle's answer.
-Bribing the oracles is discused into the subsection~\ref{subsec:inc_oracles}.
+Bribing the oracles is discussed into the Section~\ref{subsec:inc_oracles}.
 
-Making the other player to lose money could be a motivation to some players,
-  even if does not mean an earning for themself.
+Simply causing the other player to lose money could be a motivation to some
+  players, even if such action does not mean an earning for themself.
 As payments on timeouts and fees are equally distributed in the transactions,
   aborting the protocol at some point will mean an equal lose of funds for both
   players. If a player is willing to make the other one lose an amount of money,
@@ -33,16 +33,20 @@ Other possible motivation could be to deprive the other player of its funds.
 But again for the same reason mentioned above, this will mean the player
   performing the attack should lock the same amount of money for the same period
   of time.
-A player can impair monetarily the other one, but is not for free, it will cost
-  the same amount of money to do it. It can make the other player lose money,
-  but only small amounts to be used as fees.
-When it comes to funds depravation, the amount can be all the money involved,
-  but it will not be lost, just locked for the time the bet defines as timeout.
+
+A malicious player can impair monetarily the other player, but it will not be
+  for free, as it will cost the same amount of money for the malicious player.
+Finally, one player can make the other player lose money, but only the small
+  amounts to be used as fees.
+When it comes to funds withholding, the amount may end up being all the money
+  involved, but it will certainly not be lost, just locked during the timeout
+  associated to the bet.
 
 \subsection{Oracles} \label{subsec:inc_oracles}
 
-As the players, oracles also try to maximize their earnings, within the protocol
-  that means to give the correct answer and collect its payment.
+As the players, oracles also seek to maximize their earnings.
+In principle, for the protocol that means the oracle must give the correct
+  answer to collect its payment.
 But, there is an option to increase the earnings outside the protocol. Receiving
   money from a player to change their vote can give the oracle more money than
   answering correctly, as the incentive to change its vote can be bigger than
@@ -50,13 +54,14 @@ But, there is an option to increase the earnings outside the protocol. Receiving
 A modified version of the bet transaction can used to do these payment, the
   player willing to pay the bribe can set the output to be spent with the answer
   he expects.
-So, in order to get the bribe, the oracle must reveal the answer the player pay
-  to get.
+So, in order to get the bribe, the oracle must reveal the answer the player is
+  paying for.
 This make the problem even bigger, as no trust is required between a player and
   the oracle in order to cheat and change the answer.
 
 This problem comes from the fact there is not source of truth accessible in the
-  blockchain, in fact this is the problem the protocol tries to solve.
+  blockchain.
+In fact this is the main problem the protocol tries to solve.
 The payment for answering correctly goes for the oracles that answer as the
   majority of them, not the ones that answer the truth, simply because that is
   the protocol truth.
@@ -70,5 +75,6 @@ A way to mitigate this problem is to give the oracles certain reputation based
 This gives the oracles the incentive of behave properly in order to get long
   term earnings, as accepting bribes will erode their chances to be selected as
   oracles again.
-Players must consider this incentive when choosing oracles, the use of oracles
-  with some kind of reputation decreases the chance of them taking a bribe.
+Players must consider this incentive when choosing oracles, for example,
+  selecting some kind of reputation in the hope this approach decreases the
+  chance of selecting malicious oracles.

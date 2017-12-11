@@ -1,18 +1,16 @@
 \section{Costs}
-At section~\ref{sec:cost_analysis} the cost of a successful transaction is
-  provided, it sums up to over USD 60.
+In Section~\ref{sec:cost_analysis} we discussed the cost of a successful
+  transaction, which sumed up to over USD 60.
 A smaller number of oracles or less payment could bring down this number,
   however even after this the number will not be negligible.
-This has some important consequences for this protocol, its expensive to run,
-  and unsuitable for small amount bets.
-Players might be willing to pay to run the protocol, but unlikely for small
-  bets.
+This has some important consequences for this protocol: its expensive to run,
+  and that makes it unsuitable for small amount bets.
 
-\subsection{Individual Attacks}
+\subsection{Individual attacks}
 
 \subsubsection{Oracle} \label{subsec:individual_attack_oracle}
 Within the protocol, oracles maximize they earnings by participating and
-  voting for winner.
+  selecting ``the real winner''.
 However, if oracles stop participating after they send the
   \textit{Oracle Enrollment} and $c/n > \fee{Oracle Enrollment}$ they can
   also win money:
@@ -39,14 +37,14 @@ However, if oracles stop participating after they send the
     \label{tab:oracle_abort}
 \end{center}
 
-If c/n is bigger than the fees required to redeem the
+If $c/n$ is bigger than the fees required to redeem the
   \textit{Oracle Enrollment} transaction, oracle wins money by aborting after
   submitting this transaction.
 
-For the players this bring other cost beside the c/n amount.
-They need to get a replacement for this oracle, a new smaller
+For the players, this brings some additional costs beside $c/n$.
+If the players need to get a replacement for some oracle, a new smaller
   \textit{Bet Promise} transaction can be sent.
-Which has an added cost, as it have to pay fees.
+This new transaction has an added cost, as it have to pay fees.
 
 A malicious oracle can try to attack the players by aborting after the
   \textit{Oracle Enrollment} transaction, resulting in an extra cost to the
@@ -63,14 +61,15 @@ So players can spend some extra money trying to get a new oracle, run the bet
 Running the bet with fewer oracles does is the only option that does not cost
   extra money.
 
-This attack is limited, a malicious oracle can trigger the attack only once, as
-  it will replaced or ignored after doing it.
+This attack is nonetheless limited.
+A malicious oracle can trigger the attack only once, as it will replaced or
+  ignored after doing it.
 But if the same bet get multiple malicious oracles they can delay the bet long
   enough to forve player to abort it.
 This is extremely unlikely if oracles are being selected randomly from a big
   pool.
 
-\subsubsection{Player} \label{subsec:individual_attack_player}
+\subsubsection{Players} \label{subsec:individual_attack_player}
 If the bet faces a malicious player, it can abort the execution at any point
   before submitting the \textit{Bet} transaction.
 As during the protocol both player contribute in the same way to pay it, if it
@@ -86,13 +85,13 @@ A malicious player can not make the other one to lose more than the bet
 \subsubsection{Colluded attacks}\label{subsec:colluded_attacks}
 
 For every collusion involving the player and any number of oracles less than
-  the majority threshold, the damage is limited for the bet associated costs,
-  and they behave as the individual attacks described in
-  sections~\ref{subsec:individual_attack_oracle}~and~\ref{subsec:individual_attack_player}.
-The cost of any of this attacks is the same of bigger than the damage done,
-  so we say they are infeasible.
+  the majority threshold, the damage is limited to losing an amount equal to the
+  associated costs, discussed in
+  Sections~\ref{subsec:individual_attack_oracle}~and~\ref{subsec:individual_attack_player}.
+The cost of any of this attacks is of the same than the damage done, so we claim
+  they are impractical.
 
 When one player and at least the majority threshold of the oracles are colluded,
   this player can take all the money to distribute it with the colluded oracles.
 This cost to the honest player all of the bet money plus the associated costs.
-This attack is discussed at section~\ref{subsec:inc_oracles}.
+This attack is discussed at Section~\ref{subsec:inc_oracles}.

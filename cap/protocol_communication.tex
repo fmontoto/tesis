@@ -1,65 +1,68 @@
 \section{Communication}
 
-When the protocol is explained many things are get by granted, we just say
-  oracles and players exchange data between them with not further
+When the protocol is explained, we have left many things on the intuitive level:
+  we just said oracles and players exchange data between them with not further
   discussion.
 When implementing this protocol the communication between participants can
-  not be ignored, in this section we discuss a proposed model of communication
-  for the protocol.
+  not be ignored.
+In this section, we discuss a proposed model of communication for the protocol.
 
-In Bitcoin communication in the protocol is not encrypted neither
-  authenticated, the Bitcoin's protocol has incentives and cryptographic
-  protection that make this possible.
+In Bitcoin, all protocol communication is not encrypted neither authenticated.
+The Bitcoin's protocol has incentives and cryptographic protection that make
+  this possible.
 The protocol relies heavily on the Blockchain, so we take advantage of all these
-  features and no communication requieres encryption nor authentication.
+  features and we add no encryption nor authentication to the protocol
+  communication.
 
 In order to start the protocol, players are required to know two things about
-the other. The other player's Bitcoin address and a communication method.
-A communication method besides the blockchain is required in order to discuss
-  and get to an agreement in the bet parameters.
-This communication is required to be bidirectional.
+  each other: Each other player's Bitcoin address and a specific communication
+  method.
+A communication method besides ``the blockchain'' is required in order to
+  discuss and agree on the bet parameters.
+This communication must be bidirectional.
 
 The first step is to chat and decide the bet, if this communication is not
   secured, the \textit{Bet Promise} transaction works as authentication method.
-Because at signing it, each player proves it control the private key
+This is because, at signing it, each player proves it control the private key
   corresponding to its address.
-And commits to the data the transaction holds.
+This way, each player commits to the data the transaction holds.
 
-When an oracle sees its id in the blockchain it needs to get the full bet
-  description to decide whether to participate or not, as the full description
-  hash is in the \textit{Bet Promise} transaction, it can be retrieved using an
-  insecure channel.
-If the oracle decides to participate it need to send the \textit{Oracle
-  Enrollment} transaction to the players, this transaction is signed with the
-  oracle's private key, players must check it matches the address they selected.
+When an oracle sees its \texttt{id} in the blockchain it needs to get the full
+  bet description to decide whether to participate or not, as the full
+  description hash is in the \textit{Bet Promise} transaction.
+This description can be retrieved using an insecure channel.
+If the oracle decides to participate it needs to send the \textit{Oracle
+  Enrollment} transaction to the players, which is signed with the oracle's
+  private key.
+Then, players must check it matches the address they selected.
 Oracle also sends the transaction script, as a P2SH only contains the hash of
-  it, players are to check the transaction is as the protocol requires.
+  it, players must check that the transaction is consistent with what the
+  protocol requires.
 
 After all the oracles sent their transactions, players have all they need
-  to create, sign and send the Bet transaction to the blockchain.
+  to create, sign, and send the Bet transaction to the blockchain.
 No further communication off the blockchain is required from now on if every
   oracle behaves correctly.
-However, if a penalty is to be charged to an oracle \foonote{Because it did not
-  answer on time for example.} communication off the blockchain is required to
-  build and sign the transaction charging the penalty to the oracle.
 
 \subsection{Secured communication} \label{subsec:secured_comm}
 
 As stated above, there is no need for secured communication in the protocol,
-  however it might be desired for some participants, here we propose how to
-  start a secure communication with no extra previous knowledge using a peer
-  to peer channel.
+  however if required for some participants, we now propose a mechanism to
+  start a secure communication with no extra previous knowledge, simply using
+  a peer to peer channel.
 
 Both players known each other's Bitcoin address, so the first step is to
   reveal to the other the address' public key using an insecure channel.
 This is verifiable by the receiver, as the address is the hash of the public
   key.
 Then they generate and send a random string in the insecure channel.
-After this, using the public key of the other player, a secure channel id and
-  credentials to use it and the received random string are encrypted and sent
-  using the insecure channel.
+After this, using the public key of the other player, the following
+  information is encrypted and signed.
+A secure channel id, credentials to establish the secure channel, and the
+  received random string. This encrypted values are sent using the insecure
+  channel.
 This message is decrypted and a equality check is done, the random string
-  received must match the one sent at the begining, this prevent replay
+  received must match the one sent at the begining, to prevent replay
   attacks.
 
 At this point both players know the secure channel and have the credentials
@@ -69,21 +72,22 @@ At this point both players know the secure channel and have the credentials
 
 \subsection{Channel}
 
-For test purposes we used a plain TCP connection between peers, and also
-  a secure channel was implemented using
-  CurveZMQ\footnote{http://curvezmq.org/}.
-An authentication and encryption protocol on top of TCP that uses elliptic
-  curves cryptography to protect the packages sent in the wire.
+For test purposes we used a plain TCP connection between peers.
+A secure channel was implemented using
+  CurveZMQ\footnote{http://curvezmq.org/}, an authentication and encryption
+  protocol implemented on top of TCP that uses elliptic curves cryptography to
+  protect the communication.
 
-Establishing a peer to peer connection as channel might reveal more information
-  than participants might want.
-A third party communication channel can be used to obscure our id from the other
-  players, but it might be known by the third party controlling the channel.
-Several options can be used to obscure real id when communicating, using private
-  navigation as the one provided by the Thor Network\footnote{%
+Establishing a permanent peer to peer connection (a channel) might reveal more
+  information than participants might want.
+A communication channel via a trusted third party can be used to obscure our id
+  from the other players, but this opens the door to abuse by the (trusted)
+  third party controlling the channel.
+Several options can be used to obscure real id when communicating.
+Using private navigation as the one provided by the Thor network\footnote{%
     https://www.torproject.org/} can help when using a third party channel.
-Other approach is to use inherently anonymous communication protocols, as the
+Another approach is to use other anonymous communication protocols, as the
   one Orisi uses, BitMessage \cite{warren2012bitmessage}.
-Which solution to use will vary from case to case and how difficult to track
-  the participant wants to be.
+Which solution to use will vary from case to case and the degree of anonymity
+  the participants desire.
 

@@ -20,7 +20,7 @@ It uses the same bitcoin client and rules, the main difference is their value,
   escapechar=*,
 }
 \newcommand{\postbreak}[0]{\mbox{\textcolor{red}{$\hookrightarrow$}\space}}
-\subsection{Oracle Registration}
+\subsection{Oracle registration}
 \begin{lstlisting}
 {
   version: 1
@@ -74,7 +74,7 @@ The second output is the change.
 In this case the protocol does not require to spend any money in this
   transaction, so the oracle takes all the money back to an address it controls.
 
-\subsection{Bet Promise}
+\subsection{Bet promise}
 
 \begin{lstlisting}
 {
@@ -269,7 +269,7 @@ This means we do not get o see the real script required to spend them, just the
 The script (and the data required to evaluate it) must be provided when spending
   this outputs.
 
-\subsection{Oracle Enrollment}
+\subsection{Oracle enrollment}
 
 \begin{lstlisting}
 {
@@ -814,7 +814,7 @@ This is because the way Bitcoin specify transactions are signed: When signing a
 And the one being sign is set to the output's script the input spends.
 This is how Bitcoin ensures signatures are tied to its input.
 
-\subsection{Oracle Answer}
+\subsection{Oracle answer}
 
 \begin{lstlisting}
 {
@@ -908,7 +908,7 @@ At posting this transaction the oracle makes public its vote, after the
 The output of this transaction is a simple Pay To Public Key Hash, where the
   oracles has decided to move its payment.
 
-\subsection{Winner Prize Collect}\label{app:winner_collect}
+\subsection{Winner prize collect}\label{app:winner_collect}
 \begin{lstlisting}
 {
   version: 2
@@ -1306,7 +1306,7 @@ They contain the public key and the signature of the winner, and a majority
 In this case we have 5 oracles, and the threshold is set to 3, so inputs include
   three votes on its script, we can see these votes at the beginning of the
   script.
-The large and repetitive script is one of the costs of using a non turing
+The large and repetitive script is one of the costs of using a non Turing
   complete language.
 Because there are no loops availables, we need to write everything explicitly,
   like an unrolled loop.

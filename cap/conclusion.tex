@@ -3,7 +3,7 @@ Since the Bitcoin creation in 2008 more than a thousands of different
   properties.
 Bitcoin is known and often criticized because its slow evolution and resistance
   to changes.
-This is accentuated for the overwhelming number of different and fast evolving
+This is accentuated by the overwhelming number of different and fast evolving
   currencies created.
 
 A currency where rules does not change too much over time makes it a good store
@@ -21,26 +21,26 @@ The limited scripting, slow change rate and the biggest network made Bitcoin our
   choice:
 The script limitation poses a real challenge in the protocol presented, making this
   an open problem.
-As we discussed at section~\ref{sec:discussion_previous_work}, the problem has
+As we discussed at Section~\ref{sec:discussion_previous_work}, the problem has
   many implemented solutions for currencies with more expressive scripting
-  languages;
-The slow change rate helps to keep the currency value and the same rules from
-  the start to the end of a bet, this makes the platform suitable for long term
-  bets;
+  languages.
+Bitcoin's slow change rate helps to keep the currency value and the same rules
+  from the start to the end of a bet, thus making the platform suitable for long
+  term bets.
 Finally, having the largest network enforcing the protocol rules makes more
   difficult some known attacks, as Majority and Eclipse
-  \cite{heilman2015eclipse}.
-Where attackers can overtake the control of the network or part of it.
+  \cite{heilman2015eclipse}, where attackers can overtake the control of the
+  network or part of it.
 Other cost of using a limited scripting language is the amount of instructions
-  and transactions required to express the protocol, this is traduced to a
-  higher fee cost.
+  and transactions required to express the protocol, which translates into
+  somewhat a higher costs.
 
-The cost of running our proposed algorithm is prohibitively expensive for many
-  cases.
+The cost of running our proposed algorithm may be prohibitively expensive for
+  some cases.
 But we think there is people willing to pay the cost when doing bet on large
   sums of money, as the cost of the protocol would represent a small fraction of
   the bet.
-As there is no increase in the cost with the amount of money involved.
+Notice that the const does not increase with the amount of money involved.
 
 Most of the transaction required by the protcol are called ``Non standard''
   in Bitcoin.
@@ -55,7 +55,7 @@ One of the most challenging problems to resolve for this protocol was to
 Studied existing solutions are composed just by one or two different
   transactions.
 In Ethereum one smart contract is enough for the applications we discussed at
-  section~\ref{sec:previous_work}.
+  Section~\ref{sec:previous_work}.
 For Orisi, only one transaction is post in the blockchain with the bet, all
   the other communication and set up required happens outside the blockchain.
 Our protocol uses the blochain widely, not only for money transfers, but also
@@ -65,17 +65,17 @@ This seeks to avoid extra dependecies and keep most of the protocol expressed
 This come to a cost, more and larger transactions.
 Which are not free anymore, for each byte we post in the blockchain within
   a transaction we are charged by the miner.
-This cost is discussed at section~\ref{sec:cost_analysis}
+This cost is discussed at Section~\ref{sec:cost_analysis}
 
-A good example of this complexity is the transaction dumped at
-  section~\ref{app:winner_collect}.
-Bitcoin provides a multi-sig check function, which checks at least
-  threshold signatures of the provided public keys are provided.
+A good example of this complexity is the transaction show in
+  Section~\ref{app:winner_collect}.
+Bitcoin provides a multi-sig check function, which verifies if certain number
+  if signatures of the provided public keys are present.
 At the Bet transaction we need to implement our own version of this
-  language primitive, to get a multi-hash check function, which checks
+  cryptographic primitive, to get a multi-hash check function, which checks
   at least threshold preimages are provided for the written hash.
 This transaction is hard to read as it can not be written using loops (because
-  the language does not support them), and even not used branches needs to be
+  the language does not support them), and even not used branches need to be
   included to match the original hash in the Bet transaction output.
 
 The initial decision of implementing the protocol prove to be very helpful when
@@ -98,11 +98,11 @@ This code is a contribution not only for our protocol, but also for people
 
 Gambling is a really big and heavily regulated industry, Winsomeio, oraclizeit
   and this protocol are tools to make this industry more flexible.
-Allowing people to fully control its money while gambling, a difference from
-  the regular casinos or bet sites.
+They aim to allow people to fully control its money while gambling, contrarily
+  to from the regular casinos or bet sites.
 As cryptocurrencies allows people to stay away from a centralized government
-  issuer, this kind of tools allows people to steo out from centralized gambling
-  sites.
+  issuer, this kind of tools allows people to steer out from centralized
+  gambling sites.
 There is yet another big difference, people running protocols on top of
   blockchains can see every line of code executed and how decissions are taken,
   making gambling a transparent process, opossed as it is today.
