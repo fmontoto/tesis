@@ -9,9 +9,9 @@ Most of the proposed bitcoin protocols in the literature make the simplified
   assumption that transaction fee is 0, as this was the cost of it for a long
   time.
 However as bitcoin use has increased, transactions are not free
-  anymore\footnote{We can still send transactions with no fees to the blochain,
-    but it might take forever for them to get into it. As miner will prioritize
-    transactions with fee to collect.}.
+  anymore\footnote{We can still send transactions with no fees to the
+    blockchain, but it might take forever for them to get into it. As miner will
+    prioritize transactions with fee to collect.}.
 That is why we decided to explicitly consider the fees in the protocol
 So in what follows we do the analysis with all the costs, not only the oracle
   payment.
@@ -80,23 +80,27 @@ These transactions however are not enough to make the complete cost analysis
   of a protocol execution.
 Redeem transactions are required to put back the money into personal accounts,
   so we append them.
+They are explained next:
 
 \begin{itemize}
     \item Player redeem prize: takes the earnings of the winner into an address
-        he controls.
-    \item Oracle redeem payment: is the transaction with the vote to select the
-        winner and to retrieve the oracle's reward.
+        the player controls.
+    \item Oracle redeem payment: this transaction includes the vote to select
+        the winner and allows the oracle to retrieve him/her reward.
     \item Player redeem oracle doesn't answer: can be submitted by both players
-        when an oracle doesn't answer to charge the penalty for it.
-    \item Player redeem wrong answer: is the transaction the winning player can
-        submit to charge oracles that didn't answer correctly.
-    \item Oracle redeem undue: is submitted by each oracle that didn't give an
-        incorrect answer.
-    \item Player redeem two answers: can be submitted by any player when a given
-        oracle gave two answers to collect the penalty associated.
-    \item Oracle redeem two answers: can be submitted by any oracle that didn't
-        give two answers, it retrieves the penalty for this behavior back to
-        the oracle.
+        when an oracle doesn't answer. It charges the oracle with the associated
+        penalty.
+    \item Player redeem wrong answer: it is the transaction where the winning
+        player can charge oracles that didn't answer correctly.
+    \item Oracle redeem undue: it is submitted by each oracle that does not
+        provide an incorrect answer (this includes failing to provide an
+        answer).
+    \item Player redeem two answers: it is a transaction that can be submitted
+        by any player when a given oracle gave two answers to collect the
+        penalty associated.
+    \item Oracle redeem two answers: it can be submitted by any oracle that
+        didn't give two answers; it recovers the penalty for this behavior back
+        to the oracle.
 \end{itemize}
 
 For a successful run of the protocol, where there is a winner and every oracle
@@ -162,7 +166,7 @@ In table~\ref{tab:oracle_costs} we summarize the cost and earnings for an oracle
     \label{tab:oracle_costs}
 \end{center}
 
-The constant c caotures  transfer made from the players to the
+The constant c captures  transfer made from the players to the
   \textit{Oracle Enrollment} bet.
 Its objective is to mitigate the oracle risk of accepting to participate in the
   bet.

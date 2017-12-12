@@ -1,55 +1,62 @@
-Every time we place a bet, we implicitly trust the other participant or the
-  institution which holds the bet to pay in the case we win.
-For this reason we do not bet directly with people we do not know or trust,
-  and we use a casino or other gambling sites.
-Expecting the law or casino reputation to enforce good behavior.\\
+Every time we place a bet, we implicitly trust the other participant  to pay in
+  the case we win.
+For this reason if we deal with people we do not know or trust, we do not bet
+  directly with them, and instead we use a casino or other gambling sites.
+We expect the law or even casino reputation to help us to enforce good
+  behavior.\\
 \noindent
 Cryptocurrencies made possible to store and transfer value easily without
-  using centralized currencies.
-And since its populariation, many decentralized applications on top of them
-  have been proposed and implemented.
+  using centralized control.
+Given its recent popularity, many decentralized applications have been proposed
+  and implemented on top of them.
 Among them, gambling.
 It is currently possible to safely bet with an stranger on a random events
   using cryptocurrencies.
+We can bet on the value of digital dice, cards or roulette.
 Neither trust nor centralized entities are required.
-In this work we propose a protocol on top of Bitcoin to place bets depending on
-  real world events in a decentralized and trustless fashion.
+In this work we propose a protocol on top of Bitcoin to place bets on real world
+  events in a decentralized and trustless fashion.
 \noindent
-Our protocol uses a set ``oracles'' to bring the outcome of the bet's event into
-  the blockchain.
+Our protocol uses a set ``oracles'' to bring the outcome of the event on which
+  the bet depends into the blockchain.
 When a certain threshold of the oracles have reported the same outcome for
-  the event we unlock the winner's prize.
-Protocol was designed to move the money to one of the players in the bet,
-  oracles do not take control of the prize, they only decide between two
-  possible outcomes.\\
+  the event, we unlock the winner's prize.
+The protocol was designed to automatically move the money to one of the players
+  in that case, so oracles do not take control of the prize, they only decide
+  between two possible outcomes.\\
 \noindent
-Economic incentives are placed to encourage good behavior of the participants,
-  oracles get paid if and only if they provide the right answer, defined as the
-  answer provided by the majority of them.
-They are required to place a deposit to participate.
-This allows the protocol to establish economic penalties if the oracle does not
-  answer or does it wrong.\\
+Economic incentives are placed to encourage good behavior on the participants.
+Oracles get paid if and only if they provide the right answer, where right is
+  defined as the answer provided by the majority of them.
+Also, oracles are required to place a deposit to participate.
+This allows the protocol to establish economic penalties if the oracle fails to
+  answer.\\
 \noindent
-Once the bet is placed, the prize is locked waiting for the oracles' answer,
-  players lose the control of the money until the oracles decide the winner
-  or a previously defined timeout is exceeded.
-In which case each player gets half of the prize.\\
+Once the bet is placed, the prize is locked waiting for the oracles' answer.
+Players relinquish their control over the money until the oracles decide the
+  winner or a previously defined timeout expires.
+In case of timeout, each player gets half of the prize.\\
 \noindent
-Using Bitcoin scripting language the protocol guarantees fairness and correct
-  execution with a dishonest minority of oracles and a dishonest peer, once the
-  bet is placed.
-Before the bet is placed a dishonest peer can cause limited economic damage to
-  an honest player.
-With an attack cost equal to the damage inflicted.
+Using Bitcoin scripting language, the protocol guarantees fairness and execution
+  correctness with both, a dishonest minority of oracles as weel as a dishonest
+  peer, at least once the bet is placed.
+Before that a dishonest peer can cause limited economic damage to an honest
+  player.
+Yet the attack produces no net gain: it costs the attacker as much as the amount
+  of the damage done to the victim.
 Dishonest oracles, before the bet is placed, can cause small economic damage to
-  both players equally, the cost for this attack is a parameter set by the
-  players.\\
+  both players equally, although the cost for this attack is a parameter set by
+  the players.\\
 \noindent
 The protocol was implemented and run in the Bitcoin testnet using the official
   client to verify the transactions.
+Our implementation is currently available as an Open Source project.
 Discussion on the trade off between the protocol cost and economic incentives
-  for the participants
-  The trade off between the protocol cost and economic incentives are discussed
-  in the
-Sample transaction and costs for running the protocol are presented and
-  discussed
+  for the participants are included in this work.
+We also provide a detail cost analysis of running the protocol.\\
+\noindent
+We believe this work's contribution is a novel way of reasoning and deciding
+  about ``real world'' events while integrating the outcome into the blockchain.
+The protocol can be easily extended to resolve contract disputes and similar
+  situations where subjective but fair resolutions are needed, all in a
+  decentralized environment.

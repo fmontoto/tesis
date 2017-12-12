@@ -6,21 +6,25 @@ This is useful not only for betting on some outcome.
 The oracles are oblivious to the protocol in which their answer is used; they
   get paid anyway.
 Further applications of the protocol can be generalized from our proposal.
-Resolution of contractual disputes is an interesting topic, where parties agree
+Resolution of contractual disputes is an interesting topic where parties agree
   to use arbitrator(s) to decide two conflicting interpretations of a contract,
   for example.
-In this example oracles takes part in the protocol more like judge than oracle.
+In this example, oracles take part in the protocol in a role that is more
+  similar to a judge than to an oracle.
+One major difference is that one should not care whether a given judge's
+  opinion matches the others' opinion, but instead that the judge provides
+  his/her independent opinion.
 So, it would make sense to paid the oracle for providing an answer instead of
-  providing the same that the majority provides.
-To extend the proposed protocol we can remove the output with the penalty on
-  wrong answer.
+  providing the same that of the majority.
+To implement the proposed protocol from our protocol we can simply remove the
+  output with the penalty on a wrong answer.
 
-Other possible extension would be to have not just untrusted and randomly
+Other possible extension would be to move beyond untrusted and randomly
   selected oracles to decide the bet.
-It could be interesting to add semi-trusted oracles, services of oracles could
-  be created and used.
-This might require to pay differently to the oracles, semi-trusted oracles could
-  charge more for participate than the ones from the list.
-Our protocol was proposed with the assumption each oracles is the equivalent,
-  therefore they get paid the same, but it also may be extended to support
+It may be interesting to consider semi-trusted oracles, as ``oracles as a
+  service'' could be a realistic business option.
+This might require different types of payments to the oracles; semi-trusted
+  oracles may charge more for participate than random ones from the list.
+Our protocol was proposed with the assumption all oracles are equivalent,
+  therefore they get paid equally, but it also may be extended to support
   different rewards and penalties per oracle.

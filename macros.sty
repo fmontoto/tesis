@@ -54,7 +54,7 @@
 \newcommand{\@transactionize}[1]{%
     \@tempswafalse
     \@for\next:=#1\do
-    {\if@tempswa\else\@tempswatrue\fi{$T_{\next}$}}
+    {\if@tempswa\else\@tempswatrue\fi{$T_{\mathit{\next}}$}}
 }
 \newcommand{\transactionize}[1]{%
     \foreach \next [count=\ni] in {#1} {%
@@ -66,13 +66,13 @@
     }%
 }
 \newcommand{\fee}[1]{%
-    \ensuremath{\mathcal{F}_{#1}}%
+    \ensuremath{\mathcal{F}_{\mathit{#1}}}%
 }
 \newcommand{\signature}[1]{%
     \ensuremath{\mathcal{S}_{#1}}%
 }
 \newcommand{\timeout}[1]{%
-    \ensuremath{\uptau_{#1}}%
+    \ensuremath{\uptau_{\mathit{#1}}}%
 }
 \newcommand{\extra}[1]{%
     \dots \guilsinglleft #1\guilsinglright\ \dots

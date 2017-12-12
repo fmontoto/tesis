@@ -60,15 +60,15 @@ It uses the same bitcoin client and rules, the main difference is their value,
 }
 \end{lstlisting}
 
-The input spends money in the oracle's control, this is outside the scope
+The input spends money under the oracle's control. This is outside the scope
   of the protocol, so we do not parse it.
 
-The first output is a protocol dependent constant, it uses the OP\_RETURN opcode
-  to push the data mark the output as invalid.
+The first output is a protocol dependent constant. It uses the OP\_RETURN opcode
+  to push the data mark the output as unspendable.
 In this example the constant is the string
-  "I'm an oracle! Ready to provide data".
+  ``I'm an oracle! Ready to provide data''.
 This constant is used to identify an oracle enrollment in the blockchain, so
-  players can find and use the oracles.
+  players can find and invoke the oracles.
 
 The second output is the change.
 In this case the protocol does not require to spend any money in this
@@ -247,21 +247,21 @@ In this case the protocol does not require to spend any money in this
 \end{lstlisting}
 
 The inputs is all the money required to run this bet, it comes from both
-  oracles previously owned addresses.
+  players' previously owned addresses.
 
-The first output pushes: A constant to identify the data, in this case the
-  string "Bet looking for oracles"; The bet description's hash; The channel
-  to type and address to stablish communication with the players. In this
-  case an IP address and a port.
+The first output pushes the following: A constant to identify the data, in this
+  case the string "Bet looking for oracles"; The bet description's hash; The
+  channel to type and address to stablish communication with the players. In
+  this case an IP address and a port.
 
-The second and third outputs move most of the money to a joint account, to
-  be used in the Bet transaction.
+The second and third outputs move most of the money to a joint account, later
+  used in the Bet transaction.
 
 The fourth to the eighth outputs set apart the money to be used in the oracle
   enrollment.
 
-Ninth and tenth are the change for both players, de difference from what they
-  got from its input and the required to run the bet.
+Output number nine and ten are the change for both players, the difference from
+  what they got from their inputs and what it is the required to run the bet.
 
 Second to eighth outputs use Pay To Script Hash.
 This means we do not get o see the real script required to spend them, just the
