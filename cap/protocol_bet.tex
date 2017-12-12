@@ -40,7 +40,7 @@ The inputs for this transaction are not relevant to the protocol, they spend
 There can be more than one input by player, and change outputs if required.
 As it's unlikely the players have an unspent transaction for the exact amount
   required for the bet.
-To simplificate the transaction, more inputs nor change outputs are included.
+To simplify the transaction, more inputs nor change outputs are included.
 
 The first output does not transfer any money but includes the following
   information: the oracles list invited to participate; the channel to use for
@@ -76,7 +76,7 @@ This transaction spends $\mathcal{P} + \frac{c}{2}$ from each player:
 
 \subsubsection{Oracle Enrollment}
 Oracles invited to participate needs to retrieve the Bet description as
-  instructed in the \textit{Bet Promise} transaction, and decide whether ot not
+  instructed in the \textit{Bet Promise} transaction, and decide whether or not
   to participate.
 When one or more oracles do not participate, players must decide how to select
   new one(s).
@@ -211,7 +211,7 @@ When any of the players sees $m$ votes from the oracles it can get its prize.
 If the threshold is not met, half of this money goes to each player and we
   say the bet is not resolved, as there is no winner.
 
-The next $n$ outputs are the oracles's payment for answering.
+The next $n$ outputs are the oracles' payment for answering.
 They can not be spend before time \timeout{Bet}, the moment when the event
   happen.
 It requires the vote of the oracle ($AWins_o$ or $BWins_o$) plus the oracle's

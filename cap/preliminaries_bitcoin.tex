@@ -10,7 +10,7 @@ The idea of electronic cash has been present within the cryptographic community
   since at least 1983\cite{chaum1983blind}.
 And there were attempts for another three decades, and hundreds of papers
   published with improvements of e-cash schemes\cite{barber2012bitter}.
-So, why is Bitcoin so popular and why has it achieved the notority that three
+So, why is Bitcoin so popular and why has it achieved the notoriety that three
   decades of academic research on the field could not achieve?
 
 Barber et al.\cite{barber2012bitter} suggest a few key points to explain why
@@ -18,12 +18,12 @@ Barber et al.\cite{barber2012bitter} suggest a few key points to explain why
 \begin{enumerate}
 \item No central point of trust.
 	Bitcoin is a fully distributed system, there are no trusted entities in the
-	  system. The only asumption is that the majority of the network participants
+	  system. The only assumption is that the majority of the network participants
 	  are honest. Every previous proposal had a central trusted entity for
 	  critical tasks, as preventing double spending and coin issuance.
 \item Predictable money supply.
 	The money supply is minted at a defined and transparent rate, defined from
-	  the begining of the protocol.
+	  the beginning of the protocol.
 \item Transaction irreversibility.
 	Bitcoin transactions quickly become irreversible. This is a big difference
 	  with credit cards, where chargebacks have been used largely to commit
@@ -76,7 +76,7 @@ A transaction is the only way to move bitcoins from one account to other one,
 \end{figure}
 
 There is only one exception to this rule; the miner that builds each block is
-  allowed to create a transaction without intputs and send money to his account.
+  allowed to create a transaction without inputs and send money to his account.
 The details of this especial transaction, called generation transaction, are
   defined in the protocol.
 Any attempt to generate more than the defined coins from the miner will make
@@ -106,7 +106,7 @@ It is completely distributed, public, and anybody can participate and get a
 This makes it simple to prevent double spending while being sure the received
   coins are valid, as anybody can examine where each coin came from.
 
-As any other distributed system, the blockchain must resolve the consesus
+As any other distributed system, the blockchain must resolve the consensus
   problem \cite{fischer1983consensus}. Get all the participants to agree on
   the data. This is a fundamental problem to any distributed system. In the
   the blockchain anybody with an internet connection can be part of the
@@ -116,7 +116,7 @@ As any other distributed system, the blockchain must resolve the consesus
 
 Proof of work is the algorithm used by the bitcoin blockchain to seek
   consensus. Each entity trying to add data to the database must prove it
-  has done some required work. This algotithm was designed originally to fight
+  has done some required work. This algorithm was designed originally to fight
   email spam by requiring the sender of an email to prove that a small job was
   done in order to send the email \cite{dwork1992pricing}.
 It works by using a hard to calculate, but easy to check function. This

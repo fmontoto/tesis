@@ -40,7 +40,7 @@ The cost of running our proposed algorithm may be prohibitively expensive for
 Nonetheless we believe there are people willing to afford it when doing betting
   on large sums of money, as the cost of the protocol would represent a small
   fraction of the bet.
-Notice that the const does not increase with the amount of money involved.
+Notice that the cost does not increase with the amount of money involved.
 
 Most of the transactions required by the protocol are called
   \emph{``Non standard''} in Bitcoin.
@@ -48,7 +48,7 @@ Non standard transactions are valid and everyone recognizes them as such.
 Yet, most of the miners will not mine them, so submitting the transactions
   will take more time than a standard one.
 We hope new proposals that makes use of this available features, like this one,
-  can move the Bitcoin community to embrace this ``non estandard'' transactions.
+  can move the Bitcoin community to embrace this ``non standard'' transactions.
 
 One of the most challenging problems we had to address for this protocol was to
   translate the protocol restrictions to Bitcoin transactions.
@@ -60,7 +60,7 @@ For Orisi, only one transaction is post in the blockchain with the bet, all
   the other communication and required set up happens outside the blockchain.
 Our protocol uses the blockchain widely, not only for money transfers, but also
   for oracle discovery and initial communication.
-This seeks to avoid extra dependecies and keep most of the protocol expressed
+This seeks to avoid extra dependencies and keep most of the protocol expressed
   in the same framework.
 This come to a cost, more and larger transactions.
 They are not free anymore: we are charged by the miner for each byte we post in
@@ -73,7 +73,7 @@ Bitcoin provides a multi-sig check function, which verifies if a certain number
   of signatures under the provided public keys are present.
 In the Bet transaction we need to implement our own version of this
   cryptographic primitive, in order to get a multi-hash check function, which
-  checks that at least a threshold number of preimages are provided for the
+  checks that at least a threshold number of pre images are provided for the
   written hash.
 This transaction is hard to write as it can not be written using loops (because
   the language does not support them), and even not used branches need to be
@@ -108,8 +108,8 @@ As cryptocurrencies allows people to stay away from a centralized government
   centralized gambling sites.
 There is yet another big difference.
 People running protocols on top of blockchains can see every line of code
-  executed and how decissions are taken, making gambling a transparent process,
-  opossed as it is today, where people uses only the public interface of a web
+  executed and how decisions are taken, making gambling a transparent process,
+  opposed as it is today, where people uses only the public interface of a web
   site or brick and mortar casino and what it is ``behind the scenes'' remains
   opaque.
 Never seeing what is really going on ``behind the scenes''.
@@ -129,7 +129,7 @@ While working on this project we realized bets are only one example of external
 We could also see our oracles as ``judges'' in a dispute.
 And instead of providing an event outcome into the blockchain, they can
   decide on any subject, acting as arbitrator on a controversy.
-Small adjustements would be required for the protocol.
+Small adjustments would be required for the protocol.
 For example, if we remove the random selection of oracles, probably judges need
   to be agreed beforehand by the players.
 Other required change is to remove the penalization by answering different
@@ -139,7 +139,7 @@ It is perfectly fine and even desirable to have different opinions among the
 
 It might be also desirable to have a larger number of oracles participating in
   a bet.
-However, this requires a change in the Bitcoin implementaion, which is beyond
+However, this requires a change in the Bitcoin implementation, which is beyond
   under our control.
 
 Future work might also include sharing oracles among different bets.

@@ -12,9 +12,9 @@ Oraclize and Town Crier provide a secure interface to web sites.
 Making information of these websites available in the blockchain.
 A web site is a centralized data source, however combining multiple sites as
   data sources and considering a majority instead one of them give us a
-  descentralized source.
+  decentralized source.
 This could be a really good approach to do bets on popular events, as
-  many websites already publish results for this events (footbal results,
+  many websites already publish results for this events (football results,
   presidential election results, etc..).
 If the outcome is used from a massive number of bets, the cost of the oracles
   could be amortized among all the players.
@@ -54,7 +54,7 @@ Orisi is one of this applications that aims to solve the same problem we do.
 It works on top of bitcoin, one key difference is it's centralized oracle
   database.
 Other important difference is its secrecy, it uses BitMessage to keep the
-  location and indentity of the participants secret.
+  location and identity of the participants secret.
 Although we could use BitMessage, our implementation uses direct TCP
   communication among the participants.
 
@@ -66,7 +66,7 @@ This means, in order to redeem the prize, the winner needs to make a transaction
   and get it signed by a majority of the oracles.
 So oracles need to agree in the destination of the prize, otherwise they will
   not sign the transaction.
-Our proposal gets the oracles out from this decission and requires only the
+Our proposal gets the oracles out from this decision and requires only the
   winner signature to spend the money.
 In order to claim its payment, oracles are required to reveal one of the two
   secrets they kept.
@@ -75,8 +75,8 @@ When a majority of the oracles have revealed the secrets corresponding to the
 
 This has two main advantages: the first one, already mentioned, keeps the
   oracles out from deciding where does the prize goes.
-Oracles are not envolved in the transactions spending the prize;
-The second one is how it bounds the action of emiting the vote for the winner
+Oracles are not involve in the transactions spending the prize;
+The second one is how it bounds the action of emitting the vote for the winner
   with getting paid.
 There is not pressure for the oracle in responding before the other do it,
   there is a fixed timeout defined from the beginning to vote.

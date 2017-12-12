@@ -3,7 +3,7 @@ Examples of each one of the most important transactions in the protocol,
   parsed and explained.
 Transactions are represented using a json-like format with the field name
   and its value.
-In the blockchain, the trasaction is a concatenation of all the values
+In the blockchain, the transaction is a concatenation of all the values
   exposed here, the field names are added to make the transaction human
   readable.
 These transactions are generated for the testnet of Bitcoin, this blockchain
@@ -251,7 +251,7 @@ The inputs is all the money required to run this bet, it comes from both
 
 The first output pushes the following: A constant to identify the data, in this
   case the string "Bet looking for oracles"; The bet description's hash; The
-  channel to type and address to stablish communication with the players. In
+  channel to type and address to establish communication with the players. In
   this case an IP address and a port.
 
 The second and third outputs move most of the money to a joint account, later
@@ -1308,7 +1308,7 @@ In this case we have 5 oracles, and the threshold is set to 3, so inputs include
   script.
 The large and repetitive script is one of the costs of using a non Turing
   complete language.
-Because there are no loops availables, we need to write everything explicitly,
+Because there are no loops available, we need to write everything explicitly,
   like an unrolled loop.
 This script contains three main branches, one for the timeout case, where a new
   constant is visible: "6A0240", which is the \timeout{Two}.
