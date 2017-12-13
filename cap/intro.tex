@@ -15,7 +15,7 @@ Sometimes gambling is heavily regulated and taxed, and lotteries are usually
 Internet has made it cheaper to open and operate a casino, without the need of
   complying with laws of a particular country.
 This and the massive internet grow has moved a big percentage of the gambling
-  industry online \cite{shelat2002makes}\cite{griffiths2008internet}.
+  industry online \cite{shelat2002makes,griffiths2008internet}.
 The global Internet gambling market was estimated to be worth US\$28 billion in
   2012 and forecasted to rise to US\$49 billion by 2017%
   \cite{gainsbury2015risky}.
@@ -176,7 +176,7 @@ The main phases of this work will be the following:
     ensure protocol viability.
 \end{enumerate}
 
-\section{The protocol}
+\section{The proposed protocol}
 
 The main idea behind this work is to eliminate most of the single points of
   trust we can when performing bets.
@@ -196,10 +196,10 @@ Our proposed protocol lets users bet against each other over the outcome of
 It keeps the money under each player's control and relies on a distributed set
   of oracles to decide who wins the money.
 
-There are two mains phases in the protocol, the first one is optional and
-  can be replaced at players' will:
+There are two mains phases in the protocol: oracle selection and the bet
+  resolution. They are explained next:
 
-\subsection{Oracles selection}
+\subsection{Oracle Selection}
 In this first step the players compile a list of oracles from a distributed
   and public source, and select randomly from there a subset of oracles to
   be used in their bet.
@@ -217,7 +217,7 @@ The chances of a player tampering the list with oracles controlled by him must
 We say this phase is optional as it might be the case both players trust already
   in a set of oracles.
 
-\subsection{Bet resolution}
+\subsection{Bet Resolution}
 This phase starts after the players agree on the bet and the oracles to be used
   on it.
 Both players build and sign a transaction containing all the Bitcoins required

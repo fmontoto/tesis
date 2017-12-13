@@ -7,13 +7,13 @@ The same author shared as open source code a implementation of the protocol in
 Nevertheless as it was mentioned in the previous section, Bitcoin is not the
   first idea of electronic cash.
 The idea of electronic cash has been present within the cryptographic community
-  since at least 1983\cite{chaum1983blind}.
+  since at least 1983 \cite{chaum1983blind}.
 And there were attempts for another three decades, and hundreds of papers
   published with improvements of e-cash schemes\cite{barber2012bitter}.
 So, why is Bitcoin so popular and why has it achieved the notoriety that three
   decades of academic research on the field could not achieve?
 
-Barber et al.\cite{barber2012bitter} suggest a few key points to explain why
+Barber et al. \cite{barber2012bitter} suggest a few key points to explain why
   Bitcoin was the first electronic currency to take off.
 \begin{enumerate}
 \item No central point of trust.
@@ -219,7 +219,7 @@ When sending money, there are some more details than we have discussed at
 \begin{figure}[ht]
   \centering
   \includesvg[width=0.8\columnwidth]{input}
-  \caption{Wire format of an Input.
+  \caption[Wire format of an Input.]{Wire format of an Input.
              The first two fields specify the output to be spent.
              The first one is the hash of the transaction containing it, and the
                second its index on it.
@@ -236,7 +236,7 @@ When sending money, there are some more details than we have discussed at
 \begin{figure}[ht]
   \centering
   \includesvg[width=0.8\columnwidth]{output}
-  \caption{Wire format of an Output.
+  \caption[Wire format of an Output]{Wire format of an Output.
            The first field is the amount of coins this output holds.
            The second field specify the length of the script.
            And the third field is the script required to spend this output,
@@ -252,7 +252,7 @@ When sending money, there are some more details than we have discussed at
 An output does not send money to a given address, but defines how the money can
   be spent. Currently there are two formats in use. The most used is called
   ``Pay To Public Key Hash'' (P2PKH)\footnote{The key hash is the address of an
-  account}. The other is called ``Pay To Script Hash'' (P2SH).
+  account.}. The other is called ``Pay To Script Hash'' (P2SH).
 
 As figure~\ref{fig:output} shows, the output has a script on its wire
   representation.

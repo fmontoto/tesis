@@ -70,7 +70,7 @@ This transaction spends $\mathcal{P} + \frac{c}{2}$ from each player:
   $ n \cdot \frac{c}{n}$ goes to pay for oracle enrollments; \fee{Bet Promise}
   goes to pay this transaction's fees; and
   $2 \cdot \mathcal{P} - \fee{Bet Promise}$ to pay the bet and its associated
-  costs, as transaction fees and oracle rewards\footnote{\mathcal{P} is a
+  costs, as transaction fees and oracle rewards\footnote{$\mathcal{P}$ is a
   constant to make easier to keep track of the money spent by the each player
   during the protocol}.
 
@@ -89,17 +89,17 @@ When a oracle decides to participate, it builds an \textit{Oracle enrollment}
 
 \transaction%
     {Oracle Enrollment}{Oracle previous tx, Bet Promise}
-    {Oracle previous tx}{$\alpha$}{$\sigma$}
-    {Bet Promise}{3 + Oracle Index}{\signature{A} $\wedge$ \signature{B}}
+   {Oracle previous tx}{$\alpha$}{$\sigma$}
+   {Bet Promise}{3 + Oracle Index}{\signature{A} $\wedge$ \signature{B}}
     \stopinputs
-    {[Registration] + c/n + [Oracle Payment] \\ - \fee{Oracle Enrollment}}
-        {(\signature{Oracle} $\wedge$ \signature{A} $\wedge$ \signature{B}) \\
-            $\vee$ \\
-         (\signature{Oracle} $\wedge$ \timeout{Bet})}
-    {[Two Answers Penalty]}{((\signature{A} $\vee$ \signature{B}) $\wedge$ %
-                             ($AWins_o \wedge BWins_o$)) \\
-                           $\vee$ \\
-                       (\signature{Oracle} $\wedge$ \timeout{Two})}
+   {[Registration] + c/n + [Oracle Payment] \\ - \fee{Oracle Enrollment}}
+       {(\signature{Oracle} $\wedge$ \signature{A} $\wedge$ \signature{B}) \\
+           $\vee$ \\
+        (\signature{Oracle} $\wedge$ \timeout{Bet})}
+   {[Two Answers Penalty]}{((\signature{A} $\vee$ \signature{B}) $\wedge$ %
+                            ($AWins_o$ $\wedge$ $BWins_o$)) \\
+                          $\vee$ \\
+                      (\signature{Oracle} $\wedge$ \timeout{Two})}
     \stopoutputs
     {tx:oracle_enrollment}
     {Oracle Enrollment}
@@ -121,8 +121,8 @@ If the oracle reveals that player A and player B wins, this money can be taken
   \timeout{Two}.
 Two Answers Penalty is the charge for voting twice, this must not be a small
   amount, as voting twice is the oracle's full responsibility.
-At this output the hash of the answers is revealed ($H(AWins_o), H(BWins_o)$),
-  the oracle must keeps$AWins_o$ and $BWins_o$ secret, revealing this value is
+At this output the hash of the answers is revealed ($H(AWins_o)$, $H(BWins_o)$),
+  the oracle must keeps $AWins_o$ and $BWins_o$ secret, revealing this value is
   equivalent to choose a winner.
 
 \subsubsection{Bet Transaction} \label{subsec:bet_transaction}
@@ -137,6 +137,7 @@ Each one of these outputs are controlled by one oracle and both players.
 
 Because inputs come from outputs controlled by all the participants, the
   transaction must be signed by both players and all the oracles:
+\newpage
 \small{
 \transaction
     {Bet}{Bet Promise, Oracles Enrollment}
@@ -148,58 +149,58 @@ Because inputs come from outputs controlled by all the participants, the
     {Oracle_n Enrollment}{0}
         {\signature{A} $\wedge$ \signature{B} $\wedge$ \signature{o_n}}
     \stopinputs
-    {$\mathcal{P} + n/2 \cdot $([Registration] \\
+    {$\mathcal{P} + n/2 \cdot$ ([Registration] \\
             - [Oracle Payment] \\
-            - \fee{Oracle Enrollment}$)$ \\
+            - \fee{Oracle Enrollment}) \\
             - 1/2 (\fee{Bet Promise} + \fee{Bet})}
         {(\signature{A} $\wedge$ ($AWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $AWins_{\tilde{o}_m}$)) \\
                           $\vee$ \\
-         (\signature{B} $\wedge$ ($BWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $BWins_{\tilde{o}_m})) \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $BWins_{\tilde{o}_m}$)) \\
                                     $\vee$ \\
          (\signature{A} $\wedge$ \timeout{Two})}
     {$\mathcal{P} + n/2 \cdot $([Registration] \\
             - [Oracle Payment] \\
             - \fee{Oracle Enrollment}) \\
             - 1/2 (\fee{Bet Promise} + \fee{Bet})}
-        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $AWins_{\tilde{o}_m})) \\
+        {(\signature{A} $\wedge$ ($AWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $AWins_{\tilde{o}_m}$)) \\
                           $\vee$ \\
-         (\signature{B} $\wedge$ ($BWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $BWins_{\tilde{o}_m})) \\
+         (\signature{B} $\wedge$ ($BWins_{\tilde{o}_1}$ $\wedge$ \ldots $\wedge$ $BWins_{\tilde{o}_m}$)) \\
                                     $\vee$ \\
          (\signature{B} $\wedge$ \timeout{Two})}
-    {[Oracle_1 Payment]}{(\signature{o_1} $\wedge$ ($AWins_{o_1} \vee BWins_{o_1}$) %
-                       $\wedge$ \timeout{Bet}) \\
-                       $\vee$ \\
-                       \signature{A} $\wedge$ \signature{B} $\wedge$ %
-                       \timeout{Reply}}
+    {[Oracle$_{1}$ Payment]}{(\signature{o_{1}} $\wedge$ ($AWins_{o_{1}}$ $\vee$ $BWins_{o_{1}}$) %
+                      $\wedge$ \timeout{Bet}) \\
+                      $\vee$ \\
+                       \signature{A} $\wedge$ \signature{B} $\wedge$ \timeout{Reply}}
     {\ldots}{\ldots}
-    {[Oracle_{n} Payment]}{(\signature{o_{n}} $\wedge$ ($AWins_{o_{n}} \vee BWins_{o_{n}}$) %
+    {[Oracle$_{n}$ Payment]}{(\signature{o_{n}} $\wedge$ ($AWins_{o_{n}}$ $\vee$ $BWins_{o_{n}}$) %
                        $\wedge$ \timeout{Bet}) \\
                        $\vee$ \\
                        \signature{A} $\wedge$ \signature{B} $\wedge$ %
                        \timeout{Reply}}
-    {[Oracle_{1} Payment]}{\big( $AWins_{o_{1}}$ $\wedge$ \\
-                             ($BWins_{\hat{o}_{1}} \wedge$ \dots $\wedge$ %
-                             $BWins_{\hat{o}_{m}}) $\wedge$ \signature{B} \big) \\
+    {[Oracle$_{1}$ Payment]}{\big( $AWins_{o_{1}}$ $\wedge$ \\
+                             ($BWins_{\hat{o}_{1}}$ $\wedge$ \dots $\wedge$ %
+                             $BWins_{\hat{o}_{m}}$) $\wedge$ \signature{B} \big) \\
                        $\vee$ \\
                        \big($BWins_{o_{1}}$ $\wedge$ \\
                             ($AWins_{\hat{o}_{1}}$ %
-                            $\wedge$ \dots $\wedge$ $AWins_{\hat{o}_{m}}) $\wedge$ \signature{A}\big) \\
+                            $\wedge$ \dots $\wedge$ $AWins_{\hat{o}_{m}}$) $\wedge$ \signature{A}\big) \\
                        $\vee$ \\
                         \signature{o_{1}} $\wedge$ \mbox{\timeout{Undue}}}
     {\ldots}{\ldots}
-    {[Oracle_{n} Payment]}{\big( $AWins_{o_{n}}$ $\wedge$ \\
-                             ($BWins_{\hat{o}_{1}} \wedge$ \dots $\wedge$ %
-                             $BWins_{\hat{o}_{m}}) $\wedge$ \signature{B} \big) \\
+    {[Oracle$_{n}$ Payment]}{\big( $AWins_{o_{n}}$ $\wedge$ \\
+                             ($BWins_{\hat{o}_{1}}$ $\wedge$ \dots $\wedge$ %
+                             $BWins_{\hat{o}_{m}}$) $\wedge$ \signature{B} \big) \\
                        $\vee$ \\
                        \big($BWins_{o_{n}}$ $\wedge$ \\
                             ($AWins_{\hat{o}_{1}}$ %
-                            $\wedge$ \dots $\wedge$ $AWins_{\hat{o}_{m}}) $\wedge$ \signature{A}\big) \\
+                            $\wedge$ \dots $\wedge$ $AWins_{\hat{o}_{m}}$) $\wedge$ \signature{A}\big) \\
                        $\vee$ \\
                         \signature{o_{n}} $\wedge$ \timeout{Undue}}
     \stopoutputs
     {tx:bet}
     {Bet}
 }
+
 \raisebox{28em}[0pt][0pt]{%
     \hbox{\hspace{37em}{\framebox[1.1\width]{\parbox{50\unitlength}{%
         $o_{i}, \tilde{o}_j, \hat{o}_{k}$ \\ $\in$ Oracles}}}}
