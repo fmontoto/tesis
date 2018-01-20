@@ -7,12 +7,12 @@ Once players decided the oracles to use, whether using the \textit{Oracle
   for the oracles to answer, the amount of money bet by each player, and the
   fees and deposit required to the oracles.
 Once all the bet parameters are set and serialized its hash is calculated.
-Players puts the bet hash and all the money required to run the protocol,
+Players put the bet hash and all the money required to run the protocol,
   including fees and the prize into a transaction.
 The selected oracles, bet hash and a method\footnote{For instance an URL to a
   website with the bet description. Oracles are responsible to check the
   description fetched with the hash provided in the transaction.} to get the
-  transaction full description are appended to this transaction in plain text,
+  transaction's full description are appended to this transaction in plain text,
   and the transaction is sent to the blockchain.
 We call this transaction ``\textit{Bet Promise}'', as it is a commitment from both
   players to the bet:
@@ -36,11 +36,11 @@ We call this transaction ``\textit{Bet Promise}'', as it is a commitment from bo
     {Bet Promise}
 
 The inputs for this transaction are not relevant to the protocol, they spend
-  money from both player to pay for this bet.
-There can be more than one input by player, and change outputs if required.
-As it's unlikely the players have an unspent transaction for the exact amount
+  money from both players to pay for this bet.
+There can be more than one input by player, and change outputs if required,
+as it's unlikely the players have an unspent transaction for the exact amount
   required for the bet.
-To simplify the transaction, more inputs nor change outputs are included.
+To simplify the transaction, extra inputs and change outputs are not included.
 
 The first output does not transfer any money but includes the following
   information: the oracles list invited to participate; the channel to use for
@@ -60,7 +60,7 @@ In case one of the players disappear, there is a provision so, after a certain
 
 The outputs with indexes 3 to 3 + (n - 1) are a small portion of the money, used
   for the oracle enrollments.
-This money does not includes a timeout because it is an small amount\footnote{If
+This money does not include a timeout because it is an small amount\footnote{If
   players are willing to pay the extra fee required to add this timeout, it can
   be added.}.
 This money is spend at the oracle enrollment as commitment from the players to
@@ -75,14 +75,14 @@ This transaction spends $\mathcal{P} + \frac{c}{2}$ from each player:
   during the protocol}.
 
 \subsubsection{Oracle Enrollment}
-Oracles invited to participate needs to retrieve the Bet description as
+Oracles invited to participate need to retrieve the Bet description as
   instructed in the \textit{Bet Promise} transaction, and decide whether or not
   to participate.
 When one or more oracles do not participate, players must decide how to select
   new one(s).
 For example, using a "waiting list" computed in the first part of the protocol
   is an option.
-When a oracle decides to participate, it builds an \textit{Oracle enrollment}
+When an oracle decides to participate, it builds an \textit{Oracle enrollment}
   transaction, and sends it to the players while spending money from the
   \textit{Bet Promise} transaction. Table~\ref{tx:oracle_enrollment} includes
   the details.
@@ -112,24 +112,24 @@ The oracle index goes from 0 to n - 1.
 
 The first output takes the money under the oracle and both players control, to
   be used in the \textit{Bet} transaction.
-If the Bet Transaction (see Section~\ref{subsec:bet_transaction} does not go
+If the Bet Transaction (see Section~\ref{subsec:bet_transaction}) does not go
   into the blockchain, the oracle can claim this money after \timeout{Bet}.
 
-The second one is a penalty to be charge if the oracle misbehaves.
-If the oracle reveals that player A and player B wins, this money can be taken
+The second one is a penalty to be charged if the oracle misbehaves.
+If the oracle reveals that player A and player B win, this money can be taken
   by any player. Otherwise the money can be claimed back by the oracle after
   \timeout{Two}.
 Two Answers Penalty is the charge for voting twice, this must not be a small
   amount, as voting twice is the oracle's full responsibility.
 At this output the hash of the answers is revealed ($H(AWins_o)$, $H(BWins_o)$),
-  the oracle must keeps $AWins_o$ and $BWins_o$ secret, revealing this value is
+  the oracle must keep $AWins_o$ and $BWins_o$ secret, revealing this value is
   equivalent to choose a winner.
 
 \subsubsection{Bet Transaction} \label{subsec:bet_transaction}
 
 Once the required oracles are enrolled to participate, the ``Bet'' transaction
   is built by the players.
- The first two inputs contains what is remaining from the original players
+ The first two inputs contain what is remaining from the original players
    contributions to the prize, controlled by the players' joint account.
 Then, the next $n$ inputs are the outputs in the \textit{Oracle Enrollment},
   containing the oracles registration.
@@ -213,11 +213,10 @@ If the threshold is not met, half of this money goes to each player and we
   say the bet is not resolved, as there is no winner.
 
 The next $n$ outputs are the oracles' payment for answering.
-They can not be spend before time \timeout{Bet}, the moment when the event
-  happen.
-It requires the vote of the oracle ($AWins_o$ or $BWins_o$) plus the oracle's
-   signature.
-This output binds the vote with the oracle's payment, as they are required to
+They can not be spent before time \timeout{Bet}, the moment when the event
+  happens.
+These outputs require the vote of the oracle ($AWins_o$ or $BWins_o$) plus the oracle's
+   signature to be redeemed, this  binds the vote with the oracle's payment, as they are required to
   make its vote public in order to get the payment.
 If the oracle does not answer after time \timeout{Reply}, players are allowed to
   take this money back and the oracle can not further claim its payment.
@@ -241,11 +240,11 @@ There are four timeouts expressed in the transaction which are described in
         \timeout{Bet} & \makecell[l]{%
               First timeout, this is the moment the event being used to decide
               the bet \\ takes place. From this moment on oracles can vote for a
-              winner and take its \\ place.} \\
+              winner and take its \\ payment for it.} \\
         \hline
         \timeout{Reply} & \makecell[l]{%
               This timeout signals the time for the oracles to answer. After
-              this timeout \\ pass, players can take the oracle's payment if the
+              this timeout \\ passes, players can take the oracle's payment if the
               oracle has not replied.} \\
         \hline
         \timeout{Undue} & \makecell[l]{%
@@ -254,7 +253,7 @@ There are four timeouts expressed in the transaction which are described in
               that behaved correctly can \\ take the payment deposit back.} \\
         \hline
         \timeout{Two} & \makecell[l]{%
-              The last timeout, this could be the same than \timeout{Undue}.
+              The last timeout, this could be the same as \timeout{Undue}.
               Until this moment, \\  players can take the two answers penalty
               for any oracle that made public \\ the votes for both players.
               After this timeout, the oracle can take its deposit \\ back.} \\

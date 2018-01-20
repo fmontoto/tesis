@@ -1,7 +1,7 @@
 \section{The Protocol}
 \subsection{Notation}
 Before explaining the protocol we introduce the following notation, based
-  in the work of Andrychowicz et al. \cite{andrychowicz2014secure}, to describe
+  on the work of Andrychowicz et al. \cite{andrychowicz2014secure}, to describe
   the transactions.
 
 Table~\ref{tx:example} represents a transaction that spends two outputs from
@@ -46,7 +46,7 @@ When a signature from the participant $A$ is provided, we denote: \signature{A}.
 Sometimes a literal is required, usually a preimage of a known hash ($H(l)$).
 In that case, we just use $l$.
 Some branches of the transaction's script are locked before a defined time, we
-  use \timeout{k} to disable the the branch this expressions is in before the
+  use \timeout{k} to disable the branch this expressions is in before the
   time $k$.
 
 As an example, let's say Alice wants to give money to Bob if he solves a problem
@@ -54,7 +54,7 @@ As an example, let's say Alice wants to give money to Bob if he solves a problem
 We would like the money to be unspendable from Alice (to ensure Bob he gets the
   money even she changes her mind) until the time $k$.
 During this time, if Bobs provide the answer he can claim the money by himself.
-After the time $k$, if Bob does not provide an answer, Alice gets its money
+After the time $k$, if Bob does not provide an answer, Alice gets her money
   back.
 
 The script at~\ref{eq:notation_sample} describes this set of constraints.
@@ -81,7 +81,7 @@ If the list is big enough, selecting elements randomly from it reduces the
 \subsubsection{Oracle List Generation}
 
 In order to get a trustworthy list, we define a few key properties:
-The list must be must be decentralized; anybody willing to be an oracle can
+The list must be decentralized; anybody willing to be an oracle can
   enroll itself; and it must be visible for both players.
 
 As discussed in Section~\ref{subsec:Blockchain}, we already have a public
@@ -120,13 +120,13 @@ But the operation allows us to insert arbitrary data into the blockchain, and it
 
 Note that there is no required deposit for registration. There is a
   transaction fee, however, which must be paid when submitting the transaction.
-We may argue than a higher price to register an oracle will decrease the
+We may argue that a higher price to register an oracle will decrease the
   chances of single individual controlling the majority of the list.
 If that is the case, increasing the cost by adding a required a unspendable
 output does not require any change in the transaction~\ref{tx:registration},
-  as the unspendable output already exist.
+  as the unspendable output already exists.
 Adding a deposit spendable by an address will require a new output, but the
-  idea remain the same.
+  idea remains the same.
 
 When this transaction is submitted to the blockchain, players can look into
   this transaction and recognize it as an oracle registration.
@@ -138,10 +138,10 @@ There are a few parameters the value of which players must agree in order to
 First they decide the period of time they will consider oracles from\footnote{%
   Time is measured as a range of blocks in the blockchain.}.
 Some participants might want to avoid recently registered oracles, as they might
-  have an higher chance to be controlled by the other player.
+  have a higher chance to be controlled by the other player.
 Others might argue that those oracles associated to very old registrations
   are likely to be inactive.
-So players may be willing to to avoid oracles registered long time ago.
+So players may be willing to avoid oracles registered long time ago.
 
 Second, players decide the list to get the oracles from.
 In this process, they may want to filter out oracles, for example excluding
@@ -198,6 +198,6 @@ Otherwise, a player tried to cheat and the protocol aborts as there is no way to
 
 If we have a list both players agree with, and we can also produce random bits,
   selecting a number of oracles from the list is a trivial exercise.
-After this step, players had decide the oracles to use.
-We represent the total number of oracles participating in the protocol by a $n$,
+After this step, players had decided the oracles to use.
+We represent the total number of oracles participating in the protocol by $n$,
   and the required number to decide the bet as $m$, where $\frac{n}{2} < m$.

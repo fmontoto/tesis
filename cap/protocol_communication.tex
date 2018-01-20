@@ -22,7 +22,7 @@ A communication method besides ``the blockchain'' is required in order to
 This communication must be bidirectional.
 
 The first step is to chat and decide the bet, if this communication is not
-  secured, the \textit{Bet Promise} transaction works as authentication method.
+  secure, the \textit{Bet Promise} transaction works as authentication method.
 This is because, at signing it, each player proves it control the private key
   corresponding to its address.
 This way, each player commits to the data the transaction holds.
@@ -44,24 +44,24 @@ After all the oracles sent their transactions, players have all they need
 No further communication off the blockchain is required from now on if every
   oracle behaves correctly.
 
-\subsection{Secured communication} \label{subsec:secured_comm}
+\subsection{Secure communication} \label{subsec:secure_comm}
 
-As stated above, there is no need for secured communication in the protocol,
+As stated above, there is no need for secure communication in the protocol,
   however if required for some participants, we now propose a mechanism to
   start a secure communication with no extra previous knowledge, simply using
   a peer to peer channel.
 
-Both players known each other's Bitcoin address, so the first step is to
+Both players know each other's Bitcoin address, so the first step is to
   reveal to the other the address' public key using an insecure channel.
 This is verifiable by the receiver, as the address is the hash of the public
   key.
 Then they generate and send a random string in the insecure channel.
 After this, using the public key of the other player, the following
-  information is encrypted and signed.
-A secure channel id, credentials to establish the secure channel, and the
+  information is encrypted and signed:
+a secure channel id, credentials to establish the secure channel, and the
   received random string. This encrypted values are sent using the insecure
   channel.
-This message is decrypted and a equality check is done, the random string
+This message is decrypted and equality check is done, the random string
   received must match the one sent at the beginning, to prevent replay
   attacks.
 

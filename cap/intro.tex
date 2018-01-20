@@ -33,7 +33,7 @@ We might not be aware of the fact, but every time we place a bet we are
   implicitly trusting in a third party, either the other player or the bet
   site. For physical casinos this is usually not a problem, as they are
   regulated by the law, any misconduct can get the casino in legal problems
-  resulting in a revoke revoked.
+  resulting in a revoked license to operate.
 As there is a significant cost involved in starting a physical casino,
   maintaining a good reputation will attract customers.
 
@@ -44,7 +44,7 @@ Friends usually are trusted people, so trusting them when gambling might not
   resolved.
 Online casinos on the other hand are more problematic as there are many known
   scam schemes, as described by Griffiths \cite{griffiths2010crime}. And
-  half of the players at this sites believe the providers are cheating on
+  half of the players at these sites believe the providers are cheating on
   them \cite{mcmullan2010online}. However, some of them are subject to
   government regulation and many have been in the business for several years.
 This kind of characteristics can help to identify a trustworthy online site.
@@ -63,7 +63,7 @@ A subset of the digital currencies is called virtual currencies: they are
   used and accepted among the members of a specific virtual community}.
 
 Based on the interaction of the currency with currencies outside the
-  community there are three types of virtual currencies: The ones with almost
+  community there are three types of virtual currencies: the ones with almost
   no interaction with the outside money, this is usually the case of video
   games, where its currency is only valuable within the game. A second
   type is where the currency can be purchased directly using other currency.
@@ -83,7 +83,7 @@ By late 2008, a short whitepaper \cite{nakamoto2008bitcoin} signed using a
   pseudonym, was released with yet another virtual currency protocol
   specification. Later in 2009 its implementation was made available as open
   source code. The main difference with previous implementations was its lack of
-  a central organization, this new coin was completely decentralized.
+  a central organization. This new coin was completely decentralized.
 The software started to be run by some early enthusiasts and Bitcoin went from
   an idea to a usable coin.
 In the beginning the coins were exchanged for free among the community users.
@@ -105,7 +105,7 @@ Today the market capitalization of Bitcoin (this is, the amount of money times
 With cryptocurrencies getting more popular, it was only a matter of time until
   the first sites started to offer some games of chance, acting as online
   casinos.
-The only difference of this new sites with a traditional online casino was the
+The only difference of these new sites with a traditional online casino was the
   currency on which the bet takes place.
 However, as any other currency online casino, any player who decided to play
   here is at the mercy of the casino.
@@ -113,7 +113,7 @@ If the casino does not want or does not have the means to pay, there is nothing
   the participant can do, and his money is lost.
 The problems described for online casinos using traditional currencies apply in
 the same way to the new ones.
-(More on online casinos at Section~\ref{gambling}.)
+(More on online casinos in Section~\ref{gambling}.)
 
 After some time, people started to see potential of cryptocurrencies at solving
   some of the trust issues related to gambling.
@@ -130,17 +130,17 @@ Orisi allows users to access data from the outside world from the blockchain
   by using a distributed set of oracles. So instead of trusting in one instance
   to provide the data, the trust is placed in the majority of several different
   oracles.
-More recently, on early 2017, Winsome\footnote{https://www.winsome.io} was
+More recently, in early 2017, Winsome\footnote{https://www.winsome.io} was
   released. Advertised as a \itquote{Provably Fair | Trustless Casino}, Winsome
   is an online casino where wagers are placed in a public smart contract posted
   in the Ethereum's blockchain.
 The contract defining the game is enforced by the Ethereum protocol.
-As May 2017, they do offer two casino games, blackjack and \texttt{Rouleth},
+As of May 2017, they do offer two casino games, blackjack and \texttt{Rouleth},
   which is an online roulette.
 
 Motivated to provide an option to gamble over real world events with untrusted
- peers.
-This work proposes a protocol to define the destination of an initial wage
+ peers,
+this work proposes a protocol to define the destination of an initial wage
   between the two players.
 The decision is made by a set of oracles, which are being paid also within the
   protocol to behave correctly.
@@ -166,7 +166,7 @@ The main phases of this work will be the following:
 	  the proposed problem or similar ones. As cryptocurrencies are a recent
 	  research field, this review must cover literature as well as
 	  community gathering places, such as forums and specialized blogs,
-	  magazines, etc..
+	  magazines, etc.
   \item Analysis of current solutions to the problem and similar ones.
   \item Design and implementation of a protocol to solve the problem.
     Implementation is considered very important as the current rate of change
@@ -178,8 +178,8 @@ The main phases of this work will be the following:
 
 \section{The proposed protocol}
 
-The main idea behind this work is to eliminate most of the single points of
-  trust we can when performing bets.
+The main idea behind this work is to eliminate most single points of
+  trust when performing bets.
 Traditional currencies are produced and controlled by governments, so the first
   decision was to use a currency without a single controller.
 We chose Bitcoin mainly for two reasons.
@@ -192,12 +192,12 @@ And second, the network supporting bitcoin is much bigger than the ones for
   of the currency.
 
 Our proposed protocol lets users bet against each other over the outcome of
-  future events, without trusting each other nor any single judge.
+  future events, without trusting each other nor any individual judge.
 It keeps the money under each player's control and relies on a distributed set
   of oracles to decide who wins the money.
 
-There are two mains phases in the protocol: oracle selection and the bet
-  resolution. They are explained next:
+There are two main phases in the protocol: oracle selection and bet
+  resolution. They are explained as follows:
 
 \subsection{Oracle Selection}
 In this first step the players compile a list of oracles from a distributed
@@ -224,7 +224,7 @@ Both players build and sign a transaction containing all the Bitcoins required
   for the bet, the bet description and the list of oracles chosen to
   participate.
 This transaction is sent to the blockchain to make it publicly visible. So
-  oracles known they are asked to participate.
+  oracles know they are asked to participate.
 Oracles express their desire to participate by submitting an enrollment
   transaction into the blockchain.
 If enough oracles enroll, the bet can take place.

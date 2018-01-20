@@ -7,8 +7,8 @@ Creating custom transactions is not a common functionality in bitcoin clients,
   custom transactions.
 
 In order to prove the viability of the proposed protocol and generate the
-  transactions in the appendix~\ref{sec:appendix_transactions} an implementation
-  was written.
+  transactions an implementation
+  was written (see Appendix~\ref{sec:appendix_transactions}).
 
 We used Java to implement all the protocol functionality.
 We divide our implementation in three logical modules to explain the work done:
@@ -21,7 +21,7 @@ This module provides an interface to the Bitcoin client, it allows our
   validity of the transactions we generate.
 
 \item \textbf{Bitcoin core:}
-This module expose Bitcoin objects with our required functionality.
+This module exposes Bitcoin objects with our required functionality.
 It is capable to generate custom transaction and sign them, it also
   provides transaction parsers and human readable views of them.
 Likely all this functionality would be in a ``Bitcoin Library'' if bitcoin

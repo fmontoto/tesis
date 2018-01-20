@@ -13,7 +13,7 @@ However as bitcoin use has increased, transactions are not free
     blockchain, but it might take forever for them to get into it. As miner will
     prioritize transactions with fee to collect.}.
 That is why we decided to explicitly consider the fees in the protocol
-So in what follows we do the analysis with all the costs, not only the oracle
+So in what follows we do the analysis with all the costs, not only the oracle's
   payment.
 
 In Bitcoin, fees are charged by byte, therefore bigger transactions will pay more
@@ -21,7 +21,7 @@ In Bitcoin, fees are charged by byte, therefore bigger transactions will pay mor
 
 At the moment we write this work, transactions paying 120 satoshi\footnote{A
   satoshi is the smallest unit of bitcoin on the blockchain. It is a one hundred
-  millionth of a single bitcoin ($1 \cdot 10^{-8}$).} usually gets into the next
+  millionth of a single bitcoin ($1 \cdot 10^{-8}$).} usually get into the next
   mined block.
 That is not too bad for money transferences, but as we have some big transaction
   we will do calculations with a fee of \feeval{} per byte.
@@ -83,29 +83,28 @@ Redeem transactions are required to put back the money into personal accounts,
 They are explained next:
 
 \begin{itemize}
-    \item Player redeem prize: takes the earnings of the winner into an address
+    \item Player redeems prize: takes the earnings of the winner into an address
         the player controls.
-    \item Oracle redeem payment: this transaction includes the vote to select
+    \item Oracle redeems payment: this transaction includes the vote to select
         the winner and allows the oracle to retrieve him/her reward.
-    \item Player redeem oracle doesn't answer: can be submitted by both players
+    \item Player redeems oracle doesn't answer: can be submitted by both players
         when an oracle doesn't answer. It charges the oracle with the associated
         penalty.
-    \item Player redeem wrong answer: it is the transaction where the winning
+    \item Player redeems wrong answer: it is the transaction where the winning
         player can charge oracles that didn't answer correctly.
-    \item Oracle redeem undue: it is submitted by each oracle that does not
-        provide an incorrect answer (this includes failing to provide an
-        answer).
-    \item Player redeem two answers: it is a transaction that can be submitted
+    \item Oracle redeems undue: it is submitted by each oracle that does provide
+        a correct answer or fails to provide one at all.
+    \item Player redeems two answers: it is a transaction that can be submitted
         by any player when a given oracle gave two answers to collect the
         penalty associated.
-    \item Oracle redeem two answers: it can be submitted by any oracle that
+    \item Oracle redeems two answers: it can be submitted by any oracle that
         didn't give two answers; it recovers the penalty for this behavior back
         to the oracle.
 \end{itemize}
 
+Table~\ref{tab:costs}  summarize the costs incurred by both players.
 For a successful run of the protocol, where there is a winner and every oracle
-  behaves properly. Table~\ref{tab:costs}  summarize the costs incurred by both
-  players.
+  behaves properly.
 
 \newcommand\totalcost[2]{\totalcostimpl{#1}{#2}{\numoracles{}}{\feeval{}}}%
 \begin{center}
@@ -220,14 +219,14 @@ The discussion about the value for the oracle payment is less technical, and
   probably each person reading this work might have a different optimal value
   in mind.
 We have simplified this payment to be equal for every oracle, but players
-  might decide some oracles are more expensive than other ones.
+  might decide some oracles are more expensive than others.
 Oracles with more history or reputation might be worthy of a bigger payment.
 The amount being wagered is also an important factor to determine this number,
   if there is a really big amount of money at stake we might be willing to
   spend more money on this item, as this can decrease the chance of the oracles
   taking a bribe.
 
-For this calculation we have defined a [Oracle Payment] of \num{200000}
+For this calculation we have defined [Oracle Payment] to be \num{200000}
   satoshis, or USD $7.60$. Simplifying the [Registration] to 0, running the
   protocol cost the users USD $62.51$.
 In order to participate in the bet, each oracle needs to put a deposit of
