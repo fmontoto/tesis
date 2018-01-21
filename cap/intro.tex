@@ -204,12 +204,14 @@ In this first step the players compile a list of oracles from a distributed
   and public source, and select randomly from there a subset of oracles to
   be used in their bet.
 
-Bitcoin (like most of the cryptocurrencies) includes a scripting language able
+Bitcoin (like most of the cryptocurrencies) includes a scripting language
+  (see Appendix~\ref{sec:appendix_script})
+able
  to control money transferences, well defined and with its execution enforced by
  the complete bitcoin network.
 The challenge is to bring data from outside the bitcoin blockchain into it so
   scripts on it can run on that data.
-Our protocol relies on several paid ``oracles'' to bring this data.
+Our protocol relies on several paid \textit{oracles} to bring this data.
 As the oracles' output will be used to decide who is the bet's winner, it is a
   crucial step.
 The chances of a player tampering the list with oracles controlled by him must
@@ -239,5 +241,7 @@ All the payments are also set in this transaction: the payments for the winner
 Oracles get their payment by answering who the winner is, and as soon as
   enough oracles vote for one player as the winner\footnote{Enough is a
   threshold defined in the bet parameters, at least$\lfloor \frac{n}{2}
-  \rfloor + 1$ with $n$ the number of oracles.}, the winning  player can take
+  \rfloor + 1$ with $n$ the number of oracles. This ensures there is only
+  one winner, any number below this threshold can lead to two winners
+  in a correct execution of the protocol.}, the winning  player can take
   its reward.

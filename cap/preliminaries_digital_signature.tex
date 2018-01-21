@@ -1,14 +1,14 @@
 \section{Digital Signatures}
-The idea of ``Digital Signature'' was introduced in 1976 by Diffie and
-  Hellman in ``New Directions in Cryptography''\cite{diffie1976new}. This work
-  introduced what they called ``Public Key Cryptosystem'', where enciphering and
+The idea of \textit{digital signature} was introduced in 1976 by Diffie and
+  Hellman in \textit{New Directions in Cryptography}''\cite{diffie1976new}. This work
+  introduced what they called \textit{Public Key Cryptosystem}, where enciphering and
   deciphering operations use different keys, $E$ and $D$, such that computing D
   from E is computationally infeasible.
 Today this pair is widely used and known as Public Key (PK) and Secret Key (SK).
 
 The public key cryptosystem, or asymmetrical cryptography was created to solve
-  one important problem of symmetrical systems\footnote{As opposed to the
-  asymmetrical one, symmetrical systems use the same key to cipher and decipher
+  one important problem of symmetrical systems\footnote{As opposed to
+  asymmetrical systems, symmetrical systems use the same key to cipher and decipher
   the messages.}: It is impossible to start a secure communication in an
   insecure channel without previously exchange of a key using a secure channel.
 To establish secure communication within an insecure channel participants makes
@@ -28,14 +28,23 @@ The signer uses his SK to produce a signature over the message to sign, and
 
 The most important property of a digital signature is that it does not matter how
   many pairs \mbox{\textless message, signature\textgreater} a third party has
-  seen, but it does not make it easier to generate a signature for a new
-  message.
+  seen, it does not make it easier to generate a signature for a new
+  message. This property is called existential unforgeability~\cite{dwork1994efficient}
+  and it is formally defined as follows:
+
+A signature scheme is existentially unforgeable if, given any polynomial (in the
+  security parameter) number of pairs
+$$ (m_{1}, S(m_{1})), (m_{2}, S(m_{2}),\cdots,(m_{k}, S(m_{k})) $$
+
+where $S(m)$ denotes the signature on the message $m$, it is computationally
+  infeasible to generate a pair $(m_{k + 1}, S(m_{k+1}))$ for any message
+  $m_{k+1} \notin \{m_{1},\cdots,m_{k}\}$.
 
 Sometimes we require more than one signer to produce a signature, when this is
   the case we call it multisignature.
 In the general case a multisignature has two associated parameters: The number
   of signers able to sign; and the required numbers of signers to be a valid
   signature.
-A multisignature with 7 signers were at least 4 of them are required to produce
+A multisignature with 7 signers where at least 4 of them are required to produce
   a valid signature is called a 4 of 7 multisignature.
 So, a signature is valid with at least 4 out of the 7 valid signers.

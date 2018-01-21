@@ -24,7 +24,7 @@ This module provides an interface to the Bitcoin client, it allows our
 This module exposes Bitcoin objects with our required functionality.
 It is capable to generate custom transaction and sign them, it also
   provides transaction parsers and human readable views of them.
-Likely all this functionality would be in a ``Bitcoin Library'' if bitcoin
+Likely all this functionality would be in a Bitcoin library if bitcoin
   were usually used to do smart contracts.
 
 \item \textbf{Protocol implementation:}
@@ -58,7 +58,17 @@ We used this implementation and the official bitcoin client to prove the
   validity of the transactions generated.
 We want to be sure the transactions generated are valid Bitcoin transactions,
   so testing them using the official client is a crucial step.
+We created bitcoin accounts for all the participants and simulated a
+  protocol run by generating all of its transactions, using each participant's
+  accounts.
+After the transactions are generated and signed with all the required keys,
+  they are sent to the official bitcoin client for verification.
+This is the most important step, as this verification is exactly the same one
+  used to verify transactions in the real blockchain.
 
 Due to lack of libraries doing custom transactions, this implementation is
   a contribution not only for this protocol, but potentially for other
   applications using custom transactions.
+
+The implementation is available at
+  \url{https://github.com/fmontoto/thesis_oracle} under the MIT license.

@@ -103,12 +103,17 @@
 \newcommand\calculatecosts[4]{%
     \@calctotalbytes{#1}{#2}{#3}%
     \@calctotalcost{\thetotalbytes}{#4}%
-    \theconstCost & \theperOracleCost & \thetotalbytes & \num{\thetotalCost}%
+    \theconstCost &%
+    \theperOracleCost &%
+    \ensuremath{(\theconstCost + n \cdot \theperOracleCost) \cdot \mathcal{F}} &%
+    \thetotalbytes &%
+    \num{\thetotalCost}%
 }
 \newcommand\totalcostimpl[4]{%
     \@calctotalbytes{#1}{#2}{#3}%
     \@calctotalcost{\thetotalbytes}{#4}%
-    \num{\thetotalCost}%
+    \ensuremath{(#1 + n \cdot #2) \cdot \mathcal{F}} &%
+    -\num{\thetotalCost}%
 }
 \newcommand\satoshitousd[2]{%
     \newcounter{numsatoshis} \setcounter{numsatoshis}{#1}

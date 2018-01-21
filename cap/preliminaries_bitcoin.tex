@@ -68,12 +68,26 @@ A transaction is the only way to move bitcoins from one account to another,
   of accounts where the bitcoins are going to, a simplified
   view is illustrated in the figure~\ref{fig:simplified_transaction}.
 
-\begin{figure}
-	\centering
-	\includesvg[width=0.7\columnwidth]{simplified_transaction}
-	\caption{Simplified Transaction}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{$\cdots$} \\
+        \hline
+        Num Inputs & Num Outputs \\
+        \hline
+        Input$_0$ & Output$_0$ \\
+        \hline
+        Input$_{\cdots}$ & Output$_{\cdots}$ \\
+        \hline
+        Input$_{n - 1}$ & Output$_{\cdots}$ \\
+        \hline
+         & Output$_{m - 1}$ \\
+        \hline
+    \end{tabular}
+    \captionof{figure}{Simplified Transaction}
 	\label{fig:simplified_transaction}
-\end{figure}
+\end{center}
+
 
 There is only one exception to this rule; the miner that builds each block is
   allowed to create a transaction without inputs and send money to his account.
@@ -181,7 +195,7 @@ The transactions are indirectly hashed in the Merkle Root\footnote{A
 
 As expected in a protocol with many participants, there are times where more
   than one block is generated with the same parent
-  (figure~\ref{fig:chain_fork}). This is called ``fork''.
+  (figure~\ref{fig:chain_fork}). This is called \textit{fork}.
 
 \begin{figure}
 	\centering
@@ -251,8 +265,8 @@ When sending money, there are more details than we have discussed at
 
 An output does not send money to a given address, but defines how the money can
   be spent. Currently there are two formats in use. The most used is called
-  ``Pay To Public Key Hash'' (P2PKH)\footnote{The key hash is the address of an
-  account.}. The other is called ``Pay To Script Hash'' (P2SH).
+  \textit{Pay To Public Key Hash} (P2PKH)\footnote{The key hash is the address of an
+  account.}. The other is called \textit{Pay To Script Hash} (P2SH).
 
 As figure~\ref{fig:output} shows, the output has a script on its wire
   representation.

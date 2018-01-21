@@ -40,12 +40,13 @@ Table~\ref{tab:tx_fees} has the size for the transactions used in the protocol.
 Sizes are in bytes and we consider \numoracles{} oracles.
 
 \begin{center}
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|c|}
       \hline
         \textbf{Transaction} & \makecell{\textbf{Constant} \\ \textbf{size}} &
-          \makecell{\textbf{Per oracle} \\ \textbf{size}} &
-          \makecell{\textbf{Total} \\ \textbf{size}} &
-          \textbf{Fee [satoshi]} \\
+          \makecell{\textbf{Per} \\ \textbf{oracle} \\ \textbf{size}} &
+          \makecell{\textbf{Fee} \\ \textbf{[satoshi]}} &
+          \makecell{\textbf{Size} \\ \textbf{example} \\ \ensuremath{n = 7}} &
+          \makecell{\textbf{Fee example} \\ \ensuremath{\mathcal{F}=15} \\ \ensuremath{n = 7}}\\
       \hline
         Oracle Registration & \txcost{239}{0} \\
       \hline
@@ -68,7 +69,7 @@ Sizes are in bytes and we consider \numoracles{} oracles.
       \hline
         Player redeem two answers & \txcost{373}{0} \\
       \hline
-        Player redeem oracle doesn't answer & \txcost{439}{0} \\
+        \makecell{Player redeem oracle \\ doesn't answer} & \txcost{439}{0} \\
       \hline
     \end{tabular}
     \captionof{table}{Transactions size and fee.}
@@ -108,9 +109,11 @@ For a successful run of the protocol, where there is a winner and every oracle
 
 \newcommand\totalcost[2]{\totalcostimpl{#1}{#2}{\numoracles{}}{\feeval{}}}%
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|c|c|c|}
         \hline
-            \textbf{Item} & \textbf{Cost [satoshi]} \\
+            \textbf{Item} &
+            \textbf{Cost [satoshi]} &
+            \makecell{\textbf{Cost example} \\\ensuremath{\mathcal{F}=15}, \ensuremath{n = 7}} \\
         \hline
           Bet Promise fees & -\totalcost{1267}{65} \\
         \hline
@@ -118,13 +121,16 @@ For a successful run of the protocol, where there is a winner and every oracle
         \hline
           Bet transaction fee & -\totalcost{617}{445} \\
         \hline
-          Oracles payment & -\numoracles{}\ $\cdot$ [Oracle Payment] \\
+          Oracles payment & - $n$\ $\cdot$ [Oracle Payment] &%
+                            - \numoracles{}\ $\cdot$ [Oracle Payment]  \\
         \hline
-          Oracle first transfer & -c \\
+          Oracle first transfer & -c & -c\\
         \hline
           Player redeem prize & -2 $\cdot$ \totalcost{511}{150} \\
         \hline
-          \textbf{Total} & -\numoracles{}\ $\cdot$ [Oracle Payment] - c - \num{210120} \\
+          \textbf{Total} & \makecell{- \ensuremath{\mathcal{F} \cdot\ (2906 + 1586 \cdot\ n)}
+                                     - n\ $\cdot$\ [Oracle Payment] - c - TODO} &
+          -\numoracles{}\ $\cdot$ [Oracle Payment] - c - \num{210120}\\
         \hline
     \end{tabular}
   \captionof{table}{Successful run, costs for the players}
@@ -140,25 +146,28 @@ In table~\ref{tab:oracle_costs} we summarize the cost and earnings for an oracle
   that behaves correctly in a protocol execution.
 
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|c|c|c|}
         \hline
-            \textbf{Item} & \textbf{Cost [satoshi]} \\
+            \textbf{Item} &
+            \textbf{Cost [satoshi]} &
+            \makecell{\textbf{Cost example [satoshi]} \\%
+                      \ensuremath{\mathcal{F}=15, n=7}} \\
         \hline
-          Initial deposit & -[Registration] - [Oracle Payment] - [Two Answers Penalty] \\
+          Initial deposit & TODO & \makecell{-[Registration] - [Oracle Payment] \\ - [Two Answers Penalty]} \\
         \hline
-          Payment & [Oracle Payment] \\
+          Payment & TODO & [Oracle Payment] \\
         \hline
           Redeem payment fee & -\totalcost{355}{0} \\
         \hline
-          Undue deposit & [Oracle Payment] \\
+          Undue deposit & TODO & [Oracle Payment] \\
         \hline
           Undue redeem fee & -\totalcost{283}{62} \\
         \hline
-          Two answers deposit & [Two Answers Penalty] \\
+          Two answers deposit & TODO & [Two Answers Penalty] \\
         \hline
           Two answers redeem fee & -\totalcost{373}{0} \\
         \hline
-        \textbf{Total} & [Oracle Payment] - [Registration] - \num{21675} \\
+        \textbf{Total} & TODO & [Oracle Payment] - [Registration] - \num{21675} \\
         \hline
     \end{tabular}
     \captionof{table}{Successful run, oracle cost and earning}

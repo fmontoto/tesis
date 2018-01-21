@@ -168,7 +168,7 @@ As trust in the other player is not required for this protocol, both players
 need to have the certainty the election from the list is random.
 In order to achieve this property we use a protocol originally proposed to flip
   coins over the phone \cite{blum1983coin}.
-Today this algorithm is mostly known as ``Coin Tossing'', from a subfield of
+Today this algorithm is mostly known as \textit{coin tossing}, from a subfield of
   cryptography called Secure Multi Party Computation.
 Secure Multi Party Computation aims to provide protocols for computing public
   functions and gets its results while participants keep their inputs private.
@@ -187,8 +187,8 @@ If the players were physically together we would write down the bit in a paper,
 However we would like to run this algorithm through the phone or in this case
   the computer.
 The idea is the same, but instead of writing down into a paper, players
-  ``commit'' to the value they just chose randomly by sending to the other
-  player a ``commitment''.
+  \textit{commit} to the value they just chose randomly by sending to the other
+  player a \textit{commitment}.
 This commitment binds the player to the value calculated, without revealing it.
 Once both players receive the other's commitment, they send the bit they chose.
 They check the received value against the previously received commitment, and if
