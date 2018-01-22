@@ -3,10 +3,10 @@
 Bitcoin transactions are encoded using a Forth-like scripting
  system\footnote{Forth is an imperative stack based programming language
                  developed in the late '60s.}.
-A script is a sequence of instructions that describe how an output can be
+A script is a sequence of instructions that describes how an output can be
   spent.
 The language does not have any jump or loop instructions, as it is purposefully
-  not Turing-complete, in order keep the execution of a script bounded.
+  not Turing-complete, in order to keep the execution of a script bounded.
 
 A transaction is valid (can be redeemed) if its script evaluation does not
   trigger a failure and the top stack element is non false.
@@ -19,10 +19,10 @@ Commands available in the language can be grouped into a few groups:
   stack operations, as dup, push and drop;
   arithmetic operations on 32-bit signed integers, such as addition,
     substraction and comparison;
-  cryptographic operations such as hash calculations and signature check;
+  cryptographic operations like hash calculations and signature check;
   flow control as if and elf.
 
-There are also some commands to mark the transaction invalid and make the
+There are some commands to mark the transaction invalid and make the
   output impossible to redeem on certain conditions, for instance before a
   certain time has elapsed since the transaction was included in the
   blockchain.

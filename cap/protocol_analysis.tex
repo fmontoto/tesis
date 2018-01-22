@@ -40,13 +40,14 @@ Table~\ref{tab:tx_fees} has the size for the transactions used in the protocol.
 Sizes are in bytes and we consider \numoracles{} oracles.
 
 \begin{center}
+    {\small
     \begin{tabular}{|c|c|c|c|c|c|}
       \hline
         \textbf{Transaction} & \makecell{\textbf{Constant} \\ \textbf{size}} &
           \makecell{\textbf{Per} \\ \textbf{oracle} \\ \textbf{size}} &
           \makecell{\textbf{Fee} \\ \textbf{[satoshi]}} &
           \makecell{\textbf{Size} \\ \textbf{example} \\ \ensuremath{n = 7}} &
-          \makecell{\textbf{Fee example} \\ \ensuremath{\mathcal{F}=15} \\ \ensuremath{n = 7}}\\
+          \makecell{\textbf{Fee} \\ \textbf{example} \\ \ensuremath{\mathcal{F}=15} \\ \ensuremath{n = 7}}\\
       \hline
         Oracle Registration & \txcost{239}{0} \\
       \hline
@@ -59,21 +60,22 @@ Sizes are in bytes and we consider \numoracles{} oracles.
       \hline
         Player redeem prize & \txcost{511}{150} \\
       \hline
-        Oracle redeem payment & \txcost{355}{0} \\
+        \makecell{Oracle redeem payment} & \txcost{355}{0} \\
       \hline
         Oracle redeem undue & \txcost{283}{62} \\
       \hline
-        Oracle redeem two answers & \txcost{323}{0} \\
+        \makecell{Oracle redeem two answers} & \txcost{323}{0} \\
       \hline
-        Player redeem wrong answer & \txcost{338}{70} \\
+        \makecell{Player redeem wrong answer} & \txcost{338}{70} \\
       \hline
-        Player redeem two answers & \txcost{373}{0} \\
+        \makecell{Player redeem two \\ answers} & \txcost{373}{0} \\
       \hline
         \makecell{Player redeem oracle \\ doesn't answer} & \txcost{439}{0} \\
       \hline
     \end{tabular}
     \captionof{table}{Transactions size and fee.}
     \label{tab:tx_fees}
+    }
 \end{center}
 
 The first four transactions are the ones detailed in the previous section.
@@ -144,11 +146,11 @@ The value of c and [Oracle Payment] are parameters decided by the players,
   below we propose values for this constants and discuss about the tradeoff on
   setting this values.
 
-\newpage
 In table~\ref{tab:oracle_costs} we summarize the cost and earnings for an oracle
   that behaves correctly in a protocol execution.
 
 \begin{center}
+    {\small
     \begin{tabular}{|c|c|c|}
         \hline
             \textbf{Item} &
@@ -178,6 +180,7 @@ In table~\ref{tab:oracle_costs} we summarize the cost and earnings for an oracle
     \end{tabular}
     \captionof{table}{Successful run, oracle cost and earning}
     \label{tab:oracle_costs}
+    }
 \end{center}
 
 The constant c captures  transfer made from the players to the
