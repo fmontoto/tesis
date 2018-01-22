@@ -6,7 +6,7 @@ A smaller number of oracles or less payment could bring down this number,
 This has some important consequences for this protocol: it is expensive to run,
   and that makes it unsuitable for small amount bets.
 
-\subsection{Individual attacks}
+\subsection{Attacks}
 
 \subsubsection{Oracle} \label{subsec:individual_attack_oracle}
 Within the protocol, oracles maximize they earnings by participating and
@@ -18,7 +18,7 @@ However, if oracles stop participating after they send the
 \begin{center}
     \begin{tabular}{|c|c|}
         \hline
-          \textbf{Item} & Cost[USD] \\
+          \textbf{Item} & \textbf{Cost [USD]} \\
         \hline
           Initial deposit & -[Oracle Payment] - [Two Answers Penalty] \\
         \hline
@@ -94,4 +94,38 @@ The cost of any of this attacks is of the same than the damage done, so we claim
 When one player and at least the majority threshold of the oracles are colluded,
   this player can take all the money to distribute it with the colluded oracles.
 This cost to the honest player all of the bet money plus the associated costs.
-This attack is discussed at Section~\ref{subsec:inc_oracles}.
+
+From table~\ref{tab:oracle_costs} we know the expected earning for one oracle
+  behaving properly is
+  [Oracle Payment] - [Registration] - $\mathcal{F}\, \cdot$ (1011 + $n \cdot 62$),
+  lets call this value $\mathcal{E}$.
+
+When an oracle takes a bribe there are two possible outcomes for him in the
+  protocol:
+  enough oracles also take the bribe and it earns the payment for a correct
+  protocol execution $\mathcal{E}$; or not enough
+  players take the bribe and the oracle is penalized in the protocol for
+  providing a wrong answer, the oracle receives
+  $\mathcal{E}$ - [Oracle Payment] =
+  - [Registration] - $\mathcal{F}$\, $\cdot$ (1011 + $n \cdot 62$).
+
+A honest oracle which behaves correctly earns $\mathcal{E}$ for a protocol run,
+  any bribe $\mathcal{B}$ should at least ensure that amount to the oracle in
+  order to provide strong economic incentives for lying:
+
+\begin{align}
+  \mathcal{B} - [Registration] - \mathcal{F}\, \cdot (1011 + n \cdot 62) \geq \mathcal{E} \nonumber \\
+  \mathcal{B} \geq [Oracle Payment]
+\end{align}
+
+Anyone willing to bribe the oracle should at least offer [Oracle Payment] as bribe.
+This give us a lower bound for the cost of bribing enough oracles to change the
+  outcome of a bet:
+
+  \begin{equation}
+   (\lfloor \frac{n}{2} \rfloor + 1) \cdot [Oracle Payment]
+  \end{equation}
+
+If oracles were chosen randomly, it's unlikely that the dishonest player and
+  the oracles trust each other, so the cost of bribing is incemented by the
+  transactions required to enforce the bribe.

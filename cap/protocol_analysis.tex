@@ -83,6 +83,9 @@ Redeem transactions are required to put back the money into personal accounts,
   so we append them.
 They are explained next:
 
+\newcommand\totalcost[2]{\totalcostimpl{#1}{#2}{\numoracles{}}{\feeval{}}}%
+\newcommand\totalcostsingle[2]{\totalcostimplsingle{#1}{#2}{\numoracles{}}{\feeval{}}}%
+
 \begin{itemize}
     \item Player redeems prize: takes the earnings of the winner into an address
         the player controls.
@@ -103,17 +106,16 @@ They are explained next:
         to the oracle.
 \end{itemize}
 
-Table~\ref{tab:costs}  summarize the costs incurred by both players.
-For a successful run of the protocol, where there is a winner and every oracle
+Table~\ref{tab:costs} summarize the costs incurred by both players.
+For a successful run of the  protocol, where there is a winner and every oracle
   behaves properly.
 
-\newcommand\totalcost[2]{\totalcostimpl{#1}{#2}{\numoracles{}}{\feeval{}}}%
 \begin{center}
     \begin{tabular}{|c|c|c|}
         \hline
             \textbf{Item} &
             \textbf{Cost [satoshi]} &
-            \makecell{\textbf{Cost example} \\\ensuremath{\mathcal{F}=15}, \ensuremath{n = 7}} \\
+            \makecell{\textbf{Cost example} \\ $\mathcal{F}=15$, $n = 7$} \\
         \hline
           Bet Promise fees & -\totalcost{1267}{65} \\
         \hline
@@ -128,8 +130,8 @@ For a successful run of the protocol, where there is a winner and every oracle
         \hline
           Player redeem prize & -2 $\cdot$ \totalcost{511}{150} \\
         \hline
-          \textbf{Total} & \makecell{- \ensuremath{\mathcal{F} \cdot\ (2906 + 1586 \cdot\ n)}
-                                     - n\ $\cdot$\ [Oracle Payment] - c - TODO} &
+          \textbf{Total} & \makecell{- $\mathcal{F} \cdot\ (2906 + 1586 \cdot\ n)$ \\
+                                     - $n$\ $\cdot$\ [Oracle Payment] - c} &%
           -\numoracles{}\ $\cdot$ [Oracle Payment] - c - \num{210120}\\
         \hline
     \end{tabular}
@@ -142,6 +144,7 @@ The value of c and [Oracle Payment] are parameters decided by the players,
   below we propose values for this constants and discuss about the tradeoff on
   setting this values.
 
+\newpage
 In table~\ref{tab:oracle_costs} we summarize the cost and earnings for an oracle
   that behaves correctly in a protocol execution.
 
@@ -153,21 +156,24 @@ In table~\ref{tab:oracle_costs} we summarize the cost and earnings for an oracle
             \makecell{\textbf{Cost example [satoshi]} \\%
                       \ensuremath{\mathcal{F}=15, n=7}} \\
         \hline
-          Initial deposit & TODO & \makecell{-[Registration] - [Oracle Payment] \\ - [Two Answers Penalty]} \\
+          Initial deposit & \makecell{-[Registration] - [Oracle Payment] \\ - [Two Answers Penalty]} &
+                            \makecell{-[Registration] - [Oracle Payment] \\ - [Two Answers Penalty]} \\
         \hline
-          Payment & TODO & [Oracle Payment] \\
+          Payment & [Oracle Payment] & [Oracle Payment] \\
         \hline
           Redeem payment fee & -\totalcost{355}{0} \\
         \hline
-          Undue deposit & TODO & [Oracle Payment] \\
+          Undue deposit & [Oracle Payment] & [Oracle Payment] \\
         \hline
           Undue redeem fee & -\totalcost{283}{62} \\
         \hline
-          Two answers deposit & TODO & [Two Answers Penalty] \\
+          Two answers deposit & [Two Answers Penalty] & [Two Answers Penalty] \\
         \hline
           Two answers redeem fee & -\totalcost{373}{0} \\
         \hline
-        \textbf{Total} & TODO & [Oracle Payment] - [Registration] - \num{21675} \\
+        \textbf{Total} & \makecell{[Oracle Payment] - [Registration] \\
+                                   -$\mathcal{F} \cdot$ (1011 + $n \cdot 62$) } &
+                         \makecell{[Oracle Payment] - [Registration] - \\ \num{21675}} \\
         \hline
     \end{tabular}
     \captionof{table}{Successful run, oracle cost and earning}
@@ -220,7 +226,7 @@ If we replace this number in the first table we get the cost of the protocol for
 
 As the \textit{Oracle Registration} transaction fees correspond to
   % The macro has a bug somewhere, mbox to prevent the new line.
-  \mbox{\totalcost{239}{0}} satoshis, we set the parameter $c/n$ to 5000, a
+  \mbox{\totalcostsingle{239}{0}} satoshis, we set the parameter $c/n$ to 5000, a
   little bit more than the cost of the fees.
 This gives a value of $c = 35\,000$, so the cost of c is USD 1.33.
 

@@ -17,7 +17,7 @@ Bitcoin bounds the size of individual elements on the stack to 520-bytes.
 As we use hash of 20-bytes as answer validation, and 33-bytes for the address
   to verify signatures, a lower bound of the size required for our redeem
   prize transaction is
-  $n \cdot (c \cdot 20) + c \cdot 33 = c \cdot (n \cdot 20 + 33)$.
+  $n\, \cdot\, (c\, \cdot\, 20) + c\, \cdot\, 33 = c\, \cdot\, (n\, \cdot\, 20\, +\, 33)$.
 With two players ($c = 2$) and seven oracles ($n = 7$) it gives us a lower
   bound of 346-bytes.
 The other almost 200-bytes are spent on the transaction logic, this is

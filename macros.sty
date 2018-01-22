@@ -112,8 +112,12 @@
 \newcommand\totalcostimpl[4]{%
     \@calctotalbytes{#1}{#2}{#3}%
     \@calctotalcost{\thetotalbytes}{#4}%
-    \ensuremath{(#1 + n \cdot #2) \cdot \mathcal{F}} &%
-    -\num{\thetotalCost}%
+    \ensuremath{(#1 + n \cdot #2) \cdot \mathcal{F}} & -\num{\thetotalCost}
+}
+\newcommand\totalcostimplsingle[4]{%
+    \@calctotalbytes{#1}{#2}{#3}%
+    \@calctotalcost{\thetotalbytes}{#4}%
+    \num{\thetotalCost}
 }
 \newcommand\satoshitousd[2]{%
     \newcounter{numsatoshis} \setcounter{numsatoshis}{#1}
@@ -122,4 +126,5 @@
       \numexpr(\thenumsatoshis * \thebitcoinusd) / 100000000\relax}%
     \theresult %
 }
+\newenvironment{mychapterabstract}{\begin{quotation}\itshape }{\end{quotation}}
 \makeatother
