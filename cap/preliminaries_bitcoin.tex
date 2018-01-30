@@ -22,7 +22,7 @@ Barber et al. \cite{barber2012bitter} suggest a few key points to explain why
 	  are honest. Every previous proposal had a central trusted entity for
 	  critical tasks, as preventing double spending and coin issuance.
 \item Predictable money supply.
-	The money supply is minted at a defined and transparent rate, defined from
+	The money supply is generated at a defined and transparent rate, defined from
 	  the beginning of the protocol.
 \item Transaction irreversibility.
 	Bitcoin transactions quickly become irreversible. This is a big difference
@@ -62,8 +62,8 @@ By hashing the public key the address is then obtained.
 Many libraries and most of the bitcoin wallets implement the algorithms to
   generate new addresses.
 
-A transaction is the only way to move bitcoins from one account to another,
-  it is basically two lists:
+A transaction is the only way to move bitcoins from one account to another.
+A transaction contains two lists:
   a list of accounts where the money is pulled from, called inputs; and a list
   of accounts where the bitcoins are going to, a simplified
   view is illustrated in the figure~\ref{fig:simplified_transaction}.
@@ -123,7 +123,7 @@ This makes it simple to prevent double spending while being sure the received
 As any other distributed system, the blockchain must resolve the consensus
   problem \cite{fischer1983consensus}. Get all the participants to agree on
   the data. This is a fundamental problem to any distributed system. In the
-  blockchain anybody with an internet connection can be part of the
+  blockchain anybody with an Internet connection can be part of the
   protocol, so solving this problem is quite challenging. Some authors argue
   that the blockchain is the first practical solution to the Byzantine Consensus
   problem \cite{miller2014anonymous,sun2014solving}.
@@ -168,7 +168,7 @@ Proof of work consists in building a block with a hash under a threshold value,
   so the miners should reorder and change the block until the hash fulfills the
   requirement.
 There is no known algorithm to do this in a better way than brute force, so the
-  only method to get a hash that mets the criteria is to try with different
+  only method to get a hash that meets the criteria is to try with different
   block configurations. In the block there are also some bytes of nonce, a
   timestamp and transactions to be changed to get different hashes.
 
@@ -235,8 +235,8 @@ When sending money, there are more details than we have discussed at
   \includesvg[width=0.8\columnwidth]{input}
   \caption[Wire format of an Input.]{Wire format of an Input.
              The first two fields specify the output to be spent.
-             The first one is the hash of the transaction containing it, and the
-               second its index on it.
+             The first one specifies the hash of the transaction,
+               and the second one the index within the transaction.
              The next two fields define the input script, commonly known as
                scriptSig.
              To be a valid input the script in the output being spent must

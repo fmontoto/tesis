@@ -14,8 +14,8 @@ Sometimes gambling is heavily regulated and taxed, and lotteries are usually
 
 Internet has made it cheaper to open and operate a casino, without the need of
   complying with laws of a particular country.
-This and the massive internet grow has moved a big percentage of the gambling
-  industry online \cite{shelat2002makes,griffiths2008internet}.
+Indeed, an important percentage of the gambling
+  has moved online \cite{shelat2002makes,griffiths2008internet}.
 The global Internet gambling market was estimated to be worth US\$28 billion in
   2012 and forecasted to rise to US\$49 billion by 2017%
   \cite{gainsbury2015risky}.
@@ -50,7 +50,7 @@ Online casinos on the other hand are more problematic as there are many known
 This kind of characteristics can help to identify a trustworthy online site.
 
 But, what if you would like to gamble in a event that no gambling site offers
-  nor any friend is willing to do gamble in it? Likely the internet would be the
+  nor any friend is willing to do gamble in it? Likely the Internet would be the
   place to look for somebody willing to gamble on this event. Yet, how could you
   trust the potential person in order to bet with him/her?
 
@@ -148,6 +148,8 @@ The decision is made by a set of oracles, which are being paid also within the
 \section{Objectives}
 Design and implement a distributed protocol where real world observations can
   be used as blockchain transaction inputs.
+Given an arbitrary question, the protocol must allow the players to agree
+  on a single answer.
 
 \subsection{Specific objectives}
 \begin{enumerate}
@@ -192,7 +194,7 @@ And second, the network supporting bitcoin is much bigger than the ones for
   of the currency.
 
 Our proposed protocol lets users bet against each other over the outcome of
-  future events, without trusting each other nor any individual judge.
+  future events, without trusting each other nor trusting any individual judge.
 It keeps the money under each player's control and relies on a distributed set
   of oracles to decide who wins the money.
 
@@ -239,9 +241,9 @@ All the payments are also set in this transaction: the payments for the winner
   to the players from the oracles that do not behave properly.
 
 Oracles get their payment by answering who the winner is, and as soon as
-  enough oracles vote for one player as the winner\footnote{Enough is a
-  threshold defined in the bet parameters, at least$\lfloor \frac{n}{2}
-  \rfloor + 1$ with $n$ the number of oracles. This ensures there is only
+  enough oracles vote for one player as the winner\footnote{This is a
+  threshold defined by the bet parameters, at least$\lfloor \frac{n}{2}
+  \rfloor + 1$ with $n$ the number of oracles. This value ensures there is only
   one winner, any number below this threshold can lead to two winners
   in a correct execution of the protocol.}, the winning  player can take
   its reward.

@@ -51,9 +51,9 @@ Some branches of the transaction's script are locked before a defined time, we
 
 As an example, let's say Alice wants to give money to Bob if he solves a problem
   before a time $k$.
-We would like the money to be unspendable from Alice (to ensure Bob he gets the
-  money even she changes her mind) until the time $k$.
-During this time, if Bobs provide the answer he can claim the money by himself.
+We would like the money to be unspendable from Alice (to ensure Bob gets the
+  money even if Alice changes her mind) until the time $k$.
+During this time, if Bob provides the answer he can claim the money by himself.
 After the time $k$, if Bob does not provide an answer, Alice gets her money
   back.
 
@@ -153,8 +153,8 @@ Finally they decide the number of oracles to use, also they can decide to
 Once the players have agreed on the blocks from where the oracles will be
   selected (and whether some other condition/filter would be required on the
   oracles), both players can compile the same list of available oracles.
-Hashing the list and compare the hashes helps the users to be sure they had
-  compiled the same list.
+Hashing the list and comparing the hashes helps the users to ensure they have
+  the same list.
 This list is the source for selecting the oracles to use, players just need to
   decide which of them to use.
 

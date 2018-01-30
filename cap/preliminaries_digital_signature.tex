@@ -18,7 +18,7 @@ Anyone willing to talk to another participant must cipher its message using the
   is the intended receiver.
 
 A digital signature, as its name indicates, is a mechanism to provide protection
-  against third party forgeries. It must be easy for anyone to recognize as
+  against third party forgeries. It must be easy for anyone to evaluate if the signature is
   authentic, but impossible for anyone but the signer to produce it. This is
   especially challenging since any digital signal can be easily copied.
 
@@ -34,15 +34,15 @@ The most important property of a digital signature is that it does not matter ho
 
 A signature scheme is existentially unforgeable if, given any polynomial (in the
   security parameter) number of pairs
-$$ (m_{1}, S(m_{1})), (m_{2}, S(m_{2}),\cdots,(m_{k}, S(m_{k})) $$
+$$ (m_{1}, S(m_{1})), (m_{2}, S(m_{2})),\cdots,(m_{k}, S(m_{k})) $$
 
 where $S(m)$ denotes the signature on the message $m$, it is computationally
   infeasible to generate a pair $(m_{k + 1}, S(m_{k+1}))$ for any message
   $m_{k+1} \notin \{m_{1},\cdots,m_{k}\}$.
 
-Sometimes we require more than one signer to produce a signature, when this is
-  the case we call it multisignature.
-In the general case a multisignature has two associated parameters: The number
+Sometimes we want signature schemes where more than one signer is needed to produce a signature.
+We call them multisignature schemes~\cite{itakura1983public}.
+In the general case a multisignature scheme has two associated parameters: The number
   of signers able to sign; and the required numbers of signers to be a valid
   signature.
 A multisignature with 7 signers where at least 4 of them are required to produce

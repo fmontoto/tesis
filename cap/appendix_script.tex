@@ -6,31 +6,28 @@ Bitcoin transactions are encoded using a Forth-like scripting
 A script is a sequence of instructions that describes how an output can be
   spent.
 The language does not have any jump or loop instructions, as it is purposefully
-  not Turing-complete, in order to keep the execution of a script bounded.
+  not Turing-complete, in order to keep the execution time of a script bounded.
 
-A transaction is valid (can be redeemed) if its script evaluation does not
-  trigger a failure and the top stack element is non false.
+A transaction is valid (can be redeemed) if its associated script evaluation
+  does not trigger a failure and the resulting top stack element is non false.
 Using a script in the transaction provides flexibility to change the
   parameters required to redeem a transaction.
 
 The script contains commands or functions (also known as opcodes) and raw data,
-  as keys and addresses.
-Commands available in the language can be grouped into a few groups:
-  stack operations, as dup, push and drop;
+  such as keys and addresses.
+The commands available in the language can be grouped into several categories:
+  stack operations, such as dup, push and drop;
   arithmetic operations on 32-bit signed integers, such as addition,
     substraction and comparison;
-  cryptographic operations like hash calculations and signature check;
-  flow control as if and elf.
+  cryptographic operations such as hash calculations and signature check;
+  and control flow operations such as if and else.
 
-There are some commands to mark the transaction invalid and make the
-  output impossible to redeem on certain conditions, for instance before a
-  certain time has elapsed since the transaction was included in the
+There are some commands to mark the transaction invalid or the output impossible
+  to redeem on certain conditions. For instance we can mark a transaction invalid
+  if a certain time has not elapsed since the transaction was included in the
   blockchain.
 
-More information on the google scripting language can be found on the project
+More information on the bitcoin scripting language can be found on the project
   wiki at \url{https://en.bitcoin.it/wiki/Script} and in the official client
   implementation at
   \url{https://github.com/bitcoin/bitcoin/blob/master/src/script/script.h}.
-
-
-

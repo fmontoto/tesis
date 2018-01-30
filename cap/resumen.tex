@@ -1,0 +1,60 @@
+Cada vez que realizamos una apuesta, implícitamente confiamos en que la
+  contraparte nos pagar\'a en caso de perder.
+Por esta raz\'on al apostar con alguien que no conocemos o no confiamos,
+  no lo hacemos de manera directa, sino que utilizamos un casino u otro lugar de
+  apuestas.
+Confiamos en que la ley, o la reputaci\'on del lugar forzar\'a la correcta
+  ejecuci\'on de la apuesta.\\
+\noindent
+ Las criptomonedas han hecho posible el guardar y transferir dinero de manera
+   f\'acil y sin una autoridad central.
+Dada su reciente popularidad, muchor procesos descentralizados han sido
+  propuestos e implementados en ellas.
+Por ejemplo, podemos apostar a un dado, carta o ruleta. No es necesario confiar
+  en ninguna autoridad central durante el proceso.\\
+\noindent
+En este trabajo proponemos un protocolo sobre Bitcoin para realizar apuestas
+  sobre eventos en el mundo real, sin requerir una entidad centralizada ni
+  confianza en ninguna entidad individual.
+Nuestro protocolo hace uso de un grupo de \textit{or\'aculos} para proveer
+  resultados de eventos que toman lugar en el mundo real en la blockchain de
+  bitcoin.
+Cuando un umbral definido the or\'aculos reportan el mismo resultado para un
+  evento, el dinero de la apuesta pasa al control del ganador.
+El protocolo est\'a dise\~nado para mover el dinero directamente hacia el
+  ganador, los or\'aculos en nig\'un momento tienen control arbitrario sobre
+  el dinero, solo pueden escoger como destino del dinero uno de los
+  jugadores en la apuesta.\\
+\noindent
+Los incentivos econ\'omicos en el protocolo est\'a dise\~nados para premiar
+  el correcto comportamiento de los participantes.
+Los or\'aculos reciben un pago por ayudar a resolver la apuesta solo en el
+  caso de proveer la respuesta correcta, donde la correctitud la define
+  la mayor\'ia de ellos.
+Una vez que la apuesta es decidida, ambos jugadores en conjunto bloquean
+  el dinero de \'esta y le entregan el control a la mayor\'ia de los or\'aculos
+  para que decidan de entre ellos el recipiente del premio.
+En caso de que la apuesta no se resuelva, porque los or\'aculos no proveen
+  una respuesta, el dinero vuelve a cada uno de los jugadores.\\
+\noindent
+Utilizando el lenguaje de programaci\'on que Bitcoin provee, el protocolo
+  garantiza justicia y una ejecuci\'on correcta desde el momento en que
+  la apuesta es definida. Incluso cuando una minor\'ia de los or\'aculos y
+  un jugador deshonesto est\'an participando.
+Antes de definir la apuesta, or\'aculos y un jugador deshonesto pueden
+  causar un da\~no econ\'omico limitado a un jugador honesto.
+Sin embargo este ataque tiene un costo igual al da\~no causado, por lo que
+  no produce una ganancia neta al atacante.\\
+\noindent
+El protocolo fue implementado y testeado en la red de pruebas de Bitcoin,
+  utilizando el cliente oficial para verificar las transacciones.
+Nuestra implementaci\'on est\'a actualmente disponible como proyecto de
+  c\'odigo abierto.\\
+\noindent
+Los incentivos econ\'omicos para los participantes y los costos de
+  ejecutar este protocolo son discutidos en profundidad.
+Creemos que este trabajo es una contribuci\'on original en la forma en que
+  se utilizan eventos en el mundo real como input en la blockchain.
+Nuestro protocolo puede ser f\'acilmente extendido para resolver
+  disputas contractuales o situaciones similares donde decisiones
+  subjetivas pero justas son requeridas, de una forma descentralizada.

@@ -1,11 +1,12 @@
-\documentclass[upright, contnum]{umemoria}
+\documentclass[upright,contnum]{umemoria}
+
 % \linespread{2} % Double spaced.
 \depto{Departamento de Ciencias de la Computaci\'on}
 \author{Francisco Javier Andr\'es Montoto Monroy}
-\carrera{Ingeniero Civil en Computaci\'on}
+\carrera{Ingeniero Civil en Computaci\'on \\y grado de Mag\'ister en Ciencias menci\'on Computaci\'on}
 \title{Bitcoin Gambling Using Distributed Oracles in the Blockchain}
 \auspicio{}
-\date{Enero 2018}
+\date{2018}
 \guia{Alejandro Hevia Angulo}
 \tesis{Tesis para Optar al Grado de Mag\'ister en Ciencias menci\'on Computaci\'on}
 \memoria{Memoria para optar al T\'itulo De Ingeniero Civil En Computaci\'on}
@@ -48,10 +49,12 @@
 \maketitle
 
 \begin{abstract}
+    \input{cap/resumen.tex}
+\end{abstract}
+\begin{abstract}
 	\input{cap/abstract.tex}
 \end{abstract}
-
-\begin{dedicatoria} % opcional
+\begin{dedicatoria}% opcional
 	A mis padres, Lucy y Patricio. \\
     \footnotesize{Y a todas aquellas familias que tambi\'en se esfuerzan d\'ia a d\'ia
                   para entregar la mejor educaci\'on a sus hijos.}
@@ -107,7 +110,8 @@
 	\input{cap/conclusion.tex}
 \end{my_section}
 
-\printbibliography
+\chapter{Bibliography}
+\printbibliography[heading=none]
 
 \begin{my_section}{Appendix}
     \input{cap/appendix_transactions.tex}

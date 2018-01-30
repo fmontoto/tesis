@@ -68,6 +68,21 @@ But if the same bet get multiple malicious oracles they can delay the bet long
   enough to force player to abort it.
 This is extremely unlikely if oracles are being selected randomly from a big
   pool.
+Indeed, any malicious entity who wishes to control a set of oracles will have to spend an amount
+  proportional to the number of controlled oracles, so it is safe to assume that
+  given a large universe $U$ of $M = |U|$ oracles, the fraction $\epsilon$ of malicious oracles will be
+  small, that is, $\epsilon << 1$.
+Assuming players select their oracles at random,
+  any set $R\subseteq U$ of oracles of constant size $r=|R|$ will have on average $r^*=r\epsilon$ malicious
+  oracles.
+The process of iteratively selecting (honest) oracles from a pool is a
+  Bernoulli process in which we aim to obtain $r$ honest oracles where the probability of
+  selecting an honest oracle at random is $1-\epsilon$.
+For the protocol we suggest $r=7$ oracles, so given a pessimistic value of $\epsilon = 0.1$,
+  the probability $p$ of obtaining $r=7$ honest oracles after selecting $m=12$ oracles uniformly
+  at random can be modeled by the Pascal (Negative Binomial) distribution, which for the given values
+  gives us a probability $p>0.997$.
+
 
 \subsubsection{Players} \label{subsec:individual_attack_player}
 If the bet faces a malicious player, it can abort the execution at any point
@@ -82,9 +97,9 @@ Other important measure the protocol has to limit the extent of this attack
 A malicious player can not make the other one to lose more than the bet
   associated costs.
 
-\subsubsection{Colluded attacks}\label{subsec:colluded_attacks}
+\subsubsection{Collusion attacks}\label{subsec:colluded_attacks}
 
-For every collusion involving the player and any number of oracles less than
+For any collusion involving the player and an arbitrary number of oracles less than
   the majority threshold, the damage is limited to losing an amount equal to the
   associated costs, discussed in
   Sections~\ref{subsec:individual_attack_oracle}~and~\ref{subsec:individual_attack_player}.
@@ -95,37 +110,35 @@ When one player and at least the majority threshold of the oracles are colluded,
   this player can take all the money to distribute it with the colluded oracles.
 This cost to the honest player all of the bet money plus the associated costs.
 
-From table~\ref{tab:oracle_costs} we know the expected earning for one oracle
-  behaving properly is
-  [Oracle Payment] - [Registration] - $\mathcal{F}\, \cdot$ (1011 + $n \cdot 62$),
-  lets call this value $\mathcal{E}$.
+From table~\ref{tab:oracle_costs}, we know that the expected earning for a
+  well-behaved oracle is
+  [Oracle Payment] - [Registration] - $\mathcal{F}\, \cdot$ (1011 + $n \cdot 62$).
+  We call this value $\mathcal{E}$.
 
 When an oracle takes a bribe there are two possible outcomes for him in the
   protocol:
-  enough oracles also take the bribe and it earns the payment for a correct
+  either enough oracles also take the bribe in which case it gets the payment for a correct
   protocol execution $\mathcal{E}$; or not enough
-  players take the bribe and the oracle is penalized in the protocol for
-  providing a wrong answer, the oracle receives
+  players take the bribe and the oracle is penalized for providing a wrong
+  answer. In this last case the oracle receives
   $\mathcal{E}$ - [Oracle Payment] =
   - [Registration] - $\mathcal{F}$\, $\cdot$ (1011 + $n \cdot 62$).
 
-A honest oracle which behaves correctly earns $\mathcal{E}$ for a protocol run,
-  any bribe $\mathcal{B}$ should at least ensure that amount to the oracle in
-  order to provide strong economic incentives for lying:
-
+A honest oracle gets $\mathcal{E}$ for a correct execution.
+Any bribe $\mathcal{B}$ should be such that, at the end of the day, the
+  corrupted oracle gets at least $\mathcal{E}$ in
+  order to provide a sufficiently strong incentives for lying:
 \begin{align}
   \mathcal{B} - [Registration] - \mathcal{F}\, \cdot (1011 + n \cdot 62) \geq \mathcal{E} \nonumber \\
   \mathcal{B} \geq [Oracle Payment]
 \end{align}
-
 Anyone willing to bribe the oracle should at least offer [Oracle Payment] as bribe.
 This give us a lower bound for the cost of bribing enough oracles to change the
   outcome of a bet:
-
   \begin{equation}
    (\lfloor \frac{n}{2} \rfloor + 1) \cdot [Oracle Payment]
   \end{equation}
-
-If oracles were chosen randomly, it's unlikely that the dishonest player and
-  the oracles trust each other, so the cost of bribing is incemented by the
-  transactions required to enforce the bribe.
+If oracles were chosen randomly, it is unlikely that the dishonest player and
+  the oracles trust each other. In consequence, in a realistic attack, the final cost
+  of the bribe must include the cost of all transactions required to enforce the desired
+  operation of the corruped oracles.
